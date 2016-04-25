@@ -145,3 +145,6 @@ pythontex-files-*/
 # endfloat
 *.ttt
 *.fff
+
+# latexmk files
+/auto
