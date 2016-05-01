@@ -8,18 +8,19 @@
 % степень ее разработанности;
 \newcommand{\progressTXT}{Степень разработанности темы.}
 % цели и задачи;
-\newcommand{\aimTXT}{Целью}
+\newcommand{\aimTXT}{Цель работы.}
 \newcommand{\tasksTXT}{задачи}
+\newcommand{\researchsubjectTXT}{Объект и предмет исследования.}
 % научную новизну;
 \newcommand{\noveltyTXT}{Научная новизна:}
 % теоретическую и практическую значимость работы;
-%\newcommand{\influenceTXT}{Теоретическая и практическая значимость}
+\newcommand{\influenceTXT}{Теоретическая и практическая значимость.}
 % или чаще используют просто
-\newcommand{\influenceTXT}{Практическая значимость}
+% \newcommand{\influenceTXT}{Практическая значимость}
 % методологию и методы исследования;
-\newcommand{\methodsTXT}{Mетодология и методы исследования.}
+\newcommand{\methodsTXT}{Методы исследования.}
 % положения, выносимые на защиту;
-\newcommand{\defpositionsTXT}{Основные положения, выносимые на~защиту:}
+\newcommand{\defpositionsTXT}{Основные результаты, выносимые на~защиту:}
 % степень достоверности и апробацию результатов.
 \newcommand{\reliabilityTXT}{Достоверность}
 \newcommand{\probationTXT}{Апробация работы.}
@@ -30,3 +31,90 @@
 
 \newcommand{\authorbibtitle}{Публикации автора по теме диссертации}
 \newcommand{\fullbibtitle}{Список литературы} % (ГОСТ Р 7.0.11-2011, 4)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\overbar}[1]%
+{\mkern 1.5mu\overline{\mkern-1.3mu#1\mkern-1.3mu}\mkern 1.3mu}
+
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\D}{\mathbb{D}}
+\newcommand*\di{\mathop{}\!\mathrm{d}}
+\DeclareMathOperator*{\Ind}{\mathbbm{1}}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+
+\newcommand{\Co}{\ensuremath{\beta}}
+\newcommand{\DCo}{\ensuremath{\overline{\beta}}}
+
+\newcommand{\Tau}{\ensuremath{\mathrm{T}}}
+
+\newtheorem{lemma}{Лемма}
+\newtheorem{theorem}{Теорема}
+\newtheorem{proposition}{Утверждение}
+\newtheorem{remark}{Замечание}
+
+%%% Chapter 1
+%%%
+\newcommand{\generalGame}[2]{%
+G_{#1}^{m, \beta}\left({#2}\right)%
+}
+
+\newcommand{\infiniteGame}[1]{%
+G_{\infty}^{m, \beta}\left({#1}\right)%
+}
+
+\newcommand{\firstPlayerPayoff}[4]{%
+K_{#1}^{m,\beta}\left({#2}, {#3}, {#4}\right)%
+}
+
+\newcommand{\infiniteFirstPlayerPayoff}[3]{%
+K_{\infty}^{m,\beta}\left({#1}, {#2}, {#3}\right)%
+}
+
+\newcommand{\gameValue}[2]{%
+V_{#1}^{m,\beta}\left({#2}\right)%
+}
+
+\newcommand{\infiniteGameValue}[1]{%
+V_{\infty}^{m,\beta}\left({#1}\right)%
+}
+
+\newcommand{\symm}[1]{%
+\overline{#1}%
+}
+
+\newcommand{\symmGameExpression}[2][\infty]{%
+G_{#1}^{m, \alpha}\left({#2}\right)%
+}
+
+\newcommand{\upperBound}[1]{%
+H_{\infty}^{m,\beta}\left({#1}\right)%
+}
+
+\newcommand{\fGeneral}[2][1]{%
+\sigma_{#1}^{#2}%
+}
+
+\newcommand{\pEven}[1][k]{%
+p^0_{#1}%
+}
+
+\newcommand{\pOdd}[1][k]{%
+p^{\beta}_{#1}%
+}
+
+\newcommand{\fEven}[1][k]{%
+\phi^0_{#1}%
+}
+
+\newcommand{\fOdd}[1][k]{%
+\phi^{\beta}_{#1}%
+}
+
+\newcommand{\fOpt}{\sigma^*}
+
+\newcommand{\lowerBound}[2][\infty]{%
+L_{#1}^{m,\beta}\left({#2}\right)%
+}

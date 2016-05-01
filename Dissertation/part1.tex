@@ -1,146 +1,460 @@
-\chapter{Оформление различных элементов} \label{chapt1}
+\chapter{Теоретико-игровая модель биржевых торгов с дискретными ставками для
+  рынка с двумя состояниями} \label{chapt1}
 
-\section{Форматирование текста} \label{sect1_1}
+\todo{Привести краткий обзор--схему данной главы. Написать какие результаты и
+  где были опубликованы.}
 
-Мы можем сделать \textbf{жирный текст} и \textit{курсив}.
+\section{Описание модели}
+Пусть множество состояний рынка $S = \{L, H\}$. На первом шаге случай выбирает
+$s \in S $ с вероятностями $p(H) = p$ и $p(L) = 1 - p$. После этого на
+протяжении $n \leq \infty$ шагов игроки играют в игру с матрицей $A^{s,\Co}$,
+где при $\DCo = 1-\Co$
+\begin{equation*}
+  A^{L,\Co}(i, j) = \begin{cases}
+    \DCo i + \Co j, &\, i < j, \\
+    0, &\, i = j, \\
+    -\Co i - \DCo j, &\, i > j,
+  \end{cases}
+  \qquad
+  A^{H,\Co}(i, j) = \begin{cases}
+    \DCo i + \Co j - m, &\, i < j, \\
+    0, &\, i = j, \\
+    m - \Co i - \DCo j, &\, i > j.
+  \end{cases}
+\end{equation*}
 
-%\newpage
-%============================================================================================================================
+На $t$-м шаге первый игрок выбирает ставку $i_t \in I = \{0, 1, \ldots, m\}$, а
+второй --- ставку $j_t \in J = \{0, 1, \ldots, m\}$. Выигрыш первого игрока в
+повторяющейся игре равен $\sum\limits_{t=1}^n a_{i_t j_t}^{s,\Co}$. Второму
+игроку этот выигрыш становится известным только после окончания игры. На
+промежуточных шагах он не имеет точной информации о величинах $a_{i_t,
+  j_t}^{s,\Co}$.
 
-\section{Ссылки} \label{sect1_2}
-Сошлёмся на библиографию. Одна ссылка: \cite[с.~54]{Sokolov}\cite[с.~36]{Gaidaenko}. Две ссылки: \cite{Sokolov,Gaidaenko}. Много ссылок:  \cite[с.~54]{Lermontov,Management,Borozda} \cite{Lermontov,Management,Borozda,Marketing,Constitution,FamilyCode,Gost.7.0.53,Razumovski,Lagkueva,Pokrovski,Sirotko,Lukina,Methodology,Encyclopedia,Nasirova,Berestova,Kriger}. И ещё немного ссылок: \cite{Article,Book,Booklet,Conference,Inbook,Incollection,Manual,Mastersthesis,Misc,Phdthesis,Proceedings,Techreport,Unpublished}. \cite{medvedev2006jelektronnye, CEAT:CEAT581, doi:10.1080/01932691.2010.513279,Gosele1999161,Li2007StressAnalysis, Shoji199895,test:eisner-sample,AB_patent_Pomerantz_1968,iofis_patent1960}
+Таким образом, стратегией первого игрока является последовательность ходов
+$\sigma = (\sigma_1, \sigma_2, \ldots, \sigma_t, \ldots)$, где $\sigma_t: S
+\times I^{t-1} \rightarrow \Delta(I)$. Как и в \cite{domansky07}, мы ограничимся
+рассмотрением только тех стратегий $\sigma$, которые гарантируют первому игроку
+на каждом шаге игры неотрицательный выигрыш. Множество таких стратегий первого
+игрока обозначим через $\Sigma$. Аналогично стратегией второго игрока назовем
+последовательность ходов $ \tau = (\tau_1, \tau_2, \ldots, \tau_t, \ldots), $
+где $ \tau_t: I^{t-1} \rightarrow \Delta(J) $. Множество стратегий второго
+игрока обозначим через $\Tau$.
 
-%Попытка реализовать несколько ссылок на конкретные страницы для стандартной реализации:[\citenum{Sokolov}, с.~54; \citenum{Gaidaenko}, с.~36].
+При применении первым игроком смешанной стратегии $\sigma = (\sigma_1, \sigma_2,
+\ldots, \sigma_n)$, где $\sigma_t = (\sigma_t^L, \sigma_t^H),\ \sigma^s_t =
+(\sigma^s_{t,0}, \ldots, \sigma^s_{t,m}) \in \Delta(I)$, а вторым игроком
+смешанной стратегии $\tau = (\tau_1, \tau_2, \ldots, \tau_n)$, где $ \tau_t =
+(\tau_{t,0}, \ldots, \tau_{t,m}) \in \Delta(J)$, ожидаемый выигрыш первого
+игрока равен
+\begin{equation}
+  \label{eq:firstPlayerPayoff}
+  \firstPlayerPayoff{n}{p}{\sigma}{\tau} = \sum_{t=1}^n
+  \left(
+    pA^{H,\Co}(\sigma_t^H, \tau_t) + (1 - p)A^{L,\Co}(\sigma_t^L, \tau_t)
+  \right),
+\end{equation}
+где $ A^{s,\Co}(\sigma^s_t,\tau_t) = \sum\limits_{i \in I} \sum\limits_{j \in
+  J} \sigma^s_{t, i} \tau_{t, j} A^{s,\Co}(i, j). $ Полученную игру обозначим
+через $\generalGame{n}{p}$, а ее значение через $\gameValue{n}{p}$.
 
-%Несколько источников мультицитата \cites[vii--x, 5, 7]{Sokolov}[v--x, 25, 526]{Gaidaenko} поехали дальше
+Заметим, что $A^{L,\Co}(i,j) = A^{H,\DCo}(m-i,m-j), \, A^{H,\Co}(i,j) =
+A^{L,\DCo}(m-i,m-j)$. Определим симметричные по отношению к $\sigma$ и $\tau$
+стратегии игроков $ \symm{\sigma_t} = (\symm{\sigma^H_t}, \symm{\sigma^L}), $
+где $ \symm{\sigma^s_t} = (\sigma^s_{t,m},\ldots,\sigma^s_{t,0}) \in \Delta(I),
+$ и $ \symm{\tau_t} = (\tau_{t,m},\ldots,\tau_{t,0}) \in \Delta(J) $. Также
+введем обозначение $\symm{\generalGame{n}{p}} = \symmGameExpression[n]{1-p}$.
+Легко видеть, что выигрыши игроков в играх $\generalGame{n}{p}$ и
+$\symm{\generalGame{n}{p}}$ при использовании симметричных стратегий совпадают.
 
-Ссылки на собственные работы:~\cite{vakbib1, confbib1}
-
-Сошлёмся на приложения: Приложение \ref{AppendixA}, Приложение \ref{AppendixB2}.
-
-Сошлёмся на формулу: формула \eqref{eq:equation1}.
-
-Сошлёмся на изображение: рисунок \ref{img:knuth}.
-
-%\newpage
-%============================================================================================================================
-
-\section{Формулы} \label{sect1_3}
-
-Благодаря пакету \textit{icomma}, \LaTeX~одинаково хорошо воспринимает в качестве десятичного разделителя и запятую ($3,1415$), и точку ($3.1415$).
-
-\subsection{Ненумерованные одиночные формулы} \label{subsect1_3_1}
-
-Вот так может выглядеть формула, которую необходимо вставить в строку по тексту: $x \approx \sin x$ при $x \to 0$.
-
-А вот так выглядит ненумерованая отдельностоящая формула c подстрочными и надстрочными индексами:
+\section{Оценка сверху выигрыша первого игрока.}
+Следуя \cite{domansky07}, рассмотрим чистую стратегию второго игрока $\tau^k, \,
+k \in J$:
 \[
-(x_1+x_2)^2 = x_1^2 + 2 x_1 x_2 + x_2^2
+  \tau^k_1 = k, \quad \tau^k_t(i_{t-1}, j_{t-1}) = \begin{cases}
+    j_{t-1} - 1, & \, i_{t-1} < j_{t-1}, \\
+    j_{t-1},     & \, i_{t-1} = j_{t-1}, \\
+    j_{t-1} + 1, & \, i_{t-1} > j_{t-1}.
+  \end{cases}
 \]
 
-При использовании дробей формулы могут получаться очень высокие:
-\[
-  \frac{1}{\sqrt{2}+
-  \displaystyle\frac{1}{\sqrt{2}+
-  \displaystyle\frac{1}{\sqrt{2}+\cdots}}}
-\]
+По сути эта стратегия представляет собой стратегию подражания инсайдеру.
+Доказательство следующего утверждения проводится по индукции.
 
-В формулах можно использовать греческие буквы:
-\[
-\alpha\beta\gamma\delta\epsilon\varepsilon\zeta\eta\theta\vartheta\iota\kappa\lambda\\mu\nu\xi\pi\varpi\rho\varrho\sigma\varsigma\tau\upsilon\phi\varphi\chi\psi\omega\Gamma\Delta\Theta\Lambda\Xi\Pi\Sigma\Upsilon\Phi\Psi\Omega
-\]
+\begin{proposition}
+  \label{proposition:secondPlayerStrategyPayoffs}
+  При применении стратегии $\tau^k$ в игре $\generalGame{n}{p}$ второй игрок
+  гарантирует себе проигрыш не более
+  \[
+    h_n^L(\tau^k) = \sum_{t=0}^{n-1}(k - t - \DCo)^+, \quad h_n^H(\tau^k) =
+    \sum_{t=0}^{n-1}(m - k - t - \Co)^+,
+  \]
+  в состояниях L и H соответственно, где $x^+ = \max(x; 0)$ для $x \in
+  \mathbb{R}$.
+\end{proposition}
 
-%\newpage
-%============================================================================================================================
+Очевидно, что $h_n^L(\tau^k)$ и $h_n^H(\tau^k)$ монотонны и ограничены сверху по
+$n$. Введем следующую функцию:
+\begin{multline*}
+  \upperBound{p} = \min_{j \in J} \lim_{n \rightarrow \infty}\left(
+    ph_n^H(\tau^j) + (1-p)h_n^L(\tau^j)
+  \right) = \\
+  %
+  = \min_{j \in J} \left[ p (m - j)(m - j + \DCo - \Co) + (1 - p)j(j + \Co
+    - \DCo) \right] / 2.
+\end{multline*}
 
-\subsection{Ненумерованные многострочные формулы} \label{subsect1_3_2}
+При $p \in \left( (k-\DCo)/m, (k+\Co)/m) \right]$ минимум по $j \in J$
+достигается при $j = k$. Таким образом, $\upperBound{p}$ является
+кусочно-линейной функцией, состоящей из $m~+~1$ линейных сегментов, и полностью
+определяется своими значениями в точках
+\begin{gather*}
+  \upperBound{(k+\Co)/m} = \left( (m - (k + \Co))(k + \Co) + \DCo\Co
+  \right) / 2, \enskip
+  k = \overline{0, m - 1},\\
+  \upperBound{0} = \upperBound{1} = 0.
+\end{gather*}
 
-Вот так можно написать две формулы, не нумеруя их, чтобы знаки равно были строго друг под другом:
-\begin{align}
-  f_W & =  \min \left( 1, \max \left( 0, \frac{W_{soil} / W_{max}}{W_{crit}} \right)  \right), \nonumber \\
-  f_T & =  \min \left( 1, \max \left( 0, \frac{T_s / T_{melt}}{T_{crit}} \right)  \right), \nonumber
-\end{align}
+Пусть второй игрок при $p \in \left( (k-\DCo)/m, (k+\Co)/m) \right]$
+применяет $\tau^k, \, k = \overline{0, m}$. Обозначим эту стратегию через
+$\tau^*$. Тогда справедлива следующая
 
-Выровнять систему ещё и по переменной $ x $ можно, используя окружение \verb|alignedat| из пакета \verb|amsmath|. Вот так: 
-\[
-    |x| = \left\{
-    \begin{alignedat}{2}
-        &&x, \quad &\text{eсли } x\geqslant 0 \\
-        &-&x, \quad & \text{eсли } x<0
-    \end{alignedat}
-    \right.
-\]
-Здесь первый амперсанд  означает выравнивание по~левому краю, второй "--- по~$ x $, а~третий "--- по~слову <<если>>. Команда \verb|\quad| делает большой горизонтальный пробел. 
+\begin{lemma}
+  \label{lemma:upperBound}
+  При использовании вторым игроком стратегии $\tau^*$ в игре
+  $\infiniteGame{p}$\textup{,} выигрыш первого игрока ограничен сверху функцией
+  $\upperBound{p}$, т.е.
+  \[
+    \max_{\sigma \in \Sigma} \infiniteFirstPlayerPayoff{p}{\sigma}{\tau^*} \leq
+    \upperBound{p}.
+  \]
+\end{lemma}
 
-Ещё вариант:
-\[
-    |x|=
+\section{Оценка снизу выигрыша первого игрока}
+Перейдем к описанию стратегии первого игрока, гарантирующей ему выигрыш не менее
+$\upperBound{p}$ в игре $\infiniteGame{p}$. Пусть на первом шаге игрок применяет
+$ \fGeneral{k}~=~\left(\fGeneral{H}, \fGeneral{L}\right) $, где $\fGeneral{H} =
+\left(\fGeneral[1,k]{H}, \fGeneral[1,k+1]{H}\right)$, $\fGeneral{L} =
+\left(\fGeneral[1,k]{L}, \fGeneral[1,k+1]{L}\right)$ и $\fGeneral[1,i]{s}$ --
+вероятность сделать ставку $i$ в состоянии $s \in S$. Применяя
+$\fGeneral{k}$, инсайдер делает ставки $k$ и $k+1$ с некоторыми заданными
+вероятностями.
+
+Определим следующие параметры: полные вероятности действий $k$ и $k+1$, равные
+$q_k$ и $q_{k+1}$ соответственно, а также апостериорные вероятности $p(s|i)$
+состояния $s$ при условии, что на предыдущем шаге первый игрок сделал ставку
+$i$. Тогда вероятности $\fGeneral[1,i]{s}$ можно найти по формуле Байеса $
+\fGeneral[1,i]{s}~=~p(s|i)q_i/p(s), \: i = k, k + 1. $
+
+\begin{proposition}
+  При использовании $\fGeneral{k}$ первый игрок гарантирует себе на первом шаге
+  выигрыш
+  \begin{equation}
+    \label{eq:lowerPayoffGeneral}
+    \firstPlayerPayoff{1}{p}{\fGeneral{k}}{j} =
     \begin{cases}
-    \phantom{-}x, \text{если } x \geqslant 0 \\
-    -x, \text{если } x<0
+      mp - \Co k - \DCo j - \Co q_{k+1},      & \, j < k,     \\
+      \left(m p(H|k+1) - k - \Co \right) q_{k+1}, & \, j = k,     \\
+      \left(k + \Co - m p(H|k) \right) q_k,       & \, j = k + 1, \\
+      \DCo k + \Co j - mp + \DCo q_{k+1}, & \, j > k + 1.
     \end{cases}
+  \end{equation}
+\end{proposition}
+
+Доказательство следует из (\ref{eq:firstPlayerPayoff}) и определения
+$\fGeneral{k}$.
+
+Построим оптимальную стратегию инсайдера. Рассмотрим на $[0,1]$ множество $P$
+точек вида
+
+\[
+\pEven[i] = i/m, \, i = \overline{0, m}, \quad \pOdd[i] = (i + \Co)/m, \, i =
+\overline{0, m - 1}.
 \]
 
-Можно использовать разные математические алфавиты:
-\begin{align}
-\mathcal{ABCDEFGHIJKLMNOPQRSTUVWXYZ} \nonumber \\
-\mathfrak{ABCDEFGHIJKLMNOPQRSTUVWXYZ} \nonumber \\
-\mathbb{ABCDEFGHIJKLMNOPQRSTUVWXYZ} \nonumber
-\end{align}
+Для $p = \pEven$ определим $\fEven$ как действие $\fGeneral{k}$ с параметрами
+\begin{equation*}
+  p(H|k) = \pOdd[k-1], \quad p(H|k + 1) = \pOdd[k], \quad q_k = \Co, \quad q_{k+1} = \DCo.
+\end{equation*}
+Дополнительно определим $\fEven[0]$ как действие, состоящее в применении ставки
+$0$ с вероятностью $1$, а $\fEven[m]$ -- как действие, состоящее в применении
+ставки $m$ с вероятностью $1$. Аналогично для $p = \pOdd$ определим $\fOdd$ как
+действие $\fGeneral{k}$ с параметрами
+\begin{equation*}
+  p(H|k) = \pEven[k], \quad p(H|k + 1) = \pEven[k+1], \quad q_k = \DCo, \quad q_{k+1} = \Co.
+\end{equation*}
 
-Посмотрим на систему уравнений на примере аттрактора Лоренца:
+\begin{proposition}
+  При $p \in P$ для значения $\firstPlayerPayoff{1}{p}{\sigma}{j}$ выигрыша
+  первого игрока верны оценки
+  \begin{equation}
+    \label{eq:lowerBound:inequalities}
+    \min_{j \in J}
+    \firstPlayerPayoff{1}{\pEven}{\fEven}{j} \geq 0,
+    \quad
+    \min_{j \in J}
+    \firstPlayerPayoff{1}{\pOdd}{\fOdd}{j} \geq \DCo\Co.
+  \end{equation}
+\end{proposition}
+Справедливость утверждения устанавливается подстановкой $\fEven$ и $\fOdd$ в
+(\ref{eq:lowerPayoffGeneral}).
 
-\[ 
-\left\{
-  \begin{array}{rl}
-    \dot x = & \sigma (y-x) \\
-    \dot y = & x (r - z) - y \\
-    \dot z = & xy - bz
-  \end{array}
-\right.
-\]
+Заметим, что если $p \in P$, то при применении инсайдером на первом шаге игры
+$\fEven$ и $\fOdd$, значения апостериорных вероятностей также принадлежат $P$.
+Таким образом, можно продолжить применение $\fEven$ и $\fOdd$ на последующих
+шагах игры, тем самым определив стратегию $\fOpt$ в игре $\generalGame{n}{p}$,
+где $p \in P, \, n \in \mathbb{N}$.
 
-А для вёрстки матриц удобно использовать многоточия:
-\[ 
-\left(
-  \begin{array}{ccc}
-  	a_{11} & \ldots & a_{1n} \\
-  	\vdots & \ddots & \vdots \\
-  	a_{n1} & \ldots & a_{nn} \\
-  \end{array}
-\right)
-\]
-
-
-%\newpage
-%============================================================================================================================
-\subsection{Нумерованные формулы} \label{subsect1_3_3}
-
-А вот так пишется нумерованая формула:
+Пусть $\lowerBound[n]{p}$ при $p \in P$ --- гарантированный выигрыш первого
+игрока в игре $\generalGame{n}{p}$ при применении стратегии $\fOpt$. В силу
+рекурсивной структуры игры $\generalGame{n}{p}$ (см. \cite{domansky07}) и
+неравенств (\ref{eq:lowerBound:inequalities}) для $\lowerBound[n]{p}$
+справедливы формулы
 \begin{equation}
-  \label{eq:equation1}
-  e = \lim_{n \to \infty} \left( 1+\frac{1}{n} \right) ^n
+  \begin{gathered}
+    \label{eq:lowerBound:recurrence:function}
+    \lowerBound[n]{(k + \Co)/m} = \DCo\Co + \DCo\lowerBound[n-1]{k/m} +
+    \Co\lowerBound[n-1]{(k + 1)/m}, \: k = \overline{0, m-1}, \\
+    % 
+    \lowerBound[n]{k/m} = \Co\lowerBound[n-1]{(k - 1 + \Co)/m} +
+    \DCo\lowerBound[n-1]{(k + \Co)/m}, \: k = \overline{1, m-1}, \\
+    % 
+    \lowerBound[n]{0} = \lowerBound[n]{1} = 0.
+  \end{gathered}
 \end{equation}
 
-Нумерованых формул может быть несколько:
+Так как $\lowerBound[n]{p}$ не убывает по $n$ и ограничена сверху, то устремив
+$n$ к бесконечности, получим нижнюю оценку $\lowerBound{p}$ выигрыша первого
+игрока в игре $\infiniteGame{p}, \, p \in P$.
+
+Введем следующие обозначения:
+\[
+  L_{2k} = \lowerBound{k/m}, \, k = \overline{0,m}, \enskip%
+  L_{2k+1} = \lowerBound{(k+\Co)/m)}, \, k = \overline{0,m-1}.
+\]
+Тогда справедливы формулы
 \begin{equation}
-  \label{eq:equation2}
-  \lim_{n \to \infty} \sum_{k=1}^n \frac{1}{k^2} = \frac{\pi^2}{6}
+  \label{eq:lowerRecurrence}
+  \begin{gathered}
+    L_{2k+1} = \DCo\Co + \DCo L_{2k} + \Co L_{2(k+1)}, \enskip k = \overline{0, m-1},\\
+    L_{2k} = \Co L_{2k-1} + \DCo L_{2k+1}, \enskip k = \overline{1, m-1},\\
+    L_0 = L_{2m} = 0.
+  \end{gathered}
 \end{equation}
 
-Впоследствии на формулы (\ref{eq:equation1}) и (\ref{eq:equation2}) можно ссылаться.
+Введем $(2m-1)\times(2m-1)$-матрицу $B$ и $(2m-1)$-вектор-столбец $b$:
+\begin{equation*}
+  B =
+  \left(
+    \begin{array}{cccccccc}
+      1      & -\Co  & 0       & 0      & \cdots & 0      & 0       & 0       \\
+      -\Co & 1       & -\DCo & 0      & \cdots & 0      & 0       & 0       \\
+      0      & -\DCo & 1       & -\Co & \cdots & 0      & 0       & 0       \\
+      \hdotsfor{8}                                                              \\
+      0      & 0       & 0       & 0      & \cdots & -\Co & 1       & -\DCo \\
+      0      & 0       & 0       & 0      & \cdots & 0      & -\DCo & 1 
+    \end{array}
+  \right),\quad
+  %
+  b = \left(
+    \begin{array}{c}
+      \DCo\Co \\
+      0           \\
+      \DCo\Co \\
+      \cdots      \\
+      0           \\
+      \DCo\Co
+    \end{array}
+  \right).
+\end{equation*}
+Тогда (\ref{eq:lowerRecurrence}) перепишем в виде $ BL = b, L_0 = L_{2m} = 0, $
+где $L = (L_1, L_2, \ldots, L_{2m-1})$.
 
-Сделать так, чтобы номер формулы стоял напротив средней строки, можно, используя окружение \verb|multlined| (пакет \verb|mathtools|) вместо \verb|multline| внутри окружения \verb|equation|. Вот так:
-\begin{equation} % \tag{S} % tag - вписывает свой текст 
-  \label{eq:equation3}
-    \begin{multlined}
-        1+ 2+3+4+5+6+7+\dots + \\ 
-        + 50+51+52+53+54+55+56+57 + \dots + \\ 
-        + 96+97+98+99+100=5050 
-    \end{multlined}
-\end{equation}
+Системы $ Mx = f $ с трехдиагональной матрицей $ M $, имеющей структуру
+\[
+  M = \left(\begin{array}{ccccccc}
+              c_1 & b_1 & 0   & \cdots & 0       & 0       & 0       \\
+              a_2 & c_2 & b_2 & \cdots & 0       & 0       & 0       \\
+              \hdotsfor{7}                                           \\
+              0   & 0   & 0   & \cdots & a_{n-1} & c_{n-1} & b_{n-1} \\
+              0 & 0 & 0 & \cdots & 0 & a_n & c_n
+            \end{array}\right),
+\]
+можно решать методом прогонки, используя следующие формулы для
+прогоночных коэффициентов и переменных (см. \cite{samarsky89}):
+\begin{gather*}
+  x_i = \gamma_{i+1} x_{i+1} + \delta_{i+1}, \: i = \overline{1,n-1},
+  \quad
+  x_n = \frac{f_n - a_n\delta_n}{c_n + a_n\gamma_n}, \\
+  % 
+  \gamma_{i+1} = -\frac{b_i}{c_i + a_i\gamma_i}, \: i = \overline{2,
+    n-1}, \quad
+  \gamma_2 = -\frac{b_1}{c_1}, \\
+  % 
+  \delta_{i+1} = \frac{f_i - a_i\delta_i}{c_i + a_i\gamma_i}, \: i =
+  \overline{2, n-1}, \quad \delta_2 = \frac{f_1}{c_1}.
+\end{gather*}
 
-Используя команду \verb|\labelcref| из пакета \verb|cleveref|, можно
-красиво ссылаться сразу на несколько формул
-(\labelcref{eq:equation1,eq:equation3,eq:equation2}), даже перепутав
-порядок ссылок \verb|(\labelcref{eq:equation1,eq:equation3,eq:equation2})|.
+\begin{proposition}
+  \label{proposition:tridiagonal:coefficients}
+  Прогоночные коэффициенты для матрицы $B$ даются следующими
+  формулами\textup{:}
+  \begin{multline*}
+    \gamma_{2k} = \frac{\Co+k-1}{k}, \,
+    \gamma_{2k+1} = \frac{k}{k+\Co}, \\
+    \delta_{2k} = \frac{\DCo(k-1+2\Co)}{2}, \, \delta_{2k+1} =
+    \frac{k\Co(k-1+2\Co)}{2(k+\Co)}, \quad k = \overline{1,m-1}.
+  \end{multline*}
+\end{proposition}
+Данное утверждение доказывается по индукции.
+
+Из (\ref{eq:lowerRecurrence}) следует, что $L_{2k-1} =
+\gamma_{2k}\gamma_{2k+1}L_{2k+1} + \gamma_{2k}\delta_{2k+1} +
+\delta_{2k}, \, k = \overline{1, m-1}$. Подстановкой
+$\upperBound{(k+\Co)/m}$ вместо $L_{2k+1}$ это равенство обращается в
+тождество. Тем самым доказано
+
+\begin{proposition}
+  \label{proposition:lower:recurrence-solution}
+  Решение системы {\normalfont(\ref{eq:lowerRecurrence})} дается
+  следующими формулами\textup{:}
+  \begin{gather*}
+    L_{2k+1} = ((m - (k + \Co))(k + \Co) + \DCo\Co)/2, \, k = \overline{0, m-1},\\
+    L_{2k} = k (m-k)/2, \, k = \overline{0,m}.
+  \end{gather*}
+\end{proposition}
+
+Итак, мы определили функцию $\lowerBound{p}$ при $p \in P$. Для $p \in
+[0, 1] \setminus P$ стратегия инсайдера основана на применении выпуклой
+комбинации стратегий для крайних точек интервала, в котором находится
+$p$.
+
+\begin{proposition}
+  \label{proposition:first:combination:step}
+  При $\lambda \in (0, 1), \, \Co \geq 1/2, \, k = \overline{0, m-1}$
+  для значения выигрыша первого игрока верны оценки
+  \begin{align*}
+    \min_{j \in J}
+    \firstPlayerPayoff{1}{%
+    \lambda \pEven + (1-\lambda) \pOdd}{%
+    \lambda \fEven + (1-\lambda) \fOdd}{%
+    j}
+    &\geq \DCo \Co (1-\lambda), \\
+    % 
+    \min_{j \in J}
+    \firstPlayerPayoff{1}{%
+    \lambda \pOdd + (1-\lambda) \pEven[k+1]}{%
+    \lambda \fOdd + (1-\lambda) \fEven[k+1]}{%
+    j}
+    &\geq \DCo \Co \lambda.
+  \end{align*}
+\end{proposition}
+Утверждение следует из линейности $\firstPlayerPayoff{1}{p}{\sigma}{j}$
+по $\sigma$ и равенства (\ref{eq:lowerPayoffGeneral}).
+
+\begin{proposition}
+  \label{proposition:first:combination:game}
+  При $\lambda \in (0, 1), \, \Co \geq 1/2, \, k = \overline{0, m-1}$,
+  для гарантированного выигрыша первого игрока в игре $\infiniteGame{p}$
+  справедливы равенства
+  \begin{align*}
+    \lowerBound{\lambda \pEven + (1-\lambda) \pOdd}      & = 
+                                                           \lambda \lowerBound{\pEven} + (1-\lambda) \lowerBound{\pOdd}, \\
+    \lowerBound{\lambda \pOdd + (1-\lambda) \pEven[k+1]} & =
+                                                           \lambda \lowerBound{\pOdd} + (1-\lambda) \lowerBound{\pEven}.
+  \end{align*}
+\end{proposition}
+\begin{proof}
+  Пусть $p = \lambda \pOdd + (1-\lambda) \pEven[k+1]$, где $k =
+  \overline{0, m - 2}, \, \lambda \in (0, 1)$. Обозначим через
+  $\lambda\fOdd[k] + (1-\lambda)\fEven[k+1]$ распределение, при котором
+  первый игрок рандомизирует выбор ставок $k, k+1, k+2$ с параметрами
+  \begin{gather*}
+    q_k = \lambda\DCo, \, q_{k+1} = \Co, \, q_{k+2} = (1-\lambda)\DCo,\\
+    p(H|k) = \pEven, \, p(H|k+1) = \lambda \pEven[k+1] + (1-\lambda)
+    \pOdd, \, p(H|k+2) = \pOdd[k+1].
+  \end{gather*}
+  
+  Тогда по аналогии с (\ref{eq:lowerBound:recurrence:function})
+  выписывается следующая рекуррентная формула:
+  \[
+    \lowerBound{p} = \DCo \Co \lambda + \lambda \DCo
+    \lowerBound{\pEven} + (1-\lambda) \DCo \lowerBound{\pOdd[k+1]} +
+    \Co \lowerBound{(1-\lambda) \pOdd + \lambda \pEven[k+1]}.
+  \]
+  Так как $(1-\lambda)\pOdd + \lambda \pEven[k+1] \in \left( \pOdd,
+    \pEven[k+1] \right)$, то для $\lowerBound{(1-\lambda)\pOdd + \lambda
+    \pEven[k+1]}$ справедливо аналогичное представление. Приведя
+  подобные члены, получим
+  \begin{multline}
+    \label{eq:first:combination:game:2}
+    \lowerBound{p} = \frac{1}{1-\Co^2}
+    \left(\DCo\Co\lambda + \DCo\lambda\lowerBound{\pEven} + (1-\lambda)\DCo\lowerBound{\pOdd[k+1]} + \right.\\
+    % 
+    \left. + \Co \left( \DCo\Co(1-\lambda) +
+        (1-\lambda)\DCo\lowerBound{\pEven} +
+        \lambda\DCo\lowerBound{\pOdd[k+1]} \right)
+    \right) = \\
+    % 
+    = \left( (k + 1)(m - k - 1) + \DCo\lambda(2k - m + 2\Co + 1)
+    \right)/2 = \\
+    = \lambda\lowerBound{\pOdd} + (1-\lambda)\lowerBound{\pEven[k+1]}.
+  \end{multline}
+  
+  Пусть $p = \lambda\pEven + (1-\lambda)\pOdd$, где $k = \overline{1, m
+    - 1}, \, \lambda \in (0, 1)$. Обозначим через $\lambda\fEven +
+  (1-~\lambda)\fOdd$ распределение, при котором первый игрок
+  рандомизирует выбор ставок $k$ и $k+1$ с параметрами
+  \begin{gather*}
+    q_k = \lambda\Co + (1-\lambda)(1-\Co), \: p(H|k) =
+    \frac{\lambda\Co}{q_k}\pOdd[k-1] +
+    \frac{(1-\lambda)(1-\Co)}{q_k} \pEven,\\
+    q_{k+1} = \lambda(1-\Co) + (1-\lambda)\Co, \: p(H|k+1) =
+    \frac{\lambda(1-\Co)}{q_{k+1}}\pOdd[k] +
+    \frac{(1-\lambda)\Co}{q_{k+1}}\pEven[k+1].
+  \end{gather*}
+  
+  Заметим, что $p(H|k) \in \left( \pOdd[k-1], \pEven \right)$, а
+  $p(H|k+1) \in \left( \pOdd, \pEven[k+1] \right)$. Тогда с помощью
+  (\ref{eq:first:combination:game:2}) получим
+  \begin{multline*}
+    \lowerBound{p} = \lambda \Co \lowerBound{\pOdd[k-1]} + (1-\lambda)(1-\Co)\lowerBound{\pEven} + \lambda(1-\Co)\lowerBound{\pOdd} + \\
+    + (1-\lambda)\Co\lowerBound{\pEven[k+1]} = \lambda
+    \lowerBound{\pEven} + (1-\lambda) \lowerBound{\pOdd}.
+  \end{multline*}
+  
+  При $p \in \left( 0, \pOdd[1] \right)$ и $p \in \left( \pOdd[m-1], 1
+  \right)$ доказательство проводится аналогично.
+\end{proof}
+
+Заметим, что при $\Co < 1/2$ полученные результаты также имеют место,
+а стратегию $\fOpt$ можно получить, рассмотрев игру
+$\symm{\infiniteGame{p}}$. Таким образом, мы определили $\lowerBound{p}$
+и $\fOpt$ для любых $p \in [0, 1], \, \Co \in [0, 1]$.
+
+\begin{lemma}
+  \label{lemma:first:lower}
+  При использовании первым игроком стратегии $\fOpt$ в игре
+  $\infiniteGame{p}$\textup{,} его выигрыш ограничен снизу функцией
+  $\lowerBound{p}$\textup{,} т.е.
+  \[
+    \min_{\tau \in \Tau} \infiniteFirstPlayerPayoff{p}{\fOpt}{\tau} \geq
+    \lowerBound{p}.
+  \]
+\end{lemma}
+
+Отметим, что приведенная стратегия инсайдера для $p \in [0, 1] \setminus
+P$ принципиально отличается от его стратегии в \cite{pyanykh14}, которая
+оптимальна только при $\Co = 1/2$.
+
+\begin{theorem}
+  Игра $\infiniteGame{p}$ имеет значение $\infiniteGameValue{p} = \upperBound{p}
+  = \lowerBound{p}$. При этом $\fOpt$ -- оптимальная стратегия первого
+  игрока\textup{,} а $\tau^*$ -- оптимальная стратегия второго игрока.
+\end{theorem}
+Доказательство по форме повторяет доказательство аналогичной теоремы в
+\cite{domansky07}.
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../dissertation"
+%%% End:

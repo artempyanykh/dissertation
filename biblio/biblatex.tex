@@ -6,7 +6,7 @@
 \usepackage[%
 backend=biber,% движок
 bibencoding=utf8,% кодировка bib файла
-sorting=none,% настройка сортировки списка литературы
+sorting=nty,% настройка сортировки списка литературы
 style=gost-numeric,% стиль цитирования и библиографии (по ГОСТ)
 language=autobib,% получение языка из babel/polyglossia, default: autobib % если ставить autocite или auto, то цитаты в тексте с указанием страницы, получат указание страницы на языке оригинала
 autolang=other,% многоязычная библиография
@@ -82,6 +82,42 @@ sortcites=true,% сортировать номера затекстовых сс
 %            final]
 %            \step[fieldset=media, null]
 %        }
+        \map{
+            \step[fieldsource=langid, match=russian, final]
+            \step[fieldset=presort, fieldvalue={a}]
+        }
+        \map{
+            \step[fieldsource=langid, notmatch=russian, final]
+            \step[fieldset=presort, fieldvalue={z}]
+        }
+        %
+       % \map{
+       % \step[fieldset=langid, fieldvalue={tempruorder}]
+       % }
+       % \map[overwrite]{
+       % \step[fieldsource=langid, match=russian, final]
+       % \step[fieldsource=presort, 
+       % match=\regexp{(.+)}, 
+       % replace=\regexp{aa$1}]
+       % }
+       % \map{
+       % \step[fieldsource=langid, match=russian, final]
+       % \step[fieldset=presort, fieldvalue={az}]
+       % }
+       % \map[overwrite]{
+       % \step[fieldsource=langid, notmatch=russian, final]
+       % \step[fieldsource=presort, 
+       % match=\regexp{(.+)}, 
+       % replace=\regexp{za$1}]
+       % }
+       % \map{
+       % \step[fieldsource=langid, notmatch=russian, final]
+       % \step[fieldset=presort, fieldvalue={zz}]
+       % }
+       % \map{
+       % \step[fieldsource=langid, match={tempruorder}, final]
+       % \step[fieldset=langid, null]
+       % }
     }
 }
 
@@ -187,7 +223,7 @@ sortcites=true,% сортировать номера затекстовых сс
 %%% Подключение файлов bib %%%
 \addbibresource{biblio/othercites.bib}
 \addbibresource{biblio/authorpapersVAK.bib}
-\addbibresource{biblio/authorpapers.bib}
+% \addbibresource{biblio/authorpapers.bib}
 \addbibresource{biblio/authorconferences.bib}
 
 
