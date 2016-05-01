@@ -147,4 +147,4 @@ pythontex-files-*/
 *.fff
 
 # latexmk files
-/auto
+auto/
