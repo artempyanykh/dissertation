@@ -1,0 +1,35 @@
+\begin{tikzpicture}[level/.style={sibling distance=60mm,level distance=20mm}]
+  \node[shape=circle,draw,label={Ход случая}] (chance) {}
+  child {
+    node[draw] (g1) {$G_1$}
+    child {
+      node[draw] {$G_1$}
+      child { node {$\vdots$} }
+    }
+    edge from parent [-] node [anchor=south] {$p^0_1$}
+  }
+  child {
+    node[draw] (g2) {$G_2$}
+    child {
+      node[draw] (g22) {$G_2$}
+      child { node {$\vdots$} }
+    }
+    edge from parent [-] node [left] {$p^0_2$}
+  }
+  child {
+    node[draw] (g3) {$G_\kappa$}
+    child {
+      node[draw] (g32) {$G_\kappa$}
+      child { node {$\vdots$} }
+    }
+    edge from parent [-] node [anchor=south] {$p^0_\kappa$}
+  }
+  ;
+  \path (g2) -- (g3) node [midway] {\ldots};
+  \path (g22) -- (g32) node [midway] {\ldots};
+\end{tikzpicture}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../dissertation"
+%%% End:
