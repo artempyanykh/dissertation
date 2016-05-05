@@ -55,34 +55,62 @@
 \newtheorem{theorem}{Теорема}
 \newtheorem{proposition}{Утверждение}
 \newtheorem{remark}{Замечание}
+\numberwithin{lemma}{chapter}
+\numberwithin{theorem}{chapter}
+\numberwithin{proposition}{chapter}
+\numberwithin{remark}{chapter}
 
 \newcommand{\p}{\overbar{p}}
 \newcommand{\po}{\overbar{p}^0}
 
 %%% Chapter 1
 %%%
+
+% \newcommand{\generalGame}[2]{%
+% G_{#1}^{m, \beta}\left({#2}\right)%
+% }
 \newcommand{\generalGame}[2]{%
-G_{#1}^{m, \beta}\left({#2}\right)%
+G_{#1}^m\left({#2}\right)%
 }
+
+% \newcommand{\infiniteGame}[1]{%
+% G_{\infty}^{m, \beta}\left({#1}\right)%
+% }
 
 \newcommand{\infiniteGame}[1]{%
-G_{\infty}^{m, \beta}\left({#1}\right)%
+G_{\infty}^m\left({#1}\right)%
 }
+
+% \newcommand{\firstPlayerPayoff}[4]{%
+% K_{#1}^{m,\beta}\left({#2}, {#3}, {#4}\right)%
+% }
 
 \newcommand{\firstPlayerPayoff}[4]{%
-K_{#1}^{m,\beta}\left({#2}, {#3}, {#4}\right)%
+K_{#1}^m\left({#2}, {#3}, {#4}\right)%
 }
+
+% \newcommand{\infiniteFirstPlayerPayoff}[3]{%
+% K_{\infty}^{m,\beta}\left({#1}, {#2}, {#3}\right)%
+% }
 
 \newcommand{\infiniteFirstPlayerPayoff}[3]{%
-K_{\infty}^{m,\beta}\left({#1}, {#2}, {#3}\right)%
+K_{\infty}^m\left({#1}, {#2}, {#3}\right)%
 }
+
+% \newcommand{\gameValue}[2]{%
+% V_{#1}^{m,\beta}\left({#2}\right)%
+% }
 
 \newcommand{\gameValue}[2]{%
-V_{#1}^{m,\beta}\left({#2}\right)%
+V_{#1}^m\left({#2}\right)%
 }
 
+% \newcommand{\infiniteGameValue}[1]{%
+% V_{\infty}^{m,\beta}\left({#1}\right)%
+% }
+
 \newcommand{\infiniteGameValue}[1]{%
-V_{\infty}^{m,\beta}\left({#1}\right)%
+V_{\infty}^m\left({#1}\right)%
 }
 
 \newcommand{\symm}[1]{%
@@ -93,8 +121,12 @@ V_{\infty}^{m,\beta}\left({#1}\right)%
 G_{#1}^{m, \DCo}\left({#2}\right)%
 }
 
+% \newcommand{\upperBound}[1]{%
+% H_{\infty}^{m,\beta}\left({#1}\right)%
+% }
+
 \newcommand{\upperBound}[1]{%
-H_{\infty}^{m,\beta}\left({#1}\right)%
+H_{\infty}^m\left({#1}\right)%
 }
 
 \newcommand{\fGeneral}[2][1]{%
@@ -119,6 +151,10 @@ p^{\beta}_{#1}%
 
 \newcommand{\fOpt}{\sigma^*}
 
+% \newcommand{\lowerBound}[2][\infty]{%
+% L_{#1}^{m,\beta}\left({#2}\right)%
+% }
+
 \newcommand{\lowerBound}[2][\infty]{%
-L_{#1}^{m,\beta}\left({#2}\right)%
+L_{#1}^m\left({#2}\right)%
 }
