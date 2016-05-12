@@ -51,16 +51,20 @@
 
 \newcommand{\Tau}{\ensuremath{\mathrm{T}}}
 
-\newtheorem{lemma}{Лемма}
-\newtheorem{theorem}{Теорема}
-\newtheorem{proposition}{Утверждение}
-\newtheorem{remark}{Замечание}
-\newtheorem{example}{Пример}
-\numberwithin{lemma}{chapter}
-\numberwithin{theorem}{chapter}
-\numberwithin{proposition}{chapter}
-\numberwithin{remark}{chapter}
-\numberwithin{example}{chapter}
+\newtheorem{lemma}{Лемма}[chapter]
+\newtheorem{theorem}{Теорема}[chapter]
+\newtheorem{proposition}{Утверждение}[chapter]
+
+\declaretheoremstyle[bodyfont=\normalfont]{normalbody}
+\declaretheorem[numberwithin=chapter,name=Замечание,style=normalbody]{remark}
+\declaretheorem[numberwithin=chapter,name=Пример,style=normalbody]{example}
+% \newtheorem{remark}{Замечание}
+% \newtheorem{example}{Пример}
+% \numberwithin{lemma}{chapter}
+% \numberwithin{theorem}{chapter}
+% \numberwithin{proposition}{chapter}
+% \numberwithin{remark}{chapter}
+% \numberwithin{example}{chapter}
 
 \newcommand{\p}{\overbar{p}}
 \newcommand{\po}{\overbar{p}^0}
