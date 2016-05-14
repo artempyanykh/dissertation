@@ -57,11 +57,16 @@
 
 \newtheorem{lemma}{Лемма}[chapter]
 \newtheorem{theorem}{Теорема}[chapter]
-\newtheorem{proposition}{Утверждение}[chapter]
+% \newtheorem{proposition}{Утверждение}[chapter]
+% \newtheorem{corollary}{Следствие}[chapter]
 
 \declaretheoremstyle[bodyfont=\normalfont]{normalbody}
 \declaretheorem[numberwithin=chapter,name=Замечание,style=normalbody]{remark}
 \declaretheorem[numberwithin=chapter,name=Пример,style=normalbody]{example}
+
+\declaretheoremstyle[notebraces={}{},notefont=\bfseries,bodyfont=\normalfont\itshape]{nopar}
+\declaretheorem[numberwithin=chapter,name=Следствие,style=nopar]{corollary}
+\declaretheorem[numberwithin=chapter,name=Утверждение,style=nopar]{proposition}
 % \newtheorem{remark}{Замечание}
 % \newtheorem{example}{Пример}
 % \numberwithin{lemma}{chapter}
