@@ -179,12 +179,15 @@ $\tau_t: I^{t-1} \rightarrow \Delta(J)$.
   A^{L,\Co}(i, j) = A^{H,\DCo}(m-i, m-j), \quad
   A^{H,\Co}(i, j) = A^{L,\DCo}(m-i, m-j).
 \end{equation*}
-Для заданных стратегий $\sigma,\ \tau$ определим стратегии $\symm{\sigma}$ и $\symm{\tau}$ следующим образом. 
-Для $t$-го шага положим
- $\symm{\sigma_t} = (\symm{\sigma^H_t}, \symm{\sigma^L_t})$, где
-$\symm{\sigma^s_t}=(\sigma^s_{t,m},\ldots,\sigma^s_{t,0}) \in \Delta(I)$, и
-$\symm{\tau_t} = (\tau_{t,m},\ldots,\tau_{t,0}) \in \Delta(J)$.
-Легко видеть, что выигрыши игроков в играх $G^{m, \Co}_n(p)$ и $G^{m, 1-\Co}_n(1-p)$ при использовании, соответственно, стратегий $\sigma,\ \tau$ и $\symm{\sigma},\ \symm{\tau}$ совпадают.
+
+\begin{remark}
+  \label{ch1:rem:symm-payoffs}
+  Определим для заданных стратегий $\sigma,\ \tau$ стратегии $\symm{\sigma}$ и $\symm{\tau}$ таким образом, что для $t$-го шага
+  $\symm{\sigma_t} = (\symm{\sigma^H_t}, \symm{\sigma^L_t})$, где
+  $\symm{\sigma^s_t}=(\sigma^s_{t,m},\ldots,\sigma^s_{t,0}) \in \Delta(I)$, и
+  $\symm{\tau_t} = (\tau_{t,m},\ldots,\tau_{t,0}) \in \Delta(J)$.
+  Легко видеть, что выигрыши игроков в играх $G^{m, \Co}_n(p)$ и $G^{m, 1-\Co}_n(1-p)$ при использовании, соответственно, стратегий $\sigma,\ \tau$ и $\symm{\sigma},\ \symm{\tau}$ совпадают.
+\end{remark}
 
 В дальнейшем мы часто будем опускать верхний индекс $\Co$.
 
@@ -399,6 +402,7 @@ $\fGeneral[1,i]{s}$ -- вероятность сделать ставку $i$ в состоянии $s \in S$.
 \end{gather*}
 
 \begin{proposition}
+  \label{ch1:prop:K1-base}
   При $p \in P$ для значения $\firstPlayerPayoff{1}{p}{\sigma}{j}$ выигрыша первого игрока верны оценки
   \begin{equation}
     \label{ch1:eq:lowerBound:inequalities}
@@ -590,7 +594,7 @@ $\fGeneral[1,i]{s}$ -- вероятность сделать ставку $i$ в состоянии $s \in S$.
     \delta_{2(k+1)} 
     &=
       \frac{f_{2k+1} - a_{2k+1}\delta_{2k+1}}{c_{2k+1} + a_{2k+1}\gamma_{2k+1}} =
-      \frac{\DCo \Co + \Dco k\Co(k-1+2\Co)/(2(k+\Co))}{(k + \Co - \DCo k)/(k + \Co)} = \\
+      \frac{\DCo \Co + \DCo k\Co(k-1+2\Co)/(2(k+\Co))}{(k + \Co - \DCo k)/(k + \Co)} = \\
     &=
       \frac{\DCo \Co (k+\Co) + \DCo k \Co (k-1+2\Co)/2}{(k+1)\Co} =
       \frac{\DCo}{2(k+1)} \left( 
@@ -615,12 +619,6 @@ $\fGeneral[1,i]{s}$ -- вероятность сделать ставку $i$ в состоянии $s \in S$.
   Таким образом, соответствующие формулы справедливы для $\delta_i$.
 \end{proof}
 
-Из \eqref{ch1:eq:tridiagonal-book} следует, что
-\begin{equation*}
-L_{2k-1} = \gamma_{2k}\gamma_{2k+1}L_{2k+1} + \gamma_{2k}\delta_{2k+1} + \delta_{2k}, \, k = \overline{1, m-1}.
-\end{equation*}
-Подстановкой $\upperBound{(k+\Co)/m}$ вместо $L_{2k+1}$ это равенство обращается в тождество.
-Тем самым доказано
 \begin{proposition}
   \label{ch1:prop:lower:recurrence-solution}
   Решение системы {\normalfont(\ref{ch1:eq:lowerRecurrence})} дается
@@ -632,29 +630,78 @@ L_{2k-1} = \gamma_{2k}\gamma_{2k+1}L_{2k+1} + \gamma_{2k}\delta_{2k+1} + \delta_
     L_{2k} = k (m-k)/2, \quad k = \overline{0, m}.
   \end{gather}
 \end{proposition}
+\begin{proof}
+  Из \eqref{ch1:eq:tridiagonal-book} следует, что
+  \begin{equation*}
+    L_{2k-1} = \gamma_{2k}\gamma_{2k+1}L_{2k+1} + \gamma_{2k}\delta_{2k+1} + \delta_{2k}, \, k = \overline{1, m-1}.
+  \end{equation*}
+  Покажем, что подстановкой $\upperBound{(k+\Co)/m}$ вместо $L_{2k+1}$ это равенство обращается в тождество.
+  Для первого слагаемого имеем
+  \begin{align*}
+    &2 \gamma_{2k} \gamma_{2k+1} \upperBound{(k+\Co)/m} =
+      \frac{k-1+\Co}{k+\Co} ((m-k-\Co)(k+\Co) + \DCo \Co) = \\
+    &=
+      (m-k-\Co)(k-1+\Co) + \DCo \Co - \frac{\DCo\Co}{k+\Co} = \\
+    &=
+      (m-(k-1+\Co))(k-1+\Co) - (k-1+\Co) + \DCo \Co - \frac{\DCo\Co}{k+\Co}.
+  \end{align*}
+  Для второго слагаемого находим
+  \begin{align*}
+    &2(\gamma_{2k} \delta_{2k+1} + \delta_{2k}) 
+    = \frac{(k-1+\Co)\Co(k-1+2\Co)}{k+\Co} + \DCo(k-1+2\Co) = \\
+    &= \Co (k-1+2\Co) - \frac{\Co (k-1+2\Co)}{k+\Co} + \DCo (k-1+2\Co) = \\
+    &= k - 1 + 2\Co - \frac{\Co(k+\Co-\DCo)}{k+\Co} = (k-1+\Co) + \frac{\DCo\Co}{k+\Co}.
+  \end{align*}
+  Отсюда получаем
+  \begin{align*}
+    &\gamma_{2k} \gamma_{2k+1} \upperBound{(k+\Co)/m} + \gamma_{2k} \delta_{2k+1} + \delta_{2k} = \\
+    &= \frac{1}{2}\biggl(
+    (m-(k-1+\Co))(k-1+\Co) -
+    (k-1+\Co) + \DCo \Co - \frac{\DCo\Co}{k+\Co} + \\
+    &+ (k-1+\Co) + \frac{\DCo\Co}{k+\Co}
+    \biggr) =
+    \frac{1}{2} \left(
+    (m-(k-1+\Co))(k-1+\Co) + \DCo\Co
+    \right) =\\
+    &= \upperBound{(k-1+\Co)/m}.
+  \end{align*}
+  Справедливость \eqref{ch1:eq:recurrence-solution:odd} установлена.
+  Далее, имеем
+  \begin{align*}
+    2 \upperBound{(k-1+\Co)/m} 
+    &= (m-k-\Co+1)(k-1+\Co) = \\
+    &= (m-k-\Co)(k+\Co) - m + 2k + \Co - \DCo.
+  \end{align*}
+  Отсюда получаем
+  \begin{align*}
+    2 L_{2k} 
+    &= 2 (\Co L_{2k-1} + \DCo L_{2k+1}) = (m-k-\Co)(k+\Co) + \Co \DCo - \Co (m - 2k - \Co + \DCo) = \\
+    &= (m-k)k + \Co(m-2k-\Co+\DCo) - \Co(m-2k-\Co+\DCo) = (m-k)k.
+  \end{align*}
+  Таким образом, установлена справедливость \eqref{ch1:eq:recurrence-solution:even}.
+\end{proof}
 
 Итак, мы определили функцию $\lowerBound{p}$ при $p \in P$.
 Для $p \in [0, 1] \setminus P$ стратегия инсайдера основана на применении выпуклой комбинации стратегий для крайних точек интервала, в котором находится $p$.
 
-Обозначим через $\lambda\fOdd[k] + (1-\lambda)\fEven[k+1]$ распределение, при котором первый игрок рандомизирует выбор ставок $k, k+1, k+2$ с параметрами
+Для $p = \lambda \pOdd + (1-\lambda) \pEven[k+1],\ \lambda \in (0, 1)$ обозначим через $\lambda\fOdd[k] + (1-\lambda)\fEven[k+1]$ распределение, при котором первый игрок рандомизирует выбор ставок $k, k+1, k+2$ с параметрами
 \begin{align*}
   q_k = \lambda\DCo, &\quad p(H|k) = \pEven,\\
   q_{k+1} = \Co, &\quad p(H|k+1) = \lambda \pEven[k+1] + (1-\lambda) \pOdd,\\
   q_{k+2} = (1-\lambda)\DCo, &\quad p(H|k+2) = \pOdd[k+1].
 \end{align*}
 
-Через $\lambda\fEven + (1-\lambda)\fOdd$ обозначим распределение, при котором первый игрок рандомизирует выбор ставок $k$ и $k+1$ с параметрами
+Для $p = \lambda \pEven + (1-\lambda) \pOdd,\ \lambda \in (0, 1)$ через $\lambda\fEven + (1-\lambda)\fOdd$ обозначим распределение, при котором первый игрок рандомизирует выбор ставок $k$ и $k+1$ с параметрами
 \begin{gather*}
-  q_k = \lambda\Co + (1-\lambda)(1-\Co), \\
+  q_k = \lambda\Co + (1-\lambda)(1-\Co),\enskip
   p(H|k) = \frac{\lambda\Co}{q_k}\pOdd[k-1] + \frac{(1-\lambda)(1-\Co)}{q_k} \pEven,\\
-  q_{k+1} = \lambda(1-\Co) + (1-\lambda)\Co, \\
+  q_{k+1} = \lambda(1-\Co) + (1-\lambda)\Co,\enskip
   p(H|k+1) = \frac{\lambda(1-\Co)}{q_{k+1}}\pOdd[k] + \frac{(1-\lambda)\Co}{q_{k+1}}\pEven[k+1].
 \end{gather*}
 
-Доказательство следующего утверждения аналогично доказательству утверждения~\ref{ch1:prop:stage-payoff}.
 \begin{proposition}
   \label{ch1:prop:first:combination:step}
-  При $\lambda \in (0, 1), \, \Co \geq 1/2, \, k = \overline{0, m-1}$ для значения одношагового выигрыша первого игрока верны оценки
+  При $\lambda \in (0, 1), \, k = \overline{0, m-1},$ для значения одношагового выигрыша первого игрока верны оценки
   \begin{align*}
     \min_{j \in J}
     \firstPlayerPayoff{1}{%
@@ -671,10 +718,45 @@ L_{2k-1} = \gamma_{2k}\gamma_{2k+1}L_{2k+1} + \gamma_{2k}\delta_{2k+1} + \delta_
     &\geq \DCo \Co \lambda.
   \end{align*}
 \end{proposition}
+\begin{proof}
+  Из \eqref{ch1:eq:firstPlayerPayoff} находим, что для произвольной одношаговой стратегии $\sigma$ с параметрами $(q_i, p(H|i),\ i \in I)$ выполняется
+  \begin{align*}
+    \firstPlayerPayoff{1}{p}{\sigma}{j} 
+    &= \sum_{i \in I} p \sigma^H_i A^H(i, j) + (1-p) \sigma^L_i A^L(i, j) = \\
+    &= \sum_{i \in I} q_i (p(H | i) a^H(i, j) + (1-p(H | i)) a^L(i, j)).
+  \end{align*}
+  
+  Далее, пусть априорной вероятности $p_1 \in [0, 1]$ отвечает одношаговая стратегий $\sigma^1$ с параметрами $(q^1_i, p^1(H|i),\ i \in I)$, а априорной вероятности $p_2 \in [0, 1]$, отвечает стратегия $\sigma^2$ с параметрами $(q^2_i, p^2(H|i),\ i \in I)$.
+  Определим для $p = \lambda p_1 + (1-\lambda) p_2$ одношаговую стратегию $\sigma^c$ с параметрами
+  \begin{equation*}
+    q^c_i = \lambda q^1_i + (1-\lambda) q^2_i, \enskip
+    p^c(H|i) = \frac{\lambda q^1_i p^1(H|i) + (1-\lambda) q^2_i p^2(H|i)}{q^c_i}.
+  \end{equation*}
+  Одношаговый выигрыш при применении такой стратегии в игре с априорной вероятностью $p = \lambda p_1 + (1-\lambda) p_2$ равен
+  \begin{multline*}
+    K^m_1(\lambda p_1 + (1-\lambda) p_2, \sigma^c, j) = \sum_{i \in I} q^c_i \biggl(
+     \frac{\lambda q^1_i p^1(H|i) + (1-\lambda) q^2_i p^2(H|i)}{q^c_i} a^H(i, j) + \\
+    + \frac{\lambda q^1_i (1-p^1(H|i)) + (1-\lambda) q^2_i (1-p^2(H|i))}{q^c_i} a^L(i, j)
+     \biggr) = \\
+    = \lambda \sum_{i \in I} q^1_i (p^1(H|i) a^H(i, j) + (1-p^1(H|i)) a^L(i, j)) + \\
+    + (1-\lambda) \sum_{i \in I} q^2_i (p^2(H|i) a^H(i, j) + (1-p^2(H|i)) a^L(i, j)) = \\
+    = \lambda K^m_1(p_1, \sigma^1, j) + (1-\lambda) K^m(p_2, \sigma^2, j).
+  \end{multline*}
+  
+  Нетрудно проверить, что определенные выше действия $\lambda \fOdd + (1-\lambda) \fEven[k+1]$ и $\lambda \fEven + (1-\lambda) \fOdd$ отвечают именно таким комбинациям соответствующих стратегий.
+  Отсюда и из утверждения~\ref{ch1:prop:K1-base} следует справедливость данного утверждения.
+\end{proof}
+
+\begin{remark}
+  Стратегия $\sigma^c$ из утверждения~\ref{ch1:prop:first:combination:step} не является линейной комбинацией стратегий $\sigma^1$ и $\sigma^2$ в смысле покомпонентного равенства 
+  \[
+    \sigma^{c,H}_i \neq \lambda \sigma^{1,H}_i + (1-\lambda) \sigma^{2,H}_i,\ i \in I.
+  \]
+\end{remark}
 
 \begin{proposition}
   \label{ch1:prop:first:combination:game}
-  При $\lambda \in (0, 1), \, \Co \geq 1/2, \, k = \overline{0, m-1}$, для гарантированного выигрыша первого игрока в игре $\infiniteGame{p}$ справедливы равенства
+  При $\lambda \in (0, 1), \, k = \overline{0, m-1}$, для гарантированного выигрыша первого игрока в игре $\infiniteGame{p}$ справедливы равенства
   \begin{align*}
     \lowerBound{\lambda \pEven + (1-\lambda) \pOdd}      
     &= 
@@ -687,13 +769,32 @@ L_{2k-1} = \gamma_{2k}\gamma_{2k+1}L_{2k+1} + \gamma_{2k}\delta_{2k+1} + \delta_
   Пусть $p = \lambda \pOdd + (1-\lambda) \pEven[k+1]$, где $k = \overline{0, m - 2}, \, \lambda \in (0, 1)$.
   Тогда по аналогии с \eqref{ch1:eq:lowerBound:recurrence:function} выписывается следующая рекуррентная формула:
   \begin{equation*}
-    \lowerBound{p} = \DCo \Co \lambda + \lambda \DCo
-    \lowerBound{\pEven} + (1-\lambda) \DCo \lowerBound{\pOdd[k+1]} +
-    \Co \lowerBound{(1-\lambda) \pOdd + \lambda \pEven[k+1]}.
+    \lowerBound[n]{p} = \DCo \Co \lambda + \lambda \DCo
+    \lowerBound[n-1]{\pEven} + (1-\lambda) \DCo \lowerBound[n-1]{\pOdd[k+1]} +
+    \Co \lowerBound[n-1]{(1-\lambda) \pOdd + \lambda \pEven[k+1]},
   \end{equation*}
+  откуда предельным переходом при $n \rightarrow \infty$ получаем
+  \begin{equation}
+    \label{ch1:eq:prop:L(comb)}
+    \begin{aligned}
+    \lowerBound{p} 
+    &= \DCo \Co \lambda +
+    \lambda \DCo \lowerBound{\pEven} +
+    (1-\lambda) \DCo \lowerBound{\pOdd[k+1]} + \\
+    &+ \Co \lowerBound{(1-\lambda) \pOdd + \lambda \pEven[k+1]}.
+    \end{aligned}
+  \end{equation}
   
-  Так как $(1-\lambda)\pOdd + \lambda \pEven[k+1] \in (\pOdd, \pEven[k+1])$, то для $\lowerBound{(1-\lambda)\pOdd + \lambda \pEven[k+1]}$ справедливо аналогичное представление.
-  Приведя подобные члены, получим
+  Так как $(1-\lambda)\pOdd + \lambda \pEven[k+1] \in (\pOdd, \pEven[k+1])$, то для $\lowerBound{(1-\lambda)\pOdd + \lambda \pEven[k+1]}$ справедливо аналогичное представление:
+  \begin{align*}
+    \lowerBound{(1-\lambda)\pOdd + \lambda \pEven[k+1]} 
+    &=
+    \DCo\Co(1-\lambda) +
+    (1-\lambda)\DCo\lowerBound{\pEven} + \\
+    &+ \lambda\DCo\lowerBound{\pOdd[k+1]} +
+    \Co \lowerBound{p}.
+  \end{align*}
+  Подставив данное выражение в~\eqref{ch1:eq:prop:L(comb)} и приведя подобные члены, получим
 
   \begin{equation}
     \label{ch1:eq:first:combination:game:2}
@@ -737,8 +838,6 @@ L_{2k-1} = \gamma_{2k}\gamma_{2k+1}L_{2k+1} + \gamma_{2k}\delta_{2k+1} + \delta_
   При $p \in ( 0, \pOdd[1] )$ и $p \in ( \pOdd[m-1], 1 )$ доказательство проводится аналогично.
 \end{proof}
 
-Заметим, что при $\Co < 1/2$ полученные результаты также имеют место, а стратегию $\fOpt$ можно получить, рассмотрев игру $\symmGameExpression[n]{1-p}$.
-
 Таким образом, мы определили стратегию $\fOpt$ и максимальный гарантированный выигрыш первого игрока $\lowerBound{p}$ для любых $p \in [0, 1], \, \Co \in (0, 1)$.
 Отсюда вытекает справедливость следующей леммы.
 
@@ -763,12 +862,16 @@ L_{2k-1} = \gamma_{2k}\gamma_{2k+1}L_{2k+1} + \gamma_{2k}\delta_{2k+1} + \delta_
   \label{ch1:prop:value-comparison}
   При любом значении $p \in [0,1]$, $\Co \in (0,1)$ и $m \geq 3$ справедливо неравенство
   \begin{equation*}
-    V^\Co_m(p) \geq V^1_m(p) = V^0_m(p),
+    V^{m, \Co}_\infty(p) \geq V^{m,1}_\infty(p) = V^{m,0}_\infty(p),
   \end{equation*}
   причем равенство достигается только при $p = k/m, k = \overline{0,m}$.
 \end{proposition}
 \begin{proof}
-  Из (\ref{ch1:eq:recurrence-solution:even}) следует, что нам достаточно показать, что 
+  Равенство $V^{m, 1}_\infty(p) = V^{m,0}_\infty(p)$ следует из замечания~\ref{ch1:rem:symm-payoffs} и того, что при $p = k/m$ выполняется
+  \begin{equation*}
+    V^{m, 0}_\infty(1-p) = \frac{(m-k)(m-(m-k))}{2} = \frac{k(m-k)}{2} = V^{m, 0}_\infty(p) = V^{m, 1}_\infty(p).
+  \end{equation*}
+  Далее, из (\ref{ch1:eq:recurrence-solution:even}) следует, что нам достаточно показать, что 
   \[
     V^\beta_m((k+\Co)/m) > V^1_m((k+\Co)/m).
   \]
@@ -791,10 +894,10 @@ L_{2k-1} = \gamma_{2k}\gamma_{2k+1}L_{2k+1} + \gamma_{2k}\delta_{2k+1} + \delta_
     \draw[thick] plot file {plots/ch1-v0.5.dat};
     \draw[very thick,dashed] plot file {plots/ch1-v1.dat};
     
-    \node at (0.86, 2.6) {$V^{1/2}_m(p)$};
-    \node at (0.55, 2.6) {$V^1_ m(p)$};
+    \node at (0.86, 2.6) {$V^{m,1/2}_\infty(p)$};
+    \node at (0.55, 2.6) {$V^{m,1}_\infty(p)$};
   \end{tikzpicture}
-  \caption{Графики функции $V^\Co_m(p)$ при значениях $\Co = 1/2$ и $\Co = 1$}
+  \caption{Графики функции $V^{m,\Co}_\infty(p)$ при значениях $\Co = 1/2$ и $\Co = 1$}
   \label{ch1:fig:value-comparison}
 \end{figure}
 
@@ -803,8 +906,8 @@ L_{2k-1} = \gamma_{2k}\gamma_{2k+1}L_{2k+1} + \gamma_{2k}\delta_{2k+1} + \delta_
 \section{Динамика апостериорных вероятностей}
 Рассмотрим динамику апостериорных вероятностей, возникающую при применении игроками оптимальных стратегий.
 
-Пусть $p \in P$. Обозначим через $p^t$ апостериорную вероятность состояния $H$ после $t$-го шага игры, причем $p^0$ соответствует исходной априорной вероятности.
-Тогда из замечания~\ref{ch1:remark:posterior-probs} и рекурсивной структуры игры $\infiniteGame{p}$ следует, что последовательность $(p^0, p^1, p^2, \ldots, p^t, \ldots)$ представляет собой однородную марковскую цепь с $2m$ состояний и $2m \times 2m$-матрицей переходных вероятностей
+Пусть $p \in P$. Обозначим через $p^t$ апостериорную вероятность состояния $H$ после $t$-го шага игры, причем $p^0 = p$ соответствует исходной априорной вероятности.
+Тогда из замечания~\ref{ch1:remark:posterior-probs} и рекурсивной структуры игры $\infiniteGame{p}$ следует, что последовательность $(p^0, p^1, p^2, \ldots, p^t, \ldots)$ представляет собой однородную марковскую цепь с $2m$ состояниями и $2m \times 2m$-матрицей переходных вероятностей
 \begin{equation}
   \label{ch1:eq:posterior-chain}
   \Pi = 
@@ -841,7 +944,7 @@ L_{2k-1} = \gamma_{2k}\gamma_{2k+1}L_{2k+1} + \gamma_{2k}\delta_{2k+1} + \delta_
 
 Обозначим через $\pi^l_i,\ \pi^r_i,\ i \in \overline{1, 2m-1}$ вероятности перехода из состояния $p_i$ в состояния $p_{i-1}$ и $p_{i+1}$ соответственно.
 
-\begin{figure}[htb]
+\begin{figure}[tb]
   \centering
   \input{figures/ch1-posterior-markov}
   \caption[Последовательность апостериорных вероятностей]{Марковская цепь,
@@ -879,7 +982,7 @@ L_{2k-1} = \gamma_{2k}\gamma_{2k+1}L_{2k+1} + \gamma_{2k}\delta_{2k+1} + \delta_
       \ldots + \frac{\pi^l_j \ldots \pi^l_2}{\pi^r_{j-1} \ldots \pi^r_1}
     \right), \quad j \geq 2.
   \end{gather*}
-  Несложно видеть, что для коэффициентов $\rho_j$, $R_j$ выполняется
+  Нетрудно проверить, что для коэффициентов $\rho_j$, $R_j$ выполняются равенства
   \begin{gather*}
     \rho_{2k+1} = \frac{\DCo}{\Co},\quad k = \overline{0, m-1},\quad
     \rho_{2k} = 1,\quad k = \overline{1, m-1},\\
