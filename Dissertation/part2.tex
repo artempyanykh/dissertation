@@ -31,13 +31,13 @@
 \]
 где
 \begin{equation}\label{ch2:eq:trans-mech}
-  t(i, j) = \Ind_{i > j} (1, -(\Co i + \DCo j)) +
-  \Ind_{i < j} (-1, \DCo i + \Co j).
+  t(i, j) = \Ind{i > j} (1, -(\Co i + \DCo j)) +
+  \Ind{i < j} (-1, \DCo i + \Co j).
 \end{equation}
 Таким образом, одна акция продается по цене, равной выпуклой комбинации предложенных ставок с заданным коэффициентом $\Co$.
 Стоимость портфеля при этом равна
 \begin{equation*}
-  V(\Port{t})=\Ind_{s = H} \, \Port{t}^R + \Port{t}^N.
+  V(\Port{t}) \eqdef \Ind{s = H} \, \Port{t}^R + \Port{t}^N.
 \end{equation*}
 Цель игроков состоит в максимизации прибыли, полученной от торгов.
 
@@ -58,10 +58,10 @@
 Стратегией первого игрока является последовательность ходов $\sigma = (\sigma_1, \ldots, \sigma_n)$, где $\sigma_t = (\sigma^L_t,\ \sigma^H_t)$.
 При фиксированном $s \in S$ ход $\sigma^s_t: H_{t-1} \rightarrow \Delta(I)$ является отображением из множества историй ставок к моменту времени $t$ в множество $\Delta(I)$ вероятностных распределений на $I$.
 Обозначим множество стратегий первого игрока $\Sigma_n$.
-Аналогично, стратегией второго игрока назовем последовательность ходов $\tau = (\tau_1, \ldots, \tau_n)$, где $\tau_t: H_{t-1} \rightarrow \Delta(I)$.
+Аналогично, стратегией второго игрока назовем последовательность ходов $\tau = (\tau_1, \ldots, \tau_n)$, где $\tau_t: H_{t-1} \rightarrow \Delta(J)$.
 Обозначим множество стратегий второго игрока $\Tau_n$.
 
-Пара стратегий $(\sigma, \tau)$ вместе с ходом случая индуцирует на $(S, H_n)$ вероятностное распределение $\Pi[p, \sigma, \tau]$.
+Пара стратегий $(\sigma, \tau)$ вместе с ходом случая индуцирует на $S \times H_n$ вероятностное распределение $\Pi[p, \sigma, \tau]$.
 Тогда выигрыш первого игрока равен
 \[
   g^\Co_n(p, \sigma, \tau) = \E_{\Pi[p, \sigma, \tau]} V(\Port{n}).
@@ -75,7 +75,7 @@
   V^\Co_{2,n}(p) = \inf_\tau \sup_\sigma g^\Co_n(p, \sigma, \tau).
 \end{align*}
 В том случае, когда $V^\Co_{1,n}(p) = V^\Co_{2,n}(p) = V^\Co_n(p)$, будем говорить, что игра имеет значение $V_n(p)$.
-Стратегии $\sigma^*$ и $\tau^*$ называются оптимальными, если
+При этом стратегии $\sigma^*$ и $\tau^*$ называются оптимальными, если
 \[
   \inf_\tau g^\Co_n(p, \sigma^*, \tau) = V^\Co_{1,n}(p), \enskip 
   \sup_\sigma g^\Co_n(p, \sigma, \tau^*) = V_{2,n}(p).
@@ -88,17 +88,13 @@
 
 Приведем несколько известных фактов, которые понадобятся нам в дальнейшем.
 
-Пара $(\sigma_1, \tau_1)$ вместе с ходом случая индуцирует вероятностное распределение $\Pi[p, \sigma_1, \tau_1]$ на $(S, i, j)$.
+Пара $(\sigma_1, \tau_1)$ вместе с ходом случая индуцирует вероятностное распределение $\Pi[p, \sigma_1, \tau_1]$ на $S \times I \times J$.
 Обозначим через
 \[
-  p(i, j) = \Pi[p, \sigma_1, \tau_1](s = H \;|\; i, j).
+  p(i) = \Pi[p, \sigma_1](s = H \; | \; i)
 \]
-апостериорную вероятность состояния $H$ при условии, что первый игрок сделал ставку $i$, а второй -- $j$.
-Так как $j$ не зависит от $s$, то апостериорная вероятность
-\[
-  p(i, j) = p(i) = \Pi[p, \sigma_1](s = H \; | \; i)
-\]
-зависит только от $i$.
+апостериорную вероятность состояния $H$ при условии, что первый игрок сделал ставку $i$.
+Отметим, что апостериорная вероятность не зависит от ставки второго игрока $j$, так как она не зависит от $s$.
 Тогда для значения выигрыша первого игрока справедливо представление
 \begin{align*}
   g_{n+1}(p, \sigma, \tau) 
@@ -117,6 +113,8 @@
   \end{equation}
 \end{lemma}
 Подчеркнем, что поскольку можно положить $V_0(p) = 0$, данная формула имеет смысл для любого $n \geqslant 1$.
+
+В силу того, что игра с $p \in \{0, 1\}$ имеет тривиальное решение, дальнейшие построения будут проведены для значений $p \in (0, 1)$.
 
 \subsection{Определение двойственной игры $\mathbf{G^*_n(x)}$}
 Определим двойственную игру $G^*_n(x)$, следуя схеме из работы~\cite{demeyer02}.
@@ -418,10 +416,27 @@ Cтратегией первого игрока в двойственной игре является пара $\dualFPS$, где $p \
 \subsection{Оценка нижнего значения $\mathbf{V_{1,n}(p)}$ игры $\mathbf{G_n(p)}$}
 \label{ch2:sec:-primal-game}
 
+Обозначим через $\sigma^M_1(i) = p \sigma^H_1(i) + (1-p) \sigma^L_1(i)$ маргинальное распределение ставки $i$ при использовании одношаговой стратегии $\sigma_1 = (\sigma^H_1, \sigma^L_1)$, а соответствующую функцию распределения обозначим $F_{\sigma^M_1}(x)$.
+
+Возьмем случайную величину $u$, равномерно распределенную на $[0, 1]$, и положим
+\begin{equation*}
+  f(u) = F^{-1}_{\sigma^M_1}(u) \eqdef \inf \{ x\ |\ F_{\sigma^M_1}(x) \geq u \}.
+\end{equation*}
+Известно, что тогда случайные величины $f(u)$ и $i$ одинаково распределены.
+
+Далее, обозначим $Q(u) = p(f(u))$.
+Легко видеть, что для условной апостериорной вероятности $p(i)$ состояния $H$ справедливо
+\begin{equation*}
+  \int_I p(i) \sigma^M_1(\di i) = \Pi[p, \sigma_1](s = H, i \in I) = p.
+\end{equation*}
+Так как случайные величины $f(u)$ и $i$ одинаково распределены, то имеет место равенство
+\begin{equation*}
+  \int_0^1 Q(u) \di u = P.
+\end{equation*}
+Таким образом, функции $Q(u)/p$ и $(1-Q(u))/(1-p)$ являются условными плотностями.
+
 В \cite{demeyer02} рассматривается параметризация одношаговой стратегии инсайдера функциями $f$ и $Q$, которые используются для генерации маргинального распределения ставки $i$ и апостериорной вероятности $p(i)$ соответственно.
 Далее мы покажем, что задание стратегии первого игрока при помощи пары $(f, Q)$ в некотором смысле естественно и приведем способ перехода от параметризованного представления к стратегии $\sigma_1$.
-
-Обозначим через $\sigma^M_1(i) = p \sigma^H_1(i) + (1-p) \sigma^L(i)$ маргинальное распределение ставки $i$.
 
 \begin{proposition}
   Для апостериорной вероятности $p(i)$ состояния $H$ справедлива формула
@@ -432,14 +447,14 @@ Cтратегией первого игрока в двойственной игре является пара $\dualFPS$, где $p \
 \end{proposition}
 \begin{proof}
   По определению $p(i)$ для любого множества $B$ из борелевской $\sigma$-алгебры $\Borel(I)$ отрезка $I$ выполнено
-  \begin{equation*}
+  \begin{equation}
     P(s = H, \; i \in B) = \int_B p(i) \; \sigma^M_1(\di i).
-  \end{equation*}
+  \end{equation}
   С другой стороны, справедлива следующая формула:
   \begin{equation*}
     P(s = H, \; i \in B) = p \int_B \sigma^H_1(\di i).
   \end{equation*}
-  Так как $\sigma^H_1$ абсолютно непрерывна относительно $\sigma^M_1$, то существует производная Радона-Никодима, а значит
+  Так как $\sigma^H_1$ абсолютно непрерывна относительно $\sigma^M_1$, то существует производная Радона-Никодима (\seename~\cite{kolmogorov-fomin}), а значит
   \begin{equation*}
     P(s = H, \; i \in B) =
     \int_B p \frac{\di \sigma^H_1}{\di \sigma^M_1}(i) \; \sigma^M_1(\di i).
@@ -451,10 +466,10 @@ Cтратегией первого игрока в двойственной игре является пара $\dualFPS$, где $p \
   Для $g_1(p, \sigma_1, j)$ справедливо представление
   \begin{equation}\label{ch2:eq:g1-aposterior}
     \begin{multlined}
-      g_1(p, \sigma_1, j) = \int_I \Ind_{i > j} \biggl[ p(i) - \Co i -
+      g_1(p, \sigma_1, j) = \int_I \Ind{i > j} \biggl[ p(i) - \Co i -
       \DCo j
       \biggr] \; \sigma^M_1(\di i) \; + \\
-      + \int_I \Ind_{i < j} \biggl[ \DCo i + \Co j - p(i) \biggr] \;
+      + \int_I \Ind{i < j} \biggl[ \DCo i + \Co j - p(i) \biggr] \;
       \sigma^M_1(\di i).
     \end{multlined}
   \end{equation}
@@ -463,36 +478,37 @@ Cтратегией первого игрока в двойственной игре является пара $\dualFPS$, где $p \
   По определению
   \begin{equation}\label{ch2:eq:g1-def}
     g_1(p, \sigma_1, j) = \E_{\Pi[p, \sigma_1]} \langle
-    (\Ind_{s = H}, 1), t(i, j)
-    \rangle.
+    (\Ind{s = H}, 1), t(i, j)
+    \rangle,
   \end{equation}
+  где $t(i, j)$ определена в~(\ref{ch2:eq:trans-mech}).
   Подставив~\eqref{ch2:eq:trans-mech} в~\eqref{ch2:eq:g1-def}, получим
-  \begin{multline*}
-    g_1(p, \sigma_1, j) = 
-    p \int_I \biggl[ \Ind_{i > j}(1 - \Co i - \DCo j) + \Ind_{i < j} \times \\
-    \times (\DCo i - \Co j - 1) \biggr] \; \sigma^H_1(\di i) +
-    (1-p) \int_I \biggl[
-      \Ind_{i > j} \times \\
-      \times (- \Co i - \DCo j) + \Ind_{i < j}(\DCo i - \Co j) 
+  \begin{align*}
+    g_1(p, \sigma_1, j) 
+    &= p \int_I \biggl[ \Ind{i > j}(1 - \Co i - \DCo j) + \Ind{i < j} (\DCo i - \Co j - 1) \biggr] \; \sigma^H_1(\di i) + \\
+    &+ (1-p) \int_I \biggl[
+      \Ind{i > j} (- \Co i - \DCo j) + \Ind{i < j}(\DCo i - \Co j) 
     \biggr]
-    \; \sigma^L_1(\di i).
-  \end{multline*}
+    \; \sigma^L_1(\di i) = \\
+    &= \int_I \Ind{i > j} p \sigma^H_1(\di i) -
+    \int_I \Ind{i > j} (\Co i + \DCo j) \sigma^M_1 (\di i) + \\
+    &+ \int_I \Ind{i < j} (\DCo i + \Co j) \sigma^M_1 (\di i) -
+    \int_i \Ind{i < j} p \sigma^H_1(\di i).
+  \end{align*}
   Отсюда, воспользовавшись~\eqref{ch2:eq:p(i)}, получим~\eqref{ch2:eq:g1-aposterior}.
 \end{proof}
 
 Формула \eqref{ch2:eq:g1-aposterior} показывает альтернативное представление стратегии инсайдера $\sigma_1$ с помощью маргинального распределения ставки и апостериорной вероятности состояния $H$.
-Укажем способ перехода от $\sigma_1$ к параметризованному представлению $(f, Q)$ и наоборот.
 
-Возьмем случайную величину $u$, равномерно распределенную на $[0, 1]$.
-Если $f(\cdot)$ -- левая обратная функции распределения $i$, то $f(u)$ и $i$ одинаково распределены.
-Обозначим $Q(u) = p(f(u))$.
-Пусть также $\pi = \Pi[p, \sigma_1]$.
+Укажем способ перехода от $\sigma_1$ к параметризованному представлению $(f, Q)$ и наоборот.
+Пусть $\pi = \Pi[p, \sigma_1]$.
 Так как для любого $B \in \Borel(I)$ выполнено
-\begin{equation*}
-  \pi(i \in B \; | \; s = H) =
-  \frac{\pi(i \in B, \; s = H)}{\pi(s = H)} =
-  \int_0^1 \Ind_{f(u) \in B} \frac{Q(u)}{p} \di u,
-\end{equation*}
+\begin{align*}
+  \pi(i \in B \; | \; s = H) 
+  &= \frac{\pi(i \in B, \; s = H)}{\pi(s = H)} = \\
+  &= \int_0^1 \Ind{i \in B} \frac{p(i)}{p} \sigma^M_1(\di i) =
+  \int_0^1 \Ind{f(u) \in B} \frac{Q(u)}{p} \di u,
+\end{align*}
 то восстановить $\sigma_1$ по $(f, Q)$ можно следующим образом.
 Если ходом случая было выбрано состояние $H$, то инсайдер выбирает $u \in [0, 1]$ с плотностью вероятности $Q(u)/p$ и делает ставку $i = f(u)$.
 Аналогично, в состоянии $L$ он выбирает $u$ с плотностью вероятности $(1 - Q(u))/(1 - p)$ и делает ставку $i = f(u)$.
@@ -505,8 +521,8 @@ Cтратегией первого игрока в двойственной игре является пара $\dualFPS$, где $p \
 \begin{equation}\label{ch2:eq:F(f,Q,p)}
 \begin{multlined}
   \Ff{j} =
-  \int_0^1 \Ind_{f(u) > j} (Q(u) - \Co f(u) - \DCo j) \di u \enskip + \\
-  + \int_0^1 \Ind_{f(u) < j} (\DCo f(u) + \Co j - Q(u)) \di u \; + \int_0^1
+  \int_0^1 \Ind{f(u) > j} (Q(u) - \Co f(u) - \DCo j) \di u \enskip + \\
+  + \int_0^1 \Ind{f(u) < j} (\DCo f(u) + \Co j - Q(u)) \di u \; + \int_0^1
   V_{1,n}(Q(u)) \di u.
 \end{multlined}
 \end{equation}
@@ -552,15 +568,22 @@ Cтратегией первого игрока в двойственной игре является пара $\dualFPS$, где $p \
   \label{ch2:eq:f}
   f(u) = (u - \DCo)^{-2} \int_{\DCo}^u 2(x-\DCo) Q(x) \di x.\footnotemark
   \footnotetext{
-    При $u = \DCo$ доопределим $f(\DCo)$ по непрерывности как $Q(\DCo)$.
+    При $u = \DCo$ функция $f(u)$ доопределяется по правилу Лопиталя как $Q(\DCo)$.
   }
 \end{equation}%
 
 Если подставить \eqref{ch2:eq:f} в \eqref{ch2:eq:F(f,Q,fa)}, то получившееся выражение $\Phi(Q)$ зависит только от $Q$ и не зависит от $\alpha$.
 При $\alpha = 1$ получим
-\begin{equation}\label{ch2:eq:Phi:raw}
+\begin{equation}\label{ch2:eq:Phi(a=1)}
   \begin{gathered}
-    \Phi(Q) = \int_0^1 (\DCo f(u) - Q(u)) \di u + \Co f(1) + \int_0^1
+    \Phi(Q) \eqdef \int_0^1 (\DCo f(u) + \Co f(1) - Q(u)) \di u + \int_0^1
+    V_{1,n}(Q(u)) \di u.
+  \end{gathered}
+\end{equation}
+Аналогично при $\alpha = 0$ для $\Phi(Q)$ имеет место формула
+\begin{equation}\label{ch2:eq:Phi(a=0)}
+  \begin{gathered}
+    \Phi(Q) = \int_0^1 (Q(u) - \Co f(u) - \DCo f(0)) \di u + \int_0^1
     V_{1,n}(Q(u)) \di u.
   \end{gathered}
 \end{equation}
@@ -572,7 +595,7 @@ Cтратегией первого игрока в двойственной игре является пара $\dualFPS$, где $p \
   \end{equation}
 \end{lemma}
 \begin{proof}
-  Упростим \eqref{ch2:eq:Phi:raw} при $\Co \in (0, 1)$. Случаи $\Co = 0$ и $\Co = 1$ дают тот же результат и рассматриваются аналогично.
+  Упростим \eqref{ch2:eq:Phi(a=1)} при $\Co \in (0, 1)$. Случаи $\Co = 0$ и $\Co = 1$ дают тот же результат и рассматриваются аналогично.
 
   Найдем выражение для $\int_0^1 f(u) \di u$, разбив этот интеграл на две части.
   Для первой части имеем:
@@ -585,7 +608,7 @@ Cтратегией первого игрока в двойственной игре является пара $\dualFPS$, где $p \
   \begin{gather*}
     \int_\DCo^1 f(u) \di u = (2/\Co) \int_\DCo^1 (1-u) Q(u) \di u.
   \end{gather*}
-  Подставим найденные выражения в~\eqref{ch2:eq:Phi:raw}:
+  Подставим найденные выражения в~\eqref{ch2:eq:Phi(a=1)}:
   \begin{multline*}
     \Phi(Q) = 2 \int_0^\DCo u Q(u) \di u + (2\DCo/\Co) \int_\DCo^1 (1-u) Q(u) \di u \; + \\
     + (2/\Co) \int_\DCo^1 (u - \DCo) Q(u) \di u - \int_0^1 Q(u) \di u + \int_0^1
@@ -625,7 +648,6 @@ Cтратегией первого игрока в двойственной игре является пара $\dualFPS$, где $p \
   \label{ch2:eq:lambda-cond}
   &\int_0^1 V^{*\prime}_{1,n}(1+\lambda-2u) \di u = p.
 \end{align}
-
 Так как $V_{1,n}(\cdot)$ определена на $[0, 1]$, то из~\eqref{ch2:eq:dual-range} следует, что
 \begin{equation*}
   \mathrm{int} \left( \dom V_{1,n}(\cdot) \right)
@@ -633,7 +655,8 @@ Cтратегией первого игрока в двойственной игре является пара $\dualFPS$, где $p \
   \subset \range \partial V_{1,n}^*(\cdot),
 \end{equation*}
 и $V^{*\prime}_{1,n}(\cdot)$ не возрастает на $\mathbb{R}$ от $1$ до $0$.
-Поэтому $\lambda$, удовлетворяющее~\eqref{ch2:eq:lambda-cond}, существует.
+Тогда при достаточно больших отрицательных $\lambda$ интеграл близок к $1$, а при достаточно больших положительных $\lambda$ интеграл близок к 0.
+Таким образом, $\lambda$, удовлетворяющее~\eqref{ch2:eq:lambda-cond}, существует.
 
 Введем обозначение
 \begin{equation*}
@@ -662,16 +685,21 @@ Cтратегией первого игрока в двойственной игре является пара $\dualFPS$, где $p \
   \begin{equation*}
     f(u) = \int_0^1 2 t Q \left( t(u - \DCo) + \DCo \right) \di t.
   \end{equation*}
-  Отсюда видно, что~\eqref{ch2:eq:parametr-prop:f-incr} выполнено. Далее, \eqref{ch2:eq:parametr-prop:int-q=p} выполнено по построению.
+  При $u_1 < u_2$ получаем
+  \begin{equation*}
+    f(u_2) - f(u_1) =
+    \int_0^1 2t \left( 
+      Q(t u_2 + \DCo(1-t)) - Q(t u_1 + \DCo (1-t))
+    \right) \di t.
+  \end{equation*}
+  Отсюда, в силу того, что $Q(\cdot)$ не убывает, получаем, что~\eqref{ch2:eq:parametr-prop:f-incr} выполнено.
+  Далее, \eqref{ch2:eq:parametr-prop:int-q=p} следует из~\ref{ch2:eq:lambda-cond}.
   Чтобы доказать \eqref{ch2:eq:parametr-prop:f-Q-eq}, рассмотрим несколько случаев.
 
   Пусть $\DCo < u_1 < u_2$ и $f(u_1) = f(u_2)$.
   Тогда, так как $Q$ не убывает, почти при всех $t \in [0, 1]$ выполнено $ Q(t(u_1 - \DCo) + \DCo) = Q(t(u_2 - \DCo) + \DCo)$.
-  Из непрерывности $Q$ следует равенство при $t = 1$, т.е. $Q(u_1) = Q(u_2)$.
-
-  При $\DCo = u_1 < u_2$ имеем $f(u_1) = f(\DCo) = Q(\DCo)$.
-  Отсюда почти при всех $t \in [0, 1]$ выполнено $Q(t(u_2 - \DCo) + \DCo) = Q(\DCo)$.
-  Снова из непрерывности $Q$ получаем $Q(u_1) = Q(u_2) = Q(\DCo)$.
+  Из непрерывности $Q$ следует равенство при $t = 1$, то есть $Q(u_1) = Q(u_2)$.
+  Случай $u_1 = \DCo$ получается предельным переходом по $u_1 \rightarrow \DCo$.
 
   Доказательство при $u_1 < u_2 \leqslant \DCo$ и $u_1 < \DCo < u_2$ проводится аналогично.
   Таким образом, \eqref{ch2:eq:parametr-prop:f-Q-eq} выполнено.
@@ -682,7 +710,9 @@ Cтратегией первого игрока в двойственной игре является пара $\dualFPS$, где $p \
   Если $f(u_1) = f(u_2)$ при $u_1 < u_2$, то $f(u) = Q(u)$ при $u \in [u_1, u_2]$.
 \end{lemma}
 \begin{proof}
-  Действительно, если $f(u_1) = f(u_2)$, то из леммы~\ref{ch2:lem:f-Q-is-strategy} следует, что $f(\cdot)$ и $Q(\cdot)$ постоянны на $[u_1, u_2]$.
+  При $u_2 = \DCo$ справедливость утверждения следует из того, что $f(u_2) = Q(u_2)$.
+  Пусть $u_2 \neq \DCo$. 
+  Если $f(u_1) = f(u_2)$, то из леммы~\ref{ch2:lem:f-Q-is-strategy} следует, что $f(\cdot)$ и $Q(\cdot)$ постоянны на $[u_1, u_2]$.
   Тогда из \eqref{ch2:eq:f} имеем
   \begin{align*}
     f(u_2)
@@ -707,6 +737,10 @@ Cтратегией первого игрока в двойственной игре является пара $\dualFPS$, где $p \
       \left( (u_2 - \DCo)^2 - (u_1 - \DCo)^2 \right) f(u_1)
     \right).
   \end{equation*}
+  Отсюда находим
+  \begin{equation*}
+    f(u_2) - f(u_1) = \left(1 - \frac{(u_1 - \DCo)^2}{(u_2 - \DCo)^2}\right)(Q(u_1) - f(u_1)) = 0.
+  \end{equation*}
   Таким образом, $f(u_1) = Q(u_1)$, а следовательно $f(u) = Q(u)$ при $u \in [u_1, u_2]$.
 \end{proof}
 
@@ -718,16 +752,26 @@ Cтратегией первого игрока в двойственной игре является пара $\dualFPS$, где $p \
   Рассмотрим несколько случаев.
 
   Пусть $j < f(0)$.
-  Тогда из~\eqref{ch2:eq:F(f,Q,p)} и~\eqref{ch2:eq:phi=k*} получаем неравенство
-  \begin{multline*}
-    \Ff{j} = \int_0^1 \left[ Q(u) - \Co f(u) - \DCo j
-    \right] \di u \; + \\
-    + \int_0^1 V_{1,n}(Q(u)) \di u \geqslant \Ff{f(0)} = \Phi(Q) = K^*(p).
-  \end{multline*}
-  Аналогично можно показать, что при $j > f(1)$
-  \begin{equation*}
-    \Ff{j} \geqslant \Ff{f(1)} = \Phi(Q) = K^*(p).
-  \end{equation*}
+  Тогда из~(\ref{ch2:eq:F(f,Q,p)},~\ref{ch2:eq:phi=k*},~\ref{ch2:eq:Phi(a=0)}) получаем неравенство
+  \begin{align*}
+    \Ff{j} 
+    &= \int_0^1 \left[ 
+      Q(u) - \Co f(u) - \DCo j 
+    \right] \di u +
+    \int_0^1 V_{1,n}(Q(u)) \di u \geq \\
+    &\geq \int_0^1 \left[ 
+      Q(u) - \Co f(u) - \DCo f(0) 
+    \right] \di u + \int_0^1 V_{1,n}(Q(u)) \di u = \\
+    &= \Phi(Q) = K^*(p).
+  \end{align*}
+  Аналогично можно показать, что при $j > f(1)$ из~(\ref{ch2:eq:Phi(a=1)}) следует
+  \begin{align*}
+    \Ff{j} 
+    &\geq \int_0^1 \left[ 
+      \DCo f(u) + \Co f(1) - Q(u) 
+    \right] \di u + \int_0^1 V_{1,n}(Q(u)) \di u = \\
+    &= \Phi(Q) = K^*(p).
+  \end{align*}
   Пусть теперь $j = f(\alpha), \; \alpha \in [0, 1]$. Введем обозначения
   \[
     \alpha^- = \inf \left\{ x \;|\; f(x) = f(\alpha) \right\}, \quad \alpha^+ =
@@ -748,21 +792,24 @@ Cтратегией первого игрока в двойственной игре является пара $\dualFPS$, где $p \
 \label{ch2:sec:-dual-game}
 
 Аналогично тому, как это было сделано для первого игрока, параметризуем $\tau_1$ при помощи неубывающей функции $h: [0, 1] \rightarrow [0, 1]$.
-Если случайная величина $u$ равномерно распределена на $[0, 1]$, положим $j = h(u)$.
-Таким образом может быть получено любое распределение $\tau_1$ для $j$.
+Если $F_{\tau_1}(x)$ "--- функция распределения ставки $j$ при применении вторым игроком стратегии $\tau_1$, то положим
+\begin{equation*}
+  h(u) = F^{-1}_{\tau_1}(u) \eqdef \inf \{ x | F_{\tau_1} \geq u \}.
+\end{equation*}
+Тогда, если случайная величина $u$ равномерно распределена на $[0, 1]$, то $h(u)$ и $j$ имеют одинаковое распределение.
 
-Подобно предыдущему разделу получим аналог леммы~\ref{ch2:lem:low-bound-dual:general} в терминах $h$.
+Подобно предыдущему подразделу получим аналог леммы~\ref{ch2:lem:low-bound-dual:general} в терминах $h$.
 Заметим, что для $g_1^L(i, \tau_1)$ и $g_1^H(i, \tau_1)$ справедливы равенства
 \begin{align*}
   g_1^L(i,\tau_1) &=
                       \int_J \biggl[
-                      \Ind_{i>j} (-\Co i - \DCo j) +
-                      \Ind_{i<j} (\DCo i + \Co j)
+                      \Ind{i>j} (-\Co i - \DCo j) +
+                      \Ind{i<j} (\DCo i + \Co j)
                       \biggr] \tau_1(\di j),\\
   g_1^H(i,\tau_1) &=
                       \int_J \biggl[
-                      \Ind_{i>j} (1 -\Co i - \DCo j) +
-                      \Ind_{i<j} (\DCo i + \Co j - 1)
+                      \Ind{i>j} (1 -\Co i - \DCo j) +
+                      \Ind{i<j} (\DCo i + \Co j - 1)
                       \biggr] \tau_1(\di j).
 \end{align*}
 
@@ -771,11 +818,11 @@ Cтратегией первого игрока в двойственной игре является пара $\dualFPS$, где $p \
 \begin{multlined}
   \Gf[i][h] =
   W_{2,n}\left( 
-    x - \int_0^1 \left[ \Ind_{h(u) < i} - \Ind_{h(u) > i} \right] \di u
+    x - \int_0^1 \left[ \Ind{h(u) < i} - \Ind{h(u) > i} \right] \di u
   \right) \; - \\
   - \int_0^1 \left[ 
-    \Ind_{h(u) < i} (-\Co i - \DCo h(u)) + 
-    \Ind_{h(u) > i} (\DCo i + \Co h(u)) 
+    \Ind{h(u) < i} (-\Co i - \DCo h(u)) + 
+    \Ind{h(u) > i} (\DCo i + \Co h(u)) 
   \right] \di u.
 \end{multlined}
 \end{equation}
@@ -824,11 +871,11 @@ Cтратегией первого игрока в двойственной игре является пара $\dualFPS$, где $p \
 \begin{lemma}\label{ch2:lem:h(u)-props}
   Функция $h(u)$, определенная в~\eqref{ch2:eq:h(u)}, обладает следующими свойствами:
   \begin{itemize}
-  \item 
+  \item[$\bullet$] 
   $u \in [0, 1] \implies h(u) \in [0, 1];$
-  \item 
+  \item[$\bullet$] 
   $\forall u_1, u_2 \in [0, 1]: u_1 < u_2 \implies h(u_1) \leq h(u_2);$
-  \item 
+  \item[$\bullet$] 
   $h(u_1) = h(u_2) \implies h(u_1) = W_{2,n}'(x - 2u_1 + 1) = W_{2,n}'(x - 2u_2 + 1)$.
   \end{itemize}
   В частности, функция $h(\cdot)$ может служить параметризацией некоторой стратегии $\tau_1$ второго игрока.
@@ -1062,7 +1109,7 @@ $
   Из~\eqref{ch2:eq:h(u)} и теоремы~\ref{ch2:thm:optimal-strategies} следует, что выражения для $h$ и $f$ совпадают.
   Таким образом, оптимальная ставка второго игрока $j = h(u_2) = f(u_2)$.
 \item
-  Если $n = 1$, игра заканчивается после объявления ставок. В противном случае игроки переходят к игре $G_{n-1}(p^1)$, где $p^1 = Q(u_1)$.
+  Если $n = 1$, игра заканчивается после объявления ставок. В противном случае игроки переходят к игре $G_{n-1}(p^1)$, где $p_1 = Q(u_1)$.
 \end{enumerate}
 
 \section{Примеры}

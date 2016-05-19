@@ -40,10 +40,15 @@
 \DeclareMathOperator{\E}{\mathbb{E}}
 \DeclareMathOperator{\D}{\mathbb{D}}
 \newcommand*\di{\mathop{}\!\mathrm{d}}
-\DeclareMathOperator*{\Ind}{\mathbbm{1}}
+\newcommand{\Ind}[1]{\ensuremath{\mathbbm{1}_{#1}}}
 \newcommand*\dom{\ensuremath{\mathrm{dom\;}} }
 \newcommand*\range{\ensuremath{\mathrm{range\;}}}
 \newcommand{\inter}{\mathrm{int}}
+
+% \newcommand{\eqdef}{\overset{\mathrm{def}}{=\joinrel=}}
+\newcommand{\eqdef}{\overset{\mathrm{def}}{=}}
+% \newcommand*{\eqdefU}{\ensuremath{\mathop{\overset{\mathrm{def}}{=}}}}% Unscaled version
+% \newcommand*{\eqdef}{\mathop{\overset{\mathrm{def}}{\resizebox{\widthof{\eqdefU}}{\heightof{=}}{=}}}}
 
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
