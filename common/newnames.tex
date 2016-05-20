@@ -45,10 +45,7 @@
 \newcommand*\range{\ensuremath{\mathrm{range\;}}}
 \newcommand{\inter}{\mathrm{int}}
 
-% \newcommand{\eqdef}{\overset{\mathrm{def}}{=\joinrel=}}
 \newcommand{\eqdef}{\overset{\mathrm{def}}{=}}
-% \newcommand*{\eqdefU}{\ensuremath{\mathop{\overset{\mathrm{def}}{=}}}}% Unscaled version
-% \newcommand*{\eqdef}{\mathop{\overset{\mathrm{def}}{\resizebox{\widthof{\eqdefU}}{\heightof{=}}{=}}}}
 
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
@@ -62,8 +59,7 @@
 
 \newtheorem{lemma}{Лемма}[chapter]
 \newtheorem{theorem}{Теорема}[chapter]
-% \newtheorem{proposition}{Утверждение}[chapter]
-% \newtheorem{corollary}{Следствие}[chapter]
+\newtheorem{definition}{Определение}[chapter]
 
 \declaretheoremstyle[bodyfont=\normalfont]{normalbody}
 \declaretheorem[numberwithin=chapter,name=Замечание,style=normalbody]{remark}
@@ -72,16 +68,8 @@
 \declaretheoremstyle[notebraces={}{},notefont=\bfseries,bodyfont=\normalfont\itshape]{nopar}
 \declaretheorem[numberwithin=chapter,name=Следствие,style=nopar]{corollary}
 \declaretheorem[numberwithin=chapter,name=Утверждение,style=nopar]{proposition}
-% \newtheorem{remark}{Замечание}
-% \newtheorem{example}{Пример}
-% \numberwithin{lemma}{chapter}
-% \numberwithin{theorem}{chapter}
-% \numberwithin{proposition}{chapter}
-% \numberwithin{remark}{chapter}
-% \numberwithin{example}{chapter}
 
 \newcommand{\p}{\overbar{p}}
-\newcommand{\po}{\overbar{p}^0}
 
 %%% Local variables:
 %%% coding: cp1251

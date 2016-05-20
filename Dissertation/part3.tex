@@ -1,8 +1,447 @@
 \chapter{Теоретико-игровая модель биржевых торгов с дискретными ставками для
   рынка со счетным множеством состояний и несколькими активами} \label{chapt3}
+{
+\newcommand{\s}{\ensuremath{s}}
+\newcommand{\q}{\ensuremath{\overbar{q}}}
+\newcommand{\theGame}[1][n]{\ensuremath{G_{#1}}}
+\newcommand{\K}[1][n]{\ensuremath{K_{#1}}}
+\newcommand{\FPStrategies}{\Sigma}
+\newcommand{\SPStrategies}{\mathrm{T}}
+\newcommand{\V}[1][n]{\ensuremath{V_{#1}}}
+\newcommand{\High}[1][\ensuremath{\infty}]{\ensuremath{H_{#1}}}
+\newcommand{\sigmav}{\ensuremath{\overbar{\sigma}}}
+\newcommand{\tauv}{\ensuremath{\overbar{\tau}}}
+\newcommand{\sigmak}{\ensuremath{\hat{\sigma}}}
+\newcommand{\Low}[1][\ensuremath{\infty}]{\ensuremath{L_{#1}}}
 
-\section{Описание модели}
+\section{Введение}
+\label{sec:intro}
 
+В данной работе рассматривается упрощенная модель финансового рынка, на котором
+два игрока ведут торговлю однотипными акциями на протяжении $n \leqslant \infty$
+шагов. Перед началом торгов случайный ход определяет цену акции $\s \in S$ на
+весь период торгов в соответствии с вероятностным распределением $\p = (p^s, \;
+s \in S)$. Выбранная цена сообщается игроку 1 (инсайдеру). Игрок 2 при этом
+знает только вероятностное распределение $\p$ и не осведомлен о настоящем
+значении цены. На каждом шаге торгов игроки одновременно и независимо назначают
+некоторую цену за акцию. Игрок, сделавший б\'{о}льшую ставку, покупает акцию у
+другого; если ставки равны, сделки не происходит. Задачей игроков является
+максимизация стоимости итогового портфеля, состоящего из некоторого числа
+купленных акций и суммы денег, полученных в результате торгов. Данное описание
+считается известным обоим игрокам.
+
+%
+
+В работе \cite{domansky11} рассмотрено обобщение модели на случай, когда
+цена акции может принимать любое значение $\s \in S = \mathbb{Z}_+$. Решение
+игры с бесконечным количеством шагов найдено в предположении конечности
+дисперсии цены акции.
+
+\section{Постановка задачи}
+\label{sec:problem-statement}
+
+Пусть множество состояний рынка $S = \Z_+$. Перед началом игры случай выбирает
+состояние рынка $\s \in S$ в соответствии с вероятностным распределением $\p =
+(p^s, \; s \in S)$ таким, что дисперсия состояния $\D \p < \infty$. На каждом
+шаге игры $t = \overline{1,n}, \; n \leqslant \infty$ игроки делают ставки $i_t
+\in I, \, j_t \in J$, где $I = J = \Z_+$. Выплата игроку 1 в состоянии $s$ равна
+\begin{equation*}
+  % \label{eq:ps:stage-payoff}
+  a^s(i_t, j_t) =
+  \begin{cases}
+    (1-\beta) i_t + \beta j_t - s, &\; i_t < j_t, \\
+    0, &\; i_t = j_t, \\
+    s - \beta i_t - (1-\beta)j_t, &\; i_t > j_t.
+  \end{cases}
+\end{equation*}
+
+Обозначим через $\Delta(X)$ совокупность всех вероятностных распределений на
+множестве $X$.
+
+\begin{definition}
+  Стратегией игрока 1 является последовательность ходов $\sigmav = (\sigma_1,
+  \ldots, \sigma_n)$, где $\sigma_t: S \times I^{t-1} \rightarrow \Delta(I)$.
+  Множество стратегий игрока 1 обозначим $\FPStrategies$.
+\end{definition}
+
+\begin{definition}
+  Стратегией игрока 2 является последовательность ходов $\tauv = (\tau_1,
+  \ldots, \tau_n)$, где $\tau_t: I^{t-1} \rightarrow \Delta(J)$. Множество
+  стратегий игрока 2 обозначим $\SPStrategies$.
+\end{definition}
+
+Таким образом, игрок 1 на каждом шаге игры рандомизирует свои действия в
+зависимости от состояния рынка $s$ и истории ставок. Игрок 2, в свою очередь, не
+имея информации о состоянии рынка $s$, опирается только на историю ставок
+инсайдера.
+
+Будем считать, что игроки обладают неограниченными запасами рисковых и
+безрисковых активов, т.е. торги не могут закончиться по причине того, что у
+одного из игроков закончатся деньги или акции. Кроме того, будем считать, что в
+начальный момент времени оба игрока имеют нулевые портфели.
+
+При использовании игроками стратегий $\sigmav$ и $\tauv$, ожидаемый выигрыш
+игрока 1 равен
+\begin{equation*}
+  \K(\p, \sigmav, \tauv) =
+  \E_{(\p, \sigmav, \tauv)} \sum_{t=1}^n a^s(i_t, j_t),
+\end{equation*}
+где математическое ожидание берется по мере, индуцированной $\p$, $\sigmav$ и
+$\tauv$. Заданную таким образом игру обозначим $\theGame(\p)$.
+
+\begin{definition}
+  Если для некоторых $\sigmav^* \in \FPStrategies,$ $\tauv^* \in \SPStrategies$
+  выполняется
+  \begin{equation*}
+    \inf_{\tauv \in \SPStrategies} \K(\p, \sigmav^*, \tauv) =
+    \K(\p, \sigmav^*, \tauv^*) =
+    \sup_{\sigmav \in \FPStrategies} \K(\p, \sigmav, \tauv^*) = 
+    \V(\p),
+  \end{equation*}
+  то игра $\theGame(\p)$ имеет значение $\V(\p)$, а стратегии $\sigmav^*$ и $\tauv^*$
+  называются оптимальными.
+\end{definition}
+
+Следуя \cite{domansky11}, опишем рекурсивную структуру игры $\theGame(\p)$.
+Представим стратегию игрока 1 в виде $\sigmav = (\sigma, \sigmav^i, i \in I)$,
+где $\sigma$ --- ход игрока на первом шаге, а $\sigmav^i$ --- стратегия в игре
+продолжительности $n-1$ в зависимости от ставки $i$ на первом шаге. Аналогично,
+стратегию игрока 2 представим в виде $\tauv = (\tau, \tauv^i, \; i \in I)$.
+%
+Далее, обозначим $q^i$ полную вероятность, с которой игрок 1 делает ставку $i
+\in I$, и $\q = (q^i, \; i \in I)$ --- соответствующее распределение. Также
+обозначим $p^{s|i}$ апостериорную вероятность состояния $s$ в зависимости от
+ставки $i$ игрока 1, и $\p^i = (p^{s|i}, \, s \in S)$ --- соответствующее
+апостериорное распределение. Тогда для функции выигрыша в игре $\theGame[n](\p)$ будет
+справедлива формула
+\begin{equation}
+  \label{problem:eq:Kn-recurrence}
+  \K[n](\p, \sigmav, \tauv) =
+  \K[1](\p, \sigma, \tau) +
+  \sum_{i \in I} q^i \K[n-1](\p^i, \sigmav^i, \tauv^i).
+\end{equation}
+
+\section{Оценки выигрыша в игре $\mathbf{G_\infty(\p)}$}
+\label{sec:payoff-bounds}
+
+Следуя \cite{domansky11}, рассмотрим чистую стратегию $\tauv^k$ игрока 2:
+\begin{equation*}
+  \tau^k_1 = k, \quad
+  t^k_t = \begin{cases}
+    j_{t-1}, &\; i_{t-1} < j_{t-1},\\
+    j_t, &\; i_{t-1} = j_{t-1},\\
+    j_{t+1}, &\; i_{t-1} > j_{t-1}.
+  \end{cases}
+\end{equation*}
+При использовании этой стратегии игрок 2 делает ставку равную $k$ на первом
+шаге, а далее подражает инсайдеру. Обозначим $x^+ = \max(0, x), \, x \in
+\mathbb{R}$.
+
+\begin{lemma}
+  \label{upper-bound:lemma:vector-payoffs}
+  При применении стратегии $\tauv^k$ в игре $\theGame(\p)$ игрок 2 в состоянии $s$
+  гарантирует себе проигрыш не более
+  \begin{gather*}
+    h^s_n(\tauv^k) = \sum_{t=0}^{n-1} (k-s-t-1+\beta)^+, \; s \leqslant k, \\
+    h^s_n(\tauv^k) = \sum_{t=0}^{n-1} (s-k-t-\beta)^+, \; s > k.
+  \end{gather*}
+  Последовательность $\left\{ h^s_n(\tauv^k), \; n = \overline{1, \infty}
+  \right\}$ не убывает, ограничена сверху и сходится к %
+  \begin{equation}
+    \label{upper-bound:eq:max-payoff}
+    h^s_\infty(\tauv^k) = (s - k + 1 - 2\beta)(s-k)/2.
+  \end{equation}
+\end{lemma}
+
+Введем следующие обозначения для множества распределений на $S$ с заданным
+математическим ожиданием состояния:
+\begin{gather*}
+  \Theta(x) = \left\{ \p' \in \Delta(S): \E \p' = x \right\}, \\
+  \Lambda(x, y) = \left\{ \p' \in \Delta(S): x < \E \p' \leqslant y \right\}.
+\end{gather*}
+
+Пусть $\tauv^*$ --- стратегия игрока 2, состоящая в применении $\tauv^k$ при $\p
+\in \Lambda(k-1+\beta,k+\beta)$.
+
+\begin{theorem}
+  \label{upper-bound:theorem}
+  При использовании игроком 2 стратегии $\tauv^*$, выигрыш игрока 1 в игре
+  $\theGame[\infty](\p)$ ограничен сверху функцией
+  \begin{equation*}
+    \High(\p) = \min_{k \in J} \sum_{s \in S} p^s  h^s_\infty(\tauv^k).
+  \end{equation*}
+  Функция $\High(\p)$ является кусочно-линейной с областями линейности
+  $\Lambda(k - 1 + \beta, k + \beta)$ и областями недифференцируемости
+  $\Theta(k+\beta)$ при $k \in S$. Для распределений $\p$ таких, что $\E \p = k
+  - 1 + \beta + \xi, \; \xi \in (0, 1]$, ее значение равно
+  \begin{equation}
+    \label{upper-bound:eq:H(p)}
+    \High(\p) = \left( \D \p + \beta(1-\beta) - \xi(1-\xi) \right)/2.
+  \end{equation}
+\end{theorem}
+Заметим, что как и в \cite{pyanykh16:discr:ru}, в данном случае наблюдается сдвиг
+областей линейности на $\beta$ относительно $\E \p$ в сравнении с результатами
+из \cite{domansky11}.
+
+Перейдем к описанию стратегии игрока 1, которая гарантирует ему выигрыш не менее
+$\High(\p)$. Пусть $\sigma^s_i$ --- компонента хода $\sigma$ игрока 1, т.е.
+вероятность сделать ставку $i$ в состоянии $s$. По правилу Байеса $\sigma^s_i =
+p^{s|i} q^i / p^s$. В частности, справедливо $\sum_{s \in S} \sigma^s_i p^s =
+q^i,\ i \in I$. Таким образом, ход игрока 1 можно определить, задав следующие
+параметры: полные вероятности $q^i$ сделать ставку $i$ и апостериорные
+вероятности $p^{s|i}$ для $i \in I$. Тогда в терминах $\q$, $\p^i$ его
+одношаговый выигрыш выражается следующим образом:
+\begin{equation}
+  \label{lower-bound:eq:K1(q,pi)}
+  \K[1](\p, \sigma, j) = \sum_{i \in I} \sum_{s \in S} q^i p^{s|i} a^s(i, j).
+\end{equation}
+
+Обозначим через $\Low[n](\p)$ --- максимальный выигрыш, который может
+гарантировать себе игрок 1 в игре $\theGame(\p)$.
+\begin{lemma}
+  \label{lower-bound:lemma:convex-combination}
+  Пусть $\p_k$ --- распределение из $\Delta(S)$, $\sigmav_k$ --- стратегия
+  игрока 1, которая гарантирует ему выигрыш $\Low[n](\p_k)$ в игре $\theGame[n](\p_k)$,
+  и $\q_k = (q^1_k, \ldots, q^n_k),\ \p^i_k = ( p^{1|i}_k, p^{2|i}_k, \ldots)$
+  --- векторы полных вероятностей ставок и апостериорных вероятностей состояния,
+  соответствующие первому ходу стратегии $\sigmav_k,\ k = 1,2$. Тогда для $\p =
+  \lambda \p_1 + (1-\lambda) \p_2, \; \lambda \in [0, 1],$ стратегия
+  $\sigmav_c$, первый ход которой задается параметрами
+  \begin{equation}
+    \label{lower-bound:eq:q-pi}
+    q^i = \lambda q^i_1 + (1-\lambda) q^i_2, \quad
+    p^{s|i} = \left(\lambda q^i_1 p^{s|i}_1 + (1-\lambda) q^i_2 p^{s|i}_2\right)/q^i,
+  \end{equation}
+  гарантирует игроку 1 выигрыш $\lambda \Low[n](\p_1) + (1-\lambda)
+  \Low[n](\p_2)$.
+\end{lemma}
+
+
+Из теоремы~\ref{upper-bound:theorem} и
+леммы~\ref{lower-bound:lemma:convex-combination} следует, что для доказательства
+совпадения верхней и нижней оценок выигрыша в игре $\theGame[\infty](\p)$ можно
+ограничиться рассмотрением распределений $\p \in \Theta(k + \beta), \; k \in S$.
+Как показано в \cite{domansky11}, любое $\p$ может быть представлено в виде
+выпуклой комбинации распределений с двухточечным носителем. Обозначим $\p^x(l,
+r) \in \Theta(x)$ распределение с математическим ожиданием $x$ и носителем $\{l,
+r\}$. Таким образом, достаточно доказать выполнение равенства $\Low(\p) =
+\High(\p)$ для $\p = \p^{k+\beta}(l,r), \; k \in S$. Построим соответствующую
+стратегию игрока 1.
+
+Обозначим $\sigmak_k$ ход игрока 1, состоящий в применении действий $k$ и $k+1$.
+Ход $\sigmak_k$ определяется заданием полных вероятностей $q^k, q^{k+1}$ и
+апостериорных распределений $\p^k, \p^{k+1}$, причем $q^k + q^{k+1} = 1$.
+Следующая лемма является обобщением утверждения 2 из \cite{pyanykh16:discr:ru}.
+\begin{lemma}
+  \label{lower-bound:lemma:stage-payoff}
+  При использовании $\sigmak_k$ одношаговый выигрыш игрока 1 равен
+  \begin{equation*}
+    \K[1](\p, \sigmak_k, j) = \begin{cases}
+      \E \p - \beta k - (1-\beta) j - \beta q^{k+1}, &\; j < k, \\
+      (\E \p^{k+1} - k - \beta) q^{k+1}, &\; j = k, \\
+      (k + \beta - \E \p^k) q^k, &\; j = k, \\
+      (1-\beta) k + \beta j - \E \p + (1-\beta) q^{k+1}, &\; j > k + 1.
+    \end{cases}
+  \end{equation*}
+\end{lemma}
+
+Распространяя результаты \cite{pyanykh16:discr:ru} на случай $\p^{k+\beta}(l, r)$,
+определим следующую стратегию игрока 1 в игре $\theGame[\infty](\p)$. Введем
+обозначение %
+\begin{equation*}
+  P(l,r) = \left\{
+    \p^k(l, r), \, \p^{s+\beta}(l, r), \, k = \overline{l,r}, s = \overline{l,r-1}
+  \right\}.
+\end{equation*}
+При $\p \in P(l,r)$ первый ход стратегии $\sigmav^*$ определяется следующим
+образом: если $\p = \p^l(l,r)$ или $\p = \p^r(l,r)$ игрок 1 использует ставки
+$l$ и $r$, соответственно, с вероятностью 1; иначе игрок 1 использует
+$\sigmak_k$ с параметрами
+\begin{align*}
+  &\p^k(l, r):&
+  &q^k = \beta,&
+  &q^{k+1} = 1-\beta,\\
+  && 
+  &\p^k = \p^{k-1+\beta}(l, r),&
+  &\p^{k+1} = \p^{k+\beta}(l, r);\\
+  &\p^{k+\beta}(l, r):&
+  &q^k = 1-\beta,&
+  &q^{k+1} = \beta,\\
+  &&
+  &\p^k = \p^k(l, r),&
+  &\p^{k+1} = \p^{k+1}(l, r).&
+\end{align*}
+На последующих шагах игры таким образом определенный ход применяется рекурсивно
+для соответствующих значений апостериорных вероятностей. Для остальных
+распределений $\p$ стратегия $\sigmav^*$ определяется конструкцией
+леммы~\ref{lower-bound:lemma:convex-combination}.
+
+Обозначим $L^x_{l,r} = \Low(\p^x(l,r))$. Следующая теорема является обобщением
+утверждения 5 из \cite{pyanykh16:discr:ru}.
+\begin{theorem}
+  \label{lower-bound:theorem}
+  При использовании стратегии $\sigmav^*$ в игре $\theGame[\infty](\p)$ для
+  распределения %
+  $\p \in P(l,r)$ %
+  гарантированный выигрыш игрока 1 удовлетворяет следующей системе:
+  \begin{equation}
+    \label{lower-bound:eq:Linf-recurrence}
+    \begin{gathered}
+      L^{k+\beta}_{l,r} =
+      \beta(1-\beta) + (1-\beta) L^k_{l,r} + \beta L^{k+1}_{l,r}, \;
+      k \in \overline{l, r - 1}, \\
+      L^k_{l,r} =
+      \beta L^{k-1+\beta}_{l,r} + (1-\beta) L^{k+\beta}_{l,r}, \;
+      k \in \overline{l + 1, r - 1},\\
+      L^l_{l,r} = L^r_{l,r} = 0.
+    \end{gathered}
+  \end{equation}
+  Ее решение дает нижнюю оценку выигрыша игрока 1 равную
+  \begin{equation*}
+    \label{lower-bound:eq:Linf-recurrence-solution}
+    \Low(\p^{k+\beta}(l, r)) = ((r-k-\beta)(k+\beta-l) + \beta(1-\beta))/2.
+  \end{equation*}
+\end{theorem}
+
+Так как $\D p^{k+\beta}(l, r) = (r-k-\beta)(k+\beta-l)$ получаем, что выражения
+для $\High(\p^{k+\beta}(l,r))$ и $\Low(\p^{k+\beta}(l,r))$ совпадают. Таким
+образом, справедлива следующая
+\begin{theorem}
+  \label{solution:theorem}
+  Игра $\theGame[\infty](\p)$ имеет значение $\V[\infty](\p) = \High(\p) = \Low(\p)$.
+  Стратегии $\tauv^*$ и $\sigmav^*$, определенные ранее, являются оптимальными.
+\end{theorem}
+
+В заключение сделаем несколько замечаний. Нужно отметить, что стратегия
+неосведомленного игрока такая же как и в работе \cite{domansky07}. В то же
+время оптимальная стратегия инсайдера существенно зависит от $\beta$. В
+\cite{domansky11} при применении оптимальной стратегии игроком 1,
+апостериорные распределения образуют симметричное случайное блуждание по
+множествам $\Theta(s), \, s \in S$, т.е. для $\p \in \Theta(s)$ апостериорное
+распределение $\p'$ будет принадлежать либо $\Theta(s-1)$, либо $\Theta(s+1)$ с
+вероятностями равными $1/2$. В случае $\beta \in (0, 1)$ блуждание происходит по
+более широкому набору множеств %
+$\left\{ \Theta(s), \Theta(s+\beta) \right \}$, %
+кроме того оно больше не является симметричным, кроме случая $\beta = 1/2$.
+Отметим также, что оптимальная стратегия $\sigmav^*$ не сводится к стратегии из
+\cite{domansky11} при $\beta \rightarrow 1$.
+
+\begin{proof}\underline{[Лемма~\ref{upper-bound:lemma:vector-payoffs}]}
+  Проведем доказательство по индукции для случая $s > k$. При $n = 1$
+  оптимальный ответ игрока 1 на $\tauv^k$ будет $i = k + 1$. Тогда его выигрыш в
+  игре $\theGame[1](\p)$ равен
+  \begin{equation*}
+    h^s_1(\tauv^k) = s - \beta(k+1) - (1-\beta)k = s - k - \beta.
+  \end{equation*}
+  База индукции проверена. Предположим, что утверждение верно при $n \leqslant
+  N$. При $n = N + 1$ игрок 1 имеет два разумных ответа на $\tauv^k$: ставка $i
+  = k + 1$, что соответствует покупке акции по наименьшей возможной цене, и
+  ставка $i = k - 1$, что соответствует продаже акции за наибольшую возможную
+  цену. Найдем оценки выигрыша в каждом из случаев. Для $i = k + 1$ выигрыш
+  игрока 1 не превосходит величины
+  \begin{equation*}
+    s - k - \beta + h^s_N(\tauv^{k+1}) = \sum_{t=0}^N(s-k-t-\beta)^+.
+  \end{equation*}
+  Аналогично для $i = k - 1$ тот же выигрыш не превосходит
+  \begin{equation*}
+    \beta k + (1-\beta)(k-1) - s + h^s_N(\tauv^{k-1}) = \sum_{t=0}^{N-2}(s-k-t-\beta)^+.
+  \end{equation*}
+  При $s \leqslant k$ формула для $h^s_n(\tauv^k)$ доказывается аналогично.
+  Сходимость $h^s_n(\tauv^k)$ к $h^s_\infty(\tauv^k)$ следует из равенства
+  $h^s_n(\tauv^k) = h^s_{n+1}(\tauv^k)$ при $n \geqslant s - k$.
+\end{proof}
+
+\begin{proof}\underline{[Теорема~\ref{upper-bound:theorem}]}
+  Воспользовавшись \eqref{upper-bound:eq:max-payoff}, получим
+  \begin{equation}
+    \label{upper-bound:theorem:eq:1}
+    \begin{gathered}
+    \sum_{s \in S} p^s h^s_\infty(\tauv^j) = \bigl(
+      j^2 + (2\beta - 1 - 2 \E \p)j - \\
+      - (2\beta - 1) \E \p + \E \p^2 
+    \bigr)/2.
+    \end{gathered}
+  \end{equation}
+  
+  Квадратичная функция $f(x) = x^2 + (2\beta - 1 - 2\E \p)x$ достигает минимума
+  при $x = \E \p - \beta + 1/2$. Отсюда при $\p \in \Lambda(k - 1 + \beta, k +
+  \beta)$ выражение \eqref{upper-bound:theorem:eq:1} достигает минимума при $j =
+  k$. Равенство \eqref{upper-bound:eq:H(p)} проверяется непосредственной
+  подстановкой $\E \p = k - 1 + \beta + \xi$ в \eqref{upper-bound:theorem:eq:1}.
+\end{proof}
+
+\begin{proof}\underline{[Лемма~\ref{lower-bound:lemma:convex-combination}]}
+  Проведем доказательство по индукции. Покажем, что справедливо равенство %
+  \begin{equation}
+    \label{lower-bound:lemma:convex-combination:eq:1}
+    \K[n](\p, \sigmav_c, \tauv) =
+    \lambda \K[n](\p_1, \sigmav_1, \tauv) +
+    (1-\lambda)\K[n](\p_1, \sigmav_2, \tauv).
+  \end{equation}
+  Подставив \eqref{lower-bound:eq:q-pi} в
+  \eqref{lower-bound:eq:K1(q,pi)}, получим
+  \begin{gather*}
+    \K[1](\p, \sigmav_c, j) = \sum_{i \in I, \, s \in S}
+    q^i \frac{\lambda q^i_1 p^{s|i}_1 + (1-\lambda) q^i_2 p^{s|i}_2}{q^i} a^s(i,j) = \\
+    = \lambda \sum_{i \in I, \, s \in S} q^i_1 p^{s|i}_1 a^s(i,j) +
+    (1-\lambda) \sum_{i \in I, s \in S} q^i_2 p^{s|i}_2 a^s(i, j) = \\
+    = \lambda \K[1](\p_1, \sigmav_1, j) +
+    (1-\lambda)\K(\p_2, \sigmav_2, j).
+  \end{gather*}
+  Таким образом, утверждение справедливо при $n = 1$. Пусть утверждение имеет
+  место при $n \leqslant N$. Тогда из \eqref{problem:eq:Kn-recurrence} вытекает
+  \begin{gather*}
+    \K[N+1](\p, \sigmav_c, \tauv) =
+    \K[1](\p, \sigmav_c, \tauv) +
+    \sum_{i \in I} q_i \K[N](\p^i, \sigmav^i_c, \tau^i) = \\
+    = \lambda \K[1](\p_1, \sigma_1, \tau) +
+    (1-\lambda) \K[1](\p_2, \sigma_2, \tau) + \\
+    + \sum_{i \in I} q^i \left(
+      \frac{\lambda q^i_1}{q^i} \K[N](\p^i_1, \sigmav^i_1, \tauv^i) +
+      \frac{(1-\lambda) q^i_2}{q^i} \K[N](\p^i_2, \sigmav^i_2, \tauv^i)
+    \right) = \\
+    = \lambda \K[N+1](\p_1, \sigmav_1, \tauv) +
+    (1-\lambda)\K[N+1](\p_1, \sigmav_2, \tauv).
+  \end{gather*}
+  Справедливость равенства \eqref{lower-bound:lemma:convex-combination:eq:1}
+  доказана. Отсюда получаем
+  \begin{multline*}
+    \Low[n](\p) = \min_{\tauv \in \SPStrategies} \K[n](\p, \sigmav_c, j) \geqslant
+    \lambda \min_{\tauv \in \SPStrategies} \K[n](\p, \sigmav_1, j) + \\
+    + (1-\lambda) \min_{\tauv \in \SPStrategies} \K[n](\p, \sigmav_2, j) =
+    \lambda \Low[n](\p_1) + (1-\lambda) \Low[n](\p_2).
+  \end{multline*}
+  Получили, что стратегия $\sigmav_c$ обеспечивает игроку 1 в игре $\theGame[n](\p)$
+  соответствующую выпуклую комбинацию гарантированных выигрышей в играх
+  $\theGame[n](\p_1)$ и $\theGame[n](\p_2)$.
+\end{proof}
+
+\begin{proof}\underline{[Лемма~\ref{lower-bound:lemma:stage-payoff}]}
+  По аналогии с \cite{pyanykh16:discr:ru} можно показать, что
+  \begin{equation*}
+    a^s(\sigmak_k, j) = \begin{cases}
+      s - \beta k - (1-\beta) j - \beta \sigma^s_{k+1}, &\; j < k,\\
+      (s - k - \beta) \sigma^s_{k+1}, &\; j = k,\\
+      (k + \beta - s) \sigma^s_k, &\; j = k+1,\\
+      (1-\beta) k + \beta j - s + (1-\beta) \sigma^s_{k+1}, &\; j > k + 1.
+    \end{cases}
+  \end{equation*}
+  Отсюда непосредственно следует утверждение леммы.
+\end{proof}
+
+\begin{proof}\underline{[Теорема~\ref{lower-bound:theorem}]}
+  Для $\p \in P(l,r)$ определение стратегия $\sigmav^*$ аналогично определению
+  оптимальной стратегии игрока 1 из \cite{pyanykh16:discr:ru} с заменой $0, m$ на $l,
+  r$ соответственно.
+
+  Параметры $\q$ и $\p^i$ подобраны таким образом, чтобы выполнялись равенства %
+  $\Low[1](\p^k(l,r)) = 0, \, \Low[1](\p^{k+\beta}(l,r)) = \beta(1-\beta)$, а
+  апостериорные распределения принадлежали тому же множеству $P(l,r)$.
+  Полученная система \eqref{lower-bound:eq:Linf-recurrence} является системой с
+  трехдиагональной матрицей и решается методом прогонки аналогично тому, как это
+  было сделано в \cite{pyanykh16:discr:ru}.
+\end{proof}
+}
 \clearpage
 
 %%% Local Variables:
