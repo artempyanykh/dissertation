@@ -17,7 +17,7 @@
 \section{Описание модели}
 \label{ch2:sec:model-descr}
 
-Рассматриваемая в текущей главе модель биржевых торгов, аналогична модели из главы~\ref{chapt1}, за исключением того, что теперь игроки теперь могут делать произвольные вещественные ставки из отрезка $[0, 1]$.
+Рассматриваемая в текущей главе модель биржевых торгов аналогична модели из главы~\ref{chapt1} за исключением того, что теперь игроки могут делать произвольные вещественные ставки из отрезка $[0, 1]$.
 В отличие от дискретной модели, для подобных повторяющихся игр с конечным числом шагов нет общей теории, из которой вытекало бы существование значения.
 При анализе повторяющейся игры с вещественными ставками мы следуем схеме из~\cite{demeyer02c}.
 
@@ -51,7 +51,7 @@
 Как отмечено в \cite{demeyer02}, прямая (двойственная) игра больше подходит для построения оптимальной стратегии первого (второго) игрока.
 
 \subsection{Определение прямой игры $\mathbf{G^\Co_n(p)}$}
-Прямая игра описывает взимодействие между агентами, соответствующее оригинальной модели биржевых торгов.
+Прямая игра описывает взаимодействие между агентами, соответствующее оригинальной модели биржевых торгов.
 Так же перед началом игры ходом случая определяется $s \in S$ таким образом, что $P(s = H) = p, \; P(s = L) = 1-p$.
 Выбранное $s$ сообщается первому игроку (инсайдеру), второй игрок при этом не осведомлен о настоящем значении $s$ и знает только вероятности выбора случаем того или иного состояния.
 
@@ -122,7 +122,7 @@
 Если $s = H$, то первый вынужден заплатить второму штраф размера $x$ в конце игры.
 В остальном правила $G^*_n(x)$ аналогичны правилам $G_n(p)$.
 
-Cтратегией первого игрока в двойственной игре является пара $\dualFPS$, где $p \in [0, 1]$, $\sigma \in \Sigma_n$.
+Стратегией первого игрока в двойственной игре является пара $\dualFPS$, где $p \in [0, 1]$, $\sigma \in \Sigma_n$.
 Множество стратегий второго игрока совпадает с $\Tau_n$.
 
 Выигрыш второго игрока, который он стремится максимизировать, определяется как
@@ -637,7 +637,7 @@ Cтратегией первого игрока в двойственной игре является пара $\dualFPS$, где $p \
 \end{equation*}
 В силу того, что $\Phi^*$ не зависит от $Q'$, имеем
 \begin{gather*}
-  \frac{\di F^*}{\di Q} = 2u - 1 - \lambda + V_{1,n}'(Q(U)) = 0,\\
+  \frac{\di F^*}{\di Q} = 2u - 1 - \lambda + V_{1,n}'(Q(u)) = 0,\\
   \int_0^1 Q(u) \di u = p.
 \end{gather*}
 Воспользовавшись свойством \eqref{ch2:eq:subdiff-props} о связи между субдифференциалами сопряженных функций, получим
@@ -1125,8 +1125,8 @@ $
       1, &\; u > 1 - p.
     \end{cases}
   \end{equation*}
-  Пусть $p < \Co$.
-  Тогда
+  Пусть $p \leq \Co$.
+  Тогда из (\ref{ch2:eq:f}) находим
   \begin{align*}
     f(u) 
     &=
@@ -1134,10 +1134,23 @@ $
     &=
       \begin{cases}
         0, &\; u \leqslant 1 - p,\\
-        1 - \frac{(1 - p - \DCo)^2}{(u-\DCo)^2}, &\; u > 1 - p.
+        1 - {\displaystyle \frac{(\Co - p)^2}{(u-\DCo)^2}}, &\; u > 1 - p.
       \end{cases}
   \end{align*}
-  Случай $\DCo \geqslant 1 - p$ разбирается аналогично.
+  При $p > \Co$ получаем
+  \begin{equation*}
+    f(u)= \begin{cases}
+      {\displaystyle (u-\DCo)^{-2} \int_\DCo^{1-p} 2 (x - \DCo) \di x},\ & u \leq 1 - p,\\
+      {\displaystyle (u - \DCo)^{-2} \int_\DCo^u 2 (x - \DCo) \di x},\ & u > 1 - p.
+    \end{cases}                                                     
+  \end{equation*}
+  Отсюда
+  \begin{equation*}
+    f(u) = \begin{cases}
+      {\displaystyle \frac{(\Co - p)^2}{(u - \DCo)^2}},\ & u \leq 1 - p,\\
+      1,\ & u > 1 - p.
+    \end{cases}  
+  \end{equation*}
 \end{example}
 
 \begin{example}
@@ -1145,7 +1158,7 @@ $
   Из~\eqref{ch2:eq:W1'} получаем
   \begin{equation*}
     W_1(x) = \begin{cases}
-      x, &\; x \leqslant 1,\\
+      x, &\; x \leqslant -1,\\
       1/4 (-1 + 2x - x^2), &\; -1 < x < 1,\\
       0, &\; x \geqslant 1.
     \end{cases}
@@ -1162,35 +1175,95 @@ $
     \end{cases}
   \end{align*}
 
-  \begin{figure}[b]
+  \begin{figure}[hbt]
     \centering \input{figures/ch2-w2}
     \caption{График функции $W_2'(x)$}
     \label{ch2:fig:W2}
   \end{figure}
 
-  Пусть $1/2 \leqslant p \leqslant 1$.
+  Пусть $1/2 < p < 1$.
   Тогда искомое $\lambda$ находится как решение следующего уравнения (\seename рис.~\ref{ch2:fig:W2}):
   \[
   (4 - 4\lambda - \lambda^2)/8 = p.
   \]
   Отсюда $\lambda = -2 + 2\sqrt{2 - 2p}$, а следовательно имеет место равенство
-  \begin{align*}
-    Q(u) 
-    &= W'_1(\lambda + 1 - 2u) =\\
-    &= \begin{cases}
+  \begin{equation*}
+    Q(u) =
+    W'_1(\lambda + 1 - 2u) =
+    \begin{cases}
       1 - \sqrt{2 - 2p} + u, &\; u < \sqrt{2 - 2p},\\
       1, &\; u \geqslant \sqrt{2 - 2p}.
     \end{cases}
-  \end{align*}
+  \end{equation*}
   Пусть $\DCo < \sqrt{2 - 2p}$. Тогда для $f$ имеет место следующая формула:
   \begin{equation*}
     f(u) = \begin{cases}
-      1 - \sqrt{2 - 2p} + (2u + \DCo)/3, &\; u \leqslant \sqrt{2 - 2p},\\
-      1 - (\sqrt{2 - 2p} - \DCo)^3/\left(3(u - \DCo)^2\right), &\; u > \sqrt{2 - 2p}.
+      {\displaystyle 1 - \frac{\sqrt{2 - 2p} + (2u + \DCo)}{3}}, &\; u \leqslant \sqrt{2 - 2p},\\
+      {\displaystyle 1 - \frac{(\sqrt{2 - 2p} - \DCo)^3}{3(u - \DCo)^2}}, &\; u > \sqrt{2 - 2p}.
     \end{cases}
   \end{equation*}
-  Оставшиеся случаи разбираются аналогично.
+  Пусть $\DCo > \sqrt{2-2p}$.
+  В случае $u \geq \sqrt{2 - 2p}$ имеет место равенство $f(u) = 1$.
+  Если $u < \sqrt{2 - 2p}$, то тогда выражение для $f(u)$ приобретает вид
+  \begin{equation*}
+    f(u) = (u-\DCo)^{-2} \left( 
+      \int_\DCo^{\sqrt{2-2p}} 2(x-\DCo) \di x +
+      \int_{\sqrt{2-2p}}^u 2(x-\DCo) (1-\sqrt{2 - 2p} + x) \di x
+    \right).
+  \end{equation*}
+  Обозначим через $t$ выражение $\sqrt{2-2p}$.
+  Тогда для первого слагаемого получим
+  \begin{equation*}
+      \int_\DCo^t 2(x-\DCo) \di x = (\DCo - t)^2.
+  \end{equation*}
+  Для второго слагаемого находим
+  \begin{equation*}
+    \int_t^u 2(x - \DCo) (1 - t + x) \di x = \frac{1}{3} (t - u)(t^2 - t(3-u) - u(3 + 2u) + 3(2-t+u)\DCo).
+  \end{equation*}
+  Отсюда, получаем для $f(u)$ следующее выражение
+  \begin{equation*}
+    f(u) = 1 - \frac{(t-u)^2(3\DCo - t - 2u)}{3(u-\DCo)^2}.
+  \end{equation*}
+  Таким образом, при $\DCo > \sqrt{2-2p}$ функция $f(u)$ имеет следующим вид
+  \begin{equation*}
+    f(u) = \begin{cases}
+      {\displaystyle 1 - \frac{(\sqrt{2-2p}-u)^2(3\DCo - \sqrt{2-2p} - 2u)}{3(u-\DCo)^2}},\ & u < \sqrt{2-2p}, \\
+      1,\ & u \geq \sqrt{2-2p}.
+    \end{cases}
+  \end{equation*}
+  
+  Пусть $0 < p \leq 1/2$.
+  Тогда искомое $\lambda$ находится как решение следующего уравнения (\seename рис.~\ref{ch2:fig:W2}):
+  \begin{equation*}
+    (\lambda - 2)^2/8 = p.
+  \end{equation*}
+  Отсюда $\lambda = 2(1-\sqrt{2p})$, и из~(\ref{ch2:eq:W1'}) получаем
+  \begin{equation*}
+    Q(u) = W'_1(\lambda + 1 - 2u) = \begin{cases}
+      0,\ & u \geq 1 - \sqrt{2p},\\
+      1 - \sqrt{2p} + u,\ & u > 1 - \sqrt{2p}.
+    \end{cases}
+  \end{equation*}
+  
+  Пусть $\DCo \leq 1 - \sqrt{2p}$.
+  При $u \leq 1 - \sqrt{2p}$ справедливо $f(u) = 0$.
+  При $u > 1 - \sqrt{2p}$ находим
+  \begin{align*}
+    f(u) 
+    &= (u-\DCo)^{-2} \int_{1-\sqrt{2p}}^u 2 (x-\DCo) (1-\sqrt{2p}+x) \di x = \\
+    &= \frac{(u - 1 + \sqrt{2p})(2(u^2 + u - 2) + 10p - \sqrt{2p}(1+5u+9\Co) + 3(3+u)\Co)}{3(u-\DCo)^2}.
+  \end{align*}
+  При $\DCo > 1 - \sqrt{2p}$ для $f$ имеет место следующая формула
+  \begin{equation*}
+    f(u) =
+    \begin{cases}
+      {\displaystyle \frac{(5(\sqrt{2p}-1) - \DCo)(\sqrt{2p} - \Co)^2}{3(u - \DCo)^2}},\ & u \leq 1 - \sqrt{2p}, \\
+      1 - \sqrt{2p} + {\displaystyle \frac{2u + \DCo}{3}},\ & u > 1 - \sqrt{2p}.
+    \end{cases}
+  \end{equation*}
 \end{example}
+
+Как видно из данных примеров, получение явного аналитического представления функций $f$ и $Q$ в $n$-шаговой игре является трудоемкой задачей.
 }
 
 %%% Local Variables:
