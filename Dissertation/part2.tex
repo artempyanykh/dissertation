@@ -431,7 +431,7 @@
 \end{equation*}
 Так как случайные величины $f(u)$ и $i$ одинаково распределены, то имеет место равенство
 \begin{equation*}
-  \int_0^1 Q(u) \di u = P.
+  \int_0^1 Q(u) \di u = p.
 \end{equation*}
 Таким образом, функции $Q(u)/p$ и $(1-Q(u))/(1-p)$ являются условными плотностями.
 
@@ -447,13 +447,16 @@
 \end{proposition}
 \begin{proof}
   По определению $p(i)$ для любого множества $B$ из борелевской $\sigma$-алгебры $\Borel(I)$ отрезка $I$ выполнено
-  \begin{equation}
+  \begin{equation*}
     P(s = H, \; i \in B) = \int_B p(i) \; \sigma^M_1(\di i).
-  \end{equation}
+  \end{equation*}
   С другой стороны, справедлива следующая формула:
   \begin{equation*}
     P(s = H, \; i \in B) = p \int_B \sigma^H_1(\di i).
   \end{equation*}
+
+  \todo{определение абсолютно-непрерывной}
+
   Так как $\sigma^H_1$ абсолютно непрерывна относительно $\sigma^M_1$, то существует производная Радона-Никодима (\seename~\cite{kolmogorov-fomin}), а значит
   \begin{equation*}
     P(s = H, \; i \in B) =
@@ -485,9 +488,9 @@
   Подставив~\eqref{ch2:eq:trans-mech} в~\eqref{ch2:eq:g1-def}, получим
   \begin{align*}
     g_1(p, \sigma_1, j) 
-    &= p \int_I \biggl[ \Ind{i > j}(1 - \Co i - \DCo j) + \Ind{i < j} (\DCo i - \Co j - 1) \biggr] \; \sigma^H_1(\di i) + \\
+    &= p \int_I \biggl[ \Ind{i > j}(1 - \Co i - \DCo j) + \Ind{i < j} (\DCo i + \Co j - 1) \biggr] \; \sigma^H_1(\di i) + \\
     &+ (1-p) \int_I \biggl[
-      \Ind{i > j} (- \Co i - \DCo j) + \Ind{i < j}(\DCo i - \Co j) 
+      \Ind{i > j} (- \Co i - \DCo j) + \Ind{i < j}(\DCo i + \Co j) 
     \biggr]
     \; \sigma^L_1(\di i) = \\
     &= \int_I \Ind{i > j} p \sigma^H_1(\di i) -
@@ -627,7 +630,7 @@
 \end{align}
 
 По предположению $V_{1,n}(\cdot)$ -- непрерывно дифференцируемая функция.
-Тогда функция $Q$, доставляющая экстремум в задаче \eqref{ch2:eq:Q-Problem}, удовлетворяет уравнению Эйлера со следующим функционалом (\seename \cite{elsgolc69}):
+Тогда функция $Q$, доставляющая экстремум в задаче \eqref{ch2:eq:Q-Problem}, удовлетворяет уравнению Эйлера для функции Лагранжа (\seename \cite{elsgolc69}):
 \begin{equation*}
   \Phi^*(Q) =
   \int_0^1 \left[
