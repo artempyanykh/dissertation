@@ -1,50 +1,60 @@
-\documentclass[14pt]{beamer}
+\documentclass[12pt]{beamer}
 \usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[english,russian]{babel}
-\usepackage{amssymb,amsfonts,amsmath,mathtext}
+\usepackage{amssymb,amsfonts,amsmath,mathtext,amsthm}
 \usepackage{cite,enumerate,float,indentfirst}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows}
+\usetikzlibrary{automata}
 
 \graphicspath{{../images/}{images/}} 
 
+\usetheme[secheader]{Boadilla}
+\usecolortheme{seahorse}
 
-
-% \usetheme[secheader]{Boadilla}
-% \usecolortheme{seahorse}
-
-\usetheme{Pittsburgh}
-\usecolortheme{whale}
+% \usetheme{Pittsburgh}
+% \usecolortheme{whale}
 
 \beamertemplatenavigationsymbolsempty
 
 \newcommand{\todo}{\alert}
-\input{../common/data.tex}      % �������� ��������
+\input{../common/data.tex}      % Основные сведения
+
+\newcommand{\Co}{\beta}
+\newcommand{\DCo}{\overline{\beta}}
+\newcommand{\E}{\ensuremath{\mathbb{E}}}
+
+\newtheorem{thm}{Теорема}[section]
+\newtheorem{prop}{Утверждение}[section]
 
 \setbeamercolor{footline}{fg=blue}
 \setbeamertemplate{footline}{
   \leavevmode%
   \hbox{%
-  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{}%
-    % �. �. �������, ����������� ������
+  \begin{beamercolorbox}[wd=.363333\paperwidth,ht=2.25ex,dp=1ex,center]{}%
+    % И. О. Фамилия, Организация кратко
     \thesisAuthorShort, \thesisOrganizationShort
   \end{beamercolorbox}%
   \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{}%
-    % �����, 20XX
+    % Город, 20XX
     \thesisCity, \thesisYear
   \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{}%
-  ���. \insertframenumber{} �� \inserttotalframenumber \hspace*{2ex}
+  \begin{beamercolorbox}[wd=.303333\paperwidth,ht=2.25ex,dp=1ex,right]{}%
+  Стр. \insertframenumber{} из \inserttotalframenumber \hspace*{2ex}
   \end{beamercolorbox}}%
   \vskip0pt%
 }
 
 \newcommand{\itemi}{\item[\checkmark]}
 
-%\title{\small{�������� �����������}}
+%\title{\small{Название презентации}}
 \title{\small{\thesisTitle}}
 \author{\small{%
-\emph{�����������:}~\thesisAuthorShort\\%
-\emph{������������:}~\supervisorRegaliaShort~\supervisorFioShort}\\%
+\emph{Выступающий:}~\thesisAuthorShort\\%
+\emph{Руководитель:}~\supervisorRegaliaShort~\supervisorFioShort}\\%
 \vspace{30pt}%
 \thesisOrganization%
 \vspace{20pt}%
@@ -55,175 +65,547 @@
 
 \maketitle
 
-\begin{frame}
-\frametitle{���� � ������}
-\begin{itemize}
-  \item \textbf{������� ������������:} 
-  \item \textbf{����������� ��������������:} 
-  \item \textbf{���� ������������:} 
-  \item \textbf{������������:} 
-\end{itemize}
-\end{frame}
+\section{Введение}
 
 \begin{frame}
-\frametitle{��������}
-\begin{itemize}
-  \item �������� 1
-  \item �������� 2
-  \item �������� 3    
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{���� �����}
-\begin{enumerate}
-  \item \textbf{������ 1}
+  \frametitle{Краткое описание модели}
   \begin{itemize}
-    \item ��������� 1-1
-    \item ��������� 1-2
+  \item
+    Между двумя игроками в течение $n \leqslant \infty$ шагов происходят
+    торги за однотипные акции.
+  \item
+    Цена акции $s$ определяется ходом случая в соответствии с распределением $\mu$.
+  \item
+    Первый игрок (инсайдер) знает цену $s$, второй "--- знает только вероятностное распределение $\mu$.
+  \item
+    На каждом шаге торгов игроки делают ставки $i,\ j$.
+    Игрок, предложивший большую ставку, покупает у другого акцию по цене $T(i, j)$.
+    При равных ставках сделка не состоится.
   \end{itemize}
-  \item \textbf{������ 2}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Непрерывная и дискретная постановки}
+  
+  \begin{tabular}{c|c|c}
+    & Непрерывная модель & Дискретная модель \\
+    \midrule
+    Ставки & вещественные из $[0, 1]$ & вида $i/m,\ i = \overline{0, m}$ \\
+    \hline \\
+    Цена акции& \multicolumn{2}{c}{либо $0$, либо $1$; $P(s = 1) = p$} \\
+    \hline \\
+    Цена сделки& \multicolumn{2}{c}{$T(i, j) = \max(i, j)$} \\
+    \hline \\
+    $\{V_n(p)\}$ & растет как $\sqrt{n}$ & ограничена \\
+    \bottomrule \\
+  \end{tabular}
+
+  \textbf{Цель:} показать возможность стратегического происхождения броуновского движения (случайного блуждания) в динамике цен активов.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Мотивация}
+  
+  Рассмотрение более общего симметричного механизма торгов $T(i, j)$ обозначено в работе [De Meyer,~Saley,~2002] как одно из актуальных направлений дальнейших исследований.
+  
+  В качестве такого механизма был выбран
+  \[
+    T(i, j) = \beta \max(i, j) + (1-\beta) \min(i, j),\ \beta \in [0, 1],
+  \]
+  предложенный в [Chatterjee,~Samuelson,~1983].
+  
+  Параметр $\beta$ можно интерпретировать как переговорную силу продавца.
+\end{frame}
+
+\section{Глава 1. Дискретная модель}
+
+\begin{frame}
+  \frametitle{Определение модели}
+  
   \begin{itemize}
-    \item ��������� 2-1
-    \item ��������� 2-2
-    \item ��������� 2-3
+  \item 
+  Множество состояний $S = \{L, H\}$.
+  \item
+  В состоянии $L$ цена $s=0$, в состоянии $H$ цена $s=m$.
+  \item
+  Игроки могут делать ставки из множества $\{0, 1, \ldots, m\}$. Обозначим множества действий первого и второго игроков через $I$ и $J$ соответственно.
   \end{itemize}
-  \item \textbf{������ 3}
+\end{frame}
+
+\begin{frame}
+  Модель отвечает повторяющейся игре $G^{m, \Co}_n(p)$ с платежными матрицами
+  \begin{equation*}\footnotesize
+    A^{L,\Co}(i, j) = \begin{cases}
+      \DCo i + \Co j, &\, i < j, \\
+      0, &\, i = j, \\
+      -\Co i - \DCo j, &\, i > j,
+    \end{cases}
+    \qquad
+    A^{H,\Co}(i, j) = \begin{cases}
+      \DCo i + \Co j - m, &\, i < j, \\
+      0, &\, i = j, \\
+      m - \Co i - \DCo j, &\, i > j.
+    \end{cases}
+  \end{equation*}
+  Стратегией первого игрока является последовательность ходов 
+  \[
+  \sigma = (\sigma_1, \sigma_2, \ldots, \sigma_t, \ldots),\ \sigma_t: S \times I^{t-1} \rightarrow \Delta(I).
+  \]
+
+  Стратегией второго игрока --- последовательность ходов 
+  \[
+  \tau = (\tau_1, \tau_2, \ldots, \tau_t, \ldots),\ \tau_t: I^{t-1} \rightarrow \Delta(J).
+  \]
+
+  Выигрыш задается как
+  \begin{equation*}
+    K^{m,\Co}_n(p, \sigma, \tau) = \E_{\Pi[p,\sigma,\tau]} \sum_{t=1}^n
+    \left(
+      pA^{H,\Co}(i_t^H, j_t) + (1 - p)A^{L,\Co}(i_t^L, j_t)
+    \right).
+  \end{equation*}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Оптимальная стратегия второго игрока}
+  
+  Следующая чистая стратегия $\tau^k$ предложена В.~К.~Доманским в [Domansky,~2007]:
+  \[
+    \tau^k_1 = k, \quad \tau^k_t(i_{t-1}, j_{t-1}) = \begin{cases}
+      j_{t-1} - 1, & \, i_{t-1} < j_{t-1}, \\
+      j_{t-1},     & \, i_{t-1} = j_{t-1}, \\
+      j_{t-1} + 1, & \, i_{t-1} > j_{t-1}.
+    \end{cases}
+  \]
+  
+  Показано, что при $p \in (k - 1 + \Co, k + \Co),\ k = \overline{0, m}$ использование $\tau^k$ оптимально для второго игрока в игре $G^{m, \Co}_\infty(p)$.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Рекурсивная структура игры $G^{m, \Co}_n(p)$}
+  
+  Представим $\sigma$ как $(\sigma_1, \sigma(i),\ i \in I)$, а $\tau$ как $(\tau_1, \tau(i),\ i \in I)$.
+
+  Параметризуем ход $\sigma_1$ инсайдера с помощью 
   \begin{itemize}
-    \item ��������� 3-1
-    \item ��������� 3-2
-    \item ��������� 3-3
+  \item
+    полной вероятности $q(i)$ сделать ставку $i$
+  \item
+    апостериорной вероятности $p(H|i)$ состояния $H$ при использовании ставки $i$.
   \end{itemize}
-\end{enumerate}
+  По формуле Байеса вероятность сделать ставку $i \in I$ в состоянии $s \in S$ выражается как
+  \[
+    \sigma^s_{1,i} = \frac{p(s|i)q_i}{p(s)}.
+  \]
+
+  Формулу выигрыша можно переписать в виде
+  \begin{equation*}
+    K^m_n(p, \sigma_1, \tau_1) = 
+    K^m_1(p, \sigma, \tau) + 
+    \sum_{i \in I} q(i) K^m_{n-1}(p(H|i), \sigma(i), \tau(i)).
+  \end{equation*}
 \end{frame}
 
 \begin{frame}
-\frametitle{������ ������������}
-\begin{itemize}
-  \item ����� 1
-  \item ����� 2
-  \item ����� 3
-\end{itemize}
+  \frametitle{Оптимальная стратегия первого игрока}
+  
+  При $p = k/m,\ k = \overline{1, m-1}$ первый игрок рандомизирует выбор ставок $k, \, k+1$ с параметрами
+  \begin{gather*}
+    q_k = \Co, \quad p(H|k) = (k-1+\Co)/m,\\
+    q_{k+1} = \DCo, \quad p(H|k + 1) = (k + \Co)/m.
+  \end{gather*}
+  При $p = (k+\Co)/m,\ k = \overline{0, m-1}$ --- с параметрами
+  \begin{gather*}
+    q_k = \DCo, \quad p(H|k) = k/m,\\
+    q_{k+1} = \Co, \quad p(H|k + 1) = (k+1)/m.
+  \end{gather*}
+  
+  Для остальных значений $p$ используется стратегия, дающая линейную комбинацию выигрышей в точках решетки.
 \end{frame}
 
 \begin{frame}
-\frametitle{��������� �����������}
-\begin{figure}[H]
-  \center
-  \includegraphics[width=0.8\linewidth]{latex}
-\end{figure}
+  Графически оптимальную стратегию первого игрока можно представить следующим образом:
+  \begin{figure}[tb]
+    \centering
+    \begin{tikzpicture}
+      [
+      auto,node distance=1.5cm,
+      trans/.style={->,shorten >=1pt,>=stealth',semithick},
+      state/.style={shape=circle,draw,minimum size=1mm},
+      ]
+      \node[state,label={$0$}] (p0) {};
+      \node[state,right=of p0,label={$\frac{\Co}{m}$}] (p1) {}; 
+      \node[state,right=of p1,label={$\frac{1}{m}$}] (p2) {};
+      \node[right=of p2] (others) {$\ldots$};
+      \node[state,right=of others,label={$\frac{m-\DCo}{m}$}] (p2mm1) {};
+      \node[state,right=of p2mm1,label={$1$}] (p2m) {};
+      
+      \path [trans]
+      (p0) edge [loop left,min distance=10mm,out=225,in=135] node {$1$} (p0)
+      (p1) edge[bend right] node[above] {$\DCo$} (p0)
+      (p1) edge[bend left] node[above] {$\Co$} (p2)
+      (p2) edge[bend left] node[below] {$\Co$} (p1)
+      (p2) edge[bend right] node[below] {$\DCo$} (others)
+      (p2mm1) edge[bend left] node[below] {$\DCo$} (others)
+      (p2mm1) edge[bend right] node[below] {$\Co$} (p2m)
+      (p2m) edge[loop right,min distance=10mm,out=45,in=-45] node {$1$} (p2m)
+      ;
+    \end{tikzpicture}
+  \end{figure}
+
+  Для сравнения, ниже представлена стратегия из базовой работы [Domansky,~2007], которая отвечает значению $\Co = 1$
+  \begin{figure}[tb]
+    \centering
+    \begin{tikzpicture}
+      [
+      auto,node distance=1.5cm,
+      trans/.style={->,shorten >=1pt,>=stealth',semithick},
+      state/.style={shape=circle,draw,minimum size=1mm},
+      ]
+      \node[state,label={$0$}] (p0) {};
+      \node[state,right=of p0,label={$\frac{1}{m}$}] (p1) {}; 
+      \node[state,right=of p1,label={$\frac{2}{m}$}] (p2) {};
+      \node[right=of p2] (others) {$\ldots$};
+      \node[state,right=of others,label={$\frac{m-1}{m}$}] (p2mm1) {};
+      \node[state,right=of p2mm1,label={$1$}] (p2m) {};
+      
+      \path [trans]
+      (p0) edge [loop left,min distance=10mm,out=225,in=135] node {$1$} (p0)
+      (p1) edge[bend right] node[above] {$1/2$} (p0)
+      (p1) edge[bend left] node[above] {$1/2$} (p2)
+      (p2) edge[bend left] node[below] {$1/2$} (p1)
+      (p2) edge[bend right] node[below] {$1/2$} (others)
+      (p2mm1) edge[bend left] node[below] {$1/2$} (others)
+      (p2mm1) edge[bend right] node[below] {$1/2$} (p2m)
+      (p2m) edge[loop right,min distance=10mm,out=45,in=-45] node {$1$} (p2m)
+      ;
+    \end{tikzpicture}
+  \end{figure}
 \end{frame}
 
 \begin{frame}
-\frametitle{�������}
-$$
-\left\{
-  \begin{array}{rl}
-    \dot x = & \sigma (y-x) \\
-    \dot y = & x (r - z) - y \\
-    \dot z = & xy - bz
-  \end{array}
-\right.
-$$
+  \frametitle{Значение игры}
+
+  \begin{thm}
+    Игра $G^m_\infty(p)$ имеет значение $V^m_\infty{p}$. Данная функция является кусочно-линейной, состоит из $m~+~1$ линейных сегментов, и полностью определяется своими значениями в следующих точках:
+    \begin{gather*}
+      V^m_\infty{(k+\Co)/m} = \frac{1}{2} \left( (m - (k + \Co))(k + \Co) + \DCo\Co
+      \right),\enskip
+      k = \overline{0, m - 1},\\
+      V^m_\infty{0} = V^m_\infty{1} = 0.
+    \end{gather*}
+  \end{thm}
 \end{frame}
 
 \begin{frame}
-\frametitle{��������� �����������}
-\begin{figure}[h]
-  \begin{minipage}[h]{0.49\linewidth}
-    \textbf{��������� \\ ������� 1}
-    \center{\includegraphics[width=1\linewidth]{knuth1}}
-  \end{minipage}
-  \hfill
-  \begin{minipage}[h]{0.49\linewidth}
-    \textbf{��������� \\ ������� 2}
-    \center{\includegraphics[width=1\linewidth]{knuth2}}
-  \end{minipage}
-\end{figure}
+  \begin{figure}[thb]
+    \centering
+    \begin{tikzpicture}[yscale=1.3,xscale=8]
+      \draw[thick,->,>=stealth'] (-0.1,0) -- (1.1,0) node[right] {$p$};
+      \draw[thick] (0,-0.1) -- (0,0.1);
+      \node[anchor=north east] at (0,0) {$0$};
+      \draw[thick] (1,-0.1) -- (1,0.1);
+      \node[anchor=north west] at (1,0) {$1$};
+
+      \draw[thick] plot file {../plots/ch1-v0.75.dat};
+      
+      \draw[thick,dashed] (0.15, -0.1) -- (0.15, 3.2);
+      \node[anchor=north] at (0.15, -0.1) {$\Co/m$};
+
+      \draw[thick,dashed] (0.75, -0.1) -- (0.75, 3.2);
+      \node[anchor=north] at (0.75, -0.1) {$(k+\Co)/m$};
+      
+      \node at (0.55, 2.6) {$V^\Co_ m(p)$};
+    \end{tikzpicture}
+  \end{figure}
+
+  \begin{center}
+    График функции $V^{m,\Co}_\infty(p)$
+  \end{center}
 \end{frame}
 
 \begin{frame}
-\frametitle{�������}
-\begin{tabular}{|l|l|}
-\hline
-\textbf{��������� 1} & \textbf{��������� 2} \\
-\hline
-����� & $b+a$ \\
-\hline
-�������� & $a-b$ \\
-\hline
-������������ & $a*b$ \\
-\hline
-\end{tabular}
+  \begin{prop}
+    При любом значении $p \in [0,1]$, $\Co \in (0,1)$ и $m \geq 3$ справедливо неравенство
+    \begin{equation*}
+      V^{m, \Co}_\infty(p) \geq V^{m,1}_\infty(p) = V^{m,0}_\infty(p),
+    \end{equation*}
+    причем равенство достигается только при $p = k/m, k = \overline{0,m}$.
+  \end{prop}
+
+  Таким образом, из всех рассматриваемых механизмов торгов, те механизмы, которые предписывают продавать акцию по наибольшей или наименьшей предложенной цене, гарантируют инсайдеру наименьший возможный выигрыш.
 \end{frame}
 
 \begin{frame}
-\frametitle{������� �������������� ������}
-\begin{itemize}
-  \item \textbf{����� 1}
-    \begin{itemize}
-      \itemi �������� 1-1
-      \itemi �������� 1-2
-    \end{itemize}
-  \item \textbf{����� 2}
-    \begin{itemize}
-      \itemi �������� 2-1
-    \end{itemize}
-  \item \textbf{����� 3}
-    \begin{itemize}
-      \itemi �������� 3-1
-      \itemi �������� 3-2
-    \end{itemize}
-  \item \textbf{����� 4}
-    \begin{itemize}
-      \itemi �������� 4-1
-    \end{itemize}
-  \item \textbf{����� 5}
-    \begin{itemize}
-      \itemi �������� 5-1
-      \itemi �������� 5-2
-      \itemi �������� 5-3
-    \end{itemize}
-\end{itemize}
+  \begin{figure}[b]
+    \centering
+    \begin{tikzpicture}[yscale=1.5,xscale=8]
+      \draw[thick,->,>=stealth'] (-0.1,0) -- (1.1,0) node[right] {$p$};
+      \draw[thick] (0,-0.1) -- (0,0.1);
+      \node[anchor=north east] at (0,0) {$0$};
+      \draw[thick] (1,-0.1) -- (1,0.1);
+      \node[anchor=north west] at (1,0) {$1$};
+
+      \draw[thick] plot file {../plots/ch1-v0.5.dat};
+      \draw[very thick,dashed] plot file {../plots/ch1-v1.dat};
+      
+      \node at (0.86, 2.6) {$V^{m,1/2}_\infty(p)$};
+      \node at (0.55, 2.6) {$V^{m,1}_\infty(p)$};
+    \end{tikzpicture}
+    \label{ch1:fig:value-comparison}
+  \end{figure}
+
+  \begin{center}
+    Графики функции $V^{m,\Co}_\infty(p)$ при значениях $\Co = 1/2$ и $\Co = 1$
+  \end{center}
 \end{frame}
 
 \begin{frame}
-\frametitle{������ �����������}
-\begin{figure}[H]
-  \center
-    \includegraphics[width=0.4\linewidth]{latex}
-    \includegraphics[width=0.4\linewidth]{latex}\\
-    \includegraphics[width=0.4\linewidth]{latex}
-    \includegraphics[width=0.4\linewidth]{latex}
-\end{figure}
+  \frametitle{Продолжительность игры}
+
+  \begin{prop}
+    Игра $G^{m, \Co}_\infty(p)$ в среднем заканчивается за конечное количество шагов.
+    При $p \in \{k/m, (k+\Co)/m\}$ ее ожидаемая продолжительность выражается формулами
+    \begin{equation*} 
+      \tau((k+\Co)/m) = \frac{(m-k-\Co)(k+\Co)}{\Co \DCo},\quad
+      \tau(k/m) = \frac{k(m-k)}{\Co \DCo}.
+    \end{equation*}
+  \end{prop}
+
+  \begin{figure}[tb]
+    \centering
+    \begin{tikzpicture}
+      [
+      auto,node distance=1.5cm,
+      trans/.style={->,shorten >=1pt,>=stealth',semithick},
+      state/.style={shape=circle,draw,minimum size=1mm},
+      ]
+      \node[state,label={$0$}] (p0) {};
+      \node[state,right=of p0,label={$\frac{\Co}{m}$}] (p1) {}; 
+      \node[state,right=of p1,label={$\frac{1}{m}$}] (p2) {};
+      \node[right=of p2] (others) {$\ldots$};
+      \node[state,right=of others,label={$\frac{m-\DCo}{m}$}] (p2mm1) {};
+      \node[state,right=of p2mm1,label={$1$}] (p2m) {};
+      
+      \path [trans]
+      (p0) edge [loop left,min distance=10mm,out=225,in=135] node {$1$} (p0)
+      (p1) edge[bend right] node[above] {$\DCo$} (p0)
+      (p1) edge[bend left] node[above] {$\Co$} (p2)
+      (p2) edge[bend left] node[below] {$\Co$} (p1)
+      (p2) edge[bend right] node[below] {$\DCo$} (others)
+      (p2mm1) edge[bend left] node[below] {$\DCo$} (others)
+      (p2mm1) edge[bend right] node[below] {$\Co$} (p2m)
+      (p2m) edge[loop right,min distance=10mm,out=45,in=-45] node {$1$} (p2m)
+      ;
+    \end{tikzpicture}
+  \end{figure}
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-\frametitle{����������� �������� �������}
-\begin{itemize}
-  \item ����������� 1
-  \item ����������� 2
-  \item ����������� 3
-  \item ����������� 4
-  \item ����������� 5
-\end{itemize}
-\end{frame}
+% \begin{frame}
+% \frametitle{Цели и задачи}
+% \begin{itemize}
+%   \item \textbf{Предмет исследования:} 
+%   \item \textbf{Исследуемые характеристики:} 
+%   \item \textbf{Цель исследования:} 
+%   \item \textbf{Актуальность:} 
+% \end{itemize}
+% \end{frame}
 
-\begin{frame}
-\frametitle{���������� ������}
-\begin{itemize}
-  \item ��������� 1
-  \item ��������� 2
-  \item ��������� 3
-  \item ��������� 4
-\end{itemize}
-\end{frame}
+% \begin{frame}
+% \frametitle{Проблемы}
+% \begin{itemize}
+%   \item Проблема 1
+%   \item Проблема 2
+%   \item Проблема 3    
+% \end{itemize}
+% \end{frame}
+
+% \begin{frame}
+% \frametitle{План работ}
+% \begin{enumerate}
+%   \item \textbf{Задача 1}
+%   \begin{itemize}
+%     \item Подзадача 1-1
+%     \item Подзадача 1-2
+%   \end{itemize}
+%   \item \textbf{Задача 2}
+%   \begin{itemize}
+%     \item Подзадача 2-1
+%     \item Подзадача 2-2
+%     \item Подзадача 2-3
+%   \end{itemize}
+%   \item \textbf{Задача 3}
+%   \begin{itemize}
+%     \item Подзадача 3-1
+%     \item Подзадача 3-2
+%     \item Подзадача 3-3
+%   \end{itemize}
+% \end{enumerate}
+% \end{frame}
+
+% \begin{frame}
+% \frametitle{Список обыкновенный}
+% \begin{itemize}
+%   \item Пункт 1
+%   \item Пункт 2
+%   \item Пункт 3
+% \end{itemize}
+% \end{frame}
+
+% \begin{frame}
+% \frametitle{Одиночное изображение}
+% \begin{figure}[H]
+%   \center
+%   \includegraphics[width=0.8\linewidth]{latex}
+% \end{figure}
+% \end{frame}
+
+% \begin{frame}
+% \frametitle{Формулы}
+% $$
+% \left\{
+%   \begin{array}{rl}
+%     \dot x = & \sigma (y-x) \\
+%     \dot y = & x (r - z) - y \\
+%     \dot z = & xy - bz
+%   \end{array}
+% \right.
+% $$
+% \end{frame}
+
+% \begin{frame}
+% \frametitle{Составное изображение}
+% \begin{figure}[h]
+%   \begin{minipage}[h]{0.49\linewidth}
+%     \textbf{Составная \\ подпись 1}
+%     \center{\includegraphics[width=1\linewidth]{knuth1}}
+%   \end{minipage}
+%   \hfill
+%   \begin{minipage}[h]{0.49\linewidth}
+%     \textbf{Составная \\ подпись 2}
+%     \center{\includegraphics[width=1\linewidth]{knuth2}}
+%   \end{minipage}
+% \end{figure}
+% \end{frame}
+
+% \begin{frame}
+% \frametitle{Таблица}
+% \begin{tabular}{|l|l|}
+% \hline
+% \textbf{Заголовок 1} & \textbf{Заголовок 2} \\
+% \hline
+% Сумма & $b+a$ \\
+% \hline
+% Разность & $a-b$ \\
+% \hline
+% Произведение & $a*b$ \\
+% \hline
+% \end{tabular}
+% \end{frame}
+
+% \begin{frame}
+% \frametitle{Большой многоуровневый список}
+% \begin{itemize}
+%   \item \textbf{Пункт 1}
+%     \begin{itemize}
+%       \itemi Подпункт 1-1
+%       \itemi Подпункт 1-2
+%     \end{itemize}
+%   \item \textbf{Пункт 2}
+%     \begin{itemize}
+%       \itemi Подпункт 2-1
+%     \end{itemize}
+%   \item \textbf{Пункт 3}
+%     \begin{itemize}
+%       \itemi Подпункт 3-1
+%       \itemi Подпункт 3-2
+%     \end{itemize}
+%   \item \textbf{Пункт 4}
+%     \begin{itemize}
+%       \itemi Подпункт 4-1
+%     \end{itemize}
+%   \item \textbf{Пункт 5}
+%     \begin{itemize}
+%       \itemi Подпункт 5-1
+%       \itemi Подпункт 5-2
+%       \itemi Подпункт 5-3
+%     \end{itemize}
+% \end{itemize}
+% \end{frame}
+
+% \begin{frame}
+% \frametitle{Четыре изображения}
+% \begin{figure}[H]
+%   \center
+%     \includegraphics[width=0.4\linewidth]{latex}
+%     \includegraphics[width=0.4\linewidth]{latex}\\
+%     \includegraphics[width=0.4\linewidth]{latex}
+%     \includegraphics[width=0.4\linewidth]{latex}
+% \end{figure}
+% \end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}
+% \frametitle{Перспективы развития проекта}
+% \begin{itemize}
+%   \item Перспектива 1
+%   \item Перспектива 2
+%   \item Перспектива 3
+%   \item Перспектива 4
+%   \item Перспектива 5
+% \end{itemize}
+% \end{frame}
+
+% \begin{frame}
+% \frametitle{Результаты работы}
+% \begin{itemize}
+%   \item Результат 1
+%   \item Результат 2
+%   \item Результат 3
+%   \item Результат 4
+% \end{itemize}
+% \end{frame}
 
 \begin{frame}
 \begin{center}
-������� �� ��������!
+Спасибо за внимание!
 \end{center}
 \end{frame}
+
+\begin{thebibliography}{99}
+\bibitem{demeyer02}
+  De Meyer B., Saley H. \emph{On the strategic origin of Brownian motion in
+    finance} // Int J Game Theory. 2002.
+ 
+\bibitem{demeyer02arb}%
+  De Meyer B., Saley H. \emph{A model of game with a continuum of states of
+    nature} // Pr\'{e}publication de l’Institut Elie Cartan, Nancy. 2002.
+  
+\bibitem{demeyer10}%
+  De Meyer B. \emph{Price dynamics on a stock market with asymmetric
+    information} // Games and Economic Behavior. 2010.
+  
+\bibitem{domansky07}%
+  Domansky V. \emph{Repeated games with asymmetric information and random price
+  fluctuation at finance markets} // Int J Game Theory. 2007.
+
+\bibitem{domansky11}%
+  Доманский В.К, Крепс В.Л. \emph{Теоретико игровая модель биржевых торгов:
+    стратегические аспекты формирования цен на фондовых рынках} // Журнал Новой
+  экономический ассоциации. 2011
+
+\bibitem{pyanykh16}%
+  Пьяных А.И. \emph{Многошаговая модель биржевых торгов с асимметричной
+    информацией и элементами переговоров} // Вестн. Моск. ун-та. Сер. 15. 2016.
+  
+\bibitem{chatterjee83}%
+  Chatterjee K., Samuelson W. \emph{Bargaining under Incomplete Information} //
+  Operations Research, 1983.
+  
+\bibitem{myerson83}%
+  Myerson R., Satterthwaite M. \emph{Efficient Mechanisms for Bilateral Trading}
+  // Journal of Economic Theory, 1983.
+
+\end{thebibliography}
 
 \end{document} 

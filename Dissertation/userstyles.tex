@@ -1,4 +1,4 @@
-% для вертикального центрирования ячеек в tabulary
+% РґР»СЏ РІРµСЂС‚РёРєР°Р»СЊРЅРѕРіРѕ С†РµРЅС‚СЂРёСЂРѕРІР°РЅРёСЏ СЏС‡РµРµРє РІ tabulary
 \def\zz{\ifx\[$\else\aftergroup\zzz\fi}
 \def\zzz{\setbox0\lastbox
 \dimen0\dimexpr\extrarowheight + \ht0-\dp0\relax
@@ -91,88 +91,88 @@
     morestring=[d]'% 2001 Robert Denham
 }%
 
-%решаем проблему с кириллицей в комментариях (в pdflatex) https://tex.stackexchange.com/a/103712/79756
+%СЂРµС€Р°РµРј РїСЂРѕР±Р»РµРјСѓ СЃ РєРёСЂРёР»Р»РёС†РµР№ РІ РєРѕРјРјРµРЅС‚Р°СЂРёСЏС… (РІ pdflatex) https://tex.stackexchange.com/a/103712/79756
 \lstset{extendedchars=true,literate={~}{{\textasciitilde}}1
-    {а}{{\selectfont\char224}}1
-    {б}{{\selectfont\char225}}1
-    {в}{{\selectfont\char226}}1
-    {г}{{\selectfont\char227}}1
-    {д}{{\selectfont\char228}}1
-    {е}{{\selectfont\char229}}1
-    {ё}{{\"e}}1
-    {ж}{{\selectfont\char230}}1
-    {з}{{\selectfont\char231}}1
-    {и}{{\selectfont\char232}}1
-    {й}{{\selectfont\char233}}1
-    {к}{{\selectfont\char234}}1
-    {л}{{\selectfont\char235}}1
-    {м}{{\selectfont\char236}}1
-    {н}{{\selectfont\char237}}1
-    {о}{{\selectfont\char238}}1
-    {п}{{\selectfont\char239}}1
-    {р}{{\selectfont\char240}}1
-    {с}{{\selectfont\char241}}1
-    {т}{{\selectfont\char242}}1
-    {у}{{\selectfont\char243}}1
-    {ф}{{\selectfont\char244}}1
-    {х}{{\selectfont\char245}}1
-    {ц}{{\selectfont\char246}}1
-    {ч}{{\selectfont\char247}}1
-    {ш}{{\selectfont\char248}}1
-    {щ}{{\selectfont\char249}}1
-    {ъ}{{\selectfont\char250}}1
-    {ы}{{\selectfont\char251}}1
-    {ь}{{\selectfont\char252}}1
-    {э}{{\selectfont\char253}}1
-    {ю}{{\selectfont\char254}}1
-    {я}{{\selectfont\char255}}1
-    {А}{{\selectfont\char192}}1
-    {Б}{{\selectfont\char193}}1
-    {В}{{\selectfont\char194}}1
-    {Г}{{\selectfont\char195}}1
-    {Д}{{\selectfont\char196}}1
-    {Е}{{\selectfont\char197}}1
-    {Ё}{{\"E}}1
-    {Ж}{{\selectfont\char198}}1
-    {З}{{\selectfont\char199}}1
-    {И}{{\selectfont\char200}}1
-    {Й}{{\selectfont\char201}}1
-    {К}{{\selectfont\char202}}1
-    {Л}{{\selectfont\char203}}1
-    {М}{{\selectfont\char204}}1
-    {Н}{{\selectfont\char205}}1
-    {О}{{\selectfont\char206}}1
-    {П}{{\selectfont\char207}}1
-    {Р}{{\selectfont\char208}}1
-    {С}{{\selectfont\char209}}1
-    {Т}{{\selectfont\char210}}1
-    {У}{{\selectfont\char211}}1
-    {Ф}{{\selectfont\char212}}1
-    {Х}{{\selectfont\char213}}1
-    {Ц}{{\selectfont\char214}}1
-    {Ч}{{\selectfont\char215}}1
-    {Ш}{{\selectfont\char216}}1
-    {Щ}{{\selectfont\char217}}1
-    {Ъ}{{\selectfont\char218}}1
-    {Ы}{{\selectfont\char219}}1
-    {Ь}{{\selectfont\char220}}1
-    {Э}{{\selectfont\char221}}1
-    {Ю}{{\selectfont\char222}}1
-    {Я}{{\selectfont\char223}}1
+    {Р°}{{\selectfont\char224}}1
+    {Р±}{{\selectfont\char225}}1
+    {РІ}{{\selectfont\char226}}1
+    {Рі}{{\selectfont\char227}}1
+    {Рґ}{{\selectfont\char228}}1
+    {Рµ}{{\selectfont\char229}}1
+    {С‘}{{\"e}}1
+    {Р¶}{{\selectfont\char230}}1
+    {Р·}{{\selectfont\char231}}1
+    {Рё}{{\selectfont\char232}}1
+    {Р№}{{\selectfont\char233}}1
+    {Рє}{{\selectfont\char234}}1
+    {Р»}{{\selectfont\char235}}1
+    {Рј}{{\selectfont\char236}}1
+    {РЅ}{{\selectfont\char237}}1
+    {Рѕ}{{\selectfont\char238}}1
+    {Рї}{{\selectfont\char239}}1
+    {СЂ}{{\selectfont\char240}}1
+    {СЃ}{{\selectfont\char241}}1
+    {С‚}{{\selectfont\char242}}1
+    {Сѓ}{{\selectfont\char243}}1
+    {С„}{{\selectfont\char244}}1
+    {С…}{{\selectfont\char245}}1
+    {С†}{{\selectfont\char246}}1
+    {С‡}{{\selectfont\char247}}1
+    {С€}{{\selectfont\char248}}1
+    {С‰}{{\selectfont\char249}}1
+    {СЉ}{{\selectfont\char250}}1
+    {С‹}{{\selectfont\char251}}1
+    {СЊ}{{\selectfont\char252}}1
+    {СЌ}{{\selectfont\char253}}1
+    {СЋ}{{\selectfont\char254}}1
+    {СЏ}{{\selectfont\char255}}1
+    {Рђ}{{\selectfont\char192}}1
+    {Р‘}{{\selectfont\char193}}1
+    {Р’}{{\selectfont\char194}}1
+    {Р“}{{\selectfont\char195}}1
+    {Р”}{{\selectfont\char196}}1
+    {Р•}{{\selectfont\char197}}1
+    {РЃ}{{\"E}}1
+    {Р–}{{\selectfont\char198}}1
+    {Р—}{{\selectfont\char199}}1
+    {Р}{{\selectfont\char200}}1
+    {Р™}{{\selectfont\char201}}1
+    {Рљ}{{\selectfont\char202}}1
+    {Р›}{{\selectfont\char203}}1
+    {Рњ}{{\selectfont\char204}}1
+    {Рќ}{{\selectfont\char205}}1
+    {Рћ}{{\selectfont\char206}}1
+    {Рџ}{{\selectfont\char207}}1
+    {Р }{{\selectfont\char208}}1
+    {РЎ}{{\selectfont\char209}}1
+    {Рў}{{\selectfont\char210}}1
+    {РЈ}{{\selectfont\char211}}1
+    {Р¤}{{\selectfont\char212}}1
+    {РҐ}{{\selectfont\char213}}1
+    {Р¦}{{\selectfont\char214}}1
+    {Р§}{{\selectfont\char215}}1
+    {РЁ}{{\selectfont\char216}}1
+    {Р©}{{\selectfont\char217}}1
+    {РЄ}{{\selectfont\char218}}1
+    {Р«}{{\selectfont\char219}}1
+    {Р¬}{{\selectfont\char220}}1
+    {Р­}{{\selectfont\char221}}1
+    {Р®}{{\selectfont\char222}}1
+    {РЇ}{{\selectfont\char223}}1
 }
 
-% Ширина текста минус ширина надписи 999
+% РЁРёСЂРёРЅР° С‚РµРєСЃС‚Р° РјРёРЅСѓСЃ С€РёСЂРёРЅР° РЅР°РґРїРёСЃРё 999
 \newlength{\twless}
 \newlength{\lmarg}
-\setlength{\lmarg}{\widthof{999}}   % ширина надписи 999
+\setlength{\lmarg}{\widthof{999}}   % С€РёСЂРёРЅР° РЅР°РґРїРёСЃРё 999
 \setlength{\twless}{\textwidth-\lmarg}
 
 
 \lstset{ %
-%    language=R,                     %  Язык указать здесь, если во всех листингах преимущественно один язык, в результате часть настроек может пойти только для этого языка
+%    language=R,                     %  РЇР·С‹Рє СѓРєР°Р·Р°С‚СЊ Р·РґРµСЃСЊ, РµСЃР»Рё РІРѕ РІСЃРµС… Р»РёСЃС‚РёРЅРіР°С… РїСЂРµРёРјСѓС‰РµСЃС‚РІРµРЅРЅРѕ РѕРґРёРЅ СЏР·С‹Рє, РІ СЂРµР·СѓР»СЊС‚Р°С‚Рµ С‡Р°СЃС‚СЊ РЅР°СЃС‚СЂРѕРµРє РјРѕР¶РµС‚ РїРѕР№С‚Рё С‚РѕР»СЊРєРѕ РґР»СЏ СЌС‚РѕРіРѕ СЏР·С‹РєР°
     numbers=left,                   % where to put the line-numbers
     numberstyle=\fontsize{12pt}{14pt}\selectfont\color{Gray},  % the style that is used for the line-numbers
-    firstnumber=2,                  % в этой и следующей строках задаётся поведение нумерации 5, 10, 15...
+    firstnumber=2,                  % РІ СЌС‚РѕР№ Рё СЃР»РµРґСѓСЋС‰РµР№ СЃС‚СЂРѕРєР°С… Р·Р°РґР°С‘С‚СЃСЏ РїРѕРІРµРґРµРЅРёРµ РЅСѓРјРµСЂР°С†РёРё 5, 10, 15...
     stepnumber=5,                   % the step between two line-numbers. If it's 1, each line will be numbered
     numbersep=5pt,                  % how far the line-numbers are from the code
     backgroundcolor=\color{white},  % choose the background color. You must add \usepackage{color}
@@ -193,12 +193,12 @@
     stringstyle=\color{Mahogany},   % string literal style
     escapeinside={\%*}{*)},         % if you want to add a comment within your code
     morekeywords={*,...},           % if you want to add more keywords to the set
-    inputencoding=cp1251,             % кодировка кода
-    xleftmargin={\lmarg},           % Чтобы весь код и полоска с номерами строк была смещена влево, так чтобы цифры не вылезали за пределы текста слева
+    inputencoding=utf8,             % РєРѕРґРёСЂРѕРІРєР° РєРѕРґР°
+    xleftmargin={\lmarg},           % Р§С‚РѕР±С‹ РІРµСЃСЊ РєРѕРґ Рё РїРѕР»РѕСЃРєР° СЃ РЅРѕРјРµСЂР°РјРё СЃС‚СЂРѕРє Р±С‹Р»Р° СЃРјРµС‰РµРЅР° РІР»РµРІРѕ, С‚Р°Рє С‡С‚РѕР±С‹ С†РёС„СЂС‹ РЅРµ РІС‹Р»РµР·Р°Р»Рё Р·Р° РїСЂРµРґРµР»С‹ С‚РµРєСЃС‚Р° СЃР»РµРІР°
 } 
 
 %http://tex.stackexchange.com/questions/26872/smaller-frame-with-listings
-% Окружение, чтобы листинг был компактнее обведен рамкой, если она задается, а не на всю ширину текста
+% РћРєСЂСѓР¶РµРЅРёРµ, С‡С‚РѕР±С‹ Р»РёСЃС‚РёРЅРі Р±С‹Р» РєРѕРјРїР°РєС‚РЅРµРµ РѕР±РІРµРґРµРЅ СЂР°РјРєРѕР№, РµСЃР»Рё РѕРЅР° Р·Р°РґР°РµС‚СЃСЏ, Р° РЅРµ РЅР° РІСЃСЋ С€РёСЂРёРЅСѓ С‚РµРєСЃС‚Р°
 \makeatletter
 \newenvironment{SmallListing}[1][]
 {\lstset{#1}\VerbatimEnvironment\begin{VerbatimOut}{VerbEnv.tmp}}
@@ -208,22 +208,22 @@
 \makeatother
 
 
-\DefineVerbatimEnvironment% с шрифтом 12 пт
+\DefineVerbatimEnvironment% СЃ С€СЂРёС„С‚РѕРј 12 РїС‚
 {Verb}{Verbatim}
 {fontsize=\fontsize{12pt}{14pt}\selectfont}
 
-\RawFloats[figure,table]            % Отмена установок пакета floatrow для всех флотов (плавающих окружений) выбранных типов или подтипов. А то будто мы зря задавали настройки подписей рисунков и таблиц. 
+\RawFloats[figure,table]            % РћС‚РјРµРЅР° СѓСЃС‚Р°РЅРѕРІРѕРє РїР°РєРµС‚Р° floatrow РґР»СЏ РІСЃРµС… С„Р»РѕС‚РѕРІ (РїР»Р°РІР°СЋС‰РёС… РѕРєСЂСѓР¶РµРЅРёР№) РІС‹Р±СЂР°РЅРЅС‹С… С‚РёРїРѕРІ РёР»Рё РїРѕРґС‚РёРїРѕРІ. Рђ С‚Рѕ Р±СѓРґС‚Рѕ РјС‹ Р·СЂСЏ Р·Р°РґР°РІР°Р»Рё РЅР°СЃС‚СЂРѕР№РєРё РїРѕРґРїРёСЃРµР№ СЂРёСЃСѓРЅРєРѕРІ Рё С‚Р°Р±Р»РёС†. 
 
 \DeclareNewFloatType{ListingEnv}{
     placement=htb,
     within=chapter,
     fileext=lol,
-    name=Листинг,
+    name=Р›РёСЃС‚РёРЅРі,
 }
 
 \captionsetup[ListingEnv]{
     format=tablecaption,
-    labelsep=space,                 % Точка после номера листинга задается значением period
+    labelsep=space,                 % РўРѕС‡РєР° РїРѕСЃР»Рµ РЅРѕРјРµСЂР° Р»РёСЃС‚РёРЅРіР° Р·Р°РґР°РµС‚СЃСЏ Р·РЅР°С‡РµРЅРёРµРј period
     singlelinecheck=off,
     font=onehalfspacing,
     position=top,
@@ -237,17 +237,17 @@
 
 \captionsetup[lstlisting]{
     format=tablecaption,
-    labelsep=space,                 % Точка после номера листинга задается значением period
+    labelsep=space,                 % РўРѕС‡РєР° РїРѕСЃР»Рµ РЅРѕРјРµСЂР° Р»РёСЃС‚РёРЅРіР° Р·Р°РґР°РµС‚СЃСЏ Р·РЅР°С‡РµРЅРёРµРј period
     singlelinecheck=off,
     font=onehalfspacing,
     position=top,
 }
 
-\renewcommand{\lstlistingname}{Листинг}
+\renewcommand{\lstlistingname}{Р›РёСЃС‚РёРЅРі}
 
-%Общие счётчики окружений листингов
+%РћР±С‰РёРµ СЃС‡С‘С‚С‡РёРєРё РѕРєСЂСѓР¶РµРЅРёР№ Р»РёСЃС‚РёРЅРіРѕРІ
 %http://tex.stackexchange.com/questions/145546/how-to-make-figure-and-listing-share-their-counter
-% Если смешивать плавающие и не плавающие окружения, то могут быть проблемы с нумерацией
+% Р•СЃР»Рё СЃРјРµС€РёРІР°С‚СЊ РїР»Р°РІР°СЋС‰РёРµ Рё РЅРµ РїР»Р°РІР°СЋС‰РёРµ РѕРєСЂСѓР¶РµРЅРёСЏ, С‚Рѕ РјРѕРіСѓС‚ Р±С‹С‚СЊ РїСЂРѕР±Р»РµРјС‹ СЃ РЅСѓРјРµСЂР°С†РёРµР№
 \makeatletter
 \AtBeginDocument{%
     \let\c@ListingEnv\c@lstlisting
@@ -256,7 +256,7 @@
 }
 \makeatother
 
-% значок С++ — используйте команду \cpp
+% Р·РЅР°С‡РѕРє РЎ++ вЂ” РёСЃРїРѕР»СЊР·СѓР№С‚Рµ РєРѕРјР°РЅРґСѓ \cpp
 \newcommand{\cpp}{%
     C\nolinebreak\hspace{-.05em}%
     \raisebox{.2ex}{+}\nolinebreak\hspace{-.10em}%
@@ -264,15 +264,15 @@
 }
 
 
-%%% Русская традиция начертания математических знаков
+%%% Р СѓСЃСЃРєР°СЏ С‚СЂР°РґРёС†РёСЏ РЅР°С‡РµСЂС‚Р°РЅРёСЏ РјР°С‚РµРјР°С‚РёС‡РµСЃРєРёС… Р·РЅР°РєРѕРІ
 \renewcommand{\le}{\ensuremath{\leqslant}}
 \renewcommand{\leq}{\ensuremath{\leqslant}}
 \renewcommand{\ge}{\ensuremath{\geqslant}}
 \renewcommand{\geq}{\ensuremath{\geqslant}}
 \renewcommand{\emptyset}{\varnothing}
 
-%%% Русская традиция начертания греческих букв (греческие буквы вертикальные, через пакет upgreek)
-% \renewcommand{\epsilon}{\ensuremath{\upvarepsilon}}   %  русская традиция записи
+%%% Р СѓСЃСЃРєР°СЏ С‚СЂР°РґРёС†РёСЏ РЅР°С‡РµСЂС‚Р°РЅРёСЏ РіСЂРµС‡РµСЃРєРёС… Р±СѓРєРІ (РіСЂРµС‡РµСЃРєРёРµ Р±СѓРєРІС‹ РІРµСЂС‚РёРєР°Р»СЊРЅС‹Рµ, С‡РµСЂРµР· РїР°РєРµС‚ upgreek)
+% \renewcommand{\epsilon}{\ensuremath{\upvarepsilon}}   %  СЂСѓСЃСЃРєР°СЏ С‚СЂР°РґРёС†РёСЏ Р·Р°РїРёСЃРё
 % \renewcommand{\phi}{\ensuremath{\upvarphi}}
 % \renewcommand{\kappa}{\ensuremath{\varkappa}}
 % \renewcommand{\alpha}{\upalpha}
@@ -302,7 +302,3 @@
 % \renewcommand{\chi}{\upchi}
 % \renewcommand{\psi}{\uppsi}
 % \renewcommand{\omega}{\upomega}
-
-%%% Local variables:
-%%% coding: cp1251
-%%% End:

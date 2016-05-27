@@ -1,7 +1,7 @@
 # This script converts all the source files into CP1251
 
-from=utf8
-to=cp1251
+from=cp1251
+to=utf8
 
 function convert {
   for file in `find . -name '*.tex' | grep -v $to`; do

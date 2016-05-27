@@ -1,19 +1,15 @@
 \appendix
-%% Правка оформления ссылок на приложения:
+%% РџСЂР°РІРєР° РѕС„РѕСЂРјР»РµРЅРёСЏ СЃСЃС‹Р»РѕРє РЅР° РїСЂРёР»РѕР¶РµРЅРёСЏ:
 %http://tex.stackexchange.com/questions/56839/chaptername-is-used-even-for-appendix-chapters-in-toc
 %http://tex.stackexchange.com/questions/59349/table-of-contents-with-chapter-and-appendix
-%% требует двойной компиляции
+%% С‚СЂРµР±СѓРµС‚ РґРІРѕР№РЅРѕР№ РєРѕРјРїРёР»СЏС†РёРё
 \addtocontents{toc}{\def\protect\cftchappresnum{\appendixname{} }%
-\setlength{\cftchapnumwidth}{\widthof{\cftchapfont\appendixname~Ш\cftchapaftersnum}}%
+\setlength{\cftchapnumwidth}{\widthof{\cftchapfont\appendixname~РЁ\cftchapaftersnum}}%
 }
-%% Оформление заголовков приложений ближе к ГОСТ:
-\sectionformat{\chapter}[display]{% Параметры заголовков разделов в тексте
-    label=\chaptertitlename\ \thechapter,% (ГОСТ Р 2.105, 4.3.6)
+%% РћС„РѕСЂРјР»РµРЅРёРµ Р·Р°РіРѕР»РѕРІРєРѕРІ РїСЂРёР»РѕР¶РµРЅРёР№ Р±Р»РёР¶Рµ Рє Р“РћРЎРў:
+\sectionformat{\chapter}[display]{% РџР°СЂР°РјРµС‚СЂС‹ Р·Р°РіРѕР»РѕРІРєРѕРІ СЂР°Р·РґРµР»РѕРІ РІ С‚РµРєСЃС‚Рµ
+    label=\chaptertitlename\ \thechapter,% (Р“РћРЎРў Р  2.105, 4.3.6)
     labelsep=20pt,
 }
-\renewcommand\thechapter{\Asbuk{chapter}} % Чтобы приложения русскими буквами нумеровались
+\renewcommand\thechapter{\Asbuk{chapter}} % Р§С‚РѕР±С‹ РїСЂРёР»РѕР¶РµРЅРёСЏ СЂСѓСЃСЃРєРёРјРё Р±СѓРєРІР°РјРё РЅСѓРјРµСЂРѕРІР°Р»РёСЃСЊ
 
-
-%%% Local variables:
-%%% coding: cp1251
-%%% End:
