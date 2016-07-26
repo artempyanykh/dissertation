@@ -5,12 +5,15 @@
 \usepackage{amssymb,amsfonts,amsmath,mathtext,amsthm}
 \usepackage{cite,enumerate,float,indentfirst}
 \usepackage{booktabs}
+\usepackage{mathrsfs}
+\usepackage{bbm}
 \usepackage{tikz}
+\usepackage{graphicx}
 \usetikzlibrary{positioning}
 \usetikzlibrary{arrows}
 \usetikzlibrary{automata}
 
-\graphicspath{{../images/}{images/}} 
+% \graphicspath{{../images/}{images/}} 
 
 \usetheme[secheader]{Boadilla}
 \usecolortheme{seahorse}
@@ -23,12 +26,26 @@
 \newcommand{\todo}{\alert}
 \input{../common/data.tex}      % Основные сведения
 
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.3mu#1\mkern-1.3mu}\mkern 1.3mu}
 \newcommand{\Co}{\beta}
 \newcommand{\DCo}{\overline{\beta}}
 \newcommand{\E}{\ensuremath{\mathbb{E}}}
+\newcommand{\D}{\ensuremath{\mathbb{D}}}
+\newcommand{\Borel}{\ensuremath{\mathscr{B}}}
+\newcommand{\Ind}{\mathbbm{1}}
+\newcommand{\di}{\ensuremath{\mathrm{d}}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\p}{\overbar{p}}
+\newcommand{\q}{\overbar{q}}
+\newcommand{\tauv}{\overline{\tau}}
+\newcommand{\sigmav}{\ensuremath{\overbar{\sigma}}}
+\newcommand{\theGame}[1][n]{\ensuremath{G_{#1}}}
+\newcommand{\High}[1][\ensuremath{\infty}]{\ensuremath{H_{#1}}}
+\newcommand{\Low}[1][\ensuremath{\infty}]{\ensuremath{L_{#1}}}
 
 \newtheorem{thm}{Теорема}[section]
 \newtheorem{prop}{Утверждение}[section]
+\newtheorem{lem}{Лемма}[section]
 
 \setbeamercolor{footline}{fg=blue}
 \setbeamertemplate{footline}{
@@ -68,18 +85,18 @@
 \section{Введение}
 
 \begin{frame}
-  \frametitle{Краткое описание модели}
+  \frametitle{Описание модели}
   \begin{itemize}
   \item
     Между двумя игроками в течение $n \leqslant \infty$ шагов происходят
     торги за однотипные акции.
   \item
-    Цена акции $s$ определяется ходом случая в соответствии с распределением $\mu$.
+    Цена акции $s$ определяется ходом случая в соответствии с распределением $\p$.
   \item
-    Первый игрок (инсайдер) знает цену $s$, второй "--- знает только вероятностное распределение $\mu$.
+    Первый игрок (инсайдер) знает цену $s$, второй "--- знает только вероятностное распределение $\p$.
   \item
     На каждом шаге торгов игроки делают ставки $i,\ j$.
-    Игрок, предложивший большую ставку, покупает у другого акцию по цене $T(i, j)$.
+    Игрок, предложивший большую ставку, покупает у другого акцию по цене $Tr(i, j)$.
     При равных ставках сделка не состоится.
   \end{itemize}
 \end{frame}
@@ -92,9 +109,9 @@
     \midrule
     Ставки & вещественные из $[0, 1]$ & вида $i/m,\ i = \overline{0, m}$ \\
     \hline \\
-    Цена акции& \multicolumn{2}{c}{либо $0$, либо $1$; $P(s = 1) = p$} \\
+    Цена акции& \multicolumn{2}{c}{$s \in \{0, 1\};\ P(s = 1) = p$} \\
     \hline \\
-    Цена сделки& \multicolumn{2}{c}{$T(i, j) = \max(i, j)$} \\
+    Цена сделки& \multicolumn{2}{c}{$Tr(i, j) = \max(i, j)$} \\
     \hline \\
     $\{V_n(p)\}$ & растет как $\sqrt{n}$ & ограничена \\
     \bottomrule \\
@@ -106,11 +123,11 @@
 \begin{frame}
   \frametitle{Мотивация}
   
-  Рассмотрение более общего симметричного механизма торгов $T(i, j)$ обозначено в работе [De Meyer,~Saley,~2002] как одно из актуальных направлений дальнейших исследований.
+  Рассмотрение более общего симметричного механизма торгов $Tr(i, j)$ обозначено в работе [De Meyer,~Saley,~2002] как одно из актуальных направлений дальнейших исследований.
   
   В качестве такого механизма был выбран
   \[
-    T(i, j) = \beta \max(i, j) + (1-\beta) \min(i, j),\ \beta \in [0, 1],
+    Tr(i, j) = \beta \max(i, j) + (1-\beta) \min(i, j),\ \beta \in [0, 1],
   \]
   предложенный в [Chatterjee,~Samuelson,~1983].
   
@@ -120,7 +137,7 @@
 \section{Глава 1. Дискретная модель}
 
 \begin{frame}
-  \frametitle{Определение модели}
+  \frametitle{Глава 1. Теоретико-игровая модель биржевых торгов с дискретными ставками}
   
   \begin{itemize}
   \item 
@@ -159,7 +176,7 @@
 
   Выигрыш задается как
   \begin{equation*}
-    K^{m,\Co}_n(p, \sigma, \tau) = \E_{\Pi[p,\sigma,\tau]} \sum_{t=1}^n
+    K^{m,\Co}_n(p, \sigma, \tau) = \E_{\Pi[\sigma,\tau]} \sum_{t=1}^n
     \left(
       pA^{H,\Co}(i_t^H, j_t) + (1 - p)A^{L,\Co}(i_t^L, j_t)
     \right).
@@ -178,7 +195,7 @@
     \end{cases}
   \]
   
-  Показано, что при $p \in (k - 1 + \Co, k + \Co),\ k = \overline{0, m}$ использование $\tau^k$ оптимально для второго игрока в игре $G^{m, \Co}_\infty(p)$.
+  В работе показано, что при $p \in (k - 1 + \Co, k + \Co],\ k = \overline{0, m}$ использование $\tau^k$ оптимально для второго игрока в игре $G^{m, \Co}_\infty(p)$.
 \end{frame}
 
 \begin{frame}
@@ -200,8 +217,8 @@
 
   Формулу выигрыша можно переписать в виде
   \begin{equation*}
-    K^m_n(p, \sigma_1, \tau_1) = 
-    K^m_1(p, \sigma, \tau) + 
+    K^m_n(p, \sigma, \tau) = 
+    K^m_1(p, \sigma_1, \tau_1) + 
     \sum_{i \in I} q(i) K^m_{n-1}(p(H|i), \sigma(i), \tau(i)).
   \end{equation*}
 \end{frame}
@@ -220,7 +237,7 @@
     q_{k+1} = \Co, \quad p(H|k + 1) = (k+1)/m.
   \end{gather*}
   
-  Для остальных значений $p$ используется стратегия, дающая линейную комбинацию выигрышей в точках решетки.
+  Для остальных значений $p$ используется стратегия, дающая линейную комбинацию соответствующих выигрышей.
 \end{frame}
 
 \begin{frame}
@@ -289,7 +306,7 @@
   \begin{thm}
     Игра $G^m_\infty(p)$ имеет значение $V^m_\infty{p}$. Данная функция является кусочно-линейной, состоит из $m~+~1$ линейных сегментов, и полностью определяется своими значениями в следующих точках:
     \begin{gather*}
-      V^m_\infty{(k+\Co)/m} = \frac{1}{2} \left( (m - (k + \Co))(k + \Co) + \DCo\Co
+      V^m_\infty((k+\Co)/m) = \frac{1}{2} \left( (m - (k + \Co))(k + \Co) + \DCo\Co
       \right),\enskip
       k = \overline{0, m - 1},\\
       V^m_\infty{0} = V^m_\infty{1} = 0.
@@ -401,211 +418,333 @@
   \end{figure}
 \end{frame}
 
-% \begin{frame}
-% \frametitle{Цели и задачи}
-% \begin{itemize}
-%   \item \textbf{Предмет исследования:} 
-%   \item \textbf{Исследуемые характеристики:} 
-%   \item \textbf{Цель исследования:} 
-%   \item \textbf{Актуальность:} 
-% \end{itemize}
-% \end{frame}
-
-% \begin{frame}
-% \frametitle{Проблемы}
-% \begin{itemize}
-%   \item Проблема 1
-%   \item Проблема 2
-%   \item Проблема 3    
-% \end{itemize}
-% \end{frame}
-
-% \begin{frame}
-% \frametitle{План работ}
-% \begin{enumerate}
-%   \item \textbf{Задача 1}
-%   \begin{itemize}
-%     \item Подзадача 1-1
-%     \item Подзадача 1-2
-%   \end{itemize}
-%   \item \textbf{Задача 2}
-%   \begin{itemize}
-%     \item Подзадача 2-1
-%     \item Подзадача 2-2
-%     \item Подзадача 2-3
-%   \end{itemize}
-%   \item \textbf{Задача 3}
-%   \begin{itemize}
-%     \item Подзадача 3-1
-%     \item Подзадача 3-2
-%     \item Подзадача 3-3
-%   \end{itemize}
-% \end{enumerate}
-% \end{frame}
-
-% \begin{frame}
-% \frametitle{Список обыкновенный}
-% \begin{itemize}
-%   \item Пункт 1
-%   \item Пункт 2
-%   \item Пункт 3
-% \end{itemize}
-% \end{frame}
-
-% \begin{frame}
-% \frametitle{Одиночное изображение}
-% \begin{figure}[H]
-%   \center
-%   \includegraphics[width=0.8\linewidth]{latex}
-% \end{figure}
-% \end{frame}
-
-% \begin{frame}
-% \frametitle{Формулы}
-% $$
-% \left\{
-%   \begin{array}{rl}
-%     \dot x = & \sigma (y-x) \\
-%     \dot y = & x (r - z) - y \\
-%     \dot z = & xy - bz
-%   \end{array}
-% \right.
-% $$
-% \end{frame}
-
-% \begin{frame}
-% \frametitle{Составное изображение}
-% \begin{figure}[h]
-%   \begin{minipage}[h]{0.49\linewidth}
-%     \textbf{Составная \\ подпись 1}
-%     \center{\includegraphics[width=1\linewidth]{knuth1}}
-%   \end{minipage}
-%   \hfill
-%   \begin{minipage}[h]{0.49\linewidth}
-%     \textbf{Составная \\ подпись 2}
-%     \center{\includegraphics[width=1\linewidth]{knuth2}}
-%   \end{minipage}
-% \end{figure}
-% \end{frame}
-
-% \begin{frame}
-% \frametitle{Таблица}
-% \begin{tabular}{|l|l|}
-% \hline
-% \textbf{Заголовок 1} & \textbf{Заголовок 2} \\
-% \hline
-% Сумма & $b+a$ \\
-% \hline
-% Разность & $a-b$ \\
-% \hline
-% Произведение & $a*b$ \\
-% \hline
-% \end{tabular}
-% \end{frame}
-
-% \begin{frame}
-% \frametitle{Большой многоуровневый список}
-% \begin{itemize}
-%   \item \textbf{Пункт 1}
-%     \begin{itemize}
-%       \itemi Подпункт 1-1
-%       \itemi Подпункт 1-2
-%     \end{itemize}
-%   \item \textbf{Пункт 2}
-%     \begin{itemize}
-%       \itemi Подпункт 2-1
-%     \end{itemize}
-%   \item \textbf{Пункт 3}
-%     \begin{itemize}
-%       \itemi Подпункт 3-1
-%       \itemi Подпункт 3-2
-%     \end{itemize}
-%   \item \textbf{Пункт 4}
-%     \begin{itemize}
-%       \itemi Подпункт 4-1
-%     \end{itemize}
-%   \item \textbf{Пункт 5}
-%     \begin{itemize}
-%       \itemi Подпункт 5-1
-%       \itemi Подпункт 5-2
-%       \itemi Подпункт 5-3
-%     \end{itemize}
-% \end{itemize}
-% \end{frame}
-
-% \begin{frame}
-% \frametitle{Четыре изображения}
-% \begin{figure}[H]
-%   \center
-%     \includegraphics[width=0.4\linewidth]{latex}
-%     \includegraphics[width=0.4\linewidth]{latex}\\
-%     \includegraphics[width=0.4\linewidth]{latex}
-%     \includegraphics[width=0.4\linewidth]{latex}
-% \end{figure}
-% \end{frame}
-
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \begin{frame}
-% \frametitle{Перспективы развития проекта}
-% \begin{itemize}
-%   \item Перспектива 1
-%   \item Перспектива 2
-%   \item Перспектива 3
-%   \item Перспектива 4
-%   \item Перспектива 5
-% \end{itemize}
-% \end{frame}
-
-% \begin{frame}
-% \frametitle{Результаты работы}
-% \begin{itemize}
-%   \item Результат 1
-%   \item Результат 2
-%   \item Результат 3
-%   \item Результат 4
-% \end{itemize}
-% \end{frame}
+\section{Глава 2. Непрерывная модель}
 
 \begin{frame}
-\begin{center}
-Спасибо за внимание!
-\end{center}
+  \frametitle{Глава 2. Теоретико-игровая  модель биржевых торгов с непрерывными ставками}
+  
+  \begin{itemize}
+  \item 
+  Множество состояний $S = \{L, H\}$.
+  \item
+  В состоянии $L$ цена $s=0$, в состоянии $H$ цена $s=1$.
+  \item
+  Игроки могут делать вещественные ставки из отрезка $[0, 1]$.
+  \end{itemize}
 \end{frame}
 
-\begin{thebibliography}{99}
-\bibitem{demeyer02}
-  De Meyer B., Saley H. \emph{On the strategic origin of Brownian motion in
-    finance} // Int J Game Theory. 2002.
- 
-\bibitem{demeyer02arb}%
-  De Meyer B., Saley H. \emph{A model of game with a continuum of states of
-    nature} // Pr\'{e}publication de l’Institut Elie Cartan, Nancy. 2002.
+\begin{frame}
+  \frametitle{Прямая игра}
   
-\bibitem{demeyer10}%
-  De Meyer B. \emph{Price dynamics on a stock market with asymmetric
-    information} // Games and Economic Behavior. 2010.
-  
-\bibitem{domansky07}%
-  Domansky V. \emph{Repeated games with asymmetric information and random price
-  fluctuation at finance markets} // Int J Game Theory. 2007.
+    \begin{itemize}
+    \item Обозначим $y_t = (y^R_t, y^N_t)$ портфель инсайдера на $t$-м шаге
+      торгов, где $y^R_t$ и $y^N_t$ --- количество единиц рискового актива и
+      денег соответственно.
+    \item Если на $t$-м шаге игроки делают ставки $i_{t}, j_{t} \in [0,1]$,
+      то портфель $y_t$ = $y_{t-1} + t(i_{t}, j_{t})$, где при $\DCo = 1 - \Co$
+      \[
+        t(i, j) =
+        \Ind_{i > j}(1, -(\Co i + \DCo j) +
+        \Ind_{i < j}(-1, \DCo i + \Co j).
+      \]
+    \item Стоимость портфеля равна
+      \[
+        V(y_t) = \Ind_{s = H} y^R_t + y^N_t.
+      \]
+      Цель игроков --- максимизировать стоимость итогового портфеля $y_n$.
+    \end{itemize}
+\end{frame}
 
-\bibitem{domansky11}%
-  Доманский В.К, Крепс В.Л. \emph{Теоретико игровая модель биржевых торгов:
-    стратегические аспекты формирования цен на фондовых рынках} // Журнал Новой
-  экономический ассоциации. 2011
-
-\bibitem{pyanykh16}%
-  Пьяных А.И. \emph{Многошаговая модель биржевых торгов с асимметричной
-    информацией и элементами переговоров} // Вестн. Моск. ун-та. Сер. 15. 2016.
+\begin{frame}
+  Выигрыш первого игрока равен
+  \begin{equation*}
+    g_n(p, \sigma, \tau) = \E_{p, \sigma, \tau} V(y_n).
+  \end{equation*}
+  Обозначим данную игру $G_n(p)$. Ее верхнее и нижнее значения даются
+  формулами
+  \begin{equation*}
+    V_{1,n}(p) = \sup_\sigma \inf_\tau g_n(p, \sigma, \tau), \:
+    V_{2,n}(p) = \inf_\tau \sup_\sigma g_n(p, \sigma, \tau).
+  \end{equation*}
+  Если $V_{1,n}(p) = V_{2,n}(p) = V_n(p)$, то игра имеет значение $V_n(p)$.
+\end{frame}
   
-\bibitem{chatterjee83}%
-  Chatterjee K., Samuelson W. \emph{Bargaining under Incomplete Information} //
-  Operations Research, 1983.
+\begin{frame}
+  \frametitle{Двойственная игра}
   
-\bibitem{myerson83}%
-  Myerson R., Satterthwaite M. \emph{Efficient Mechanisms for Bilateral Trading}
-  // Journal of Economic Theory, 1983.
+  Двойственная игра $G_n^*(x)$ определяется следующим образом:
+  \begin{itemize}
+  \item 
+    Перед началом торгов игрок 1 выбирает $s \in S$.
+  \item
+    В том случае, если он выбрал $H$, то по окончании игры он платит игроку 2 штраф размера $x$.
+  \item
+    Игрок 1 также контролирует значение $p$.
+  \item
+    В остальном правила двойственной игры аналогичны правилам прямой игры.
+  \end{itemize}
+\end{frame}
 
-\end{thebibliography}
+\begin{frame}
+  Функция выигрыша двойственной игры задается формулой
+  \begin{equation*}
+    g^*_n(x, (p, \sigma), \tau) = x p - g_n(p, \sigma, \tau).
+  \end{equation*}
+  Игрок 2 стремиться максимизировать ее значение.
+
+  Верхнее и нижнее значение игры $G^*_n(x)$ даются формулами
+  \begin{equation*}
+    W_{1,n}(x) = \inf_{(p, \sigma)} \sup_\tau g^*_n(x, (p, \sigma), \tau), \:
+    W_{2,n}(x) = \sup_\tau \inf_{(p, \sigma)} g^*_n(x, (p, \sigma), \tau).
+  \end{equation*}
+  Если $W_{1,n}(x) = W_{2,n}(x) = W_n(x)$, то игра имеет значение $W_n(x)$.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Параметризация стратегии первого игрока в прямой игре}
+  
+  Для стратегии первого игрока имеет место декомпозиция 
+  \[
+    \sigma = (\sigma_1, \sigma(i),\ i \in I).
+  \]
+  Ход $\sigma_1$ параметризуем при помощи функций
+  \begin{gather*}
+    f(u) = F^{-1}_{\sigma^M_1}(u) := \inf \{ x\ |\ F_{\sigma^M_1}(x) \geqslant u \},\\
+    Q(u) = P(s = H | i = f(u)),
+  \end{gather*}
+  где $\sigma^M_1$ --- маргинальное распределение ставки $i$.
+  
+  Восстановить $\sigma_1$ можно из следующего равенства:
+  \begin{align*}
+    P(i \in B \; | \; s = H) 
+    = \frac{P(i \in B, \; s = H)}{P(s = H)}
+    = \int_0^1 \Ind_{f(u) \in B} \frac{Q(u)}{p} \di u,
+  \end{align*}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Параметризация стратегии второго игрока в двойственной игре}
+  
+  Для стратегии второго игрока имеет место декомпозиция 
+  \[
+    \tau = (\tau_1, \tau(i),\ i \in I).
+  \]
+  Ход $\tau_1$ параметризуем при помощи функции
+  \begin{gather*}
+    h(u) = F^{-1}_{\tau^M_1}(u) := \inf \{ x\ |\ F_{\tau^M_1}(x) \geqslant u \},\\
+  \end{gather*}
+  где $\tau^M_1$ --- маргинальное распределение ставки $j$.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Анализ прямой и двойственной игры}
+  
+  Следуя схеме, приведенной в [De~Meyer,~Saley,~2002],
+  \begin{itemize}
+  \item найдены функции $f, Q$, выравнивающие выигрыш первого игрока при $p_2 \in
+    [f(0), f(1)]$ в прямой игре;
+  \item найдена функция $h$, выравнивающая выигрыш второго игрока при $p_1 \in
+    [h(0), h(1)]$ в двойственной игре;
+  \item из соотношений двойственности между верхними и нижними значениями
+    прямой и двойственной игр показано, что данные стратегии оптимальны.
+  \end{itemize}
+\end{frame}
+  
+    
+\begin{frame}
+  \frametitle{Результаты}
+  
+  Значение двойственной игры $G^*_n(x)$ дается формулой:
+  \begin{equation*}
+    W_{n+1}(x) = \int_0^1 W_n(x - 2u + 1), \, W_0(x) = \min(x, 0).
+  \end{equation*}
+  
+  \begin{figure}[H!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/wGraphs}
+  \end{figure}
+\end{frame} 
+
+\begin{frame}
+  Значение прямой игры $G_n(P)$ дается формулой:
+  \begin{equation*}
+    V_n(P) = W_n^*(P),
+  \end{equation*}
+  где $W^*(P) = \inf_x \{ x P - W_n(x) \}$ --- сопряженная в смысле Фенхеля функция.
+
+  \begin{figure}[H!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/vGraphs.eps}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  Функция $Q(u)$ определяется как
+  \begin{equation*}
+    Q(n, p)(u) = W'_n(x + 1 - 2u),
+  \end{equation*}
+  где параметр двойственной игры $x$ удовлетворяет уравнению 
+  \begin{equation*}
+    W'_n(x) = p.
+  \end{equation*}
+
+  \begin{figure}[H!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/qGraphs.eps}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  Функция $f(u)$ определяется как
+  \begin{equation*}
+    f(n, p, \Co)(u) = 2 (u - \DCo)^{-2} \int_{\DCo}^u (x - \DCo) Q(n,p)(x) \di x.
+  \end{equation*}
+  
+  При этом $h(u) = f(u)$.
+
+  \begin{figure}[H!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/fGraphs.eps}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  Сравнивая полученные результаты с существующими, получаем:
+  \begin{itemize}
+  \item
+    Введение механизма заключения сделки с параметром $\Co$ влияет на оптимальные стратегии инсайдера и неосведомленного игрока.
+  \item
+    При этом значение игры не зависит от значения $\Co$ и совпадает с таковым в [De~Meyer,~Saley,~2002].
+    В этом смысле непрерывная модель отличается от дискретной, в которой и стратегии и значение игры зависят от значения $\Co$.
+  \item
+    В силу того, что функции значения прямой и двойственной игр совпадают с [De~Meyer,~Saley,~2002], справедливы все утверждения об асимптотике значений прямой игры и динамике апостериорных вероятностей.
+  \end{itemize}
+\end{frame}
+
+\section{Глава 3. Обобщения дискретной модели}
+
+\begin{frame}
+  \frametitle{Глава 3. Дальнейшие обобщения модели биржевых торгов с дискретными ставками}
+
+  \begin{itemize}
+  \item 
+    Множество состояний $S = \Z_+$.
+    Рассматриваются только такие распределения $\p$, что дисперсия цены $\D \p$ конечна.
+  \item
+    Каждое состояние из $S$ отождествляется с соответствующей ценой акции.
+  \item
+    Игроки могут делать произвольные целочисленные ставки.
+    Выплата первому игроку в состоянии $s$ равна
+    \begin{equation*}
+      a^s(i, j) =
+      \begin{cases}
+        \DCo i + \Co j - s, &\; i < j, \\
+        0, &\; i = j, \\
+        s - \Co i - \DCo j, &\; i > j.
+      \end{cases}
+    \end{equation*}
+  \end{itemize}
+
+  Базовая модель с $Tr(i, j) = \max(i, j)$ была рассмотрена в [Доманский,~Крепс,~2011].
+\end{frame}
+
+\begin{frame}
+  \frametitle{Оптимальная стратегия второго игрока}
+  Введем обозначения для множества распределений на $S$ с заданным математическим ожиданием:
+  \begin{gather*}
+    \Theta(x) = \left\{ \p' \in \Delta(S): \E \p' = x \right\},\\
+    \Lambda(x, y) = \left\{ \p' \in \Delta(S): x < \E \p' \leqslant y \right\}.
+  \end{gather*}
+
+  Стратегия $\tauv^*$, заключающаяся в применении $\tauv^k$ 
+  \begin{equation*}
+    \tau^k_1 = k, \quad
+    t^k_t = \begin{cases}
+      j_{t-1}, &\; i_{t-1} < j_{t-1},\\
+      j_t, &\; i_{t-1} = j_{t-1},\\
+      j_{t+1}, &\; i_{t-1} > j_{t-1}.
+    \end{cases}
+  \end{equation*}
+  при $\p \in \Lambda(k-1+\Co, k+\Co)$, является оптимальной. 
+\end{frame}
+
+\begin{frame}
+  \begin{thm}
+    При использовании игроком 2 стратегии $\tauv^*$, выигрыш игрока 1 в игре
+    $\theGame[\infty](\p)$ ограничен сверху функцией $\High(\p)$.
+
+    Функция $\High(\p)$ является кусочно-линейной с областями линейности $\Lambda(k - 1 + \beta, k + \beta)$ и областями недифференцируемости $\Theta(k+\beta)$ при $k \in S$.
+    
+    Для распределений $\p$ таких, что $\E \p = k - 1 + \beta + \xi, \; \xi \in (0, 1]$, ее значение равно
+    \begin{equation}
+      \label{upper-bound:eq:H(p)}
+      \High(\p) = \frac{1}{2} \left( \D \p + \beta(1-\beta) - \xi(1-\xi) \right).
+    \end{equation}
+  \end{thm}
+\end{frame}
+
+\begin{frame}
+  \begin{lem}
+    Пусть $\p_k \in \Delta(S)$, $\sigmav_k$ --- стратегия игрока 1, которая гарантирует ему выигрыш $\Low[n](\p_k)$ в $\theGame[n](\p_k)$, и $\q_k = (q^1_k, \ldots, q^n_k),\ \p^i_k = ( p^{1|i}_k, p^{2|i}_k, \ldots)$ --- параметры первого хода стратегии $\sigmav_k,\ k = 1,2$.
+
+    Тогда для $\p = \lambda \p_1 + (1-\lambda) \p_2, \; \lambda \in [0, 1],$ стратегия $\sigmav_c$, первый ход которой задается параметрами
+    \begin{equation*}
+      q^i = \lambda q^i_1 + (1-\lambda) q^i_2, \quad
+      p^{s|i} = \left(\lambda q^i_1 p^{s|i}_1 + (1-\lambda) q^i_2 p^{s|i}_2\right)/q^i,
+    \end{equation*}
+    гарантирует игроку 1 выигрыш $\lambda \Low[n](\p_1) + (1-\lambda) \Low[n](\p_2)$.
+  \end{lem}
+
+  \begin{figure}[tb]
+    \centering
+    \begin{tikzpicture}
+      [
+      auto,node distance=3.5cm,
+      trans/.style={->,shorten >=1pt,>=stealth',semithick},
+      state/.style={shape=circle,draw,minimum size=0.1mm},
+      ]
+      \node[state,label={$\p_1, \sigmav_1, L_n(\p_1)$}] (p1) {};
+      \node[state,right=of p1,label={$\lambda \p_1 + (1-\lambda) \p_2, \sigmav_c$}] (pc) {}; 
+      \node[state,right=of pc,label={$\p_2,\ \sigmav_2, L_n(\p_2)$}] (p2) {};
+      
+      \draw (p1) -- (pc);
+      \draw (pc) -- (p2);
+    \end{tikzpicture}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Оптимальная стратегия первого игрока}
+  \begin{itemize}
+  \item 
+    В [Доманский,~Крепс,~2011] показано, что любое распределение $\p$ может быть представлено в виде выпуклой комбинации распределений с одноточечным и двухточечным носителем.
+  \item
+    Обозначим $\p^x(l, r) \in \Theta(x)$ распределение с математическим ожиданием $x$ и носителем $\{l, r\}$.
+    Достаточно найти стратегию первого игрока, гарантирующую ему $\High(\p)$ для $\p = \p^{k+\beta}(l,r), \; k \in S$.
+  \item
+    Перенося результаты главы 1 на распределения $\p^{k+\Co}(l, r)$, получим стратегию, которая гарантирует первому игроку
+    \begin{equation*}
+      \frac{1}{2}((r-k-\beta)(k+\beta-l) + \beta(1-\beta)) = \High[\infty](p^{k+\Co}(l, r)).
+    \end{equation*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Результаты, выносимые на защиту}
+\begin{itemize}
+\item
+  Решение бесконечной повторяющейся игры биржевых торгов с дискретными ставками и более общим механизмом торгов.
+\item
+  Решение конечношаговой повторяющейся игры биржевых торгов с непрерывными ставками и более общим механизмом торгов.
+\item
+  Обобщение результатов, полученных для модели с дискретными ставками, на случай рынка со счетным множеством возможных цен рискового актива.
+\end{itemize}
+\end{frame}
+  
+\begin{frame}
+  \begin{center}
+    Спасибо за внимание!
+  \end{center}
+\end{frame}
 
 \end{document} 

@@ -146,5 +146,6 @@ pythontex-files-*/
 *.ttt
 *.fff
 
-# latexmk files
+# emacs files
+ltxpng/
 auto/
