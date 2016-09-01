@@ -1,5 +1,5 @@
 
-\subsection*{Общая характеристика работы}
+\section*{Общая характеристика работы}
 
 \newcommand{\actuality}{\underline{\textbf{\actualityTXT}}}
 \newcommand{\progress}{\underline{\textbf{\progressTXT}}}
@@ -22,7 +22,7 @@
 %\underline{\textbf{Объем и структура работы.}} Диссертация состоит из~введения, четырех глав, заключения и~приложения. Полный объем диссертации \textbf{ХХХ}~страниц текста с~\textbf{ХХ}~рисунками и~5~таблицами. Список литературы содержит \textbf{ХХX}~наименование.
 
 %\newpage
-\subsection*{Содержание работы}
+\section*{Содержание работы}
 Во \underline{\textbf{введении}} обосновывается актуальность исследований, проводимых в рамках данной диссертационной работы, приводится обзор научной литературы по изучаемой проблеме, формулируется цель, ставятся задачи работы, сформулированы научная новизна и практическая значимость представляемой работы.
 
 \underline{\textbf{Первая глава}} посвящена ...
@@ -56,7 +56,8 @@
 диссертации формируется в разделе <<\publications>>\ файла
 \verb!../common/characteristic.tex!  при помощи команды \verb!\nocite! 
 
-\ifthenelse{\equal{\thebibliosel}{0}}{% Встроенная реализация с загрузкой файла через движок bibtex8
+\ifdefmacro{\microtypesetup}{\microtypesetup{protrusion=false}}{} % не рекомендуется применять пакет микротипографики к автоматически генерируемому списку литературы
+\ifnumequal{\value{bibliosel}}{0}{% Встроенная реализация с загрузкой файла через движок bibtex8
   \renewcommand{\refname}{\large \authorbibtitle}
   \nocite{*}
   \insertbiblioauthor                          % Подключаем Bib-базы
@@ -65,6 +66,7 @@
   \insertbiblioauthor                          % Подключаем Bib-базы
   \insertbiblioother
 }
+\ifdefmacro{\microtypesetup}{\microtypesetup{protrusion=true}}{}
 
 
 %%% Local variables:

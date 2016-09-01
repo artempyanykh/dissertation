@@ -1,18 +1,36 @@
-all: synopsis dissertation talk
+.PHONY: synopsis dissertation preformat pdflatex talk dissertation-preformat dissertation-formated synopsis-preformat clean distclean release draft
+
+all: synopsis dissertation
+
+preformat: synopsis-preformat dissertation-preformat
 
 dissertation:
 	#	$(MAKE) -C Dissertation
 	latexmk -pdf -pdflatex="xelatex %O %S" dissertation
 
+pdflatex:
+	latexmk -pdf -pdflatex="pdflatex %O %S" dissertation
+
 synopsis:
 	#	$(MAKE) -C Synopsis
 	latexmk -pdf -pdflatex="xelatex %O %S" synopsis
+draft:	
+	latexmk -pdf -pdflatex="xelatex %O '\newcounter{draft}\setcounter{draft}{1}\input{%S}'" dissertation
+	latexmk -pdf -pdflatex="xelatex %O '\newcounter{draft}\setcounter{draft}{1}\input{%S}'" synopsis
+
 talk:
 	$(MAKE) talk -C Presentation
 
-draft:
-	$(MAKE) draft -C Synopsis
-	$(MAKE) draft -C Dissertation
+dissertation-preformat:
+	etex -ini "&latex" mylatexformat.ltx """dissertation.tex"""
+	latexmk -pdf -jobname=dissertation -silent --shell-escape dissertation.tex
+
+dissertation-formated:
+	latexmk -pdf -jobname=dissertation -silent --shell-escape dissertation.tex
+
+synopsis-preformat:
+	etex -ini "&latex" mylatexformat.ltx """synopsis.tex"""
+	latexmk -pdf -jobname=synopsis -silent --shell-escape synopsis.tex
 
 clean:
 	#	$(MAKE) clean -C Dissertation
