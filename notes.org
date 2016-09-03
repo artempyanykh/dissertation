@@ -1,0 +1,15 @@
+* Notation
+
+| Meaning               | Ch.1   | Ch.2           | Ch.3   |
+|-----------------------+--------+----------------+--------|
+| A priori distribution | p      | $\overline{p}$ | p      |
+
+* Plan 
+** Immediate next actions
+*** TODO Finish moving chapter 2 from UBS
+:LOGBOOK:
+CLOCK: [2016-09-03 Sat 15:05]
+CLOCK: [2016-09-03 Sat 13:33]--[2016-09-03 Sat 13:34] =>  0:01
+:END:
+** Other tasks
+*** Fix acronyms

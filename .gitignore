@@ -157,3 +157,6 @@ Thumbs.db
 
 # Auctex generated files
 auto/
+_region_.tex
+ltxpng/*
+notes.tex
