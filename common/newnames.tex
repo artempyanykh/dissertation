@@ -40,7 +40,7 @@
 \DeclareMathOperator{\E}{\mathbb{E}}
 \DeclareMathOperator{\D}{\mathbb{D}}
 \newcommand*\di{\mathop{}\!\mathrm{d}}
-\newcommand{\Ind}[1]{\ensuremath{\mathbbm{1}_{#1}}}
+\newcommand{\Ind}[1]{\ensuremath{\mathbf{1}_{#1}}}
 \newcommand*\dom{\ensuremath{\mathrm{dom\;}} }
 \newcommand*\range{\ensuremath{\mathrm{range\;}}}
 \newcommand{\inter}{\mathrm{int}}
@@ -70,3 +70,8 @@
 \declaretheorem[numberwithin=chapter,name=Утверждение,style=nopar]{proposition}
 
 \newcommand{\p}{\overbar{p}}
+
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+
+\newcommand{\ceil}[1]{\ensuremath{\lceil #1 \rceil}}
+\newcommand{\floor}[1]{\ensuremath{\lfloor #1 \rfloor}}

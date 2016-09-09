@@ -1,3 +1,4 @@
+#+STARTUP: content
 * Notation
 
 | Meaning               | Ch.1   | Ch.2           | Ch.3   |
@@ -5,11 +6,589 @@
 | A priori distribution | p      | $\overline{p}$ | p      |
 
 * Plan 
-** Immediate next actions
-*** TODO Finish moving chapter 2 from UBS
+** Main tasks
+*** Survey [100%]
+**** DONE Expand the survey [4/4]
+CLOSED: [2016-09-09 Fri 14:57]
+- [X] Outline the structure of the Survey
+- [X] Collect references from Aumann, Maschler book
+- [X] Look through Handbook of Game Theory for more references
+- [X] Collect references from Sandomirskaya's thesis
 :LOGBOOK:
-CLOCK: [2016-09-03 Sat 15:05]
+CLOCK: [2016-09-06 Tue 13:20]--[2016-09-06 Tue 13:44] =>  0:24
+CLOCK: [2016-09-06 Tue 12:58]--[2016-09-06 Tue 13:06] =>  0:08
+:END:
+*** Chapter 2 [50%]
+**** TODO Refine chapter 2 text
+:LOGBOOK:
+CLOCK: [2016-09-05 Mon 21:35]--[2016-09-05 Mon 22:10] =>  0:35
+CLOCK: [2016-09-05 Mon 11:00]--[2016-09-05 Mon 11:28] =>  0:28
+CLOCK: [2016-09-05 Mon 01:47]--[2016-09-05 Mon 02:39] =>  0:52
+CLOCK: [2016-09-04 Sun 18:38]--[2016-09-04 Sun 19:01] =>  0:23
+:END:
+**** DONE Finish moving chapter 2 from UBS
+CLOSED: [2016-09-04 Sun 17:15]
+:LOGBOOK:
+CLOCK: [2016-09-04 Sun 16:23]--[2016-09-04 Sun 17:00] =>  0:37
+CLOCK: [2016-09-04 Sun 15:45]--[2016-09-04 Sun 16:21] =>  0:36
+CLOCK: [2016-09-04 Sun 15:10]--[2016-09-04 Sun 15:40] =>  0:30
+CLOCK: [2016-09-03 Sat 17:13]--[2016-09-03 Sat 17:37] =>  0:24
+CLOCK: [2016-09-03 Sat 16:13]--[2016-09-03 Sat 16:34] =>  0:21
+CLOCK: [2016-09-03 Sat 15:05]--[2016-09-03 Sat 15:34] =>  0:29
 CLOCK: [2016-09-03 Sat 13:33]--[2016-09-03 Sat 13:34] =>  0:01
 :END:
-** Other tasks
-*** Fix acronyms
+*** Other [100%]
+**** DONE Fix acronyms
+CLOSED: [2016-09-06 Tue 12:50]
+:LOGBOOK:
+CLOCK: [2016-09-05 Mon 22:54]--[2016-09-05 Mon 23:17] =>  0:23
+:END:
+
+** Refinements [3/5]
+*** Survey
+- [ ] Add "Э.Г. Давыдов. Исследование операций"
+- [X] Add Kohlberg, Heuer, Mertens/Zamir (1976)
+- [X] Look through Aumann, Maschler for more reference
+*** Chapter 2
+- [X] Write an intro to ch2
+- [X] Fix tables in ch2
+- [X] Fix 'Из леммы~\ref{ch3:lower-bound:eq:K1(q,pi)}'
+*** Chapter 3
+- [ ] The structure of W' (photo from VV)
+
+* Survey structure
+:PROPERTIES:
+:VISIBILITY: folded
+:END:
+** Repeated games (avg. payoff)
+*** Zero sum
+**** Incomplete information on one side
+***** ACDA reports (Aumann, Maschler, Stearns)
+***** Aumann, Maschler (1995) Monograph
+***** DONE Kohlberg (1975) Int J Game Theory
+CLOSED: [2016-09-09 Fri 11:55]
+Extension for the case when P2 cannot observe pure strategies chosen by P1.
+:abstract:
+The paper is concerned with zero-sum two-person repeated games with lack of
+information on one side. The main result in the construction of an optimal
+strategy for the uninformed player in the infinitely repeated game.
+:END:
+:bibtex:
+@Article{Kohlberg1975,
+author="Kohlberg, E.",
+title="Optimal strategies in repeated games with incomplete information",
+journal="International Journal of Game Theory",
+year="1975",
+volume="4",
+number="1",
+pages="7--24",
+abstract="The paper is concerned with zero-sum two-person repeated games with lack of information on one side. The main result in the construction of an optimal strategy for the uninformed player in the infinitely repeated game.",
+issn="1432-1270",
+doi="10.1007/BF01766399",
+url="http://dx.doi.org/10.1007/BF01766399"
+}
+:END:
+***** DONE Heuer (1991) Int J Game Theory
+CLOSED: [2016-09-09 Fri 11:57]
+:PROPERTIES:
+:CUSTOM_ID: heuer1991
+:END:
+Explicit nontrivial solution for one particular 2x2 finite game.
+:abstract:
+This paper provides a counterpart of the well-known recursive formula for
+finitely repeated zero-sum games with lack of information on one side from the
+point of view of the uninformed player. Applying the results to a specific game
+that has already been discussed by Mertens and Zamir, for the first time a
+nontrivial sequence of values and optimal strategies is explicitly computed.
+This allows to recover their startling result on the appearance of the normal
+law in such models by entirely different arguments.
+:END:
+:bibtex:
+@Article{Heuer1991,
+author="Heuer, M.",
+title="Optimal strategies for the uninformed player",
+journal="International Journal of Game Theory",
+year="1991",
+volume="20",
+number="1",
+pages="33--51",
+abstract="This paper provides a counterpart of the well-known recursive formula for finitely repeated zero-sum games with lack of information on one side from the point of view of the uninformed player. Applying the results to a specific game that has already been discussed by Mertens and Zamir, for the first time a nontrivial sequence of values and optimal strategies is explicitly computed. This allows to recover their startling result on the appearance of the normal law in such models by entirely different arguments.",
+issn="1432-1270",
+doi="10.1007/BF01240565",
+url="http://dx.doi.org/10.1007/BF01240565"
+}
+:END:
+***** DONE Domansky, Kreps (1994) Int J Game Theory
+CLOSED: [2016-09-09 Fri 11:58]
+Using [[#heuer1991]]'s approach a solution for a class of 2x2 finite games is obtained.
+:abstract:
+We consider two person zero-sum games with lack of information on one side given
+by two 2×2-matrices A1 and A2 for which val [pA1 +(1−p)A2]=p valA1+(1−p) valA2.
+Using the approach developed by Heuer [1991] we give the explicit solution for
+all such finitely repeated games. It provides a supplement to the recent results
+on the limiting behavior of the value for these games (see Mertens, Sorin and
+Zamir [1990], De Meyer [1989], [1993]).
+
+We are grateful to the referees and the editor in charge for helpful and
+instructive comments and especially for the printed materials on the subject.
+:END:
+:bibtex:
+@Article{Domansky1994,
+author="Domansky, Victor C.
+and Kreps, Victoria L.",
+title="``Eventually revealing'' repeated games with incomplete information",
+journal="International Journal of Game Theory",
+year="1994",
+volume="23",
+number="2",
+pages="89--99",
+abstract="We consider two person zero-sum games with lack of information on one side given by two 2{\texttimes}2-matricesA1 andA2 for which val [pA1 +(1−p)A2]=p valA1+(1−p) valA2. Using the approach developed by Heuer [1991] we give the explicit solution for all such finitely repeated games. It provides a supplement to the recent results on the limiting behavior of the value for these games (see Mertens, Sorin and Zamir [1990], De Meyer [1989], [1993]).",
+issn="1432-1270",
+doi="10.1007/BF01240177",
+url="http://dx.doi.org/10.1007/BF01240177"
+}
+:END:
+***** DONE Domansky, Kreps (1995) Math Methods of OR
+CLOSED: [2016-09-09 Fri 11:59]
+:abstract:
+We consider two person zero-sum games with lack of information on one side given
+by m matrices of dimension m×m. We suppose the matrices to have the following
+“symmetric” structure: a_{ij}^s=a{ij}+c δ_i^s, c>0, where δ_i^s=1 if i=s and δ_i^s=0 otherwise.
+Under certain additional assumptions we give the explicit solution for finite
+repetitions of these games. These solutions are expressed in terms of
+multinomial distributions. We give the probabilisitc arguments which explain the
+obtained form of solutions. Applying the Central Limit Theorem we get the
+description of limiting behavior of value closely connected with the recent
+results of De Meyer [1989], [1993].
+:END:
+:bibtex:
+@Article{Domansky1995,
+author="Domansky, Victor
+and Kreps, Victoria",
+title="Repeated games and multinomial distributions",
+journal="Zeitschrift f{\"u}r Operations Research",
+year="1995",
+volume="42",
+number="3",
+pages="275--293",
+issn="1432-5217",
+doi="10.1007/BF01432505",
+url="http://dx.doi.org/10.1007/BF01432505"
+}
+:END:
+***** DONE Domansky, Kreps (1999) Math Methods of OR
+CLOSED: [2016-09-09 Fri 12:06]
+:abstract:
+We consider two person zero-sum repeated games with lack of information on one
+side and with payoffs of special “separable” form. The solutions for these games
+are reduced to the solutions for families of special transportation type
+problems with recursive structure. We illustrate our approach applying it to the
+game introduced by Mertens/Zamir [1976] and later studied by several authors.
+The “symmetric” subclass of games under consideration was studied in Domansky,
+Kreps [1995].
+:END:
+:bibtex:
+@Article{Domansky1999,
+author="Domansky, Victor
+and Kreps, Victoria",
+title="Repeated games with incomplete information and transportation problems",
+journal="Mathematical Methods of Operations Research",
+year="1999",
+volume="49",
+number="2",
+pages="283--298",
+abstract="We consider two person zero-sum repeated games with lack of information on one side and with payoffs of special ``separable'' form. The solutions for these games are reduced to the solutions for families of special transportation type problems with recursive structure. We illustrate our approach applying it to the game introduced by Mertens/Zamir [1976] and later studied by several authors. The ``symmetric'' subclass of games under consideration was studied in Domansky, Kreps [1995].",
+issn="1432-5217",
+doi="10.1007/PL00020918",
+url="http://dx.doi.org/10.1007/PL00020918"
+}
+:END:
+***** DONE Zamir (1971-72) Int J Game Theory, speed of convergence
+CLOSED: [2016-09-09 Fri 11:41]
+Aumann+
+:abstract:
+For a class of repeated two-person zero-sum games with incomplete information it
+was proved by Aumann and Maschler that lim_{n→∞}v_n n ∞ v n exists, Ν n being the value
+of the game with n repetitions. As for the speed of convergence Aumann and Maschler
+showed that the error term δ n=¦Ν n−limΝ n¦ is bounded from above by c/√n for some
+positive constant c. Both results have been generalized by Mertens and Zamir. It is
+shown in this paper that the above mentioned theorem about the speed of
+convergence is sharp in the sense that there are games in which δ n≥c′/√n for
+some positive constant c′. However there are games for which δn is of a lower
+order of magnitude, for instancec′(logn)/n≤δ n≤c (logn)/n orc′/n≤δ n≤c/n.
+Sufficient conditions are given here for games to belong to one of these
+categories as well as examples of games from each category.
+:END:
+:bibtex:
+@Article{Zamir1971,
+author="Zamir, Shmuel",
+title="On the relation between finitely and infinitely repeated games with incomplete information",
+journal="International Journal of Game Theory",
+year="1971",
+volume="1",
+number="1",
+pages="179--198",
+abstract="For a class of repeated two-person zero-sum games with incomplete information it was proved byAumann andMaschler that                                                                          {\$}{\$}{\backslash}mathop {\{}{\backslash}lim {\}}{\backslash}limits{\_}{\{}n {\backslash}to {\backslash}infty {\}} v{\_}n{\$}{\$}                 exists,$\Nu$n being the value of the game withn repetitions. As for the speed of convergenceAumann andMaschler showed that the error term$\delta$n={\textbrokenbar}$\Nu$n−lim$\Nu$n{\textbrokenbar} is bounded from above byc/{\textsurd}n for some positive constantc. Both results have been generalized byMertens andZamir. It is shown in this paper that the above mentioned theorem about the speed of convergence is sharp in the sense that there are games in which$\delta$n≥c{\textasciiacutex}/{\textsurd}n for some positive constantc{\textasciiacutex}. However there are games for which $\delta$n is of a lower order of magnitude, for instancec{\textasciiacutex}(logn)/n≤$\delta$n≤c (logn)/n orc{\textasciiacutex}/n≤$\delta$n≤c/n. Sufficient conditions are given here for games to belong to one of these categories as well as examples of games from each category.",
+issn="1432-1270",
+doi="10.1007/BF01753442",
+url="http://dx.doi.org/10.1007/BF01753442"
+}
+:END:
+***** DONE Mertens, Zamir (1976b) The Normal Distribution and repeated games
+CLOSED: [2016-09-09 Fri 11:47]
+The error term
+Aumann+
+:abstract:
+#+BEGIN_SRC latex
+For a reperated zero-sum two-person game with incomplete information discussed
+byZamir, it is proved here that {\$}{\$}{\backslash}mathop {\{}{\backslash}lim
+{\}}{\backslash}limits{\_}{\{}n {\backslash}to {\backslash}infty {\}}
+{\backslash}sqrt n v{\_}n (p) = {\backslash}phi (p){\$}{\$} where$\phi$ (p) is
+the normal density function evaluated at itsp-quantile (i.e.
+{\$}{\$}{\backslash}phi (p) = {\backslash}frac{\{}1{\}}{\{}{\{}{\backslash}sqrt
+{\{}2{\backslash}pi {\}} {\}}{\}}e^{\{} - ({\{}1
+{\backslash}mathord{\{}{\backslash}left/ {\{}{\backslash}vphantom {\{}1
+2{\}}{\}} {\backslash}right. {\backslash}kern-{\backslash}nulldelimiterspace{\}}
+2{\}})x^2 {\}} p{\$}{\$} where
+{\$}{\$}{\backslash}frac{\{}1{\}}{\{}{\{}{\backslash}sqrt {\{}2{\backslash}pi
+{\}} {\}}{\}}{\backslash}mathop {\{}{\backslash}smallint ^p
+{\}}{\backslash}limits{\_}{\{} - {\backslash}infty {\}}^x e^{\{} - ({\{}1
+{\backslash}mathord{\{}{\backslash}left/ {\{}{\backslash}vphantom {\{}1
+2{\}}{\}} {\backslash}right. {\backslash}kern-{\backslash}nulldelimiterspace{\}}
+2{\}})x^2 {\}} dx = p{\$}{\$} . Here for 0⩽p⩽1, (p, 1 −p) is the a priori
+probability distribution on two states of nature, the actual state of nature is
+known to the maximizer but not to the minimizer.v n (p) is the minimax value of
+the game withn stages.
+#+END_SRC
+:END:
+:bibtex:
+@Article{Mertens1976,
+author="Mertens, J. -F.
+and Zamir, S.",
+title="The normal distribution and repeated games",
+journal="International Journal of Game Theory",
+year="1976",
+volume="5",
+number="4",
+pages="187--197",
+abstract="For a reperated zero-sum two-person game with incomplete information discussed byZamir, it is proved here that                                                                          {\$}{\$}{\backslash}mathop {\{}{\backslash}lim {\}}{\backslash}limits{\_}{\{}n {\backslash}to {\backslash}infty {\}} {\backslash}sqrt n v{\_}n (p) = {\backslash}phi (p){\$}{\$}                 where$\phi$ (p) is the normal density function evaluated at itsp-quantile (i.e.                                                                          {\$}{\$}{\backslash}phi (p) = {\backslash}frac{\{}1{\}}{\{}{\{}{\backslash}sqrt {\{}2{\backslash}pi {\}} {\}}{\}}e^{\{} - ({\{}1 {\backslash}mathord{\{}{\backslash}left/ {\{}{\backslash}vphantom {\{}1 2{\}}{\}} {\backslash}right. {\backslash}kern-{\backslash}nulldelimiterspace{\}} 2{\}})x^2 {\}} p{\$}{\$}                 where                                                                          {\$}{\$}{\backslash}frac{\{}1{\}}{\{}{\{}{\backslash}sqrt {\{}2{\backslash}pi {\}} {\}}{\}}{\backslash}mathop {\{}{\backslash}smallint ^p {\}}{\backslash}limits{\_}{\{} - {\backslash}infty {\}}^x e^{\{} - ({\{}1 {\backslash}mathord{\{}{\backslash}left/ {\{}{\backslash}vphantom {\{}1 2{\}}{\}} {\backslash}right. {\backslash}kern-{\backslash}nulldelimiterspace{\}} 2{\}})x^2 {\}} dx = p{\$}{\$}                . Here for 0⩽p⩽1, (p, 1 −p) is the a priori probability distribution on two states of nature, the actual state of nature is known to the maximizer but not to the minimizer.v                  n                (p) is the minimax value of the game withn stages.",
+issn="1432-1270",
+doi="10.1007/BF01761601",
+url="http://dx.doi.org/10.1007/BF01761601"
+}
+:END:
+***** DONE Mertens, Zamir (1977) The maximal variation of a bounded martingale
+CLOSED: [2016-09-09 Fri 11:47]
+The error term
+Aumann+
+:abstract:
+Let {\$}{\$}{\backslash}chi {\_}0^n = {\backslash}left{\backslash}{\{}
+{\{}X{\_}t {\}} {\backslash}right{\backslash}{\}}{\_}0^n {\$}{\$} be a
+martingale such that 0≦Xi≦1;i=0, {\ldots},n. For 0≦p≦1 denote by ℳ p n the set
+of all such martingales satisfying alsoE(X0)=p. Thevariation of a martingale
+$\chi$ 0 n is denoted byV 0 n and defined by {\$}{\$}V({\backslash}chi {\_}0^n )
+= E{\backslash}left( {\{}{\backslash}sum {\{}{\_}{\{}l = 0{\}}^{\{}n - 1{\}}
+{\}} {\backslash}left| {\{}X{\_}{\{}l + 1{\}} - X{\_}l {\}}
+{\backslash}right|{\}} {\backslash}right){\$}{\$} . It is proved that
+{\$}{\$}{\backslash}mathop {\{}{\backslash}lim {\}}{\backslash}limits{\_}{\{}n
+{\backslash}to {\backslash}infty {\}} {\backslash}left{\backslash}{\{}
+{\{}{\backslash}mathop {\{}Sup{\}}{\backslash}limits{\_}{\{}x{\_}0^n
+{\backslash}in {\backslash}mathcal{\{}M{\}}{\_}p^n {\}} {\backslash}left[
+{\{}{\backslash}frac{\{}1{\}}{\{}{\{}{\backslash}sqrt n
+{\}}{\}}V({\backslash}chi {\_}0^n ){\}} {\backslash}right]{\}}
+{\backslash}right{\backslash}{\}} = {\backslash}phi (p){\$}{\$} , where ϕ(p) is
+the well known normal density evaluated at itsp-quantile, i.e.
+{\$}{\$}{\backslash}phi (p) = {\backslash}frac{\{}1{\}}{\{}{\{}{\backslash}sqrt
+{\{}2{\backslash}pi {\}} {\}}{\}}{\backslash}exp ( -
+{\backslash}frac{\{}1{\}}{\{}2{\}}{\backslash}chi {\_}p^2 ) where
+{\backslash}int{\_}{\{} - {\backslash}alpha {\}}^{\{}x{\_}p {\}}
+{\{}{\backslash}frac{\{}1{\}}{\{}{\{}{\backslash}sqrt {\{}2{\backslash}pi {\}}
+{\}}{\}}{\backslash}exp ( - {\backslash}frac{\{}1{\}}{\{}2{\}}{\backslash}chi ^2
+){\}} dx = p{\$}{\$} . A sequence of martingales $\chi$ 0 n ,n=1,2, {\ldots} is
+constructed so as to satisfy {\$}{\$}{\backslash}lim {\_}{\{}n {\backslash}to
+{\backslash}infty {\}} (1/{\backslash}sqrt n )V({\backslash}chi {\_}0^n ) =
+{\backslash}phi (p){\$}{\$} .
+:END:
+:bibtex:
+@Article{Mertens1977,
+author="Mertens, Jean-Francois
+and Zamir, Shmuel",
+title="The maximal variation of a bounded martingale",
+journal="Israel Journal of Mathematics",
+year="1977",
+volume="27",
+number="3",
+pages="252--276",
+abstract="Let                                                                          {\$}{\$}{\backslash}chi {\_}0^n  = {\backslash}left{\backslash}{\{} {\{}X{\_}t {\}} {\backslash}right{\backslash}{\}}{\_}0^n {\$}{\$}                 be a martingale such that 0≦Xi≦1;i=0, {\ldots},n. For 0≦p≦1 denote by ℳ                                      p                                                        n                                   the set of all such martingales satisfying alsoE(X0)=p. Thevariation of a martingale $\chi$                  0                                      n                                   is denoted byV                                  0                                      n                                   and defined by                                                                          {\$}{\$}V({\backslash}chi {\_}0^n ) = E{\backslash}left( {\{}{\backslash}sum {\{}{\_}{\{}l = 0{\}}^{\{}n - 1{\}} {\}} {\backslash}left| {\{}X{\_}{\{}l + 1{\}}  - X{\_}l {\}} {\backslash}right|{\}} {\backslash}right){\$}{\$}                . It is proved that                                                                          {\$}{\$}{\backslash}mathop {\{}{\backslash}lim {\}}{\backslash}limits{\_}{\{}n {\backslash}to {\backslash}infty {\}} {\backslash}left{\backslash}{\{} {\{}{\backslash}mathop {\{}Sup{\}}{\backslash}limits{\_}{\{}x{\_}0^n  {\backslash}in {\backslash}mathcal{\{}M{\}}{\_}p^n {\}} {\backslash}left[ {\{}{\backslash}frac{\{}1{\}}{\{}{\{}{\backslash}sqrt n {\}}{\}}V({\backslash}chi {\_}0^n ){\}} {\backslash}right]{\}} {\backslash}right{\backslash}{\}} = {\backslash}phi (p){\$}{\$}                , where ϕ(p) is the well known normal density evaluated at itsp-quantile, i.e.                                                                          {\$}{\$}{\backslash}phi (p) = {\backslash}frac{\{}1{\}}{\{}{\{}{\backslash}sqrt {\{}2{\backslash}pi {\}} {\}}{\}}{\backslash}exp ( - {\backslash}frac{\{}1{\}}{\{}2{\}}{\backslash}chi {\_}p^2 )   where   {\backslash}int{\_}{\{} - {\backslash}alpha {\}}^{\{}x{\_}p {\}} {\{}{\backslash}frac{\{}1{\}}{\{}{\{}{\backslash}sqrt {\{}2{\backslash}pi {\}} {\}}{\}}{\backslash}exp ( - {\backslash}frac{\{}1{\}}{\{}2{\}}{\backslash}chi ^2 ){\}} dx = p{\$}{\$}                . A sequence of martingales $\chi$                  0                                      n                                  ,n=1,2, {\ldots} is constructed so as to satisfy                                                                          {\$}{\$}{\backslash}lim {\_}{\{}n {\backslash}to {\backslash}infty {\}} (1/{\backslash}sqrt n )V({\backslash}chi {\_}0^n ) = {\backslash}phi (p){\$}{\$}                .",
+issn="1565-8511",
+doi="10.1007/BF02756487",
+url="http://dx.doi.org/10.1007/BF02756487"
+}
+:END:
+
+**** Incomplete information on both sides
+***** Mertens, Zamir (1971) Int J Game Theory
+The value of two-person zero-sum repeated games with lack of information on both sides
+***** DONE Mertens, Zamir (1977b) J Math Analysis and Application
+CLOSED: [2016-09-09 Fri 14:05]
+A duality theorem on a pair of simultaneous functional equations
+:abstract:
+Given P and Q convex compact sets in RkandRs, respectively, and u a continuous
+real valued function on P × Q, we consider the following pair of dual problems:
+Problem I—Minimize ƒ so that ƒ: P × Q → R and ƒ ⩾ CavpVexq × max(u, ƒ). Problem
+II—Maximize g so that g: P × Q → R and g ⩽ Vexq × Cavpmin(u, g). Here Cavp is
+the operation of concavification of a function with respect to the variable p ϵ
+P (for each fixed q ϵ Q). Similarly, Vexq is the operation of convexification
+with respect to q ϵ Q. Maximum and minimum are taken here in the partial
+ordering of pointwise comparison: ƒ ⩽ g means ƒ(p, q) ⩽ g(p, q) ∀(p, q) ϵ P × Q.
+It is proved here that both problems have the same solution which is also the
+unique simultaneous solution of the following pair of functional equations: (i)
+ƒ = Vexqmax(u, ƒ). (ii) ƒ = Cavpmin(u, ƒ). The problem arises in game theory,
+but the proof here is purely analytical and makes no use of game-theoretical
+concepts.
+:END:
+:bibtex:
+@article{MERTENS1977550,
+title = "A duality theorem on a pair of simultaneous functional equations",
+journal = "Journal of Mathematical Analysis and Applications",
+volume = "60",
+number = "2",
+pages = "550 - 558",
+year = "1977",
+note = "",
+issn = "0022-247X",
+doi = "http://dx.doi.org/10.1016/0022-247X(77)90041-5",
+url = "http://www.sciencedirect.com/science/article/pii/0022247X77900415",
+author = "Jean François Mertens and Shmuel Zamir",
+abstract = "Given P and Q convex compact sets in RkandRs, respectively, and u a continuous real valued function on P × Q, we consider the following pair of dual problems: Problem I—Minimize ƒ so that ƒ: P × Q → R and ƒ ⩾ CavpVexq × max(u, ƒ). Problem II—Maximize g so that g: P × Q → R and g ⩽ Vexq × Cavpmin(u, g). Here Cavp is the operation of concavification of a function with respect to the variable p ϵ P (for each fixed q ϵ Q). Similarly, Vexq is the operation of convexification with respect to q ϵ Q. Maximum and minimum are taken here in the partial ordering of pointwise comparison: ƒ ⩽ g means ƒ(p, q) ⩽ g(p, q) ∀(p, q) ϵ P × Q. It is proved here that both problems have the same solution which is also the unique simultaneous solution of the following pair of functional equations: (i) ƒ = Vexqmax(u, ƒ). (ii) ƒ = Cavpmin(u, ƒ). The problem arises in game theory, but the proof here is purely analytical and makes no use of game-theoretical concepts."
+          }
+:END:
+***** DONE Sorin (1984b) J Math Analysis and Applications
+CLOSED: [2016-09-09 Fri 14:05]
+On a pair of simultaneous functional equations
+:abstract:
+For each p in the simplex P of Rk we introduce convex subsets of P, ΠI(p) and
+ΠII(p). For f a real function on P we define Cav1f to be the smallest function
+greater than f on P and concave on Π1(p) for each p in P (and similarly VexIIf).
+Given u a continuous real function on P we prove that the following problems:
+Minimizef;f:→R, f⩽CavI VexII max{u,f}Minimizef;f:→R, f⩾VexII CavI min{u,f} have
+the same solution which is also the only solution of f = Vex11 max{u,f} = Cav1
+min{u,f}. This is an extension of a former proof by Mertens and Zamir for the
+case where P is a. product of convex R and S with ΠI(p) = r × S and ΠII(p) = R ×
+s.
+:END:
+:bibtex:
+@article{SORIN1984296,
+title = "On a pair of simultaneous functional equations",
+journal = "Journal of Mathematical Analysis and Applications",
+volume = "98",
+number = "1",
+pages = "296 - 303",
+year = "1984",
+note = "",
+issn = "0022-247X",
+doi = "http://dx.doi.org/10.1016/0022-247X(84)90296-8",
+url = "http://www.sciencedirect.com/science/article/pii/0022247X84902968",
+author = "S Sorin",
+abstract = "For each p in the simplex P of Rk we introduce convex subsets of P, ΠI(p) and ΠII(p). For f a real function on P we define Cav1f to be the smallest function greater than f on P and concave on Π1(p) for each p in P (and similarly VexIIf). Given u a continuous real function on P we prove that the following problems: Minimizef;f:→R, f⩽CavI VexII max{u,f}Minimizef;f:→R, f⩾VexII CavI min{u,f} have the same solution which is also the only solution of f = Vex11 max{u,f} = Cav1 min{u,f}. This is an extension of a former proof by Mertens and Zamir for the case where P is a. product of convex R and S with ΠI(p) = r × S and ΠII(p) = R × s."
+}
+:END:
+*** Non-zero sum
+**** Incomplete information on one side
+***** Characterization of Nash equilibria
+****** DONE Hart (1985) Math of OR
+CLOSED: [2016-09-09 Fri 14:15]
+Nonzero-sum two-person repeated games with incomplete information
+:abstract:
+Characterization of all equilibria of nonzero-sum two-person repeated games with
+incomplete information, in the standard one-sided information case. Informally,
+each such equilibrium is described by a sequence of communications between the
+players (consisting of information transmission and coordination), leading to
+some individually rational agreement. Formally, the concept of a bi-martingale
+is introduced.
+:END:
+:bibtex:
+@article{hart85,
+ author = {Sergiu Hart},
+ journal = {Mathematics of Operations Research},
+ number = {1},
+ pages = {117-153},
+ publisher = {INFORMS},
+ title = {Nonzero-Sum Two-Person Repeated Games with Incomplete Information},
+ volume = {10},
+ year = {1985}
+}
+:END:
+****** DONE Aumann, Hart (1986) Isreal J of Math
+CLOSED: [2016-09-09 Fri 14:15]
+Bi-convexity and bi-martingales
+:abstract:
+A set in a product spaceX{\texttimes}Y isbi-convex if all itsx- andy-sections
+are convex. Abi-martingale is a martingale with values inX{\texttimes}Y whosex-
+andy-coordinates change only one at a time. This paper investigates the limiting
+behavior of bimartingales in terms of thebi-convex hull of a set --- the
+smallest bi-convex set containing it --- and of several related concepts
+generalizing the concept of separation to the bi-convex case.
+:END:
+:bibtex:
+@Article{Aumann1986,
+author="Aumann, Robert J.
+and Hart, Sergiu",
+title="Bi-convexity and bi-martingales",
+journal="Israel Journal of Mathematics",
+year="1986",
+volume="54",
+number="2",
+pages="159--180",
+abstract="A set in a product spaceX{\texttimes}Y isbi-convex if all itsx- andy-sections are convex. Abi-martingale is a martingale with values inX{\texttimes}Y whosex- andy-coordinates change only one at a time. This paper investigates the limiting behavior of bimartingales in terms of thebi-convex hull of a set --- the smallest bi-convex set containing it --- and of several related concepts generalizing the concept of separation to the bi-convex case.",
+issn="1565-8511",
+doi="10.1007/BF02764940",
+url="http://dx.doi.org/10.1007/BF02764940"
+}
+:END:
+***** Existence of equilibrium
+****** DONE Sorin (1983) Int J Game Theory, two states of nature
+CLOSED: [2016-09-09 Fri 14:17]
+Some results on the existence of Nash equilibria for non-zero-sum games with incomplete information
+Th: if the number of statues of nature is 2, then \Gamma(p) has a Nash equilibrium for every p.
+:abstract:
+We prove the existence of Nash equilibria for two person non-zero sum repeated
+games with lack of information on one side and two states of nature.
+:END:
+:bibtex:
+@Article{Sorin1983,
+author="Sorin, S.",
+title="Some results on the existence of Nash equilibria for non-zero sum games with incomplete information",
+journal="International Journal of Game Theory",
+year="1983",
+volume="12",
+number="4",
+pages="193--205",
+abstract="We prove the existence of Nash equilibria for two person non-zero sum repeated games with lack of information on one side and two states of nature.",
+issn="1432-1270",
+doi="10.1007/BF01769090",
+url="http://dx.doi.org/10.1007/BF01769090"
+}
+:END:
+***** Communication and correlated equilibria (won't cover)
+** Random walks (early)
+*** DONE Bachelier
+CLOSED: [2016-09-09 Fri 14:23]
+*** Kyle (1985) Econometrica
+**** DONE Add a note about noise traders (фоновые игроки)
+CLOSED: [2016-09-09 Fri 14:18]
+*** DONE Back (1995) The Review of Financial Studies
+CLOSED: [2016-09-09 Fri 14:22]
+:abstract:
+The continuous-time version of Kyle's (1985) model of asset pricing with
+asymmetric information is studied. It is shown that there is a unique
+equilibrium pricing rule within a certain class. This pricing rule is obtained
+in closed form for general distributions of the asset value. A particular
+example is a lognormal distribution, for which the equilibrium price process is
+a geometric Brownian motion. General trading strategies are allowed. In
+equilibrium, the informed agent, who is risk neutral, has many optima, but he
+does not correlate his trades locally with the noise trades nor does he submit
+discrete orders.
+:END:
+:bibtex:
+@article{10.2307/2962132,
+ ISSN = {08939454, 14657368},
+ URL = {http://www.jstor.org/stable/2962132},
+ abstract = {The continuous-time version of Kyle's (1985) model of asset pricing with asymmetric information is studied. It is shown that there is a unique equilibrium pricing rule within a certain class. This pricing rule is obtained in closed form for general distributions of the asset value. A particular example is a lognormal distribution, for which the equilibrium price process is a geometric Brownian motion. General trading strategies are allowed. In equilibrium, the informed agent, who is risk neutral, has many optima, but he does not correlate his trades locally with the noise trades nor does he submit discrete orders.},
+ author = {Kerry Back},
+ journal = {The Review of Financial Studies},
+ number = {3},
+ pages = {387-409},
+ publisher = {[Oxford University Press, Society for Financial Studies]},
+ title = {Insider Trading in Continuous Time},
+ volume = {5},
+ year = {1992}
+}
+:END:
+*** DONE Subrahmanyam (1991) The Review of Financial Studies
+CLOSED: [2016-09-09 Fri 14:22]
+:abstract:
+A model of a noncompetitive speculative market is analyzed in which privately
+informed traders and market makers are risk averse. Market liquidity is found to
+be nonmonotonic in the number of informed traders, their degree of risk
+aversion, and the precision of their information. It is also shown that
+increased liquidity trading leads to reduced priced efficiency, and that, under
+endogenous information acquisition, market liquidity may also be nonmonotonic in
+the variance of liquidity trades.
+:END:
+:bibtex:
+@article{Subrahmanyam01071991,
+author = {Subrahmanyam, Avanidhar}, 
+title = {Risk Aversion, Market Liquidity, and Price Efficiency},
+volume = {4}, 
+number = {3}, 
+pages = {417-441}, 
+year = {1991}, 
+doi = {10.1093/rfs/4.3.417}, 
+abstract ={A model of a noncompetitive speculative market is analyzed in which privately informed traders and market makers are risk averse. Market liquidity is found to be nonmonotonic in the number of informed traders, their degree of risk aversion, and the precision of their information. It is also shown that increased liquidity trading leads to reduced priced efficiency, and that, under endogenous information acquisition, market liquidity may also be nonmonotonic in the variance of liquidity trades.}, 
+URL = {http://rfs.oxfordjournals.org/content/4/3/417.abstract}, 
+eprint = {http://rfs.oxfordjournals.org/content/4/3/417.full.pdf+html}, 
+journal = {Review of Financial Studies} 
+}
+:END:
+** Insider bidding (sum payoff)
+*** Continuous
+**** 2 states
+***** De Meyer, Saley (2002) Int J Game Theory
+**** Continuum of states
+***** De Meyer, Saley (2002) Preb.
+**** Arbitrary transaction mechanism
+***** De Meyer (2010)
+***** Gensbittel (2015) Mathematics of OR
+**** Risk averse market makers
+***** DONE De Meyer (2015) Tech Report
+CLOSED: [2016-09-09 Fri 14:28]
+Price dynamics on a risk averse market with asymmetric information
+:abstract:
+A market with asymmetric information can be viewed as a repeated exchange game
+between an informed sector and an uniformed sector. The case where all agents in
+the market are risk neutral was analyzed in De Meyer [2010]. The main result of
+that paper was that the price process in this risk neutral environment should be
+a particular kind o Brownian martingale called CMMV. This type of dynamics is
+due to the strategic use of their private information by the informed agents. In
+this paper, we generalize this analysis to the case of a risk averse market. Our
+main result is that the price process is still a CMMV under a martingale
+equivalent measure
+:END:
+:bibtex:
+@TechReport{RePEc:mse:cesdoc:15054,
+  author={Bernard De Meyer and Gaëtan Fournier},
+  title={{Price dynamics on a risk averse market with asymmetric information}},
+  year=2015,
+  month=Jun,
+  institution={Université Panthéon-Sorbonne (Paris 1), Centre d'Economie de la Sorbonne},
+  type={Documents de travail du Centre d'Economie de la Sorbonne},
+  url={https://ideas.repec.org/p/mse/cesdoc/15054.html},
+  number={15054},
+  abstract={A market with asymmetric information can be viewed as a repeated exchange game between an informed sector and an uniformed sector. The case where all agents in the market are risk neutral was analyzed in De Meyer [2010]. The main result of that paper was that the price process in this risk neutral environment should be a particular kind o Brownian martingale called CMMV. This type of dynamics is due to the strategic use of their private information by the informed agents. In this paper, we generalize this analysis to the case of a risk averse market. Our main result is that the price process is still a CMMV under a martingale equivalent measure},
+  keywords={Asymmetric information; Price dynamics; Martingales of maximal variation; Repeated games; Martingale},
+  doi={},
+}
+:END:
+*** Discrete
+**** Infinite duration
+***** 2 states
+****** Marino, De Meyer (2010) Games and Economic Behavior
+****** Domansky (2007) Int J Game Theory
+***** Z_+ states
+****** DONE Domansky, Kreps (2008) Prob. theory conf proceedings
+CLOSED: [2016-09-09 Fri 14:37]
+:citation:
+Доманский В.К., Крепс В.Л.
+Многошаговые торги акциями и повторяющиеся игры N лиц с неполной информацией.
+В сборнике: Теория вероятностей, случайные процессы, математическая статистика и приложения. Труды международной научной конференции.
+Минск, "Издательский центр БГУ". 2008. С.82--88.
+:END:
+****** Domansky, Kreps (2011)
+****** Domansky, Kreps (2013) (2 assets)
+****** Domansky, Kreps (2014) (m assets)
+****** Sandomirskaya (2014) UBS (with spread)
+**** Finite duration
+***** Sandomirskaya, Domansky (2012) MGTA (1 stage)
+***** Kreps (2009) Control theory and systems (m <= 3)
+***** Sandomirskaya (2013) Dissertation (error term)
