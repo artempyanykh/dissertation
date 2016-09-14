@@ -1,13 +1,28 @@
 #+STARTUP: content
 * Notation
 
-| Meaning               | Ch.1   | Ch.2           | Ch.3   |
-|-----------------------+--------+----------------+--------|
-| A priori distribution | p      | $\overline{p}$ | p      |
+| Meaning                             | Ch.1.1       | Ch1.2+   | Ch.2         | Ch.3   |
+|-------------------------------------+--------------+----------+--------------+--------|
+| A priori distribution               | \overline{p} | p        | \overline{p} |        |
+| Probability of a state s            | p_s          |          |              |        |
+| First player strategy n-stages      | \sigma       | \sigma   | \sigmav      | \sigma |
+| First player strategy at i^th stage | \sigma_i     | \sigma_i | ?            | ?      |
+| First player strategy at i^th stage |              |          |              |        |
 
-* Plan 
-** Main tasks
-*** Survey [100%]
+
+
+* Synopsis
+
+** Chapter 1
+
+*** TODO Outline the structure of chapter 1
+** Chapter 2
+** Chapter 3
+
+
+* Dissertation
+** Activities
+*** Survey
 **** DONE Expand the survey [4/4]
 CLOSED: [2016-09-09 Fri 14:57]
 - [X] Outline the structure of the Survey
@@ -18,14 +33,10 @@ CLOSED: [2016-09-09 Fri 14:57]
 CLOCK: [2016-09-06 Tue 13:20]--[2016-09-06 Tue 13:44] =>  0:24
 CLOCK: [2016-09-06 Tue 12:58]--[2016-09-06 Tue 13:06] =>  0:08
 :END:
-*** Chapter 2 [50%]
-**** TODO Refine chapter 2 text
-:LOGBOOK:
-CLOCK: [2016-09-05 Mon 21:35]--[2016-09-05 Mon 22:10] =>  0:35
-CLOCK: [2016-09-05 Mon 11:00]--[2016-09-05 Mon 11:28] =>  0:28
-CLOCK: [2016-09-05 Mon 01:47]--[2016-09-05 Mon 02:39] =>  0:52
-CLOCK: [2016-09-04 Sun 18:38]--[2016-09-04 Sun 19:01] =>  0:23
-:END:
+*** Chapter 1
+**** TODO Address VV comments
+**** TODO Change notation L^m_n(p) (explicitly add a strategy)
+*** Chapter 2
 **** DONE Finish moving chapter 2 from UBS
 CLOSED: [2016-09-04 Sun 17:15]
 :LOGBOOK:
@@ -37,24 +48,24 @@ CLOCK: [2016-09-03 Sat 16:13]--[2016-09-03 Sat 16:34] =>  0:21
 CLOCK: [2016-09-03 Sat 15:05]--[2016-09-03 Sat 15:34] =>  0:29
 CLOCK: [2016-09-03 Sat 13:33]--[2016-09-03 Sat 13:34] =>  0:01
 :END:
-*** Other [100%]
+*** Chapter 3
+**** TODO Write about a structure of W' (photo from VV)
+*** Other
 **** DONE Fix acronyms
 CLOSED: [2016-09-06 Tue 12:50]
 :LOGBOOK:
 CLOCK: [2016-09-05 Mon 22:54]--[2016-09-05 Mon 23:17] =>  0:23
 :END:
 
-** Refinements [3/5]
-*** Survey
+
+* Refinements
 - [ ] Add "Э.Г. Давыдов. Исследование операций"
 - [X] Add Kohlberg, Heuer, Mertens/Zamir (1976)
 - [X] Look through Aumann, Maschler for more reference
-*** Chapter 2
 - [X] Write an intro to ch2
 - [X] Fix tables in ch2
 - [X] Fix 'Из леммы~\ref{ch3:lower-bound:eq:K1(q,pi)}'
-*** Chapter 3
-- [ ] The structure of W' (photo from VV)
+
 
 * Survey structure
 :PROPERTIES:
@@ -592,3 +603,13 @@ CLOSED: [2016-09-09 Fri 14:37]
 ***** Sandomirskaya, Domansky (2012) MGTA (1 stage)
 ***** Kreps (2009) Control theory and systems (m <= 3)
 ***** Sandomirskaya (2013) Dissertation (error term)
+
+
+* Part 1 structure
+** Основные понятия
+** Описание модели
+** Определение игры G_n^m(p)
+** Оценка сверху
+** Оценка снизу
+** Значение игры G_\infty^m(p)
+** Динамика апостериорных вероятностей

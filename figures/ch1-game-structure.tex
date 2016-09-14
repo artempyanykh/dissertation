@@ -6,7 +6,7 @@
       node[draw] {$G_1$}
       child { node {$\vdots$} }
     }
-    edge from parent [-] node [anchor=south] {$p^0_1$}
+    edge from parent [-] node [anchor=south] {$p(1)$}
   }
   child {
     node[draw] (g2) {$G_2$}
@@ -14,7 +14,7 @@
       node[draw] (g22) {$G_2$}
       child { node {$\vdots$} }
     }
-    edge from parent [-] node [left] {$p^0_2$}
+    edge from parent [-] node [left] {$p(2)$}
   }
   child {
     node[draw] (g3) {$G_\kappa$}
@@ -22,7 +22,7 @@
       node[draw] (g32) {$G_\kappa$}
       child { node {$\vdots$} }
     }
-    edge from parent [-] node [anchor=south] {$p^0_\kappa$}
+    edge from parent [-] node [anchor=south] {$p(\kappa)$}
   }
   ;
   \path (g2) -- (g3) node [midway] {\ldots};
