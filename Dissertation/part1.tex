@@ -211,6 +211,11 @@ $\tau_t: I^{t-1} \rightarrow \Delta(J)$.
     \sum_{t=0}^{n-1}(m - k - t - \Co)^+,
   \]
   в состояниях L и H соответственно.
+  Последовательности $\{h_n^L(\tau^k)\}_{n=1}^\infty$ и $\{h_n^H(\tau^k)\}_{n=1}^\infty$ не убывают, ограничены сверху по $n$ и имеют следующие предельные значения:
+  \begin{equation*}
+    h_\infty^L(\tau^k) = \frac{(k+\Co-\DCo)k}{2},\quad
+    h_\infty^H(\tau^k) = \frac{(m - k)(m - k + \DCo - \Co)}{2}.
+  \end{equation*}
 \end{proposition}
 \begin{proof}
   Проведем доказательство по индукции для $h^L_n(\tau^k)$.
@@ -232,12 +237,14 @@ $\tau_t: I^{t-1} \rightarrow \Delta(J)$.
   \begin{gather*}
     h^L_{N+1}(\tau^k) = 0 = \sum_{t=0}^N(k-t-\DCo)^+.
   \end{gather*}
+  Далее заметим, что $h^L_k(\tau^k) = h^L_{k+i}(\tau^k),\ i \in \N_+$.
+  Отсюда находим
+  \begin{equation*}
+    h_\infty^L(\tau^k) = \sum_{t=0}^{k-1} (k - t - \DCo) = \frac{(k+\Co-\DCo)k}{2}.
+  \end{equation*}
   Для $h^H_n(\tau^k)$ утверждение доказывается аналогично.
 \end{proof}
 
-Последовательности $\{h_n^L(\tau^k)\}$ и $\{h_n^H(\tau^k)\}$ не убывают и ограничены сверху по $n$.
-Кроме того,
-$h^s_m(\tau^k) = h^s_{m+i}(\tau^k),\ i \in \N_+$.
 Введем следующую функцию:
 \begin{multline*}
   \upperBound{p} 
@@ -245,9 +252,8 @@ $h^s_m(\tau^k) = h^s_{m+i}(\tau^k),\ i \in \N_+$.
     ph_n^H(\tau^j) + (1-p)h_n^L(\tau^j)
   \right) = \\
   %
-  = \min_{j \in J} \frac{1}{2} \left[ p (m - j)(m - j + \DCo - \Co) + (1 - p)j(j + \Co
-    - \DCo) \right] = \\
-  = \min_{j \in J} \left[ j^2 + j(2\Co - 1 - 2 m p) + m p (1 + m - 2\Co) \right].
+  = \min_{j \in J} \frac{\left[ p (m - j)(m - j + \DCo - \Co) + (1 - p)j(j + \Co - \DCo) \right]}{2} = \\
+  = \min_{j \in J} \frac{\left[ j^2 + j(2\Co - 1 - 2 m p) + m p (1 + m - 2\Co) \right]}{2}.
 \end{multline*}
 
 \begin{figure}[thb]
@@ -370,13 +376,43 @@ $\fGeneral[1,i]{s}$ -- вероятность сделать ставку $i$ в
     &= m p(H|k+1) q_{k+1} - q_{k+1} (\Co (k+1) + \DCo k) = \\
     &= (m p(H|k+1) - k - \Co) q_{k+1}.
   \end{align*}
-  Случаи $j = k + 1$ и $j > k + 1$ разбираются аналогично.
+  При $j=k+1$ находим
+  \begin{align*}
+    \firstPlayerPayoff{1}{p}{\fGeneral{k}}{j} 
+    &=
+      p \fGeneral[1,k]{H} (\Co (k+1) + \DCo k - m) +
+      (1-p) \fGeneral[1,k]{L} (\Co (k+1) + \DCo k) = \\
+    &= (p \fGeneral[1,k]{H} + (1-p) \fGeneral[1,k]{L}) (\Co (k+1) + \DCo k)
+      - m p \fGeneral[1,k]{H} =\\
+    &= q_k (\Co (k+1) + \DCo k) - m p(H|k) q_k  = \\
+    &= (k + \Co - m p(H|k)) q_k.
+  \end{align*}
+  При $j>k+1$ получаем
+  \begin{align*}
+    \firstPlayerPayoff{1}{p}{\fGeneral{k}}{j} &=
+    p \left( 
+      \fGeneral[1,k]{H} (\Co j - \DCo k - m) +
+      \fGeneral[1,k+1]{H} (\Co j - \DCo (k+1) - m)
+    \right) + \\
+    &+ (1-p) \left( 
+      \fGeneral[1,k]{L} (\Co j + \DCo k) +
+      \fGeneral[1,k+1]{L} (\Co j + \DCo (k+1))
+    \right) = \\
+    &= (\DCo k + \Co j)
+    \left(
+      p (\fGeneral[1,k]{H} + \fGeneral[1,k+1]{H}) +
+      (1-p) (\fGeneral[1,k]{L} + \fGeneral[1,k+1]{L})
+    \right) - \\
+    &- m p (\fGeneral[1,k]{H} + \fGeneral[1,k+1]{H}) +
+    (p \fGeneral[1,k+1]{H} + (1-p) \fGeneral[1,k+1]{L}) \DCo = \\
+    &= \DCo k + \DCo j - mp + \Co q_{k+1}.
+  \end{align*}
+  Отсюда устанавливаем справедливость \eqref{ch1:eq:lowerPayoffGeneral}.
 \end{proof}
 
 Построим оптимальную стратегию инсайдера. Рассмотрим на $[0,1]$ множество $P$ точек вида
 \[
-\pEven[i] = i/m, \, i = \overline{0, m}, \quad \pOdd[i] = (i + \Co)/m, \, i =
-\overline{0, m - 1}.
+\pEven[k] = k/m, \, k = \overline{0, m}, \quad \pOdd[k] = (k + \Co)/m, \, k = \overline{0, m - 1}.
 \]
 
 Для $p = \pEven,\ k = \overline{1, m-1}$ определим $\fEven$ как распределение $\fGeneral{k}$ с параметрами
@@ -450,7 +486,18 @@ $\fGeneral[1,i]{s}$ -- вероятность сделать ставку $i$ в
   Таким образом, можно продолжить применение $\fEven$ и $\fOdd$ на последующих шагах игры, тем самым определив стратегию $\fOpt$ в игре $\generalGame{n}{p}$, при $p \in P, \, n \in \mathbb{N}$.
 \end{remark}
 
-Пусть $\lowerBound[n]{p}$ при $p \in P$ --- гарантированный выигрыш первого игрока в игре $\generalGame{n}{p}$ при применении стратегии $\fOpt$.
+Обозначим гарантированный выигрыш первого игрока в игре $\generalGame{n}{p}$ при применении стратегии $\fOpt$ через
+\begin{equation*}
+  \lowerBound[n]{p} = \min_{\tau \in \Tau} \firstPlayerPayoff{n}{p}{\fOpt}{\tau}.
+\end{equation*}
+Из утверждения~\ref{ch1:prop:K1-base} непосредственно следует, что
+\begin{equation}
+  \label{ch1:eq:L_1(p)}
+  \begin{gathered}
+  \lowerBound[1]{\pEven} = 0,\ k = \overline{0,m},\\
+  \lowerBound[1]{\pOdd} = \Co \DCo,\ k = \overline{0,m-1}.
+  \end{gathered}
+\end{equation}
 
 Следуя \cite{domansky07}, опишем рекурсивную структуру игры $\generalGame{n}{p}$.
 Стратегию $\sigma$ первого игрока в $n$-шаговой игре можно представить как $(\sigma_1, \sigma(i),\ i \in I)$, где $\sigma_1$ "--- ход
@@ -464,7 +511,7 @@ $\fGeneral[1,i]{s}$ -- вероятность сделать ставку $i$ в
   \sum_{i \in I} q_i \firstPlayerPayoff{n-1}{p(H|i)}{\sigma(i)}{\tau(i)}.
 \end{equation}
 
-При использовании стратегии $\fOpt$ в силу неравенств (\ref{ch1:eq:lowerBound:inequalities}) и формулы \eqref{ch1:eq:recursive-structure} для гарантированного выигрыша первого игрока в игре $\generalGame{n}{p}$ справедливы формулы
+При использовании стратегии $\fOpt$ в силу \eqref{ch1:eq:L_1(p)} и \eqref{ch1:eq:recursive-structure} для гарантированного выигрыша первого игрока в игре $\generalGame{n}{p}$ справедливы формулы
 \begin{equation}
   \begin{gathered}
     \label{ch1:eq:lowerBound:recurrence:function}
