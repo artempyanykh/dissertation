@@ -1,19 +1,28 @@
 #+STARTUP: content
 * Notation
 
-| Meaning                             | Ch.1.1       | Ch1.2+   | Ch.2         | Ch.3   |
-|-------------------------------------+--------------+----------+--------------+--------|
-| A priori distribution               | \overline{p} | p        | \overline{p} |        |
-| Probability of a state s            | p_s          |          |              |        |
-| First player strategy n-stages      | \sigma       | \sigma   | \sigmav      | \sigma |
-| First player strategy at i^th stage | \sigma_i     | \sigma_i | ?            | ?      |
-| First player strategy at i^th stage |              |          |              |        |
-
+| Meaning                             | Ch.1.1       | Ch1.2+           | Ch.2                  | Ch.3   |
+|-------------------------------------+--------------+------------------+-----------------------+--------|
+| A priori distribution               | \overline{p} | p                | \overline{p}          |        |
+| A priori distribution component     | p(s)         | p(s)             |                       |        |
+| A posteriori distribution           | -            | -                | \p^i                  |        |
+| A posteriori distribution component | -            | p(s\i)           | p^{s\i}               |        |
+| Full probability of action i        | -            | q_i              | \q^i                  |        |
+| Lower bound                         | -            | L^m_n(p)         | L^\beta_n(\p, \sigma) |        |
+| Payoffs                             |              | A^{s,\beta)(i,j) | a^{s,\beta}(i,j)      |        |
+| First player strategy n-stages      | \sigma       | \sigma           | \sigmav               | \sigma |
+| First player strategy at i^th stage | \sigma_i     | \sigma_i         | \sigma_i              | ?      |
+| One-stage strategy                  | -            | \sigma_1         | \sigma                |        |
+| One stage strategy component        | -            | \sigma^s_{1,i}   | \sigma^s_i            |        |
+| Strategy tail                       | -            | \sigma(i)        | \sigmav^i             |        |
+|                                     |              |                  |                       |        |
 
 
 * Synopsis
 ** Chapter 1
-*** TODO Outline the structure of chapter 1
+*** DONE Outline the structure of chapter 1
+CLOSED: [2016-09-16 Fri 14:55]
+*** TODO Add a definition of \tau(p) in Sec.1.7 (random walk) near Theorem 4
 ** Chapter 2
 ** Chapter 3
 ** Misc
@@ -37,6 +46,7 @@ CLOCK: [2016-09-06 Tue 12:58]--[2016-09-06 Tue 13:06] =>  0:08
 *** Chapter 1
 **** TODO Address VV comments
 **** TODO Change notation L^m_n(p) (explicitly add a strategy)
+L^\beta_n(\p, \sigma) во второй главе.
 *** Chapter 2
 **** DONE Finish moving chapter 2 from UBS
 CLOSED: [2016-09-04 Sun 17:15]
