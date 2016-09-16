@@ -12,13 +12,14 @@
 
 
 * Synopsis
-
 ** Chapter 1
-
 *** TODO Outline the structure of chapter 1
 ** Chapter 2
 ** Chapter 3
-
+** Misc
+*** DONE Fix numbering (theorem envs.)
+CLOSED: [2016-09-16 Fri 11:21]
+* 
 
 * Dissertation
 ** Activities
