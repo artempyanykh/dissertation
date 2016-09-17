@@ -52,8 +52,8 @@
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Borel}{\mathscr{B}}
 
-\newcommand{\Co}{\ensuremath{\beta}}
-\newcommand{\DCo}{\ensuremath{{\overline{\beta}}}}
+\newcommand{\Co}{\ensuremath{\todo{\beta}}}
+\newcommand{\DCo}{\ensuremath{\todo{{\overline{\beta}}}}}
 
 \newcommand{\Tau}{\ensuremath{\mathrm{T}}}
 
@@ -63,3 +63,118 @@
 
 \newcommand{\ceil}[1]{\ensuremath{\lceil #1 \rceil}}
 \newcommand{\floor}[1]{\ensuremath{\lfloor #1 \rfloor}}
+
+%% Distributions
+\newcommand{\pd}{\ensuremath{\todo{\overbar{p}}}} %%
+\newcommand{\pc}[1]{\ensuremath{\todo{p(#1)}}} %% component of a distribution
+
+% Posterior distributions
+\newcommand{\pad}[1]{\ensuremath{\todo{p^{#1}}}}
+\newcommand{\pac}[2]{\ensuremath{\todo{p(#1|#2)}}}
+\newcommand{\pacn}[3]{\ensuremath{\todo{p^{#1}(#2|#3)}}}
+
+% Full probabilities
+\newcommand{\qd}{\ensuremath{\todo{q}}}
+\newcommand{\qc}[1]{\ensuremath{\todo{q(#1)}}}
+\newcommand{\qcn}[2]{\ensuremath{\todo{q^{#1}(#2)}}}
+
+% First player strategies
+\newcommand{\sigmar}{\ensuremath{\todo{\sigma}}} % in repeated game
+\DeclareDocumentCommand{\sigmas}{O{} m}{\ensuremath{\todo{\sigma^{#1}_{#2}}}}
+\DeclareDocumentCommand{\sigmasc}{O{} O{1} m}{\ensuremath{\todo{\sigma^{#1}_{#2,#3}}}}
+\newcommand{\sigmara}[1]{\ensuremath{\todo{\sigma(#1)}}}
+\newcommand{\sigmaran}[2]{\ensuremath{\todo{\sigma^{#1}(#2)}}}
+\newcommand{\sigmak}{\ensuremath{\todo{\hat{\sigma_k}}}}
+
+% Second player strategies
+\newcommand{\taur}{\ensuremath{\todo{\tau}}}
+\newcommand{\taus}[1]{\ensuremath{\todo{\tau_{#1}}}}
+\newcommand{\tausc}[2][1]{\ensuremath{\todo{\tau_{#1,#2}}}}
+\newcommand{\taura}[1]{\ensuremath{\todo{\tau(#1)}}}
+
+%% Payoffs
+\DeclareDocumentCommand{\as}{O{s} O{\Co}}{\ensuremath{\todo{a^{#1,#2}}}}
+
+%% Game
+\DeclareDocumentCommand{\theG}{s O{\Co} m}{%
+\todo{%
+\IfBooleanTF {#1}
+{G^{m,#2}_{#3}}
+{G^{#2}_{#3}}%
+}%
+}
+
+%% Values
+\DeclareDocumentCommand{\K}{s O{\Co} m}{%
+\todo{%
+\IfBooleanTF {#1}
+{K^{m,#2}_{#3}}
+{K^{#2}_{#3}}%
+}%
+}
+
+\DeclareDocumentCommand{\V}{s O{\Co} m}{%
+\todo{%
+\IfBooleanTF {#1}
+{V^{m,#2}_{#3}}
+{V^{#2}_{#3}}%
+}%
+}
+
+\DeclareDocumentCommand{\LowV}{s O{\Co} m}{%
+\todo{%
+\IfBooleanTF {#1}
+{\underline{V}^{m,#2}_{#3}}
+{\underline{V}^{#2}_{#3}}%
+}%
+}
+
+\DeclareDocumentCommand{\HighV}{s O{\Co} m}{%
+\todo{%
+\IfBooleanTF {#1}
+{\overbar{V}^{m,#2}_{#3}}
+{\overbar{V}^{#2}_{#3}}%
+}%
+}
+
+%% Guaranteed values
+
+\DeclareDocumentCommand{\H}{s O{\Co} m}{%
+\todo{%
+\IfBooleanTF {#1}
+{H^{m,#2}_{#3}}
+{H^{#2}_{#3}}%
+}%
+}
+
+\DeclareDocumentCommand{\L}{s O{\Co} m}{%
+\todo{%
+\IfBooleanTF {#1}
+{L^{m,#2}_{#3}}
+{L^{#2}_{#3}}%
+}%
+}
+
+% $\sigmas{t}$
+
+% $\sigmasc[s][t]{k}, \sigmasc{k}$
+
+% $\sigmara{i}$
+
+% $\tausc[t]{i}, \tausc{i}, \taura{i}$
+
+% $\as, \as[H], \as[H][\DCo]$
+
+% $\theG{n}, \theG*{n}, \theG[\DCo]{n}, \theG*[\DCo]{n}$
+
+% $\K{n}, \K*{n}, \K[\DCo]{n}, \K*[\DCo]{n}$
+
+% $\V{n}, \V*{n}, \V[\DCo]{n}, \V*[\DCo]{n}$
+
+% $\LowV{n}, \LowV*{n}, \LowV[\DCo]{n}, \LowV*[\DCo]{n}$
+
+% $\HighV{n}, \HighV*{n}, \HighV[\DCo]{n}, \HighV*[\DCo]{n}$
+
+% $\H{n}, \H*{n}, \H[\DCo]{n}, \H*[\DCo]{n}$
+
+% $\L{n}, \L*{n}, \L[\DCo]{n}, \L*[\DCo]{n}$

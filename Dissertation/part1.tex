@@ -1,22 +1,11 @@
 \chapter{Теоретико-игровая модель биржевых торгов с дискретными ставками и двумя состояниями} \label{chapt1} 
 {
 %%% Chapter 1 commands
-\newcommand{\generalGame}[2]{G_{#1}^m\left({#2}\right)}
-\newcommand{\infiniteGame}[1]{G_{\infty}^m\left({#1}\right)}
-\newcommand{\firstPlayerPayoff}[4]{K_{#1}^m\left({#2}, {#3}, {#4}\right)}
-\newcommand{\infiniteFirstPlayerPayoff}[3]{K_{\infty}^m\left({#1}, {#2}, {#3}\right)}
-\newcommand{\gameValue}[2]{V_{#1}^m\left({#2}\right)}
-\newcommand{\infiniteGameValue}[1]{V_{\infty}^m\left({#1}\right)}
 \newcommand{\symm}[1]{\overline{#1}}
-\newcommand{\symmGameExpression}[2][\infty]{G_{#1}^{m, \DCo}\left({#2}\right)}
-\newcommand{\upperBound}[1]{H_{\infty}^m\left({#1}\right)}
-\newcommand{\fGeneral}[2][1]{\sigma_{#1}^{#2}}
 \newcommand{\pEven}[1][k]{p^0_{#1}}
 \newcommand{\pOdd}[1][k]{p^{\beta}_{#1}}
 \newcommand{\fEven}[1][k]{\phi^0_{#1}}
 \newcommand{\fOdd}[1][k]{\phi^{\beta}_{#1}}
-\newcommand{\fOpt}{\sigma^*}
-\newcommand{\lowerBound}[2][\infty]{L_{#1}^m\left({#2}\right)}
 
 В разделе~\ref{ch1:intro} данной работы дано введение в теорию повторяющихся игр с неполной информацией, определены основные термины и понятия.
 В разделе~\ref{ch1:model} приведено описание модели биржевых торгов с дискретными ставками, которая в разделе~\ref{ch1:formal-def} формализована в виде игры в нормальной форме.
@@ -37,7 +26,7 @@
 игре.
 Таким образом, априорные убеждения второго игрока задаются вероятностным вектором
 \[
-  \p = (p(1), p(2), \ldots, p(\kappa)),\quad \sum_{i=1}^\kappa p_i = 1.
+  \pd = (\pc{1}, \pc{2}, \ldots, \pc{\kappa}),\quad \sum_{i=1}^\kappa \pc{i} = 1.
 \]
 
 С данными функциями выигрыша можно связать игры $G_1, G_2, \ldots, G_\kappa$.
@@ -63,7 +52,7 @@
 
 Данная игра с неполной информацией описывается в виде игры в нормальной форме следующим образом.
 Обозначим через $S = \{1, 2, \ldots, \kappa\}$ множество возможных альтернатив или \emph{состояний природы}.
-Перед началом игры ходом случая в соответствии с вероятностным распределением $\p$ выбирается состояние $s \in S$.
+Перед началом игры ходом случая в соответствии с вероятностным распределением $\pd$ выбирается состояние $s \in S$.
 Далее на протяжении $n$ шагов разыгрывается игра $G_s$.
 Первый игрок информирован о результате хода случая, второй игрок "--- нет.
 В остальном правила данной игры совпадают с описанными выше.
@@ -71,9 +60,9 @@
 Пусть $h_t = \left((i_1, j_1), (i_2, j_2), \ldots, (i_t, j_t)\right)$ "--- история ставок игроков после завершения шага $t$.
 Множество все таких $h_t$ обозначим через $H_t$. 
 
-Стратегией первого игрока в такой игре является последовательность ходов (отображений) $\sigma = (\sigma_1, \sigma_2, \ldots, \sigma_n)$, где $\sigma_t = (\sigma^1_t, \sigma^2_t, \ldots, \sigma^\kappa_t)$, и $\sigma^s_t: H_{t-1} \rightarrow \Delta(I)$ "--- смешанная стратегия, зависящая от предыдущих ходов, которую первый игрок использует если ходом случая реализовалось состояние $s$.
+Стратегией первого игрока в такой игре является последовательность ходов (отображений) $\sigmar = (\sigmas{1}, \sigmas{2}, \ldots, \sigmas{n})$, где $\sigmas{t} = (\sigmas[1]{t}, \sigmas[2]{t}, \ldots, \sigmas[\kappa]{t})$, и $\sigmas[s]{t}: H_{t-1} \rightarrow \Delta(I)$ "--- смешанная стратегия, зависящая от предыдущих ходов, которую первый игрок использует если ходом случая реализовалось состояние $s$.
 
-Аналогичным образом определим стратегию второго игрока как последовательность ходов (отображений) $\tau = (\tau_1, \tau_2, \ldots, \tau_n)$, где $\tau_t: H_{t-1} \rightarrow \Delta(I)$ "--- смешанная стратегия, зависящая от предыдущих ходов.
+Аналогичным образом определим стратегию второго игрока как последовательность ходов (отображений) $\taur = (\taus{1}, \taus{2}, \ldots, \taus{n})$, где $\taus{t}: H_{t-1} \rightarrow \Delta(I)$ "--- смешанная стратегия, зависящая от предыдущих ходов.
 Как видно, ход второго игрока на каждом шаге игры зависит только от предыдущих ходов, и не зависит от состояния, в силу того, что второй игрок не информирован о результате хода случая.
 
 Отметим, что, как показано в монографии Аумана, Машлера~\cite{aumann95}, достаточно рассматривать только стратегии, которые зависят лишь от предыдущих ходов первого игрока и не зависят от ходов второго.
@@ -107,20 +96,20 @@
 При рассмотрении модели с произвольным значением $\Co$ цена сделки перестает быть целочисленной, однако интерпретацию дискретности модели в этой постановке можно оставить неизменной, решив проблему нецелой финальной выплаты размера $a$ с помощью случайного механизма, который выберет либо выплату размера $\floor{a}$, либо выплату размера $\ceil{a}$.
 Ожидаемый выигрыш при этом останется неизменным, но свойство дискретности сохранится.
 
-\section{Определение игры $\mathbf{G^m_n(p)}$}\label{ch1:formal-def}
+\section{Определение игры $\mathbf{G^{m,\beta}_n(p)}$}\label{ch1:formal-def}
 
 Определим формально повторяющуюся игру с неполной информацией, отвечающую данному выше описанию. 
 
 Пусть множество состояний рынка $S = \{L, H\}$. Перед началом игры случай выбирает $s \in S $ с вероятностями $P(s=H) = p$ и $P(s=L) = 1 - p$.
-После этого на протяжении $n \leq \infty$ шагов игроки участвуют в игре с матрицей $A^{s,\Co}$, где
+После этого на протяжении $n \leq \infty$ шагов игроки участвуют в игре с матрицей $A^{s,\Co}$, где элементы матрица заданы следующим образом:
 \begin{equation*}
-  A^{L,\Co}(i, j) = \begin{cases}
+  \as[L](i, j) = \begin{cases}
     \DCo i + \Co j, &\, i < j, \\
     0, &\, i = j, \\
     -\Co i - \DCo j, &\, i > j,
   \end{cases}
   \qquad
-  A^{H,\Co}(i, j) = \begin{cases}
+  \as[H](i, j) = \begin{cases}
     \DCo i + \Co j - m, &\, i < j, \\
     0, &\, i = j, \\
     m - \Co i - \DCo j, &\, i > j.
@@ -128,27 +117,26 @@
 \end{equation*}
 
 Стратегией первого игрока в данной игре является последовательность ходов (отображений) 
-$\sigma = (\sigma_1, \sigma_2, \ldots, \sigma_t, \ldots)$, где 
-$\sigma_t: S \times I^{t-1} \rightarrow \Delta(I)$.
+$\sigmar = (\sigmas{1}, \sigmas{2}, \ldots, \sigmas{t}, \ldots)$, где 
+$\sigmas{t}: S \times I^{t-1} \rightarrow \Delta(I)$.
 Таким образом, на каждом шаге торгов первый игрок рандомизирует выбор ставки в зависимости от состояния и предыдущих ставок.
-Как и в работе~\cite{domansky07}, мы ограничимся рассмотрением только тех стратегий $\sigma$, которые гарантируют первому игроку на каждом шаге игры неотрицательный выигрыш.
+Как и в работе~\cite{domansky07}, мы ограничимся рассмотрением только тех стратегий $\sigmar$, которые гарантируют первому игроку на каждом шаге игры неотрицательный выигрыш.
 Множество таких стратегий первого игрока обозначим через $\Sigma$.
 
 Аналогично стратегией второго игрока назовем последовательность ходов (отображений) 
-$\tau = (\tau_1, \tau_2, \ldots, \tau_t, \ldots),$ где 
-$\tau_t: I^{t-1} \rightarrow \Delta(J)$.
+$\taur = (\taus{1}, \taus{2}, \ldots, \taus{t}, \ldots),$ где 
+$\taus{t}: I^{t-1} \rightarrow \Delta(J)$.
 Не имея информации о настоящем состоянии, второй игрок при выборе ставки опирается только на историю ставок инсайдера.
 Множество стратегий второго игрока обозначим через $\Tau$.
 
-Обозначим $\Pi[p, \sigma, \tau]$ вероятностное распределение на $S \times I^n \times J^n$, порожденное ходом случая и смешанными стратегиями $\sigma$ и $\tau$ игроков.
-Также обозначим $\E_{(p,\sigma,\tau)}$ математическое ожидание по мере $\Pi[p, \sigma, \tau]$.
+Обозначим через $\E_{(p,\sigmar,\taur)}$ математическое ожидание по мере, индуцированной на $S \times I^n \times J^n$ ходом случая и смешанными стратегиями $\sigmar$ и $\taur$ игроков.
 
-При применении первым игроком смешанной стратегии $\sigma$, а вторым игроком "--- смешанной стратегии $\tau$, ожидаемый выигрыш первого игрока
+При применении первым игроком смешанной стратегии $\sigmar$, а вторым игроком "--- смешанной стратегии $\taur$, ожидаемый выигрыш первого игрока
 \begin{equation}
   \label{ch1:eq:firstPlayerPayoff}
-  K^{m,\Co}_n(p, \sigma, \tau) = \E_{(p,\sigma,\tau)} \sum_{t=1}^n
+  \K*{n}(p, \sigma, \tau) = \E_{(p,\sigmar,\taur)} \sum_{t=1}^n
   \left(
-    pA^{H,\Co}(i_t^H, j_t) + (1 - p)A^{L,\Co}(i_t^L, j_t)
+    p \as[H](i_t^H, j_t) + (1 - p)\as[L](i_t^L, j_t)
   \right).
 \end{equation}
 
@@ -159,36 +147,34 @@ $\tau_t: I^{t-1} \rightarrow \Delta(J)$.
   Тогда любая ставка $i < m$ будет давать первому игроку отрицательный выигрыш размера $\DCo (i - m)$, и только ставка $m$ даст первому игроку выигрыш равный нулю. 
 \end{remark}
 
-Полученную игру обозначим через $G^{m,\Co}_n(p)$. Ее верхнее и нижнее значения даются формулами
+Полученную игру обозначим через $\theG*{n}(p)$. Ее верхнее и нижнее значения даются формулами
 \begin{equation*}
-  \underline{V}^{m,\Co}_n(p) = \max_{\sigma \in \Sigma} \inf_{\tau \in \Tau}
-  K^{m,\Co}_n(p, \sigma, \tau), \quad
-  \overbar{V}^{m,\Co}_n(p) = \min_{\tau \in \Tau} \sup_{\sigma \in \Sigma}
-  K^{m,\Co}_n(p, \sigma, \tau).
+  \LowV*{n}(p) = \max_{\sigmar \in \Sigma} \inf_{\taur \in \Tau}
+  \K*{n}(p, \sigmar, \taur), \quad
+  \HighV*{n}(p) = \min_{\taur \in \Tau} \sup_{\sigmar \in \Sigma}
+  \K*{n}(p, \sigmar, \taur).
 \end{equation*}
-Если верхнее и нижнее значения совпадают, то игра имеет значение, которое мы обозначим $V^{m,\Co}_n(p)$.
+Если верхнее и нижнее значения совпадают, то игра имеет значение, которое мы обозначим $\V*{n}(p)$.
 
 \begin{remark}
-  В силу того, что игра $G^{m,\Co}_n(p)$ может быть представлена в виде матричной игры большой размерности, существование ее значения следует из основной теоремы матричных игр (\seename~\cite{morozov08}).
+  В силу того, что игра $\theG*{n}(p)$ может быть представлена в виде матричной игры большой размерности, существование ее значения следует из основной теоремы матричных игр (\seename~\cite{morozov08}).
 \end{remark}
 
 Заметим, что имеют место следующие равенства:
 \begin{equation}
   \label{ch1:eq:payoff-symmetry}
-  A^{L,\Co}(i, j) = A^{H,\DCo}(m-i, m-j), \quad
-  A^{H,\Co}(i, j) = A^{L,\DCo}(m-i, m-j).
+  \as[L][\Co](i, j) = \as[H][\DCo](m-i, m-j), \quad
+  \as[H][\Co](i, j) = \as[L][\DCo](m-i, m-j).
 \end{equation}
 
 \begin{remark}
   \label{ch1:rem:symm-payoffs}
-  Определим для заданных стратегий $\sigma,\ \tau$ стратегии $\symm{\sigma}$ и $\symm{\tau}$ таким образом, что для $t$-го шага
-  $\symm{\sigma_t} = (\symm{\sigma^H_t}, \symm{\sigma^L_t})$, где
-  $\symm{\sigma^s_t}=(\sigma^s_{t,m},\ldots,\sigma^s_{t,0}) \in \Delta(I)$, и
-  $\symm{\tau_t} = (\tau_{t,m},\ldots,\tau_{t,0}) \in \Delta(J)$.
-  Из равенств (\ref{ch1:eq:payoff-symmetry}) следует, что выигрыши игроков в играх $G^{m, \Co}_n(p)$ и $G^{m, \DCo}_n(1-p)$ при использовании соответственно стратегий $\sigma,\ \tau$ и $\symm{\sigma},\ \symm{\tau}$ совпадают.
+  Определим для заданных стратегий $\sigmar,\ \taur$ стратегии $\symm{\sigmar}$ и $\symm{\taur}$ таким образом, что для $t$-го шага
+  $\symm{\sigmas{t}} = (\symm{\sigmas[H]{t}}, \symm{\sigmas[L]{t}})$, где
+  $\symm{\sigmas[s]{t}}=(\sigmasc[s][t]{m},\ldots,\sigmasc[s][t]{0}) \in \Delta(I)$, и
+  $\symm{\taus{t}} = (\tausc[t]{m},\ldots,\tausc[t]{0}) \in \Delta(J)$.
+  Из равенств (\ref{ch1:eq:payoff-symmetry}) следует, что выигрыши игроков в играх $\theG*[\Co]{n}(p)$ и $\theG*[\DCo]{n}(1-p)$ при использовании соответственно стратегий $\sigmar,\ \taur$ и $\symm{\sigmar},\ \symm{\taur}$ совпадают.
 \end{remark}
-
-В дальнейшем мы часто будем опускать верхний индекс $\Co$.
 
 \section{Оценка сверху выигрыша первого игрока.}\label{ch1:upper-bound}
 Следуя \cite{domansky07}, рассмотрим чистую стратегию второго игрока $\tau^k, \, k \in J$:
@@ -205,7 +191,7 @@ $\tau_t: I^{t-1} \rightarrow \Delta(J)$.
 
 \begin{proposition}
   \label{ch1:prop:secondPlayerStrategyPayoffs}
-  При применении стратегии $\tau^k$ в игре $\generalGame{n}{p}$ второй игрок гарантирует себе проигрыш не более
+  При применении стратегии $\tau^k$ в игре $\theG*{n}(p)$ второй игрок гарантирует себе проигрыш не более
   \[
     h_n^L(\tau^k) = \sum_{t=0}^{n-1}(k - t - \DCo)^+, \quad h_n^H(\tau^k) =
     \sum_{t=0}^{n-1}(m - k - t - \Co)^+,
@@ -221,7 +207,7 @@ $\tau_t: I^{t-1} \rightarrow \Delta(J)$.
   Проведем доказательство по индукции для $h^L_n(\tau^k)$.
   При $n=1$ справедливо
   \[
-    h^L_1(\tau^k) = \max_{i \in I} A^L(i, k) = \max(0, k - \DCo) = (k - \DCo)^+.
+    h^L_1(\tau^k) = \max_{i \in I} \as[L](i, k) = \max(0, k - \DCo) = (k - \DCo)^+.
   \]
   Предположим, что формула верна при $n \leq N$.
   Пусть $n=N+1$.
@@ -247,7 +233,7 @@ $\tau_t: I^{t-1} \rightarrow \Delta(J)$.
 
 Введем следующую функцию:
 \begin{multline*}
-  \upperBound{p} 
+  \H*{\infty}(p) 
   = \min_{j \in J} \lim_{n \rightarrow \infty}\left(
     ph_n^H(\tau^j) + (1-p)h_n^L(\tau^j)
   \right) = \\
@@ -266,13 +252,13 @@ $\tau_t: I^{t-1} \rightarrow \Delta(J)$.
 Функция $\omega(x, p) = x^2 + x(2\Co - 1 - 2mp)$ достигает минимума по $x \in \R$ в точке $m p - \Co + 1/2$.
 Поэтому при $p \in \left( (k-\DCo)/m, (k+\Co)/m) \right]$ минимум функции $j^2 + j(2\Co - 1 - 2 m p)$ по $j \in J$ достигается при $j = k$ (\seename рис~\ref{ch1:fig:omega(x,p)}).
 
-Таким образом, $\upperBound{p}$ является вогнутой кусочно-линейной функцией, график которой состоит из $m~+~1$ линейных сегментов.
+Таким образом, $\H*{\infty}(p)$ является вогнутой кусочно-линейной функцией, график которой состоит из $m~+~1$ линейных сегментов.
 Она полностью определяется своими значениями в следующих точках (\seename~рис.~\ref{ch1:fig:Hm})
 \begin{gather*}
-  \upperBound{(k+\Co)/m} = \frac{1}{2} \left( (m - (k + \Co))(k + \Co) + \DCo\Co
+  \H*{\infty}((k+\Co)/m) = \frac{1}{2} \left( (m - (k + \Co))(k + \Co) + \DCo\Co
   \right),\enskip
   k = \overline{0, m - 1},\\
-  \upperBound{0} = \upperBound{1} = 0.
+  \H*{\infty}(0) = \H*{\infty}(1) = 0.
 \end{gather*}
 
 \begin{figure}[thb]
@@ -292,120 +278,120 @@ $\tau_t: I^{t-1} \rightarrow \Delta(J)$.
     \draw[thick,dashed] (0.75, -0.1) -- (0.75, 3.2);
     \node[anchor=north] at (0.75, -0.1) {$(k+\Co)/m$};
     
-    \node at (0.55, 2.6) {$H^m_\infty(p)$};
+    \node at (0.55, 2.6) {$\H*{\infty}(p)$};
   \end{tikzpicture}
-  \caption{График функции $H^m_\infty(p)$}
+  \caption{График функции $\H*{\infty}(p)$}
   \label{ch1:fig:Hm}
 \end{figure}
 
 Пусть второй игрок при $p \in \left( (k-\DCo)/m, (k+\Co)/m) \right]$ применяет $\tau^k, \, k = \overline{0, m}$.
-Обозначим эту стратегию через $\tau^*$.
+Обозначим эту стратегию через $\taur^*$.
 Тогда справедлива следующая
 \begin{lemma}
   \label{ch1:lemma:upperBound}
   Зафиксируем вероятность $p \in [0,1]$.
-  Тогда при использовании вторым игроком стратегии $\tau^*$ в игре $\infiniteGame{p}$\textup{,} выигрыш первого игрока ограничен сверху величиной $\upperBound{p}$, т.е.
+  Тогда при использовании вторым игроком стратегии $\taur^*$ в игре $\theG*{\infty}(p)$\textup{,} выигрыш первого игрока ограничен сверху величиной $\H*{\infty}(p)$, т.е.
   \[
-    \max_{\sigma \in \Sigma} \infiniteFirstPlayerPayoff{p}{\sigma}{\tau^*} \leq
-    \upperBound{p}.
+    \max_{\sigmar \in \Sigma} \K*{\infty}(p, \sigmar, \taur^*) \leq \H*{\infty}(p).
   \]
 \end{lemma}
 
 \section{Оценка снизу выигрыша первого игрока}\label{ch1:lower-bound}
-Перейдем к описанию стратегии первого игрока, гарантирующей ему выигрыш не менее $\upperBound{p}$ в игре $\infiniteGame{p}$.
+Перейдем к описанию стратегии первого игрока, гарантирующей ему выигрыш не менее $\H*{\infty}(p)$ в игре $\theG*{\infty}(p)$.
 
 Пусть на первом шаге игры первый игрок выбирает ход %
-$\fGeneral{k} = \left(\fGeneral{H}, \fGeneral{L}\right)$, где %
-$\fGeneral{H} = \left(\fGeneral[1,k]{H}, \fGeneral[1,k+1]{H}\right)$,
-$\fGeneral{L} = \left(\fGeneral[1,k]{L}, \fGeneral[1,k+1]{L}\right)$ и
-$\fGeneral[1,i]{s}$ -- вероятность сделать ставку $i$ в состоянии $s \in S$.
-Применяя $\fGeneral{k}$, инсайдер делает ставки $k$ и $k+1$ с некоторыми заданными вероятностями.
+$\sigmak = \left(\sigmas[H]{1}, \sigmas[L]{1}\right)$, где %
+$\sigmas[H]{1} = \left(\sigmasc[H]{k}, \sigmasc[H]{k+1}\right)$,
+$\sigmas[L]{1} = \left(\sigmasc[L]{k}, \sigmasc[L]{k+1}\right)$ и
+$\sigmasc[s]{i}$ -- вероятность сделать ставку $i$ в состоянии $s \in S$.
+Применяя $\sigmak$, инсайдер делает ставки $k$ и $k+1$ с некоторыми заданными вероятностями.
 
 В дальнейшем будем использовать эквивалентный способ задания хода.
-Для этого определим следующие параметры: полные вероятности использования действий $k$ и $k+1$, равные $q_k$ и $q_{k+1}$ соответственно, а также апостериорные вероятности $p(s|i)$ состояния $s$ при условии, что на предыдущем шаге первый игрок сделал ставку $i$.
-Тогда вероятности $\fGeneral[1,i]{s}$ можно найти по формуле Байеса
+Для этого определим следующие параметры: полные вероятности использования действий $k$ и $k+1$, равные $\qc{k}$ и $\qc{k+1}$ соответственно, а также апостериорные вероятности $\pac{s}{i}$ состояния $s$ при условии, что на предыдущем шаге первый игрок сделал ставку $i$.
+Тогда вероятности $\sigmasc[s]{i}$ можно найти по формуле Байеса
 \[
-  \fGeneral[1,i]{s}~=~p(s|i)q_i/p(s), \: i = k, k + 1.
+  \sigmasc[s]{i} = \pac{s}{i} \qc{i} / \pc{s}, \: i = k, k + 1.
 \]
 
 \begin{proposition}
   \label{ch1:prop:stage-payoff}
-  При использовании $\fGeneral{k}$ первый игрок обеспечивает себе на первом шаге выигрыш
+  При использовании $\sigmak$ первый игрок обеспечивает себе на первом шаге выигрыш
   \begin{equation}
     \label{ch1:eq:lowerPayoffGeneral}
-    \firstPlayerPayoff{1}{p}{\fGeneral{k}}{j} =
+    \K*{1}(p, \sigmak, j) =
     \begin{cases}
-      mp - \Co k - \DCo j - \Co q_{k+1},      & \, j < k,     \\
-      \left(m p(H|k+1) - k - \Co \right) q_{k+1}, & \, j = k,     \\
-      \left(k + \Co - m p(H|k) \right) q_k,       & \, j = k + 1, \\
-      \DCo k + \Co j - mp + \DCo q_{k+1}, & \, j > k + 1.
+      mp - \Co k - \DCo j - \Co \qc{k+1},      & \, j < k,     \\
+      \left(m \pac{H}{k+1} - k - \Co \right) \qc{k+1}, & \, j = k,     \\
+      \left(k + \Co - m \pac{H}{k} \right) \qc{k},       & \, j = k + 1, \\
+      \DCo k + \Co j - m p + \DCo \qc{k+1}, & \, j > k + 1.
     \end{cases}
   \end{equation}
 \end{proposition}
 \begin{proof}
   Пусть $j < k$.
-  Тогда из \eqref{ch1:eq:firstPlayerPayoff} и определения $\fGeneral{k}$ получаем
+  Тогда из \eqref{ch1:eq:firstPlayerPayoff} и определения $\sigmak$ получаем
   \begin{align*}
-    \firstPlayerPayoff{1}{p}{\fGeneral{k}}{j} &=
+    \K*{1}(p, \sigmak, j) &=
     p \left( 
-      \fGeneral[1,k]{H} (m - \Co k - \DCo j) +
-      \fGeneral[1,k+1]{H} (m - \Co (k+1) - \DCo j)
+      \sigmasc[H]{k} (m - \Co k - \DCo j) +
+      \sigmasc[H]{k+1} (m - \Co (k+1) - \DCo j)
     \right) + \\
     &+ (1-p) \left( 
-      \fGeneral[1,k]{L} (- \Co k - \DCo j) +
-      \fGeneral[1,k+1]{L} (- \Co (k+1) - \DCo j)
+      \sigmasc[L]{k} (- \Co k - \DCo j) +
+      \sigmasc[L]{k+1} (- \Co (k+1) - \DCo j)
     \right) = \\
     &=
-    m p (\fGeneral[1,k]{H} + \fGeneral[1,k+1]{H}) -
+    m p (\sigmasc[H]{k} + \sigmasc[H]{k+1}) -
     \left(
-      p (\fGeneral[1,k]{H} + \fGeneral[1,k+1]{H}) +
-      (1-p) (\fGeneral[1,k]{L} + \fGeneral[1,k+1]{L})
+      p (\sigmasc[H]{k} + \sigmasc[H]{k+1}) +
+      (1-p) (\sigmasc[L]{k} + \sigmasc[L]{k+1})
     \right) \times \\ 
     &\times (\Co k + \DCo j) -
-    (p \fGeneral[1,k+1]{H} + (1-p) \fGeneral[1,k+1]{L}) \Co = \\
-    &= mp - \Co k - \DCo j - \Co q_{k+1}.
+    (p \sigmasc[H]{k+1} + (1-p) \sigmasc[L]{k+1}) \Co = \\
+    &= mp - \Co k - \DCo j - \Co \qc{k+1}.
   \end{align*}
   При $j = k$ имеет место равенство
   \begin{align*}
-    \firstPlayerPayoff{1}{p}{\fGeneral{k}}{j} 
+    \K*{1}(p, \sigmak, j) 
     &=
-      p \fGeneral[1,k+1]{H} (m - \Co (k+1) - \DCo k) +
-      (1-p) \fGeneral[1,k+1]{L} (- \Co (k+1) - \DCo k) = \\
-    &= m p \fGeneral[1,k+1]{H} - 
-      (p \fGeneral[1,k+1]{H} + (1-p) \fGeneral[1,k+1]{L}) (\Co (k+1) + \DCo k) =\\
-    &= m p(H|k+1) q_{k+1} - q_{k+1} (\Co (k+1) + \DCo k) = \\
-    &= (m p(H|k+1) - k - \Co) q_{k+1}.
+      p \sigmasc[H]{k+1} (m - \Co (k+1) - \DCo k) +
+      (1-p) \sigmasc[L]{k+1} (- \Co (k+1) - \DCo k) = \\
+    &= m p \sigmasc[H]{k+1} - 
+      (p \sigmasc[H]{k+1} + (1-p) \sigmasc[L]{k+1}) (\Co (k+1) + \DCo k) =\\
+    &= m \pac{H}{k+1} \qc{k+1} - \qc{k+1} (\Co (k+1) + \DCo k) = \\
+    &= (m \pac{H}{k+1} - k - \Co) \qc{k+1}.
   \end{align*}
   При $j=k+1$ находим
   \begin{align*}
-    \firstPlayerPayoff{1}{p}{\fGeneral{k}}{j} 
+    \K*{1}(p, \sigmak, j) 
     &=
-      p \fGeneral[1,k]{H} (\Co (k+1) + \DCo k - m) +
-      (1-p) \fGeneral[1,k]{L} (\Co (k+1) + \DCo k) = \\
-    &= (p \fGeneral[1,k]{H} + (1-p) \fGeneral[1,k]{L}) (\Co (k+1) + \DCo k)
-      - m p \fGeneral[1,k]{H} =\\
-    &= q_k (\Co (k+1) + \DCo k) - m p(H|k) q_k  = \\
-    &= (k + \Co - m p(H|k)) q_k.
+      p \sigmasc[H]{k} (\Co (k+1) + \DCo k - m) +
+      (1-p) \sigmasc[L]{k} (\Co (k+1) + \DCo k) = \\
+    &= (p \sigmasc[H]{k} + (1-p) \sigmasc[L]{k}) (\Co (k+1) + \DCo k)
+      - m p \sigmasc[H]{k} =\\
+    &= \qc{k} (\Co (k+1) + \DCo k) - m \pac{H}{k} \qc{k}  = \\
+    &= (k + \Co - m \pac{H}{k})) \qc{k}.
   \end{align*}
   При $j>k+1$ получаем
   \begin{align*}
-    \firstPlayerPayoff{1}{p}{\fGeneral{k}}{j} &=
-    p \left( 
-      \fGeneral[1,k]{H} (\Co j - \DCo k - m) +
-      \fGeneral[1,k+1]{H} (\Co j - \DCo (k+1) - m)
-    \right) + \\
+    \K*{1}(p, \sigmak, j) 
+    &=
+      p \left( 
+      \sigmasc[H]{k} (\Co j - \DCo k - m) +
+      \sigmasc[H]{k+1} (\Co j - \DCo (k+1) - m)
+      \right) + \\
     &+ (1-p) \left( 
-      \fGeneral[1,k]{L} (\Co j + \DCo k) +
-      \fGeneral[1,k+1]{L} (\Co j + \DCo (k+1))
+      \sigmasc[L]{k} (\Co j + \DCo k) +
+      \sigmasc[L]{k+1} (\Co j + \DCo (k+1))
     \right) = \\
     &= (\DCo k + \Co j)
     \left(
-      p (\fGeneral[1,k]{H} + \fGeneral[1,k+1]{H}) +
-      (1-p) (\fGeneral[1,k]{L} + \fGeneral[1,k+1]{L})
+      p (\sigmasc[H]{k} + \sigmasc[H]{k+1}) +
+      (1-p) (\sigmasc[L]{k} + \sigmasc[L]{k+1})
     \right) - \\
-    &- m p (\fGeneral[1,k]{H} + \fGeneral[1,k+1]{H}) +
-    (p \fGeneral[1,k+1]{H} + (1-p) \fGeneral[1,k+1]{L}) \DCo = \\
-    &= \DCo k + \DCo j - mp + \Co q_{k+1}.
+    &- m p (\sigmasc[H]{k} + \sigmasc[H]{k+1}) +
+    (p \sigmasc[H]{k+1} + (1-p) \sigmasc[L]{k+1}) \DCo = \\
+    &= \DCo k + \DCo j - mp + \Co \qc{k+1}.
   \end{align*}
   Отсюда устанавливаем справедливость \eqref{ch1:eq:lowerPayoffGeneral}.
 \end{proof}
@@ -415,31 +401,31 @@ $\fGeneral[1,i]{s}$ -- вероятность сделать ставку $i$ в
 \pEven[k] = k/m, \, k = \overline{0, m}, \quad \pOdd[k] = (k + \Co)/m, \, k = \overline{0, m - 1}.
 \]
 
-Для $p = \pEven,\ k = \overline{1, m-1}$ определим $\fEven$ как распределение $\fGeneral{k}$ с параметрами
+Для $p = \pEven,\ k = \overline{1, m-1}$ определим $\fEven$ как распределение $\sigmak$ с параметрами
 \begin{align*}
-  q_k = \Co,& \quad p(H|k) = \pOdd[k-1] = (k-1+\Co)/m,\\
-  q_{k+1} = \DCo,& \quad p(H|k + 1) = \pOdd[k] = (k+\Co)/m.
+  \qc{k} = \Co,& \quad \pac{H}{k} = \pOdd[k-1] = (k-1+\Co)/m,\\
+  \qc{k+1} = \DCo,& \quad \pac{H}{k+1} = \pOdd[k] = (k+\Co)/m.
 \end{align*}
 Покомпонентно оно записывается как
 \begin{gather*}
-  \fGeneral[1,k]{H} = \frac{(k-\DCo)\Co}{k},\quad 
-  \fGeneral[1,k+1]{H} = \frac{(k+\Co)\DCo}{k},\\
-  \fGeneral[1,k]{L} = \frac{(m - k + \DCo)\Co}{m - k},\quad 
-  \fGeneral[1,k+1]{L} = \frac{(m - k - \Co)\DCo}{m - k}.
+  \sigmasc[H]{k} = \frac{(k-\DCo)\Co}{k},\quad 
+  \sigmasc[H]{k+1} = \frac{(k+\Co)\DCo}{k},\\
+  \sigmasc[L]{k} = \frac{(m - k + \DCo)\Co}{m - k},\quad 
+  \sigmasc[L]{k+1} = \frac{(m - k - \Co)\DCo}{m - k}.
 \end{gather*}
 Дополнительно определим $\fEven[0]$ как распределение, состоящее в применении ставки $0$ с вероятностью $1$, а $\fEven[m]$ -- как распределение, состоящее в применении ставки $m$ с вероятностью $1$.
 
-Аналогично для $p = \pOdd,\ k = \overline{0, m-1}$ определим $\fOdd$ как распределение $\fGeneral{k}$ с параметрами
+Аналогично для $p = \pOdd,\ k = \overline{0, m-1}$ определим $\fOdd$ как распределение $\sigmak$ с параметрами
 \begin{align*}
-  q_k = \DCo,& \quad p(H|k) = \pEven[k] = k/\Co,\\
-  q_{k+1} = \Co,& \quad p(H|k + 1) = \pEven[k+1] = (k+1)/\Co.
+  \qc{k} = \DCo,& \quad \pac{H}{k} = \pEven[k] = k/\Co,\\
+  \qc{k+1} = \Co,& \quad \pac{H}{k+1} = \pEven[k+1] = (k+1)/\Co.
 \end{align*}
 Покомпонентно оно записывается как
 \begin{gather*}
-  \fGeneral[1,k]{H} = \frac{k\DCo}{k + \Co},\quad 
-  \fGeneral[1,k+1]{H} = \frac{(k+1)\Co}{k + \Co},\\
-  \fGeneral[1,k]{L} = \frac{(m - k)\DCo}{m - k - \Co},\quad 
-  \fGeneral[1,k+1]{L} = \frac{(m - k - 1)\Co}{m - k - \Co}.
+  \sigmasc[H]{k} = \frac{k\DCo}{k + \Co},\quad 
+  \sigmasc[H]{k+1} = \frac{(k+1)\Co}{k + \Co},\\
+  \sigmasc[L]{k} = \frac{(m - k)\DCo}{m - k - \Co},\quad 
+  \sigmasc[L]{k+1} = \frac{(m - k - 1)\Co}{m - k - \Co}.
 \end{gather*}
 
 \begin{proposition}
@@ -449,16 +435,16 @@ $\fGeneral[1,i]{s}$ -- вероятность сделать ставку $i$ в
     \label{ch1:eq:lowerBound:inequalities}
     \begin{gathered}
       \min_{j \in J}
-      \firstPlayerPayoff{1}{\pEven}{\fEven}{j} = 0,\ k = \overline{0, m}, \\
+      \K*{1}(\pEven, \fEven, j) = 0,\ k = \overline{0, m}, \\
       \min_{j \in J}
-      \firstPlayerPayoff{1}{\pOdd}{\fOdd}{j} = \DCo\Co,\ k = \overline{0, m-1}.
+      \K*{1}(\pOdd, \fOdd, j) = \DCo\Co,\ k = \overline{0, m-1}.
     \end{gathered}
   \end{equation}
 \end{proposition}
 \begin{proof}
   Подставив полные вероятности действий и апостериорные вероятности состояний в \eqref{ch1:eq:lowerPayoffGeneral}, получим для $p = \pEven,\ k = \overline{1, m-1}$
   \begin{equation*}
-    \firstPlayerPayoff{1}{\pEven}{\fEven}{j} = \begin{cases}
+    \K*{1}(\pEven, \fEven, j) = \begin{cases}
       k - \Co k - \DCo j - \Co \DCo \geq \DCo \DCo,\ & j < k,\\
       (k + \Co - k - \Co) \DCo = 0,\ & j = k,\\
       (k + \Co - k) \Co = \Co \Co,\ & j = k+1,\\
@@ -468,7 +454,7 @@ $\fGeneral[1,i]{s}$ -- вероятность сделать ставку $i$ в
 
   При $p = \pOdd[k],\ k = \overline{1,m-1}$ получаем
   \begin{equation*}
-    \firstPlayerPayoff{1}{\pOdd}{\fOdd}{j} = \begin{cases}
+    \K*{1}(\pOdd, \fOdd, j) = \begin{cases}
       k + \Co - \Co k - \DCo j - \Co^2 > \Co \DCo,\ & j < k,\\
       (k + 1 - k - \Co) \Co = \Co \DCo,\ & j = k,\\
       (k + \Co - k) \DCo = \Co \DCo,\ & j = k+1,\\
@@ -477,60 +463,62 @@ $\fGeneral[1,i]{s}$ -- вероятность сделать ставку $i$ в
   \end{equation*}
   
 
-  Справедливость неравенства $\min_{j \in J} \firstPlayerPayoff{1}{\pEven}{\fEven}{j} \geq 0,\ k \in \{0, m\}$, то есть, соответствующего значению $p \in \{0, 1\}$, очевидна.
+  Справедливость неравенства $\min_{j \in J} \K*{1}(\pEven, \fEven, j) \geq 0,\ k \in \{0, m\}$, то есть, соответствующего значению $p \in \{0, 1\}$, очевидна.
 \end{proof}
 
 \begin{remark}
   \label{ch1:remark:posterior-probs}
   Если $p \in P$, то при применении инсайдером на первом шаге игры $\fEven$ и $\fOdd$, значения апостериорных вероятностей также принадлежат $P$.
-  Таким образом, можно продолжить применение $\fEven$ и $\fOdd$ на последующих шагах игры, тем самым определив стратегию $\fOpt$ в игре $\generalGame{n}{p}$, при $p \in P, \, n \in \mathbb{N}$.
+  Таким образом, можно продолжить применение $\fEven$ и $\fOdd$ на последующих шагах игры, тем самым определив стратегию $\sigmar^*$ в игре $\theG*{n}(p)$, при $p \in P, \, n \in \mathbb{N}$.
 \end{remark}
 
-Обозначим гарантированный выигрыш первого игрока в игре $\generalGame{n}{p}$ при применении стратегии $\fOpt$ через
+Обозначим гарантированный выигрыш первого игрока в игре $\theG*{n}(p)$ при применении стратегии $\sigmar$ через
 \begin{equation*}
-  \lowerBound[n]{p} = \min_{\tau \in \Tau} \firstPlayerPayoff{n}{p}{\fOpt}{\tau}.
+  \L*{n}(p, \sigmar) = \min_{\taur \in \Tau} \K*{n}(p, \sigmar, \taur).
 \end{equation*}
 Из утверждения~\ref{ch1:prop:K1-base} непосредственно следует, что
 \begin{equation}
   \label{ch1:eq:L_1(p)}
   \begin{gathered}
-  \lowerBound[1]{\pEven} = 0,\ k = \overline{0,m},\\
-  \lowerBound[1]{\pOdd} = \Co \DCo,\ k = \overline{0,m-1}.
+  \L*{1}(\pEven, \fEven) = 0,\ k = \overline{0,m},\\
+  \L*{1}(\pOdd, \fOdd) = \Co \DCo,\ k = \overline{0,m-1}.
   \end{gathered}
 \end{equation}
 
-Следуя \cite{domansky07}, опишем рекурсивную структуру игры $\generalGame{n}{p}$.
-Стратегию $\sigma$ первого игрока в $n$-шаговой игре можно представить как $(\sigma_1, \sigma(i),\ i \in I)$, где $\sigma_1$ "--- ход
-первого игрока на первом шаге игры, а $\sigma(i)$ "--- стратегия в игре продолжительности $n-1$, зависящая от ставки $i$ на первом шаге.
-Аналогично стратегию второго игрока можно представить как $(\tau_1, \tau(i),\ i \in I)$.
+Следуя \cite{domansky07}, опишем рекурсивную структуру игры $\theG*{n}(p)$.
+Стратегию $\sigmar$ первого игрока в $n$-шаговой игре можно представить как
+$(\sigmas{1}, \sigmara{i},\ i \in I)$, где $\sigmas{1}$ "--- ход первого игрока на первом шаге игры, а $\sigmara{i}$ "--- стратегия в игре продолжительности $n-1$, зависящая от ставки $i$ на первом шаге.
+Аналогично стратегию второго игрока можно представить как $(\taus{1}, \taura{i},\ i \in I)$.
 Тогда для функции выигрыша справедливо следующее представление
 \begin{equation}
   \label{ch1:eq:recursive-structure}
-  \firstPlayerPayoff{n}{p}{\sigma}{\tau} = 
-  \firstPlayerPayoff{1}{p}{\sigma_1}{\tau_1} + 
-  \sum_{i \in I} q_i \firstPlayerPayoff{n-1}{p(H|i)}{\sigma(i)}{\tau(i)}.
+  \K*{n}(p, \sigmar, \taur) = 
+  \K*{1}(p, \sigmas{1}, \taus{1}) + 
+  \sum_{i \in I} \qc{i} \K*{n-1}(\pac{H}{i}, \sigmara{i}, \taura{i}).
 \end{equation}
 
-При использовании стратегии $\fOpt$ в силу \eqref{ch1:eq:L_1(p)} и \eqref{ch1:eq:recursive-structure} для гарантированного выигрыша первого игрока в игре $\generalGame{n}{p}$ справедливы формулы
+При использовании стратегии $\sigmar^*$ в силу \eqref{ch1:eq:L_1(p)} и \eqref{ch1:eq:recursive-structure} для гарантированного выигрыша первого игрока в игре $\theG*{n}(p)$ справедливы формулы
 \begin{equation}
-  \begin{gathered}
+  \begin{aligned}
     \label{ch1:eq:lowerBound:recurrence:function}
-    \lowerBound[n]{(k + \Co)/m} = \DCo\Co + \DCo\lowerBound[n-1]{k/m} +
-    \Co\lowerBound[n-1]{(k + 1)/m}, \: k = \overline{0, m-1}, \\
+    \L*{n}(\frac{k + \Co}{m}, \sigmar^*)
+    = \DCo\Co &+ \DCo\L*{n-1}(\frac{k}{m}, \sigmaran{*}{k}) + \\
+    &+\Co\L*{n-1}(\frac{k+1}{m}, \sigmaran{*}{k+1}), \: k = \overline{0, m-1}, \\
     % 
-    \lowerBound[n]{k/m} = \Co\lowerBound[n-1]{(k - 1 + \Co)/m} +
-    \DCo\lowerBound[n-1]{(k + \Co)/m}, \: k = \overline{1, m-1}, \\
+    \L*{n}(\frac{k}{m}, \sigmar^*)
+    &= \Co\L*{n-1}(\frac{k - 1 + \Co}{m}, \sigmaran{*}{k}) + \\
+    &+ \DCo\L*{n-1}(\frac{k + \Co}{m}, \sigmaran{*}{k+1}), \: k = \overline{1, m-1}, \\
     % 
-    \lowerBound[n]{0} = \lowerBound[n]{1} = 0.
-  \end{gathered}
+    \L*{n}(0, \sigmar^*) &= \L*{n}(1, \sigmar^*) = 0.
+  \end{aligned}
 \end{equation}
 
-Так как $\lowerBound[n]{p}$ не убывает по $n$ и ограничена сверху, то устремив $n$ к бесконечности, получим нижнюю оценку $\lowerBound{p}$ выигрыша первого игрока в игре $\infiniteGame{p}, \, p \in P$.
+Так как $\L*{n}(p, \sigmar^*)$ не убывает по $n$ и ограничена сверху, то устремив $n$ к бесконечности, получим нижнюю оценку $\L*{\infty}(p)$ выигрыша первого игрока в игре $\theG*{\infty}(p), \, p \in P$.
 
 Введем следующие обозначения:
 \begin{align*}
-  L_{2k} = \lowerBound{k/m}, & \quad k = \overline{0, m},\\
-  L_{2k+1} = \lowerBound{(k+\Co)/m)}, & \quad k = \overline{0, m-1}.
+  L_{2k} = \L*{\infty}(k/m), & \quad k = \overline{0, m},\\
+  L_{2k+1} = \L*{\infty}((k+\Co)/m), & \quad k = \overline{0, m-1}.
 \end{align*}
 Тогда справедливы формулы
 \begin{equation}
@@ -678,9 +666,9 @@ $\fGeneral[1,i]{s}$ -- вероятность сделать ставку $i$ в
   следующими формулами\textup{:}
   \begin{gather}
     \label{ch1:eq:recurrence-solution:odd}
-    L_{2k+1} = \frac{(m - k - \Co)(k + \Co) + \DCo\Co}{2} = \upperBound{\frac{k+\Co}{m}}, \quad k = \overline{0, m-1},\\
+    L_{2k+1} = \frac{(m - k - \Co)(k + \Co) + \DCo\Co}{2} = \H*{\infty}(( k+\Co )/m), \quad k = \overline{0, m-1},\\
     \label{ch1:eq:recurrence-solution:even}
-    L_{2k} = \frac{k (m-k)}{2} = \upperBound{\frac{k}{m}}, \quad k = \overline{0, m}.
+    L_{2k} = \frac{k (m-k)}{2} = \H*{\infty}( k/m ), \quad k = \overline{0, m}.
   \end{gather}
 \end{proposition}
 \begin{proof}
@@ -688,10 +676,10 @@ $\fGeneral[1,i]{s}$ -- вероятность сделать ставку $i$ в
   \begin{equation*}
     L_{2k-1} = \gamma_{2k}\gamma_{2k+1}L_{2k+1} + \gamma_{2k}\delta_{2k+1} + \delta_{2k}, \, k = \overline{1, m-1}.
   \end{equation*}
-  Покажем, что подстановкой $\upperBound{(k+\Co)/m}$ вместо $L_{2k+1}$ это равенство обращается в тождество.
+  Покажем, что подстановкой $\H*{\infty}((k+\Co)/m)$ вместо $L_{2k+1}$ это равенство обращается в тождество.
   Для первого слагаемого имеем
   \begin{align*}
-    &2 \gamma_{2k} \gamma_{2k+1} \upperBound{(k+\Co)/m} =
+    &2 \gamma_{2k} \gamma_{2k+1} \H*{\infty}( (k+\Co)/m ) =
       \frac{k-1+\Co}{k+\Co} ((m-k-\Co)(k+\Co) + \DCo \Co) = \\
     &=
       (m-k-\Co)(k-1+\Co) + \DCo \Co - \frac{\DCo\Co}{k+\Co} = \\
@@ -707,7 +695,7 @@ $\fGeneral[1,i]{s}$ -- вероятность сделать ставку $i$ в
   \end{align*}
   Отсюда получаем
   \begin{align*}
-    &\gamma_{2k} \gamma_{2k+1} \upperBound{(k+\Co)/m} + \gamma_{2k} \delta_{2k+1} + \delta_{2k} = \\
+    &\gamma_{2k} \gamma_{2k+1} \H*{\infty}( (k+\Co)/m ) + \gamma_{2k} \delta_{2k+1} + \delta_{2k} = \\
     &= \frac{1}{2}\biggl(
     (m-(k-1+\Co))(k-1+\Co) -
     (k-1+\Co) + \DCo \Co - \frac{\DCo\Co}{k+\Co} + \\
@@ -716,12 +704,12 @@ $\fGeneral[1,i]{s}$ -- вероятность сделать ставку $i$ в
     \frac{1}{2} \left(
     (m-(k-1+\Co))(k-1+\Co) + \DCo\Co
     \right) =\\
-    &= \upperBound{(k-1+\Co)/m}.
+    &= \H*{\infty}( (k-1+\Co)/m ).
   \end{align*}
   Справедливость \eqref{ch1:eq:recurrence-solution:odd} установлена.
   Далее, имеем
   \begin{align*}
-    2 \upperBound{(k-1+\Co)/m} 
+    2 \H*{\infty}( (k-1+\Co)/m ) 
     &= (m-k-\Co+1)(k-1+\Co) = \\
     &= (m-k-\Co)(k+\Co) - m + 2k + \Co - \DCo.
   \end{align*}
@@ -734,22 +722,22 @@ $\fGeneral[1,i]{s}$ -- вероятность сделать ставку $i$ в
   Таким образом, установлена справедливость \eqref{ch1:eq:recurrence-solution:even}.
 \end{proof}
 
-Итак, мы определили функцию $\lowerBound{p}$ при $p \in P$.
+Итак, мы определили функцию $\L*{\infty}(p)$ при $p \in P$.
 Для $p \in [0, 1] \setminus P$ стратегия инсайдера основана на применении выпуклой комбинации стратегий для крайних точек интервала, в котором находится $p$.
 
 Для $p = \lambda \pOdd + (1-\lambda) \pEven[k+1],\ \lambda \in (0, 1)$ обозначим через $\lambda\fOdd[k] + (1-\lambda)\fEven[k+1]$ распределение, при котором первый игрок рандомизирует выбор ставок $k, k+1, k+2$ с параметрами
 \begin{align*}
-  q_k = \lambda\DCo, &\quad p(H|k) = \pEven,\\
-  q_{k+1} = \Co, &\quad p(H|k+1) = \lambda \pEven[k+1] + (1-\lambda) \pOdd,\\
-  q_{k+2} = (1-\lambda)\DCo, &\quad p(H|k+2) = \pOdd[k+1].
+  \qc{k} = \lambda\DCo, &\quad \pac{H}{k} = \pEven,\\
+  \qc{k+1} = \Co, &\quad \pac{H}{k+1} = \lambda \pEven[k+1] + (1-\lambda) \pOdd,\\
+  \qc{k+2} = (1-\lambda)\DCo, &\quad \pac{H}{k+2} = \pOdd[k+1].
 \end{align*}
 
 Для $p = \lambda \pEven + (1-\lambda) \pOdd,\ \lambda \in (0, 1)$ через $\lambda\fEven + (1-\lambda)\fOdd$ обозначим распределение, при котором первый игрок рандомизирует выбор ставок $k$ и $k+1$ с параметрами
 \begin{gather*}
-  q_k = \lambda\Co + (1-\lambda)(1-\Co),\enskip
-  p(H|k) = \frac{\lambda\Co}{q_k}\pOdd[k-1] + \frac{(1-\lambda)(1-\Co)}{q_k} \pEven,\\
-  q_{k+1} = \lambda(1-\Co) + (1-\lambda)\Co,\enskip
-  p(H|k+1) = \frac{\lambda(1-\Co)}{q_{k+1}}\pOdd[k] + \frac{(1-\lambda)\Co}{q_{k+1}}\pEven[k+1].
+  \qc{k} = \lambda\Co + (1-\lambda)(1-\Co),\enskip
+  \pac{H}{k} = \frac{\lambda\Co}{\qc{k}}\pOdd[k-1] + \frac{(1-\lambda)(1-\Co)}{\qc{k}} \pEven,\\
+  \qc{k+1} = \lambda(1-\Co) + (1-\lambda)\Co,\enskip
+  \pac{H}{k+1} = \frac{\lambda(1-\Co)}{\qc{k+1}}\pOdd[k] + \frac{(1-\lambda)\Co}{\qc{k+1}}\pEven[k+1].
 \end{gather*}
 
 \begin{proposition}
@@ -757,43 +745,46 @@ $\fGeneral[1,i]{s}$ -- вероятность сделать ставку $i$ в
   При $\lambda \in (0, 1), \, k = \overline{0, m-1},$ при использовании распределений $\lambda\fEven + (1-\lambda)\fOdd$ и $\lambda\fOdd[k] + (1-\lambda)\fEven[k+1]$ для одношагового гарантированного выигрыша первого игрока верны оценки
   \begin{align*}
     \min_{j \in J}
-    \firstPlayerPayoff{1}{%
-    \lambda \pEven + (1-\lambda) \pOdd}{%
-    \lambda \fEven + (1-\lambda) \fOdd}{%
-    j}
+    \K*{1}(%
+    \lambda \pEven + (1-\lambda) \pOdd,\
+    \lambda \fEven + (1-\lambda) \fOdd,\
+    j)
     &\geq \DCo \Co (1-\lambda), \\
     % 
     \min_{j \in J}
-    \firstPlayerPayoff{1}{%
-    \lambda \pOdd + (1-\lambda) \pEven[k+1]}{%
-    \lambda \fOdd + (1-\lambda) \fEven[k+1]}{%
-    j}
+    \K*{1}(%
+    \lambda \pOdd + (1-\lambda) \pEven[k+1],\
+    \lambda \fOdd + (1-\lambda) \fEven[k+1],\
+    j)
     &\geq \DCo \Co \lambda.
   \end{align*}
 \end{proposition}
 \begin{proof}
-  Из \eqref{ch1:eq:firstPlayerPayoff} находим, что для произвольной одношаговой стратегии $\sigma$ с параметрами $(q_i, p(H|i),\ i \in I)$ выполняется
+  Из \eqref{ch1:eq:firstPlayerPayoff} находим, что для произвольной одношаговой стратегии $\sigmar$ с параметрами $(\qc{i}, \pac{H}{i},\ i \in I)$ выполняется
   \begin{align*}
-    \firstPlayerPayoff{1}{p}{\sigma}{j} 
-    &= \sum_{i \in I} p \sigma^H_i A^H(i, j) + (1-p) \sigma^L_i A^L(i, j) = \\
-    &= \sum_{i \in I} q_i (p(H | i) a^H(i, j) + (1-p(H | i)) a^L(i, j)).
+    \K*{1}(p, \sigma, j) 
+    &= \sum_{i \in I} p \sigmas[H]{i} \as[H](i, j) + (1-p) \sigmas[L]{i} \as[L](i, j) = \\
+    &= \sum_{i \in I} \qc{i} (\pac{H}{i} \as[H](i, j) + (1-\pac{H}{i}) \as[L](i, j)).
   \end{align*}
   
-  Далее, пусть априорной вероятности $p_1 \in [0, 1]$ отвечает одношаговая стратегия $\sigma^1$ с параметрами $(q^1_i, p^1(H|i),\ i \in I)$, а априорной вероятности $p_2 \in [0, 1]$, отвечает стратегия $\sigma^2$ с параметрами $(q^2_i, p^2(H|i),\ i \in I)$.
-  Определим для $p = \lambda p_1 + (1-\lambda) p_2$ одношаговую стратегию $\sigma^c$ с параметрами
+  Далее, пусть априорной вероятности $p_1 \in [0, 1]$ отвечает одношаговая стратегия $\sigmar^1$ с параметрами $(\qcn{1}{i}, \pacn{1}{H}{i},\ i \in I)$, а априорной вероятности $p_2 \in [0, 1]$, отвечает стратегия $\sigmar^2$ с параметрами $(\qcn{2}{i}, \pacn{2}{H}{i},\ i \in I)$.
+  Определим для $p = \lambda p_1 + (1-\lambda) p_2$ одношаговую стратегию $\sigmar^c$ с параметрами
   \begin{equation*}
-    q^c_i = \lambda q^1_i + (1-\lambda) q^2_i, \enskip
-    p^c(H|i) = \frac{\lambda q^1_i p^1(H|i) + (1-\lambda) q^2_i p^2(H|i)}{q^c_i}.
+    \qcn{c}{i}_i = \lambda \qcn{1}{i} + (1-\lambda) \qcn{2}{i}, \enskip
+    \pacn{c}{H}{i} = \frac{\lambda \qcn{1}{i} \pacn{1}{H}{i} + (1-\lambda) \qcn{2}{i} \pacn{2}{H}{i}}{\qcn{c}{i}}.
   \end{equation*}
   Одношаговый выигрыш при применении такой стратегии в игре с априорной вероятностью $p = \lambda p_1 + (1-\lambda) p_2$ равен
   \begin{multline*}
-    K^m_1(\lambda p_1 + (1-\lambda) p_2, \sigma^c, j) = \sum_{i \in I} q^c_i \biggl(
-     \frac{\lambda q^1_i p^1(H|i) + (1-\lambda) q^2_i p^2(H|i)}{q^c_i} a^H(i, j) + \\
-    + \frac{\lambda q^1_i (1-p^1(H|i)) + (1-\lambda) q^2_i (1-p^2(H|i))}{q^c_i} a^L(i, j)
+    \K*{1}(\lambda p_1 + (1-\lambda) p_2, \sigmar^c, j) = \sum_{i \in I} \qcn{c}{i} \biggl(
+    \frac{\lambda \qcn{1}{i} \pacn{1}{H}{i}
+      + (1-\lambda) \qcn{2}{i} \pacn{2}{H}{i}}{\qcn{c}{i}} \times \\
+    \times \as[H](i, j)
+    + \frac{\lambda \qcn{1}{i} (1-\pacn{1}{H}{i})
+      + (1-\lambda) \qcn{2}{i} (1-\pacn{2}{H}{i})}{\qcn{c}{i}} \as[L](i, j)
      \biggr) = \\
-    = \lambda \sum_{i \in I} q^1_i (p^1(H|i) a^H(i, j) + (1-p^1(H|i)) a^L(i, j)) + \\
-    + (1-\lambda) \sum_{i \in I} q^2_i (p^2(H|i) a^H(i, j) + (1-p^2(H|i)) a^L(i, j)) = \\
-    = \lambda K^m_1(p_1, \sigma^1, j) + (1-\lambda) K^m(p_2, \sigma^2, j).
+    = \lambda \sum_{i \in I} \qcn{1}{i} (\pacn{1}{H}{i} \as[H](i, j) + (1-\pacn{1}{H}{i}) \as[L](i, j)) + \\
+    + (1-\lambda) \sum_{i \in I} \qcn{2}{i} (\pacn{2}{H}{i} \as[H](i, j) + (1-\pacn{2}{H}{i}) \as[L](i, j)) = \\
+    = \lambda \K*{1}(p_1, \sigmar^1, j) + (1-\lambda) \K*{1}(p_2, \sigmar^2, j).
   \end{multline*}
   
   Нетрудно проверить, что определенные выше распределения $\lambda \fOdd + (1-\lambda) \fEven[k+1]$ и $\lambda \fEven + (1-\lambda) \fOdd$ отвечают именно таким комбинациям соответствующих стратегий.
@@ -801,73 +792,76 @@ $\fGeneral[1,i]{s}$ -- вероятность сделать ставку $i$ в
 \end{proof}
 
 \begin{remark}
-  Одношаговая стратегия $\sigma^c$ из утверждения~\ref{ch1:prop:first:combination:step} не является линейной комбинацией одношаговых стратегий $\sigma^1$ и $\sigma^2$ в смысле покомпонентного равенства:
+  Одношаговая стратегия $\sigmar^c$ из утверждения~\ref{ch1:prop:first:combination:step} не является линейной комбинацией одношаговых стратегий $\sigmar^1$ и $\sigmar^2$ в смысле покомпонентного равенства:
   \[
     \sigma^{c,H}_i \neq \lambda \sigma^{1,H}_i + (1-\lambda) \sigma^{2,H}_i,\ i \in I.
   \]
 \end{remark}
 
-Стратегию $\sigma^c$ из утверждения~\ref{ch1:prop:first:combination:step} можно определить для игры $\generalGame{n}{p},\ n \in \N$ произвольной продолжительности, рекурсивно продолжив ее применение на последующих шагах игры для соответствующих значений апостериорных вероятностей.
+Пусть $\sigmar^*$ для $p \in [0,1] \setminus P$ состоит в применении $\sigmar^c$ из утверждения~\ref{ch1:prop:first:combination:step}, причем на последующих шагах игры $\theG*{n}(p),\ n \in \N$ одношаговая стратегия $\sigmar^c$ рекурсивно примененяется для соответствующих значений апостериорных вероятностей.
 
 \begin{proposition}
   \label{ch1:prop:first:combination:game}
-  При $\lambda \in (0, 1), \, k = \overline{0, m-1}$, и использовании первым игроком стратегии $\sigma^c$ для его гарантированного выигрыша в игре $\infiniteGame{p}$ справедливы равенства
+  При $\lambda \in (0, 1), \, k = \overline{0, m-1}$, и использовании первым игроком стратегии $\sigmar^*$ для его гарантированного выигрыша в игре $\theG*{\infty}(p)$ справедливы равенства
   \begin{align*}
-    \lowerBound{\lambda \pEven + (1-\lambda) \pOdd}      
+    \L*{\infty}(\lambda \pEven + (1-\lambda) \pOdd)      
     &= 
-      \lambda \lowerBound{\pEven} + (1-\lambda) \lowerBound{\pOdd}, \\
-    \lowerBound{\lambda \pOdd + (1-\lambda) \pEven[k+1]} 
-    &= \lambda \lowerBound{\pOdd} + (1-\lambda) \lowerBound{\pEven}.
+      \lambda \L*{\infty}(\pEven) + (1-\lambda) \L*{\infty}(\pOdd), \\
+    \L*\infty(\lambda \pOdd + (1-\lambda) \pEven[k+1]) 
+    &= \lambda \L*{\infty}( \pOdd, \sigmar^* ) + (1-\lambda) \L*{\infty}(\pEven).
   \end{align*}
 \end{proposition}
 \begin{proof}
-  Пусть $p = \lambda \pOdd + (1-\lambda) \pEven[k+1]$, где $k = \overline{0, m - 2}, \, \lambda \in (0, 1)$.
+  Пусть $p = \lambda \pOdd + (1-\lambda) \pEven[k+1],\ k = \overline{0, m - 2}, \, \lambda \in (0, 1)$.
   Тогда по аналогии с \eqref{ch1:eq:lowerBound:recurrence:function} выписывается следующая рекуррентная формула:
-  \begin{equation*}
-    \lowerBound[n]{p} = \DCo \Co \lambda + \lambda \DCo
-    \lowerBound[n-1]{\pEven} + (1-\lambda) \DCo \lowerBound[n-1]{\pOdd[k+1]} +
-    \Co \lowerBound[n-1]{(1-\lambda) \pOdd + \lambda \pEven[k+1]},
-  \end{equation*}
+  \begin{align*}
+    \L*{n}(p, \sigmar^*)
+    &= \DCo \Co \lambda +
+      \lambda \DCo \L*{n-1}(\pEven, \sigmaran{*}{k}) +
+      (1-\lambda) \DCo \L*{n-1}(\pOdd[k+1], \sigmaran{*}{k+2}) + \\
+    &+ \Co \L*{n-1}((1-\lambda) \pOdd + \lambda \pEven[k+1], \sigmaran{*}{k+1}),
+  \end{align*}
   откуда предельным переходом при $n \rightarrow \infty$ получаем
   \begin{equation}
     \label{ch1:eq:prop:L(comb)}
     \begin{aligned}
-    \lowerBound{p} 
+    \L*{\infty}(p) 
     &= \DCo \Co \lambda +
-    \lambda \DCo \lowerBound{\pEven} +
-    (1-\lambda) \DCo \lowerBound{\pOdd[k+1]} + \\
-    &+ \Co \lowerBound{(1-\lambda) \pOdd + \lambda \pEven[k+1]}.
+    \lambda \DCo \L*{\infty}(\pEven) +
+    (1-\lambda) \DCo \L*{\infty}(\pOdd[k+1]) + \\
+    &+ \Co \L*{\infty}( (1-\lambda) \pOdd + \lambda \pEven[k+1] ).
     \end{aligned}
   \end{equation}
   
-  Так как $(1-\lambda)\pOdd + \lambda \pEven[k+1] \in (\pOdd, \pEven[k+1])$, то для $\lowerBound{(1-\lambda)\pOdd + \lambda \pEven[k+1]}$ справедливо аналогичное представление:
+  Так как $(1-\lambda)\pOdd + \lambda \pEven[k+1] \in (\pOdd, \pEven[k+1])$, то для
+  $\L*{\infty}( (1-\lambda)\pOdd + \lambda \pEven[k+1] )$ справедливо аналогичное представление:
   \begin{align*}
-    \lowerBound{(1-\lambda)\pOdd + \lambda \pEven[k+1]} 
+    \L*{\infty}( (1-\lambda)\pOdd + \lambda \pEven[k+1] ) 
     &=
     \DCo\Co(1-\lambda) +
-    (1-\lambda)\DCo\lowerBound{\pEven} + \\
-    &+ \lambda\DCo\lowerBound{\pOdd[k+1]} +
-    \Co \lowerBound{p}.
+    (1-\lambda)\DCo\L*{\infty}( \pEven ) + \\
+    &+ \lambda\DCo\L*{\infty}( \pOdd[k+1] ) +
+    \Co \L*{\infty}( p ).
   \end{align*}
   Подставив данное выражение в~\eqref{ch1:eq:prop:L(comb)} и приведя подобные члены, получим
 
   \begin{equation}
     \label{ch1:eq:first:combination:game:2}
     \begin{aligned}
-      \lowerBound{p} 
+      \L*{\infty}(p) 
       &= 
       \frac{1}{1-\Co^2}
       \left(
         \DCo\Co\lambda + 
-        \DCo\lambda\lowerBound{\pEven} + 
-        (1-\lambda)\DCo\lowerBound{\pOdd[k+1]} + 
+        \DCo\lambda\L*{\infty}(\pEven) + 
+        (1-\lambda)\DCo\L*{\infty}(\pOdd[k+1]) + 
       \right.\\
       % 
       &\left. 
         + \Co \left( 
           \DCo\Co(1-\lambda) +
-          (1-\lambda)\DCo\lowerBound{\pEven} +
-          \lambda\DCo\lowerBound{\pOdd[k+1]} 
+          (1-\lambda)\DCo\L*{\infty}(\pEven) +
+          \lambda\DCo\L*{\infty}(\pOdd[k+1]) 
         \right)
       \right) = \\
       % 
@@ -875,41 +869,40 @@ $\fGeneral[1,i]{s}$ -- вероятность сделать ставку $i$ в
       \left( (k + 1)(m - k - 1) + \DCo\lambda(2k - m + 2\Co + 1)
       \right)/2 = \\
       &=
-      \lambda\lowerBound{\pOdd} + (1-\lambda)\lowerBound{\pEven[k+1]}.
+      \lambda\L*{\infty}(\pOdd) + (1-\lambda)\L*{\infty}(\pEven[k+1]).
     \end{aligned}
   \end{equation}
   
   Пусть $p = \lambda\pEven + (1-\lambda)\pOdd$, где $k = \overline{1, m - 1}, \, \lambda \in (0, 1)$.
-  Заметим, что $p(H|k) \in ( \pOdd[k-1], \pEven )$, а $p(H|k+1) \in ( \pOdd, \pEven[k+1] )$.
+  Заметим, что $\pac{H}{k} \in ( \pOdd[k-1], \pEven )$, а $\pac{H}{k+1} \in ( \pOdd, \pEven[k+1] )$.
   Тогда с помощью \eqref{ch1:eq:first:combination:game:2} получим
   \begin{multline*}
-    \lowerBound{p} =
-    \lambda \Co \lowerBound{\pOdd[k-1]} + 
-    (1-\lambda)(1-\Co)\lowerBound{\pEven} + \lambda(1-\Co)\lowerBound{\pOdd} + \\
-    + (1-\lambda)\Co\lowerBound{\pEven[k+1]} 
-    = \lambda \lowerBound{\pEven} + (1-\lambda) \lowerBound{\pOdd}.
+    \L*{\infty}(p) =
+    \lambda \Co \L*{\infty}(\pOdd[k-1]) + 
+    (1-\lambda)(1-\Co)\L*{\infty}(\pEven) + \lambda(1-\Co)\L*{\infty}(\pOdd) + \\
+    + (1-\lambda)\Co\L*{\infty}(\pEven[k+1]) 
+    = \lambda \L*{\infty}(\pEven) + (1-\lambda) \L*{\infty}(\pOdd).
   \end{multline*}
   
   При $p \in ( 0, \pOdd[1] )$ и $p \in ( \pOdd[m-1], 1 )$ доказательство проводится аналогично.
 \end{proof}
 
-Таким образом, мы определили стратегию $\fOpt$ и соответствующий гарантированный выигрыш первого игрока $\lowerBound{p}$ для любых $p \in [0, 1], \, \Co \in (0, 1)$.
+Таким образом, мы определили соответствующий гарантированный выигрыш первого игрока $\L*{\infty}(p)$ для любых $p \in [0, 1], \, \Co \in (0, 1)$.
 Отсюда вытекает справедливость следующей леммы.
 
 \begin{lemma}
   \label{ch1:lemma:first:lower}
-  При использовании первым игроком стратегии $\fOpt$ в игре $\infiniteGame{p}$\textup{,} его выигрыш ограничен снизу функцией $\lowerBound{p}$\textup{,} т.е.
+  При использовании первым игроком стратегии $\sigmar^*$ в игре $\theG*{\infty}(p)$\textup{,} его выигрыш ограничен снизу функцией $\L*{\infty}(p)$\textup{,} т.е.
   \[
-    \min_{\tau \in \Tau} \infiniteFirstPlayerPayoff{p}{\fOpt}{\tau} \geq
-    \lowerBound{p}.
+    \min_{\taur \in \Tau} \K*{\infty}(p, \sigmar^*, \taur) \geq \L*{\infty}(p).
   \]
 \end{lemma}
 
-\section{Значение игры $\mathbf{G^m_\infty(p)}$}\label{ch1:game-value}
+\section{Значение игры $\mathbf{G^{m,\beta}_\infty(p)}$}\label{ch1:game-value}
 
 \begin{theorem}
-  Игра $\infiniteGame{p}$ имеет значение $\infiniteGameValue{p} = \upperBound{p} = \lowerBound{p}$.
-  При этом $\fOpt$ -- оптимальная стратегия первого игрока\textup{,} а $\tau^*$ -- оптимальная стратегия второго игрока.
+  Игра $\theG*{\infty}(p)$ имеет значение $\V*{\infty}(p) = \H*{\infty}(p) = \L*{\infty}(p)$.
+  При этом $\sigmar^*$ -- оптимальная стратегия первого игрока\textup{,} а $\taur^*$ -- оптимальная стратегия второго игрока.
 \end{theorem}
 Доказательство данной теоремы непосредственно следует из леммы~\ref{ch1:lemma:upperBound} и утверждения~\ref{ch1:prop:lower:recurrence-solution} и по форме повторяет доказательство аналогичной теоремы в~\cite{domansky07}.
 
@@ -917,22 +910,22 @@ $\fGeneral[1,i]{s}$ -- вероятность сделать ставку $i$ в
   \label{ch1:prop:value-comparison}
   При любом значении $p \in [0,1]$, $\Co \in (0,1)$ и $m \geq 3$ справедливо неравенство
   \begin{equation*}
-    V^{m, \Co}_\infty(p) \geq V^{m,1}_\infty(p) = V^{m,0}_\infty(p),
+    \V*[\Co]{\infty}(p) \geq \V*[1]{\infty}(p) = \V*[0]{\infty}(p),
   \end{equation*}
   причем равенство достигается только при $p = k/m, k = \overline{0,m}$.
 \end{proposition}
 \begin{proof}
-  Равенство $V^{m, 1}_\infty(p) = V^{m,0}_\infty(p)$ следует из замечания~\ref{ch1:rem:symm-payoffs} и того, что при $p = k/m$ выполняется
+  Равенство $\V*[1]{\infty}(p) = \V*[0]{\infty}(p)$ следует из замечания~\ref{ch1:rem:symm-payoffs} и того, что при $p = k/m$ выполняется
   \begin{equation*}
-    V^{m, 1}_\infty(p) = V^{m, 0}_\infty(1-p) = \frac{(m-k)(m-(m-k))}{2} = \frac{k(m-k)}{2} = V^{m, 0}_\infty(p).
+    \V*[1]{\infty}(p) = \V*[0]{\infty}(1-p) = \frac{(m-k)(m-(m-k))}{2} = \frac{k(m-k)}{2} = \V*[0]{\infty}(p).
   \end{equation*}
   Далее, из (\ref{ch1:eq:recurrence-solution:even}) следует, что нам достаточно показать, что 
   \[
-    V^\beta_m((k+\Co)/m) > V^1_m((k+\Co)/m).
+    \V*[\Co]{\infty}((k+\Co)/m) > \V*[1]{\infty}((k+\Co)/m).
   \]
   В силу того, что $(k+\Co)/m = \DCo k/m + \Co (k+1)/m$, получаем
   \begin{gather*}
-    V^\Co_m((k+\beta)/m) - \DCo V^1_m(k/m) - \Co V^1_m((k+1)/m) = 2\DCo > 0.
+    \V*[\Co]{\infty}((k+\beta)/m) - \DCo \V*[1]{\infty}(k/m) - \Co \V*[1]{\infty}((k+1)/m) = 2\DCo > 0.
   \end{gather*}
   Отсюда следует справедливость данного утверждения.
 \end{proof}
@@ -949,10 +942,10 @@ $\fGeneral[1,i]{s}$ -- вероятность сделать ставку $i$ в
     \draw[thick] plot file {plots/ch1-v0.5.dat};
     \draw[very thick,dashed] plot file {plots/ch1-v1.dat};
     
-    \node at (0.86, 2.6) {$V^{m,1/2}_\infty(p)$};
-    \node at (0.55, 2.6) {$V^{m,1}_\infty(p)$};
+    \node at (0.86, 2.6) {$\V*[1/2]{\infty}(p)$};
+    \node at (0.55, 2.6) {$\V*[1]{\infty}(p)$};
   \end{tikzpicture}
-  \caption{Графики функции $V^{m,\Co}_\infty(p)$ при значениях $\Co = 1/2$ и $\Co = 1$}
+  \caption{Графики функции $\V*{\infty}(p)$ при значениях $\Co = 1/2$ и $\Co = 1$}
   \label{ch1:fig:value-comparison}
 \end{figure}
 
@@ -962,7 +955,7 @@ $\fGeneral[1,i]{s}$ -- вероятность сделать ставку $i$ в
 Рассмотрим динамику апостериорных вероятностей, возникающую при применении игроками оптимальных стратегий.
 
 Пусть $p \in P$. Обозначим через $p^t$ апостериорную вероятность состояния $H$ после $t$-го шага игры, причем $p^0 = p$ соответствует исходной априорной вероятности.
-Тогда из замечания~\ref{ch1:remark:posterior-probs} и рекурсивной структуры игры $\infiniteGame{p}$ следует, что последовательность $(p^0, p^1, p^2, \ldots, p^t, \ldots)$ представляет собой однородную марковскую цепь с $2m$ состояниями и $2m \times 2m$-матрицей переходных вероятностей
+Тогда из замечания~\ref{ch1:remark:posterior-probs} и рекурсивной структуры игры $\theG*{\infty}(p)$ следует, что последовательность $(p^0, p^1, p^2, \ldots, p^t, \ldots)$ представляет собой однородную марковскую цепь с $2m$ состояниями и $2m \times 2m$-матрицей переходных вероятностей
 \begin{equation}
   \label{ch1:eq:posterior-chain}
   \Pi = 
@@ -1009,7 +1002,7 @@ $\fGeneral[1,i]{s}$ -- вероятность сделать ставку $i$ в
 
 \begin{proposition}
   \label{ch1:prop:game-duration}
-  Игра $\infiniteGame{p_k}$ в среднем заканчивается за конечное количество шагов.
+  Игра $\theG*{\infty}(p_k)$ в среднем заканчивается за конечное количество шагов.
   Ее ожидаемая продолжительность выражается формулами
   \begin{equation*} 
     \tau(p_{2k+1}) = \frac{(m-k-\Co)(k+\Co)}{\Co \DCo},\quad
