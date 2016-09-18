@@ -4,7 +4,7 @@
 \newcommandx*\Ff[3][1={(f, Q)}, 2=n+1]{\ensuremath{F_{#2} \left(p, #1, #3 \right)}}
 \newcommand*\dualFPS{\ensuremath{(p,\ \sigma)}}
 \newcommandx*\dualg[4][1=n, 2={\dualFPS}, 3=z, 4=\tau]{\ensuremath{g^*_{#1}(#3, #2, #4)}}
-\newcommandx*\Gf[2][1=i, 2=\tau_1]{\ensuremath{G_{n+1} \left(z, #1, #2 \right)}}
+\newcommandx*\Gf[2][1=x, 2=\tau_1]{\ensuremath{G_{n+1} \left(z, #1, #2 \right)}}
 
 В разделах~\ref{ch3:sec:model-descr} и~\ref{ch3:sec:formal-descr} приводится описание модели биржевых торгов с вещественными ставками и теоретико-игровая постановка основной задачи и двойственной к ней в смысле Де~Мейера.
 В разделе~\ref{ch3:sec:1st} получено решение одношаговой игры, на примере которой демонстрируются идеи, использованные при решении $n$-шаговой игры.
@@ -24,14 +24,14 @@
 На каждом шаге торгов, первый игрок делает ставку из множества $I = [0, 1]$, второй игрок "--- ставку из множества $J = [0,1]$.
 
 Обозначим через $\Port{t} = (\Port{t}^R, \Port{t}^N)$ портфель первого игрока на $t$-м шаге торгов, где $\Port{t}^R$ и $\Port{t}^N$ "--- количество единиц рискового и безрискового активов соответственно.
-Если на $t$-м шаге игроки делают ставки $i \in I,\ j \in J$, то портфель 
+Если на $t$-м шаге игроки делают ставки $x \in I,\ y \in J$, то портфель 
 \[
-\Port{t} = \Port{t-1} + t(i, j),
+\Port{t} = \Port{t-1} + t(x, y),
 \]
 где
 \begin{equation}\label{ch3:eq:trans-mech}
-  t(i, j) = \Ind{i > j} (1, -(\Co i + \DCo j)) +
-  \Ind{i < j} (-1, \DCo i + \Co j).
+  t(x, y) = \Ind{x > y} (1, -(\Co x + \DCo y)) +
+  \Ind{x < y} (-1, \DCo x + \Co y).
 \end{equation}
 Таким образом, одна акция продается по цене, равной выпуклой комбинации предложенных ставок с заданным коэффициентом $\Co$.
 Стоимость портфеля при этом равна
@@ -82,7 +82,7 @@
 В дальнейшем верхний индекс $\Co$ мы будем часто опускать.
 
 В работе \cite{demeyer02} показано, что игра $G_n(p)$ имеет рекурсивную структуру аналогичную структуре повторяющейся игры из главы~\ref{chapt1}.
-Соответственно, рассмотрим стратегию $\sigma$ первого игрока как пару $(\sigma_1, \tilde{\sigma})$, где $\sigma_1$ -- ход игрока на первом шаге игры, а $\tilde{\sigma}$ -- стратегия в игре продолжительности $n$, зависящая от ставок $(i, j)$ на первом шаге.
+Соответственно, рассмотрим стратегию $\sigma$ первого игрока как пару $(\sigma_1, \tilde{\sigma})$, где $\sigma_1$ -- ход игрока на первом шаге игры, а $\tilde{\sigma}$ -- стратегия в игре продолжительности $n$, зависящая от ставок $(x, y)$ на первом шаге.
 Аналогично стратегию $\tau$ второго игрока можно представить как пару $(\tau_1, \tilde{\tau})$.
 
 Приведем несколько известных фактов, которые понадобятся нам в дальнейшем.
@@ -90,25 +90,25 @@
 Пара $(\sigma_1, \tau_1)$ вместе с ходом случая индуцирует вероятностное распределение $\Pi[p, \sigma_1, \tau_1]$ на $S \times I \times J$.
 Обозначим через
 \[
-  p(i) = \Pi[p, \sigma_1](s = H \; | \; i)
+  p(i) = \Pi[p, \sigma_1](s = H \; | \; x)
 \]
-апостериорную вероятность состояния $H$ при условии, что первый игрок сделал ставку $i$.
-Отметим, что апостериорная вероятность не зависит от ставки второго игрока $j$, так как она не зависит от $s$.
+апостериорную вероятность состояния $H$ при условии, что первый игрок сделал ставку $x$.
+Отметим, что апостериорная вероятность не зависит от ставки второго игрока $y$, так как она не зависит от $s$.
 Тогда для значения выигрыша первого игрока справедливо представление
 \begin{align*}
   g_{n+1}(p, \sigma, \tau) 
   &= 
     g_1(p, \sigma_1, \tau_1) +
     \E_{\Pi[p, \sigma_1, \tau_1]}
-    g_n(p(i), \tilde{\sigma}(i, j), \tilde{\tau}(i, j)).
+    g_n(p(X), \tilde{\sigma}(X, Y), \tilde{\tau}(X, Y)).
 \end{align*}
 Отсюда вытекает справедливость следующего утверждения для нижнего значения игры (\seename \cite{demeyer02}).
 \begin{lemma}
   \label{ch3:lem:low-bound-primal}
   Для любого $p \in [0, 1]$ выполняется неравенство
   \begin{equation}
-    V_{1,n+1}(p) \geqslant \sup_{\sigma_1} \inf_{j} g_1(p, \sigma_1, j)
-    + \E_{\Pi[p, \sigma_1]} V_{1,n}\left( p(i) \right).
+    V_{1,n+1}(p) \geqslant \sup_{\sigma_1} \inf_{y} g_1(p, \sigma_1, y)
+    + \E_{\Pi[p, \sigma_1]} V_{1,n}\left( p(X) \right).
   \end{equation}
 \end{lemma}
 Подчеркнем, что поскольку можно положить $V_0(p) = 0$, данная формула имеет смысл для любого $n \geqslant 1$.
@@ -143,8 +143,8 @@
 \begin{lemma}\label{ch3:lem:low-bound-dual:general}
   Для любого $z \in \mathbb{R}$ выполняется неравенство
   \begin{equation}\label{ch3:eq:low-bound-dual:general}
-    W_{2,n+1}(z) \geqslant \sup_{\tau_1} \inf_{i}
-    W_{2,n}(z - g^H_1(i, \tau_1) + g_1^L(i, \tau_1)) - g^L_1(i, \tau_1).
+    W_{2,n+1}(z) \geqslant \sup_{\tau_1} \inf_x
+    W_{2,n}(z - g^H_1(x, \tau_1) + g_1^L(x, \tau_1)) - g^L_1(x, \tau_1).
   \end{equation}
 \end{lemma}
 Отметим, что так как $W^*_0(z) = \phi(z) = \min(z, 0)$, формула имеет смысл для любого $n \geqslant 1$.
@@ -415,88 +415,86 @@
 \subsection{Оценка нижнего значения $\mathbf{V_{1,n}(p)}$ игры $\mathbf{G_n(p)}$}
 \label{ch3:sec:-primal-game}
 
-Обозначим через $\sigma^M_1(i) = p \sigma^H_1(i) + (1-p) \sigma^L_1(i)$ маргинальное распределение ставки $i$ при использовании одношаговой стратегии $\sigma_1 = (\sigma^H_1, \sigma^L_1)$, а соответствующую функцию распределения обозначим $F_{\sigma^M_1}(x)$.
+Обозначим через $\sigma^M_1(x) = p \sigma^H_1(x) + (1-p) \sigma^L_1(x)$ маргинальное распределение ставки $X$ при использовании одношаговой стратегии $\sigma_1 = (\sigma^H_1, \sigma^L_1)$, а соответствующую функцию распределения обозначим $F_{\sigma^M_1}(x)$.
 
 Возьмем случайную величину $u$, равномерно распределенную на $[0, 1]$, и положим
 \begin{equation*}
   f(u) = F^{-1}_{\sigma^M_1}(u) \eqdef \inf \{ v\ |\ F_{\sigma^M_1}(v) \geq u \}.
 \end{equation*}
-Известно, что тогда случайные величины $f(u)$ и $i$ одинаково распределены.
+Известно, что тогда случайные величины $f(U)$ и $X$ одинаково распределены.
 
 Далее, обозначим $Q(u) = p(f(u))$.
-Легко видеть, что для условной апостериорной вероятности $p(i)$ состояния $H$ справедливо
+Легко видеть, что для условной апостериорной вероятности $p(x)$ состояния $H$ справедливо
 \begin{equation*}
-  \int_I p(i) \sigma^M_1(\di i) = \Pi[p, \sigma_1](s = H, i \in I) = p.
+  \int_I p(x) \sigma^M_1(\di x) = \Pi[p, \sigma_1](s = H, x \in I) = p.
 \end{equation*}
-Так как случайные величины $f(u)$ и $i$ одинаково распределены, то имеет место равенство
+Так как случайные величины $f(U)$ и $X$ одинаково распределены, то имеет место равенство
 \begin{equation*}
   \int_0^1 Q(u) \di u = p.
 \end{equation*}
 Таким образом, функции $Q(u)/p$ и $(1-Q(u))/(1-p)$ являются условными плотностями.
 
-В \cite{demeyer02} рассматривается параметризация одношаговой стратегии инсайдера функциями $f$ и $Q$, которые используются для генерации маргинального распределения ставки $i$ и апостериорной вероятности $p(i)$ соответственно.
+В \cite{demeyer02} рассматривается параметризация одношаговой стратегии инсайдера функциями $f$ и $Q$, которые используются для генерации маргинального распределения ставки $x$ и апостериорной вероятности $p(x)$ соответственно.
 Далее мы покажем, что задание стратегии первого игрока при помощи пары $(f, Q)$ в некотором смысле естественно и приведем способ перехода от параметризованного представления к стратегии $\sigma_1$.
 
 \begin{proposition}
-  Для апостериорной вероятности $p(i)$ состояния $H$ справедлива формула
-  \begin{equation}\label{ch3:eq:p(i)}
-    p(i) = p \; \frac{\di \sigma^H_1}{\di \sigma^M_1}(i),
+  Для апостериорной вероятности $p(x)$ состояния $H$ справедлива формула
+  \begin{equation}\label{ch3:eq:p(x)}
+    p(x) = p \; \frac{\di \sigma^H_1}{\di \sigma^M_1}(x),
   \end{equation}
   где $\di \sigma^H_1/\di \sigma^M_1$ -- производная Радона-Никодима.
 \end{proposition}
 \begin{proof}
-  По определению $p(i)$ для любого множества $B$ из борелевской $\sigma$-алгебры $\Borel(I)$ отрезка $I$ выполнено
+  По определению $p(x)$ для любого множества $B$ из борелевской $\sigma$-алгебры $\Borel(I)$ отрезка $I$ выполнено
   \begin{equation*}
-    P(s = H, \; i \in B) = \int_B p(i) \; \sigma^M_1(\di i).
+    P(s = H, \; X \in B) = \int_B p(x) \; \sigma^M_1(\di x).
   \end{equation*}
   С другой стороны, справедлива следующая формула:
   \begin{equation*}
-    P(s = H, \; i \in B) = p \int_B \sigma^H_1(\di i).
+    P(s = H, \; X \in B) = p \int_B \sigma^H_1(\di x).
   \end{equation*}
 
   Нетрудно видеть, что для любого множества $B \in \Borel(I)$ справедливо $\sigma^M_1(B) = 0 \implies \sigma^H_1(B) = 0$, то есть $\sigma^H_1$ абсолютно непрерывна относительно $\sigma^M_1$.
   Следовательно существует производная Радона-Никодима (\seename~\cite{kolmogorov-fomin}), а значит
   \begin{equation*}
-    P(s = H, \; i \in B) =
-    \int_B p \frac{\di \sigma^H_1}{\di \sigma^M_1}(i) \; \sigma^M_1(\di i).
+    P(s = H, \; X \in B) =
+    \int_B p \frac{\di \sigma^H_1}{\di \sigma^M_1}(x) \; \sigma^M_1(\di x).
   \end{equation*}
-  Отсюда получаем \eqref{ch3:eq:p(i)}.
+  Отсюда получаем \eqref{ch3:eq:p(x)}.
 \end{proof}
 
 \begin{proposition}
-  Для $g_1(p, \sigma_1, j)$ справедливо представление
+  Для $g_1(p, \sigma_1, y)$ справедливо представление
   \begin{equation}\label{ch3:eq:g1-aposterior}
     \begin{multlined}
-      g_1(p, \sigma_1, j) = \int_I \Ind{i > j} \biggl[ p(i) - \Co i -
-      \DCo j
-      \biggr] \; \sigma^M_1(\di i) \; + \\
-      + \int_I \Ind{i < j} \biggl[ \DCo i + \Co j - p(i) \biggr] \;
-      \sigma^M_1(\di i).
+      g_1(p, \sigma_1, y) = \int_I \Ind{x > y} \biggl[ p(x) - \Co x - \DCo y \biggr] \; \sigma^M_1(\di x) \; + \\
+      + \int_I \Ind{x < y} \biggl[ \DCo x + \Co y - p(x) \biggr] \;
+      \sigma^M_1(\di x).
     \end{multlined}
   \end{equation}
 \end{proposition}
 \begin{proof}
   По определению
   \begin{equation}\label{ch3:eq:g1-def}
-    g_1(p, \sigma_1, j) = \E_{\Pi[p, \sigma_1]} \langle
-    (\Ind{s = H}, 1), t(i, j)
+    g_1(p, \sigma_1, y) = \E_{\Pi[p, \sigma_1]} \langle
+    (\Ind{s = H}, 1), t(x, y)
     \rangle,
   \end{equation}
-  где $t(i, j)$ определена в~(\ref{ch3:eq:trans-mech}).
+  где $t(x, y)$ определена в~(\ref{ch3:eq:trans-mech}).
   Подставив~\eqref{ch3:eq:trans-mech} в~\eqref{ch3:eq:g1-def}, получим
   \begin{align*}
-    g_1(p, \sigma_1, j) 
-    &= p \int_I \biggl[ \Ind{i > j}(1 - \Co i - \DCo j) + \Ind{i < j} (\DCo i + \Co j - 1) \biggr] \; \sigma^H_1(\di i) + \\
+    g_1(p, \sigma_1, y) 
+    &= p \int_I \biggl[ \Ind{x > y}(1 - \Co x - \DCo y) + \Ind{x < y} (\DCo x + \Co y - 1) \biggr] \; \sigma^H_1(\di x) + \\
     &+ (1-p) \int_I \biggl[
-      \Ind{i > j} (- \Co i - \DCo j) + \Ind{i < j}(\DCo i + \Co j) 
+      \Ind{x > y} (- \Co x - \DCo y) + \Ind{x < y}(\DCo x + \Co y) 
     \biggr]
-    \; \sigma^L_1(\di i) = \\
-    &= \int_I \Ind{i > j} p \sigma^H_1(\di i) -
-    \int_I \Ind{i > j} (\Co i + \DCo j) \sigma^M_1 (\di i) + \\
-    &+ \int_I \Ind{i < j} (\DCo i + \Co j) \sigma^M_1 (\di i) -
-    \int_i \Ind{i < j} p \sigma^H_1(\di i).
+    \; \sigma^L_1(\di x) = \\
+    &= \int_I \Ind{x > y} p \sigma^H_1(\di x) -
+    \int_I \Ind{x > y} (\Co x + \DCo y) \sigma^M_1 (\di x) + \\
+    &+ \int_I \Ind{x < y} (\DCo x + \Co y) \sigma^M_1 (\di x) -
+    \int_i \Ind{x < y} p \sigma^H_1(\di x).
   \end{align*}
-  Отсюда, воспользовавшись~\eqref{ch3:eq:p(i)}, получим~\eqref{ch3:eq:g1-aposterior}.
+  Отсюда, воспользовавшись~\eqref{ch3:eq:p(x)}, получим~\eqref{ch3:eq:g1-aposterior}.
 \end{proof}
 
 Формула \eqref{ch3:eq:g1-aposterior} показывает альтернативное представление стратегии инсайдера $\sigma_1$ с помощью маргинального распределения ставки и апостериорной вероятности состояния $H$.
@@ -505,25 +503,25 @@
 Пусть $\pi = \Pi[p, \sigma_1]$.
 Так как для любого $B \in \Borel(I)$ выполнено
 \begin{align*}
-  \pi(i \in B \; | \; s = H) 
-  &= \frac{\pi(i \in B, \; s = H)}{\pi(s = H)} = \\
-  &= \int_0^1 \Ind{i \in B} \frac{p(i)}{p} \sigma^M_1(\di i) =
+  \pi(X \in B \; | \; s = H) 
+  &= \frac{\pi(X \in B, \; s = H)}{\pi(s = H)} = \\
+  &= \int_0^1 \Ind{x \in B} \frac{p(x)}{p} \sigma^M_1(\di x) =
   \int_0^1 \Ind{f(u) \in B} \frac{Q(u)}{p} \di u,
 \end{align*}
 то восстановить $\sigma_1$ по $(f, Q)$ можно следующим образом.
-Если ходом случая было выбрано состояние $H$, то инсайдер выбирает $u \in [0, 1]$ с плотностью вероятности $Q(u)/p$ и делает ставку $i = f(u)$.
-Аналогично, в состоянии $L$ он выбирает $u$ с плотностью вероятности $(1 - Q(u))/(1 - p)$ и делает ставку $i = f(u)$.
+Если ходом случая было выбрано состояние $H$, то инсайдер выбирает $u \in [0, 1]$ с плотностью вероятности $Q(u)/p$ и делает ставку $x = f(u)$.
+Аналогично, в состоянии $L$ он выбирает $u$ с плотностью вероятности $(1 - Q(u))/(1 - p)$ и делает ставку $x = f(u)$.
 
 Введем обозначение
 \[
-  \Ff{j} = g_1(p, (f, Q), j) + \E V_{1,n}(Q(u)).
+  \Ff{y} = g_1(p, (f, Q), y) + \E V_{1,n}(Q(u)).
 \]
 Переходя к $f$ и $Q$ в формуле~\eqref{ch3:eq:g1-aposterior} получаем следующее равенство:
 \begin{equation}\label{ch3:eq:F(f,Q,p)}
 \begin{multlined}
-  \Ff{j} =
-  \int_0^1 \Ind{f(u) > j} (Q(u) - \Co f(u) - \DCo j) \di u \enskip + \\
-  + \int_0^1 \Ind{f(u) < j} (\DCo f(u) + \Co j - Q(u)) \di u \; + \int_0^1
+  \Ff{y} =
+  \int_0^1 \Ind{f(u) > y} (Q(u) - \Co f(u) - \DCo y) \di u \enskip + \\
+  + \int_0^1 \Ind{f(u) < y} (\DCo f(u) + \Co y - Q(u)) \di u \; + \int_0^1
   V_{1,n}(Q(u)) \di u.
 \end{multlined}
 \end{equation}
@@ -539,18 +537,18 @@
     &\bullet\quad \forall u_1, u_2 \in [0, 1]: f(u_1) = f(u_2) \implies Q(u_1) = Q(u_2).&
   \end{flalign}
 \end{subequations}
-Условия (\ref{ch3:eq:parametr-prop:f-incr},~\ref{ch3:eq:parametr-prop:int-q=p}) естественны, условие \eqref{ch3:eq:parametr-prop:f-Q-eq} необходимо для того, чтобы случайная величина $Q(u)$ была измеримой относительно $\sigma$-алгебры порожденной $i$.
+Условия (\ref{ch3:eq:parametr-prop:f-incr},~\ref{ch3:eq:parametr-prop:int-q=p}) естественны, условие \eqref{ch3:eq:parametr-prop:f-Q-eq} необходимо для того, чтобы случайная величина $Q(U)$ была измеримой относительно $\sigma$-алгебры порожденной $X$.
 Переформулируем лемму~\ref{ch3:lem:low-bound-primal} в терминах $f$ и $Q$.
 \begin{lemma}
   Для любого $p \in [0, 1]$ выполняется неравенство
   \[
-    V_{1,n+1}(p) \geqslant \sup_{(f, \; Q)} \inf_{j} \Ff{j},
+    V_{1,n+1}(p) \geqslant \sup_{(f, \; Q)} \inf_{y} \Ff{y},
   \]
   где $f$ и $Q$ удовлетворяют~\eqref{ch3:eq:parametr-prop:f-incr} "--- \eqref{ch3:eq:parametr-prop:f-Q-eq}.
 \end{lemma}
 
-Будем искать пару $(f, Q)$, выравнивающую выигрыш первого игрока при $j \in [f(0), f(1)]$.
-Пусть $j = f(\alpha)$ для некоторого $\alpha \in [0, 1]$, и $f$ возрастает в некоторой окрестности точки $\alpha$.
+Будем искать пару $(f, Q)$, выравнивающую выигрыш первого игрока при $y \in [f(0), f(1)]$.
+Пусть $y = f(\alpha)$ для некоторого $\alpha \in [0, 1]$, и $f$ возрастает в некоторой окрестности точки $\alpha$.
 Тогда для выравнивающей пары $(f, Q)$ выражение
 \begin{multline}\label{ch3:eq:F(f,Q,fa)}
   \Ff{f(\alpha)} = \int_\alpha^1 \left( Q(u) - \Co f(u) - \DCo f(\alpha)
@@ -749,15 +747,15 @@
   При любом $p \in [0, 1]$ для гарантированного выигрыша первого игрока в игре $G_n(p)$ справедлива оценка $V_{1,n+1}(p) \geqslant K^*(p)$.
 \end{theorem}
 \begin{proof}
-  В силу леммы~\ref{ch3:lem:low-bound-primal} достаточно доказать, что при любом $j \in [0, 1]$ выполнено $\Ff{j} \geqslant K^*(p)$.
+  В силу леммы~\ref{ch3:lem:low-bound-primal} достаточно доказать, что при любом $y \in [0, 1]$ выполнено $\Ff{y} \geqslant K^*(p)$.
   Рассмотрим несколько случаев.
 
-  Пусть $j < f(0)$.
+  Пусть $y < f(0)$.
   Тогда из~(\ref{ch3:eq:F(f,Q,p)},~\ref{ch3:eq:phi=k*},~\ref{ch3:eq:Phi(a=0)}) получаем неравенство
   \begin{align*}
-    \Ff{j} 
+    \Ff{y} 
     &= \int_0^1 \left[ 
-      Q(u) - \Co f(u) - \DCo j 
+      Q(u) - \Co f(u) - \DCo y 
     \right] \di u +
     \int_0^1 V_{1,n}(Q(u)) \di u \geq \\
     &\geq \int_0^1 \left[ 
@@ -765,65 +763,65 @@
     \right] \di u + \int_0^1 V_{1,n}(Q(u)) \di u = \\
     &= \Phi(Q) = K^*(p).
   \end{align*}
-  Аналогично можно показать, что при $j > f(1)$ из~(\ref{ch3:eq:Phi(a=1)}) следует
+  Аналогично можно показать, что при $y > f(1)$ из~(\ref{ch3:eq:Phi(a=1)}) следует
   \begin{align*}
-    \Ff{j} 
+    \Ff{y} 
     &\geq \int_0^1 \left[ 
       \DCo f(u) + \Co f(1) - Q(u) 
     \right] \di u + \int_0^1 V_{1,n}(Q(u)) \di u = \\
     &= \Phi(Q) = K^*(p).
   \end{align*}
-  Пусть теперь $j = f(\alpha), \; \alpha \in [0, 1]$. Введем обозначения
+  Пусть теперь $y = f(\alpha), \; \alpha \in [0, 1]$. Введем обозначения
   \[
     \alpha^- = \inf \left\{ v \;|\; f(v) = f(\alpha) \right\}, \quad \alpha^+ =
     \sup \left\{ v \;|\; f(v) = f(\alpha) \right\}.
   \]
   Подстановкой в~\eqref{ch3:eq:F(f,Q,p)} получаем
   \begin{multline}\label{ch3:eq:V-lower:alpha-0-1}
-    \Ff{j} =
+    \Ff{y} =
     \int_{\alpha^+}^1  (Q(u) - \Co f(u) - \DCo f(\alpha)) \di u \; + \\
     + \int_0^{\alpha^-} (\DCo f(u) + \Co f(\alpha) - Q(u)) \di u \; + \int_0^1
     V_{1,n}(Q(u)) \di u.
   \end{multline}
   Однако, из леммы~\ref{ch3:lem:f=Q} следует, что $Q(u) = f(\alpha)$ при $u \in [\alpha^-, \alpha^+]$.
-  Поэтому~\eqref{ch3:eq:V-lower:alpha-0-1} совпадает с~\eqref{ch3:eq:F(f,Q,fa)} и $\Ff{j} = \Phi(Q) = K^*(p)$ по построению.
+  Поэтому~\eqref{ch3:eq:V-lower:alpha-0-1} совпадает с~\eqref{ch3:eq:F(f,Q,fa)} и $\Ff{y} = \Phi(Q) = K^*(p)$ по построению.
 \end{proof}
 
 \subsection{Оценка нижнего значения $\mathbf{W_{2,n}(z)}$ игры $\mathbf{G^*_n(z)}$}
 \label{ch3:sec:-dual-game}
 
 Аналогично тому, как это было сделано для первого игрока, параметризуем $\tau_1$ при помощи неубывающей функции $h: [0, 1] \rightarrow [0, 1]$.
-Если $F_{\tau_1}(y)$ "--- функция распределения ставки $j$ при применении вторым игроком стратегии $\tau_1$, то положим
+Если $F_{\tau_1}(y)$ "--- функция распределения ставки $y$ при применении вторым игроком стратегии $\tau_1$, то положим
 \begin{equation*}
   h(u) = F^{-1}_{\tau_1}(u) \eqdef \inf \{ y\ |\ F_{\tau_1}(y) \geq u \}.
 \end{equation*}
-Тогда, если случайная величина $u$ равномерно распределена на $[0, 1]$, то $h(u)$ и $j$ имеют одинаковое распределение.
+Тогда, если случайная величина $u$ равномерно распределена на $[0, 1]$, то $h(u)$ и $y$ имеют одинаковое распределение.
 
 Подобно предыдущему подразделу получим аналог леммы~\ref{ch3:lem:low-bound-dual:general} в терминах $h$.
-Заметим, что для $g_1^L(i, \tau_1)$ и $g_1^H(i, \tau_1)$ справедливы равенства
+Заметим, что для $g_1^L(x, \tau_1)$ и $g_1^H(x, \tau_1)$ справедливы равенства
 \begin{align*}
-  g_1^L(i,\tau_1) &=
+  g_1^L(x,\tau_1) &=
                       \int_J \biggl[
-                      \Ind{i>j} (-\Co i - \DCo j) +
-                      \Ind{i<j} (\DCo i + \Co j)
-                      \biggr] \tau_1(\di j),\\
-  g_1^H(i,\tau_1) &=
+                      \Ind{x>y} (-\Co x - \DCo y) +
+                      \Ind{x<y} (\DCo x + \Co y)
+                      \biggr] \tau_1(\di y),\\
+  g_1^H(x,\tau_1) &=
                       \int_J \biggl[
-                      \Ind{i>j} (1 -\Co i - \DCo j) +
-                      \Ind{i<j} (\DCo i + \Co j - 1)
-                      \biggr] \tau_1(\di j).
+                      \Ind{x>y} (1 -\Co x - \DCo y) +
+                      \Ind{x<y} (\DCo x + \Co y - 1)
+                      \biggr] \tau_1(\di y).
 \end{align*}
 
-Подставим $g_1^H(i, \tau_1)$ и $g_1^L(i,\tau_1)$ в правую часть~\eqref{ch3:eq:low-bound-dual:general} и получившийся результат обозначим как
+Подставим $g_1^H(x, \tau_1)$ и $g_1^L(x,\tau_1)$ в правую часть~\eqref{ch3:eq:low-bound-dual:general} и получившийся результат обозначим как
 \begin{equation}\label{eq:W-low-bound:parameterized}
 \begin{multlined}
-  \Gf[i][h] =
+  \Gf[x][h] =
   W_{2,n}\left( 
-    z - \int_0^1 \left[ \Ind{h(u) < i} - \Ind{h(u) > i} \right] \di u
+    z - \int_0^1 \left[ \Ind{h(u) < x} - \Ind{h(u) > x} \right] \di u
   \right) \; - \\
   - \int_0^1 \left[ 
-    \Ind{h(u) < i} (-\Co i - \DCo h(u)) + 
-    \Ind{h(u) > i} (\DCo i + \Co h(u)) 
+    \Ind{h(u) < x} (-\Co x - \DCo h(u)) + 
+    \Ind{h(u) > x} (\DCo x + \Co h(u)) 
   \right] \di u.
 \end{multlined}
 \end{equation}
@@ -831,12 +829,12 @@
 \begin{lemma}\label{ch3:lem:W-low-bound:parameterized}
   Для любого $z \in \mathbb{R}$ выполнено неравенство
   \begin{equation*}
-    W_{2,n+1}(z) \geqslant \sup_h \inf_{i} \Gf[i][h].
+    W_{2,n+1}(z) \geqslant \sup_h \inf_{x} \Gf[x][h].
   \end{equation*}
 \end{lemma}
 
-Будем искать стратегию второго игрока, выравнивающую его выигрыш при $i \in [h(0), h(1)]$.
-Пусть $i = h(\alpha)$ для некоторого $\alpha \in [0, 1]$, и $h(\cdot)$ возрастает в некоторой окрестности точки $\alpha$.
+Будем искать стратегию второго игрока, выравнивающую его выигрыш при $x \in [h(0), h(1)]$.
+Пусть $x = h(\alpha)$ для некоторого $\alpha \in [0, 1]$, и $h(\cdot)$ возрастает в некоторой окрестности точки $\alpha$.
 Тогда для выравнивающей функции $h$ выражение
 \begin{equation}\label{ch3:eq:G(ha)}
 \begin{multlined}
@@ -889,20 +887,20 @@
   \end{equation*}
 \end{theorem}
 \begin{proof}
-  Из леммы~\ref{ch3:lem:W-low-bound:parameterized} следует, что нам достаточно показать, что при любом $i \in [0, 1]$ выполнено $\Gf[i][h] \geqslant \Psi(h)$.
+  Из леммы~\ref{ch3:lem:W-low-bound:parameterized} следует, что нам достаточно показать, что при любом $x \in [0, 1]$ выполнено $\Gf[x][h] \geqslant \Psi(h)$.
   Рассмотрим несколько случаев.
 
-  При $i < h(0)$ из~\eqref{eq:W-low-bound:parameterized} и~\eqref{ch3:eq:G(ha)} получаем
+  При $x < h(0)$ из~\eqref{eq:W-low-bound:parameterized} и~\eqref{ch3:eq:G(ha)} получаем
   \begin{multline*}
-    \Gf[i][h] =
-    W_{2,n}(z + 1) - \int_0^1 \left( \DCo i + \Co h(u) \right) \di u \geqslant \\
+    \Gf[x][h] =
+    W_{2,n}(z + 1) - \int_0^1 \left( \DCo x + \Co h(u) \right) \di u \geqslant \\
     \geqslant W_{2,n}(z + 1) - \int_0^1 \left( \DCo h(0) + \Co h(1) \right) \di
     u = \Gf[h(0)][h] = \Psi(h).
   \end{multline*}
 
-  Аналогично можно показать, что при $i > h(1)$ выполняется неравенство $\Gf[i][h] \geqslant \Psi(h)$.
+  Аналогично можно показать, что при $x > h(1)$ выполняется неравенство $\Gf[x][h] \geqslant \Psi(h)$.
 
-  Пусть теперь $i = h(\alpha), \; \alpha \in [0, 1]$. Введем обозначения
+  Пусть теперь $x = h(\alpha), \; \alpha \in [0, 1]$. Введем обозначения
   \[
     \alpha^- = \inf \left\{ v \;|\; h(v) = h(\alpha) \right\}, \quad \alpha^+ =
     \sup \left\{ v \;|\; h(v) = h(\alpha) \right\}.
@@ -910,9 +908,9 @@
   
   Из~\eqref{eq:W-low-bound:parameterized} находим
   \begin{multline}\label{ch3:eq:g+-}
-    \Gf[i][h] = W_{2,n}(z + 1 - \alpha^- - \alpha^+) \enskip - \\
-    - \int_0^{\alpha^-} \left(-\Co i - \DCo h(u)\right) \di u -
-    \int_{\alpha^+}^1 \left(\DCo i + \Co h(u)\right) \di u.
+    \Gf[x][h] = W_{2,n}(z + 1 - \alpha^- - \alpha^+) \enskip - \\
+    - \int_0^{\alpha^-} \left(-\Co x - \DCo h(u)\right) \di u -
+    \int_{\alpha^+}^1 \left(\DCo x + \Co h(u)\right) \di u.
   \end{multline}
   Поскольку $W_{2,n}(\cdot)$ "--- дифференцируемая вогнутая функция, верно неравенство
   \begin{multline*}
@@ -925,20 +923,20 @@
     W_{2,n}'(z + 1 - \alpha^- - \alpha^+) = W_{2,n}'(z + 1 - 2\alpha) =
     h(\alpha).
   \]
-  Так как $h(u)$ постоянна на $[\alpha^-, \alpha^+]$ и $h(\alpha) = i$ имеем
+  Так как $h(u)$ постоянна на $[\alpha^-, \alpha^+]$ и $h(\alpha) = x$ имеем
   \begin{multline*}
     W_{2,n}(z + 1 - \alpha^- - \alpha^+) \geqslant W_{2,n}(z + 1 - 2\alpha) - \\
-    - \int_\alpha^{\alpha^+} \left( \DCo i + \Co h(u) \right) \di u +
-    \int_{\alpha^-}^\alpha \left( \Co i + \DCo h(u) \right) \di u.
+    - \int_\alpha^{\alpha^+} \left( \DCo x + \Co h(u) \right) \di u +
+    \int_{\alpha^-}^\alpha \left( \Co x + \DCo h(u) \right) \di u.
   \end{multline*}
   Используя оценку на $W_{2,n}(z + 1 - \alpha^- - \alpha^+)$ в \eqref{ch3:eq:g+-}, получаем
   \begin{multline*}
-    \Gf[i][h] \geqslant W_{2,n}(z + 1 - 2\alpha)
+    \Gf[x][h] \geqslant W_{2,n}(z + 1 - 2\alpha)
     - \int_\alpha^1 \biggl( \DCo h(\alpha) + \Co h(u) \biggr) \di u \; + \\
     + \int_0^\alpha \biggl( \Co h(\alpha) + \DCo h(u) \biggr) \di u =
     \Gf[h(\alpha)][h] = \Psi(h).
   \end{multline*}
-  Таким образом, требуемое неравенство справедливо при любом $i \in [0, 1]$.
+  Таким образом, требуемое неравенство справедливо при любом $x \in [0, 1]$.
 \end{proof}
 
 \section{Значение игры $\mathbf{G_n\left(p\right)}$}
@@ -1015,9 +1013,9 @@ $
 \begin{proposition}[{{\cite[Лемма 9]{demeyer02}}}]
   Существует константа $C$ такая, что для всех $m, n$ при $m < n$ выполняется неравенство
   \begin{equation*}
-    | i_m - p_m | \leq C / \sqrt{n - m},
+    | x_m - p_m | \leq C / \sqrt{n - m},
   \end{equation*}
-  где $i_m$ "--- ставка первого игрока на $m$-м шаге игры.
+  где $x_m$ "--- ставка первого игрока на $m$-м шаге игры.
 \end{proposition}
 
 Обоснуем сделанные ранее предположения о непрерывной дифференцируемости функций $V_{1,n}(\cdot)$, $V_{1,n}^*(\cdot)$ и $W_{2,n}(\cdot)$.
@@ -1101,14 +1099,14 @@ $
 \item
   Согласно~\eqref{ch3:eq:f} находим 
   \[
-    i = f(u_1) = (u_1 - \DCo)^{-2} \int_\DCo^{u_1} 2 (v - \DCo) Q(v) \di v.
+    x = f(u_1) = (u_1 - \DCo)^{-2} \int_\DCo^{u_1} 2 (v - \DCo) Q(v) \di v.
   \]
-  Так как для расчета оптимальной ставки $i$ необходимо знать значение $f(u)$ лишь в одной точке $u$, оно может быть эффективно найдено численно.
+  Так как для расчета оптимальной ставки $x$ необходимо знать значение $f(u)$ лишь в одной точке $u$, оно может быть эффективно найдено численно.
 \item
   Находим $u_2$ как реализацию случайной величины $U_2$, распределенной равномерно на $[0, 1]$
 \item
   Из~\eqref{ch3:eq:h(u)} и теоремы~\ref{ch3:thm:optimal-strategies} следует, что выражения для $h$ и $f$ совпадают.
-  Таким образом, оптимальная ставка второго игрока $j = h(u_2) = f(u_2)$.
+  Таким образом, оптимальная ставка второго игрока $y = h(u_2) = f(u_2)$.
 \item
   Если $n = 1$, игра заканчивается после объявления ставок. В противном случае игроки переходят к игре $G_{n-1}(p^1)$, где $p^1 = Q(u_1)$.
 \end{enumerate}
