@@ -1,10 +1,10 @@
 \chapter{Теоретико-игровая модель биржевых торгов с непрерывными ставками} \label{chapt3}%
 {
-\newcommand{\Port}[1]{y_{#1}}
+\newcommand{\Port}[1]{\pi_{#1}}
 \newcommandx*\Ff[3][1={(f, Q)}, 2=n+1]{\ensuremath{F_{#2} \left(p, #1, #3 \right)}}
 \newcommand*\dualFPS{\ensuremath{(p,\ \sigma)}}
-\newcommandx*\dualg[4][1=n, 2={\dualFPS}, 3=x, 4=\tau]{\ensuremath{g^*_{#1}(#3, #2, #4)}}
-\newcommandx*\Gf[2][1=i, 2=\tau_1]{\ensuremath{G_{n+1} \left(x, #1, #2 \right)}}
+\newcommandx*\dualg[4][1=n, 2={\dualFPS}, 3=z, 4=\tau]{\ensuremath{g^*_{#1}(#3, #2, #4)}}
+\newcommandx*\Gf[2][1=i, 2=\tau_1]{\ensuremath{G_{n+1} \left(z, #1, #2 \right)}}
 
 В разделах~\ref{ch3:sec:model-descr} и~\ref{ch3:sec:formal-descr} приводится описание модели биржевых торгов с вещественными ставками и теоретико-игровая постановка основной задачи и двойственной к ней в смысле Де~Мейера.
 В разделе~\ref{ch3:sec:1st} получено решение одношаговой игры, на примере которой демонстрируются идеи, использованные при решении $n$-шаговой игры.
@@ -115,39 +115,39 @@
 
 В силу того, что игра с $p \in \{0, 1\}$ имеет тривиальное решение, дальнейшие построения будут проведены для значений $p \in (0, 1)$.
 
-\subsection{Определение двойственной игры $\mathbf{G^*_n(x)}$}
-Определим двойственную игру $G^*_n(x)$, следуя схеме из работы~\cite{demeyer02}.
+\subsection{Определение двойственной игры $\mathbf{G^*_n(z)}$}
+Определим двойственную игру $G^*_n(z)$, следуя схеме из работы~\cite{demeyer02}.
 Перед началом игры первый игрок выбирает текущее состояние $s \in S$; второй игрок не осведомлен о выборе первого.
-Если $s = H$, то первый вынужден заплатить второму штраф размера $x$ в конце игры.
-В остальном правила $G^*_n(x)$ аналогичны правилам $G_n(p)$.
+Если $s = H$, то первый вынужден заплатить второму штраф размера $z$ в конце игры.
+В остальном правила $G^*_n(z)$ аналогичны правилам $G_n(p)$.
 
 Стратегией первого игрока в двойственной игре является пара $\dualFPS$, где $p \in [0, 1]$, $\sigma \in \Sigma_n$.
 Множество стратегий второго игрока совпадает с $\Tau_n$.
 
 Выигрыш второго игрока, который он стремится максимизировать, определяется как
 \begin{equation*}
-  \dualg = x p - g_n(p, \sigma, \tau),
+  \dualg = z p - g_n(p, \sigma, \tau),
 \end{equation*}
 а верхнее и нижнее значения игры даются, соответственно, формулами
 \begin{equation*}
-  W_{1,n}(x) = \inf_{\dualFPS} \sup_\tau \dualg, \enskip
-  W_{2,n}(x) = \sup_\tau \inf_{\dualFPS} \dualg.
+  W_{1,n}(z) = \inf_{\dualFPS} \sup_\tau \dualg, \enskip
+  W_{2,n}(z) = \sup_\tau \inf_{\dualFPS} \dualg.
 \end{equation*}
-В том случае, когда $W_{1,n}(x) = W_{2,n}(x) = W_n(x)$, будем говорить, что игра имеет значение $W_n(x)$.
+В том случае, когда $W_{1,n}(z) = W_{2,n}(z) = W_n(z)$, будем говорить, что игра имеет значение $W_n(z)$.
 
 Обозначим выигрыши в состояниях $H$ и $L$ через
 \begin{equation*}
  g^H_1(\sigma_1, \tau_1) = g_1(1, \sigma_1, \tau_1), \enskip g^L_1(\sigma_1, \tau_1) = g_1(0, \sigma_1, \tau_1).
 \end{equation*}
-Аналогично предыдущему пункту, можно провести рассмотрение рекурсивной структуры игры $G^*_n(x)$ и получить следующий результат из \cite{demeyer02}.
+Аналогично предыдущему пункту, можно провести рассмотрение рекурсивной структуры игры $G^*_n(z)$ и получить следующий результат из \cite{demeyer02}.
 \begin{lemma}\label{ch3:lem:low-bound-dual:general}
-  Для любого $x \in \mathbb{R}$ выполняется неравенство
+  Для любого $z \in \mathbb{R}$ выполняется неравенство
   \begin{equation}\label{ch3:eq:low-bound-dual:general}
-    W_{2,n+1}(x) \geqslant \sup_{\tau_1} \inf_{i}
-    W_{2,n}(x - g^H_1(i, \tau_1) + g_1^L(i, \tau_1)) - g^L_1(i, \tau_1).
+    W_{2,n+1}(z) \geqslant \sup_{\tau_1} \inf_{i}
+    W_{2,n}(z - g^H_1(i, \tau_1) + g_1^L(i, \tau_1)) - g^L_1(i, \tau_1).
   \end{equation}
 \end{lemma}
-Отметим, что так как $W^*_0(x) = \phi(x) = \min(x, 0)$, формула имеет смысл для любого $n \geqslant 1$.
+Отметим, что так как $W^*_0(z) = \phi(z) = \min(z, 0)$, формула имеет смысл для любого $n \geqslant 1$.
 
 \section{Решение одношаговой игры}
 \label{ch3:sec:1st}
@@ -374,33 +374,33 @@
 \label{ch3:sec:value-bounds}
 
 В данном разделе будут построены выравнивающие стратегии первого и второго игроков в прямой и двойственной играх, соответственно.
-Будет показано, что несмотря на то, что по виду данные стратегии отличается от стратегий из \cite{demeyer02}, вид оценок на $V_{1,n}(p)$ и $W_{2,n}(x)$ остается неизменным.
-Отсюда будет следовать справедливость двойственных соотношений между $V_{1,n}(p)$ и $W_{2,n}(x)$, существование $V_n(p)$ и $W_n(x)$, формулы для их расчета, а также оптимальность построенных стратегий.
+Будет показано, что несмотря на то, что по виду данные стратегии отличается от стратегий из \cite{demeyer02}, вид оценок на $V_{1,n}(p)$ и $W_{2,n}(z)$ остается неизменным.
+Отсюда будет следовать справедливость двойственных соотношений между $V_{1,n}(p)$ и $W_{2,n}(z)$, существование $V_n(p)$ и $W_n(x)$, формулы для их расчета, а также оптимальность построенных стратегий.
 
 Нам потребуются некоторые определения и факты из выпуклого анализа.
 
 Пусть $f$ "--- вогнутая функция, определенная на прямой, причем $f$ может принимать значение $-\infty$.
 Функцией, сопряженной к $f$ в смысле Фенхеля, называется
 \begin{equation*}
-  f^*(x^*) = \inf \{ x^* \cdot x - f(x) \;|\; x \in \mathbb{R} \}.
+  f^*(v^*) = \inf \{ v^* v - f(v) \;|\; v \in \mathbb{R} \}.
 \end{equation*}
 Эффективное множество функции $f$ определяется следующим образом:
 \[
-\dom f = \{ x \;|\; f(x) > -\infty \}.
+\dom f = \{ v \;|\; f(v) > -\infty \}.
 \]
 Множество значений функции $f$ будем обозначать \[
-\range f = \{ f(x) \;|\; x \in \mathbb{R} \}.
+\range f = \{ f(v) \;|\; v \in \mathbb{R} \}.
 \]
 %
-Субдифференциалом функции $f$ в точке $x$ называется множество
+Субдифференциалом функции $f$ в точке $v$ называется множество
 \begin{equation*}
-  \partial f(x) =
-  \{ a \in \mathbb{R} \;|\; \forall y \in \mathbb{R}: f(y) \leqslant f(x) + a(y-x) \}.
+  \partial f(v) =
+  \{ a \in \mathbb{R} \;|\; \forall y \in \mathbb{R}: f(y) \leqslant f(v) + a(y-v) \}.
 \end{equation*}
 %
 Справедливо утверждение \cite[Теорема 23.5]{rockafellar73}:
 \begin{equation}\label{ch3:eq:subdiff-props}
-  x^* \in \partial f(x) \iff x \in \partial f^*(x^*).
+  v^* \in \partial f(v) \iff v \in \partial f^*(v^*).
 \end{equation}
 Кроме того, имеют место следующие включения \cite[\S~24]{rockafellar73}:
 \begin{equation}\label{ch3:eq:dual-range}
@@ -419,7 +419,7 @@
 
 Возьмем случайную величину $u$, равномерно распределенную на $[0, 1]$, и положим
 \begin{equation*}
-  f(u) = F^{-1}_{\sigma^M_1}(u) \eqdef \inf \{ x\ |\ F_{\sigma^M_1}(x) \geq u \}.
+  f(u) = F^{-1}_{\sigma^M_1}(u) \eqdef \inf \{ v\ |\ F_{\sigma^M_1}(v) \geq u \}.
 \end{equation*}
 Известно, что тогда случайные величины $f(u)$ и $i$ одинаково распределены.
 
@@ -567,7 +567,7 @@
 Отсюда
 \begin{equation}
   \label{ch3:eq:f}
-  f(u) = (u - \DCo)^{-2} \int_{\DCo}^u 2(x-\DCo) Q(x) \di x.\footnotemark
+  f(u) = (u - \DCo)^{-2} \int_{\DCo}^u 2(v-\DCo) Q(v) \di v.\footnotemark
   \footnotetext{
     При $u = \DCo$ функция $f(u)$ доопределяется по правилу Лопиталя как $Q(\DCo)$.
   }
@@ -682,7 +682,7 @@
   Далее, из \eqref{ch3:eq:f} вытекает, что $f(u)$ является математическим ожиданием $Q(X)$, где $X$ -- случайная величина, распределенная на отрезке $[\DCo, u]$ ($[u, \DCo]$) при $\DCo < u$ ($u < \DCo$) с плотностью $2|x-\DCo|/(u-\DCo)^2$.
   Следовательно, $f(\cdot)$ также принимает значения в $[0, 1]$.
 
-  Сделаем замену переменной $t = (x - \DCo)/(u - \DCo)$ в \eqref{ch3:eq:f}. Тогда
+  Сделаем замену переменной $t = (v - \DCo)/(u - \DCo)$ в \eqref{ch3:eq:f}. Тогда
   \begin{equation*}
     f(u) = \int_0^1 2 t Q \left( t(u - \DCo) + \DCo \right) \di t.
   \end{equation*}
@@ -717,14 +717,14 @@
   Тогда из \eqref{ch3:eq:f} имеем
   \begin{align*}
     f(u_2)
-    &= (u_2 - \DCo)^{-2} \int_\DCo^{u_2} 2 (x - \DCo) Q(x) \di x = \\
+    &= (u_2 - \DCo)^{-2} \int_\DCo^{u_2} 2 (v - \DCo) Q(v) \di v = \\
     &= (u_2 - \DCo)^{-2} \left(
-      \int_\DCo^{u_1} 2 (x - \DCo) Q(x) \di x \, +
-      \int_{u_1}^{u_2} 2 (x - \DCo) Q(x) \di x
+      \int_\DCo^{u_1} 2 (v - \DCo) Q(v) \di v \, +
+      \int_{u_1}^{u_2} 2 (v - \DCo) Q(v) \di v
       \right) = \\
     &= (u_2 - \DCo)^{-2} \left(
       (u_1 - \DCo)^2 f(u_1) +
-      \int_{u_1}^{u_2} 2 (x - \DCo) Q(u_1) \di x
+      \int_{u_1}^{u_2} 2 (v - \DCo) Q(u_1) \di v
       \right) = \\
     &= (u_2 - \DCo)^{-2} \left(
       (u_1 - \DCo)^2 f(u_1) +
@@ -775,8 +775,8 @@
   \end{align*}
   Пусть теперь $j = f(\alpha), \; \alpha \in [0, 1]$. Введем обозначения
   \[
-    \alpha^- = \inf \left\{ x \;|\; f(x) = f(\alpha) \right\}, \quad \alpha^+ =
-    \sup \left\{ x \;|\; f(x) = f(\alpha) \right\}.
+    \alpha^- = \inf \left\{ v \;|\; f(v) = f(\alpha) \right\}, \quad \alpha^+ =
+    \sup \left\{ v \;|\; f(v) = f(\alpha) \right\}.
   \]
   Подстановкой в~\eqref{ch3:eq:F(f,Q,p)} получаем
   \begin{multline}\label{ch3:eq:V-lower:alpha-0-1}
@@ -789,13 +789,13 @@
   Поэтому~\eqref{ch3:eq:V-lower:alpha-0-1} совпадает с~\eqref{ch3:eq:F(f,Q,fa)} и $\Ff{j} = \Phi(Q) = K^*(p)$ по построению.
 \end{proof}
 
-\subsection{Оценка нижнего значения $\mathbf{W_{2,n}(x)}$ игры $\mathbf{G^*_n(x)}$}
+\subsection{Оценка нижнего значения $\mathbf{W_{2,n}(z)}$ игры $\mathbf{G^*_n(z)}$}
 \label{ch3:sec:-dual-game}
 
 Аналогично тому, как это было сделано для первого игрока, параметризуем $\tau_1$ при помощи неубывающей функции $h: [0, 1] \rightarrow [0, 1]$.
-Если $F_{\tau_1}(x)$ "--- функция распределения ставки $j$ при применении вторым игроком стратегии $\tau_1$, то положим
+Если $F_{\tau_1}(y)$ "--- функция распределения ставки $j$ при применении вторым игроком стратегии $\tau_1$, то положим
 \begin{equation*}
-  h(u) = F^{-1}_{\tau_1}(u) \eqdef \inf \{ x | F_{\tau_1} \geq u \}.
+  h(u) = F^{-1}_{\tau_1}(u) \eqdef \inf \{ y\ |\ F_{\tau_1}(y) \geq u \}.
 \end{equation*}
 Тогда, если случайная величина $u$ равномерно распределена на $[0, 1]$, то $h(u)$ и $j$ имеют одинаковое распределение.
 
@@ -819,7 +819,7 @@
 \begin{multlined}
   \Gf[i][h] =
   W_{2,n}\left( 
-    x - \int_0^1 \left[ \Ind{h(u) < i} - \Ind{h(u) > i} \right] \di u
+    z - \int_0^1 \left[ \Ind{h(u) < i} - \Ind{h(u) > i} \right] \di u
   \right) \; - \\
   - \int_0^1 \left[ 
     \Ind{h(u) < i} (-\Co i - \DCo h(u)) + 
@@ -829,9 +829,9 @@
 \end{equation}
 
 \begin{lemma}\label{ch3:lem:W-low-bound:parameterized}
-  Для любого $x \in \mathbb{R}$ выполнено неравенство
+  Для любого $z \in \mathbb{R}$ выполнено неравенство
   \begin{equation*}
-    W_{2,n+1}(x) \geqslant \sup_h \inf_{i} \Gf[i][h].
+    W_{2,n+1}(z) \geqslant \sup_h \inf_{i} \Gf[i][h].
   \end{equation*}
 \end{lemma}
 
@@ -841,7 +841,7 @@
 \begin{equation}\label{ch3:eq:G(ha)}
 \begin{multlined}
   \Gf[h(\alpha)][h] =
-  W_{2,n}(x + 1 - 2\alpha) - \\
+  W_{2,n}(z + 1 - 2\alpha) - \\
   - \int_\alpha^1 \biggl( \DCo h(\alpha) + \Co h(u) \biggr) \di u +
   \int_0^\alpha \biggl( \Co h(\alpha) + \DCo h(u) \biggr) \di u.
 \end{multlined}
@@ -849,12 +849,12 @@
 не зависит от $\alpha$. Следовательно
 \begin{equation*}
   \frac{\partial G_{n+1}}{\partial \alpha} =
-  2h(\alpha) + (\alpha - \DCo)h'(\alpha) - 2 W_{2,n}'(x - 2\alpha + 1) = 0.
+  2h(\alpha) + (\alpha - \DCo)h'(\alpha) - 2 W_{2,n}'(z - 2\alpha + 1) = 0.
 \end{equation*}
 Отсюда
 \begin{equation}\label{ch3:eq:h(u)}
-  h(u) = 2(u - \DCo)^{-2} \int_\DCo^u (s - \DCo) W_{2,n}'(x - 2s + 1) \di s\footnotemark.
-  \footnotetext{При $u = \DCo$ доопределим $h(\DCo)$ по непрерывности как $W_{2,n}'(x - 2\DCo + 1)$.}
+  h(u) = 2(u - \DCo)^{-2} \int_\DCo^u (s - \DCo) W_{2,n}'(z - 2s + 1) \di s\footnotemark.
+  \footnotetext{При $u = \DCo$ доопределим $h(\DCo)$ по непрерывности как $W_{2,n}'(z - 2\DCo + 1)$.}
 \end{equation}
 Если подставить $h(u)$ в~\eqref{ch3:eq:G(ha)} то получившееся выражение, которое мы обозначим $\Psi(h)$, не зависит от $\alpha$.
 Доказательство следующей леммы аналогично доказательству леммы~\ref{ch3:lem:Phi}.
@@ -862,7 +862,7 @@
 \begin{lemma}
   Для значения $\Psi(h)$ справедливо равенство
   \begin{equation}
-    \Psi(h) = \int_0^1 W_{2,n}(x - 2s + 1) \di s.
+    \Psi(h) = \int_0^1 W_{2,n}(z - 2s + 1) \di s.
   \end{equation}
 \end{lemma}
 
@@ -877,15 +877,15 @@
   \item[$\bullet$] 
   $\forall u_1, u_2 \in [0, 1]: u_1 < u_2 \implies h(u_1) \leq h(u_2);$
   \item[$\bullet$] 
-  $h(u_1) = h(u_2) \implies h(u_1) = W_{2,n}'(x - 2u_1 + 1) = W_{2,n}'(x - 2u_2 + 1)$.
+  $h(u_1) = h(u_2) \implies h(u_1) = W_{2,n}'(z - 2u_1 + 1) = W_{2,n}'(z - 2u_2 + 1)$.
   \end{itemize}
   В частности, функция $h(\cdot)$ может служить параметризацией некоторой стратегии $\tau_1$ второго игрока.
 \end{lemma}
 
 \begin{theorem}\label{ch3:thm:W-bound}
-  Для гарантированного выигрыша второго игрока в игре $G_{n+1}^*(x)$ справедлива оценка
+  Для гарантированного выигрыша второго игрока в игре $G_{n+1}^*(z)$ справедлива оценка
   \begin{equation*}
-    W_{2,n+1}(x) \geqslant \int_0^1 W_{2,n}(x - 2s + 1) \di s.
+    W_{2,n+1}(z) \geqslant \int_0^1 W_{2,n}(z - 2s + 1) \di s.
   \end{equation*}
 \end{theorem}
 \begin{proof}
@@ -895,8 +895,8 @@
   При $i < h(0)$ из~\eqref{eq:W-low-bound:parameterized} и~\eqref{ch3:eq:G(ha)} получаем
   \begin{multline*}
     \Gf[i][h] =
-    W_{2,n}(x + 1) - \int_0^1 \left( \DCo i + \Co h(u) \right) \di u \geqslant \\
-    \geqslant W_{2,n}(x + 1) - \int_0^1 \left( \DCo h(0) + \Co h(1) \right) \di
+    W_{2,n}(z + 1) - \int_0^1 \left( \DCo i + \Co h(u) \right) \di u \geqslant \\
+    \geqslant W_{2,n}(z + 1) - \int_0^1 \left( \DCo h(0) + \Co h(1) \right) \di
     u = \Gf[h(0)][h] = \Psi(h).
   \end{multline*}
 
@@ -904,36 +904,36 @@
 
   Пусть теперь $i = h(\alpha), \; \alpha \in [0, 1]$. Введем обозначения
   \[
-    \alpha^- = \inf \left\{ x \;|\; h(x) = h(\alpha) \right\}, \quad \alpha^+ =
-    \sup \left\{ x \;|\; h(x) = h(\alpha) \right\}.
+    \alpha^- = \inf \left\{ v \;|\; h(v) = h(\alpha) \right\}, \quad \alpha^+ =
+    \sup \left\{ v \;|\; h(v) = h(\alpha) \right\}.
   \]
   
   Из~\eqref{eq:W-low-bound:parameterized} находим
   \begin{multline}\label{ch3:eq:g+-}
-    \Gf[i][h] = W_{2,n}(x + 1 - \alpha^- - \alpha^+) \enskip - \\
+    \Gf[i][h] = W_{2,n}(z + 1 - \alpha^- - \alpha^+) \enskip - \\
     - \int_0^{\alpha^-} \left(-\Co i - \DCo h(u)\right) \di u -
     \int_{\alpha^+}^1 \left(\DCo i + \Co h(u)\right) \di u.
   \end{multline}
   Поскольку $W_{2,n}(\cdot)$ "--- дифференцируемая вогнутая функция, верно неравенство
   \begin{multline*}
-    W_{2,n}(x + 1 - 2\alpha) \leqslant W_{2,n}(x + 1 - \alpha^- - \alpha^+) \enskip +\\
-    + W_{2,n}'(x + 1 - \alpha^- - \alpha^+) \left( [ \alpha^+ - \alpha ] + [
+    W_{2,n}(z + 1 - 2\alpha) \leqslant W_{2,n}(z + 1 - \alpha^- - \alpha^+) \enskip +\\
+    + W_{2,n}'(z + 1 - \alpha^- - \alpha^+) \left( [ \alpha^+ - \alpha ] + [
       \alpha^- - \alpha ] \right).
   \end{multline*}
   Из леммы~\ref{ch3:lem:h(u)-props} при $u_1 = (\alpha^- + \alpha^+)/2,\: u_2 = \alpha$ следует, что
   \[
-    W_{2,n}'(x + 1 - \alpha^- - \alpha^+) = W_{2,n}'(x + 1 - 2\alpha) =
+    W_{2,n}'(z + 1 - \alpha^- - \alpha^+) = W_{2,n}'(z + 1 - 2\alpha) =
     h(\alpha).
   \]
   Так как $h(u)$ постоянна на $[\alpha^-, \alpha^+]$ и $h(\alpha) = i$ имеем
   \begin{multline*}
-    W_{2,n}(x + 1 - \alpha^- - \alpha^+) \geqslant W_{2,n}(x + 1 - 2\alpha) - \\
+    W_{2,n}(z + 1 - \alpha^- - \alpha^+) \geqslant W_{2,n}(z + 1 - 2\alpha) - \\
     - \int_\alpha^{\alpha^+} \left( \DCo i + \Co h(u) \right) \di u +
     \int_{\alpha^-}^\alpha \left( \Co i + \DCo h(u) \right) \di u.
   \end{multline*}
-  Используя оценку на $W_{2,n}(x + 1 - \alpha^- - \alpha^+)$ в \eqref{ch3:eq:g+-}, получаем
+  Используя оценку на $W_{2,n}(z + 1 - \alpha^- - \alpha^+)$ в \eqref{ch3:eq:g+-}, получаем
   \begin{multline*}
-    \Gf[i][h] \geqslant W_{2,n}(x + 1 - 2\alpha)
+    \Gf[i][h] \geqslant W_{2,n}(z + 1 - 2\alpha)
     - \int_\alpha^1 \biggl( \DCo h(\alpha) + \Co h(u) \biggr) \di u \; + \\
     + \int_0^\alpha \biggl( \Co h(\alpha) + \DCo h(u) \biggr) \di u =
     \Gf[h(\alpha)][h] = \Psi(h).
@@ -944,28 +944,28 @@
 \section{Значение игры $\mathbf{G_n\left(p\right)}$}
 \label{ch3:sec:game-value}
 
-Поскольку выражения для нижних оценок в теоремах~\ref{ch3:thm:V-bound} и~\ref{ch3:thm:W-bound} совпадают с аналогичными выражениями в \cite{demeyer02}, справедливы все двойственные соотношения между $V_{1,n}(p)$ и $W_{2,n}(x)$, а также утверждения относительно оптимальности стратегий.
+Поскольку выражения для нижних оценок в теоремах~\ref{ch3:thm:V-bound} и~\ref{ch3:thm:W-bound} совпадают с аналогичными выражениями в \cite{demeyer02}, справедливы все двойственные соотношения между $V_{1,n}(p)$ и $W_{2,n}(z)$, а также утверждения относительно оптимальности стратегий.
 Приведем соответствующие теоремы.
 
 \begin{theorem}
-  Для всех $x \in \mathbb{R}$ выполнено
+  Для всех $z \in \mathbb{R}$ выполнено
   \begin{equation}\label{ch3:eq:duality-relationships}
-    V_{1,n}^*(x) = W_{1,n}(x) = V_{2,n}^*(x) = W_{2,n}(x).
+    V_{1,n}^*(z) = W_{1,n}(z) = V_{2,n}^*(z) = W_{2,n}(z).
   \end{equation}
-  Таким образом, игры $G_n(p)$ и $G_n^*(x)$ имеют значения $V_n(p)$ и $W_n(x)$ соответственно.
+  Таким образом, игры $G_n(p)$ и $G_n^*(z)$ имеют значения $V_n(p)$ и $W_n(z)$ соответственно.
   Кроме того,
   \begin{equation}\label{ch3:eq:W-recursive}
-    W_{n+1}(x) = \int_0^1 W_n(x - 2u + 1) \di u.
+    W_{n+1}(z) = \int_0^1 W_n(z - 2u + 1) \di u.
   \end{equation}
 \end{theorem}
 
 \begin{theorem}\label{ch3:thm:optimal-strategies}
-  Стратегии $\sigma$ и $\tau$ являются оптимальными в игре $G_n(p)$ тогда и только тогда, когда $(p, \sigma),$ $\tau$ являются оптимальными при $x = V_n'(p)$ в игре $G_n^*(x)$.
+  Стратегии $\sigma$ и $\tau$ являются оптимальными в игре $G_n(p)$ тогда и только тогда, когда $(p, \sigma),$ $\tau$ являются оптимальными при $z = V_n'(p)$ в игре $G_n^*(z)$.
 \end{theorem}
 
 \begin{corollary}
   \label{ch3:cor:value-indep-beta}
-  Значения игр $G^\Co_n(p)$ и $G^{*\Co}_n(x)$ не зависят от коэффициента $\Co$.
+  Значения игр $G^\Co_n(p)$ и $G^{\Co*}_n(z)$ не зависят от коэффициента $\Co$.
 \end{corollary}
 
 Нужно отметить, что в силу следствия~\ref{ch3:cor:value-indep-beta} содержание утверждений об асимптотике значения игры и динамике апостериорных вероятностей справедливо и для данной модели без каких-либо изменений.
@@ -975,18 +975,18 @@
 Также введем обозначение $\psi_n(p) = V_n(p)/\sqrt{n}$.
 
 \begin{proposition}[{{\cite[Следствие 3]{demeyer02}}}]
-Пусть величина $x_p$ определяется из условия 
+Пусть величина $v_p$ определяется из условия 
 $
-  p~=~\int_{x_p}^\infty f_n(s) \di s.
+  p~=~\int_{v_p}^\infty f_n(s) \di s.
 $
 Тогда справедливы равенства
 \begin{equation*}
-  \psi_n(p) = \int_{x_p}^\infty s f_n(s) \di s, \enskip
-  \psi'_n(p) = x_p.
+  \psi_n(p) = \int_{v_p}^\infty s f_n(s) \di s, \enskip
+  \psi'_n(p) = v_p.
 \end{equation*}
 \end{proposition}
 
-Введем обозначение $\psi^*(x) = \E \min(0, x + Z/\sqrt{3})$, где $Z$ "--- случайная величина, имеющая стандартное нормальное распределение.
+Введем обозначение $\psi^*(v) = \E \min(0, v + Z/\sqrt{3})$, где $Z$ "--- случайная величина, имеющая стандартное нормальное распределение.
 
 \begin{proposition}[{{\cite[Следствие 4]{demeyer02}}}]
 Последовательности функций $\psi^*_n$ и $\psi^{*\prime}_n$ сходятся равномерно к $\psi^*$ и $\psi^{*\prime}$ соответственно.
@@ -1004,10 +1004,10 @@ $
   Случайный процесс $p^n$ при $n \rightarrow \infty$ сходится в смысле конечномерных распределений к процессу $\pi$, который определяется следующим образом:
   \begin{align*}
     \pi_t &= \psi^{*\prime} \left(
-      \frac{x_p - B_t/\sqrt{3}}{\sqrt{1-t}}
+      \frac{v_p - B_t/\sqrt{3}}{\sqrt{1-t}}
     \right) =
     F\left( \frac{z_p - B_t}{\sqrt{1-t}} \right),\\
-    F(x) &= \int_{-\infty}^x e^{-z^2/2}/\sqrt{2\pi} \di s,
+    F(v) &= \int_{-\infty}^v e^{-z^2/2}/\sqrt{2\pi} \di z,
   \end{align*}
   где $B$ "--- стандартный винеровский процесс, а $z_p$ удовлетворяет $F(z_p) = p$.
 \end{proposition}
@@ -1025,29 +1025,29 @@ $
 \begin{proposition}
   При любом $n \geqslant 1$ функция $W_n(\cdot)$ является непрерывно дифференцируемой на $\mathbb{R}$.
 \end{proposition}
-Это сразу следует из формулы~\eqref{ch3:eq:W-recursive} и того, что $W_0(x) = \min(x, 0)$.
-Рассмотрим подробнее, как ведет себя $W_n'(x)$.
+Это сразу следует из формулы~\eqref{ch3:eq:W-recursive} и того, что $W_0(z) = \min(z, 0)$.
+Рассмотрим подробнее, как ведет себя $W_n'(z)$.
 
 \begin{lemma}\label{ch3:lem:W'-props}
   Для любого $n \geqslant 1$ выполняется\textnormal{:}
   \begin{enumerate}
-  \item $W_n'(x) = 1$ при $x \in (-\infty, -n];$
-  \item $W_n'(x) = 0$ при $x \in [n, \infty);$
-  \item $W_n'(x)$ убывает при $x \in [-n, n].$
+  \item $W_n'(z) = 1$ при $z \in (-\infty, -n];$
+  \item $W_n'(z) = 0$ при $z \in [n, \infty);$
+  \item $W_n'(z)$ убывает при $z \in [-n, n].$
   \end{enumerate}
 \end{lemma}
 \begin{proof}
   Из~\eqref{ch3:eq:W-recursive} следует, что
   \begin{equation}\label{ch3:eq:W'-recursive}
-    W_{n+1}'(x) = \frac{1}{2} \left( W_n(x + 1) - W_n(x - 1) \right).
+    W_{n+1}'(z) = \frac{1}{2} \left( W_n(z + 1) - W_n(z - 1) \right).
   \end{equation}
   Отсюда
   \begin{equation}\label{ch3:eq:W1'}
-    W_1'(x) =
+    W_1'(z) =
     \begin{cases}
-      1, &x < -1, \\
-      (1-x)/2,  &-1 \leqslant x \leqslant 1, \\
-      0, &x > 1.
+      1, &z < -1, \\
+      (1-z)/2,  &-1 \leqslant z \leqslant 1, \\
+      0, &z > 1.
     \end{cases}
   \end{equation}
   Таким образом, утверждение леммы верно при $n = 1$.
@@ -1055,14 +1055,14 @@ $
 
   Из~\eqref{ch3:eq:W'-recursive} следует, что для некоторого $\Theta \in (-1,1)$ верно равенство
   \[
-    W_{N+1}'(x) = W_{N}'(x + \Theta).
+    W_{N+1}'(z) = W_{N}'(z + \Theta).
   \]
   Отсюда получаем справедливость первых двух утверждений леммы.
   Далее, из~\eqref{ch3:eq:W'-recursive} получаем 
   \[
-    W_{N+1}''(x) = 1/2 \left( W_{N}'(x + 1) - W_{N}'(x - 1) \right).
+    W_{N+1}''(z) = 1/2 \left( W_{N}'(z + 1) - W_{N}'(z - 1) \right).
   \]
-  Так как $W_N'(x)$ убывает на $[-N, N]$, то $W_N'(x + 1)$ убывает на $[-N-1, N - 1]$, $W_N'(x - 1)$ убывает на $[-N + 1, N+1]$, а значит $W_{N+1}''(x)$ отрицательна при $x \in [-N-1, N+1]$.
+  Так как $W_N'(z)$ убывает на $[-N, N]$, то $W_N'(z + 1)$ убывает на $[-N-1, N - 1]$, $W_N'(z - 1)$ убывает на $[-N + 1, N+1]$, а значит $W_{N+1}''(z)$ отрицательна при $z \in [-N-1, N+1]$.
   Отсюда получаем третье утверждение леммы.
 \end{proof}
 
@@ -1072,7 +1072,7 @@ $
 \begin{proof}
   Из~\eqref{ch3:eq:subdiff-props} следует, что
   \begin{equation*}
-    x_1^* \neq x_2^* \in \partial V_n(p) \iff p = W_n'(x_1^*) = W_n'(x_2^*).
+    z_1^* \neq z_2^* \in \partial V_n(p) \iff p = W_n'(z_1^*) = W_n'(z_2^*).
   \end{equation*}
   Однако по лемме~\ref{ch3:lem:W'-props} функция $W_n'(\cdot)$ убывает от $1$ до $0$.
   Следовательно $\partial V_n(\cdot)$ содержит только одно значение в каждой точке отрезка $[0, 1]$, что эквивалентно дифференцируемости $V_n(\cdot)$.
@@ -1101,7 +1101,7 @@ $
 \item
   Согласно~\eqref{ch3:eq:f} находим 
   \[
-    i = f(u_1) = (u_1 - \DCo)^{-2} \int_\DCo^{u_1} 2 (x - \DCo) Q(x) \di x.
+    i = f(u_1) = (u_1 - \DCo)^{-2} \int_\DCo^{u_1} 2 (v - \DCo) Q(v) \di v.
   \]
   Так как для расчета оптимальной ставки $i$ необходимо знать значение $f(u)$ лишь в одной точке $u$, оно может быть эффективно найдено численно.
 \item
@@ -1131,7 +1131,7 @@ $
   \begin{align*}
     f(u) 
     &=
-      (u - \DCo)^{-2} \int_{1-p}^u 2 (x - \DCo) Q(x) \di x = \\
+      (u - \DCo)^{-2} \int_{1-p}^u 2 (v - \DCo) Q(v) \di v = \\
     &=
       \begin{cases}
         0, &\; u \leqslant 1 - p,\\
@@ -1141,8 +1141,8 @@ $
   При $p > \Co$ получаем
   \begin{equation*}
     f(u)= \begin{cases}
-      {\displaystyle (u-\DCo)^{-2} \int_\DCo^{1-p} 2 (x - \DCo) \di x},\ & u \leq 1 - p,\\
-      {\displaystyle (u - \DCo)^{-2} \int_\DCo^u 2 (x - \DCo) \di x},\ & u > 1 - p.
+      {\displaystyle (u-\DCo)^{-2} \int_\DCo^{1-p} 2 (v - \DCo) \di v},\ & u \leq 1 - p,\\
+      {\displaystyle (u - \DCo)^{-2} \int_\DCo^u 2 (v - \DCo) \di v},\ & u > 1 - p.
     \end{cases}                                                     
   \end{equation*}
   Отсюда
@@ -1158,27 +1158,27 @@ $
   Найдем оптимальные $f$ и $Q$ в игре $G_2(p)$.
   Из~\eqref{ch3:eq:W1'} получаем
   \begin{equation*}
-    W_1(x) = \begin{cases}
-      x, &\; x \leqslant -1,\\
-      1/4 (-1 + 2x - x^2), &\; -1 < x < 1,\\
-      0, &\; x \geqslant 1.
+    W_1(z) = \begin{cases}
+      z, &\; z \leqslant -1,\\
+      1/4 (-1 + 2z - z^2), &\; -1 < z < 1,\\
+      0, &\; z \geqslant 1.
     \end{cases}
   \end{equation*}
   Отсюда по формуле~\eqref{ch3:eq:W'-recursive} находим
   \begin{align*}
-    W'_2(x) 
-    &= \frac{1}{2} \left( W_1(x+1) - W_1(x-1) \right) =\\
+    W'_2(z) 
+    &= \frac{1}{2} \left( W_1(z+1) - W_1(z-1) \right) =\\
     &= \begin{cases}
-      1, &\; x < -2,\\
-      (4 - 4x - x^2)/8, &\; -2 \leqslant x < 0,\\
-      (x - 2)^2/8, &\; 0 \leqslant x < 2,\\
-      0, &\; x \geqslant 2.
+      1, &\; z < -2,\\
+      (4 - 4z - z^2)/8, &\; -2 \leqslant z < 0,\\
+      (z - 2)^2/8, &\; 0 \leqslant z < 2,\\
+      0, &\; z \geqslant 2.
     \end{cases}
   \end{align*}
 
   \begin{figure}[hbt]
     \centering \input{figures/ch3-w2}
-    \caption{График функции $W_2'(x)$}
+    \caption{График функции $W_2'(z)$}
     \label{ch3:fig:W2}
   \end{figure}
 
@@ -1208,18 +1208,18 @@ $
   Если $u < \sqrt{2 - 2p}$, то тогда выражение для $f(u)$ приобретает вид
   \begin{equation*}
     f(u) = (u-\DCo)^{-2} \left( 
-      \int_\DCo^{\sqrt{2-2p}} 2(x-\DCo) \di x +
-      \int_{\sqrt{2-2p}}^u 2(x-\DCo) (1-\sqrt{2 - 2p} + x) \di x
+      \int_\DCo^{\sqrt{2-2p}} 2(v-\DCo) \di v +
+      \int_{\sqrt{2-2p}}^u 2(v-\DCo) (1-\sqrt{2 - 2p} + v) \di v
     \right).
   \end{equation*}
   Обозначим через $t$ выражение $\sqrt{2-2p}$.
   Тогда для первого слагаемого получим
   \begin{equation*}
-      \int_\DCo^t 2(x-\DCo) \di x = (\DCo - t)^2.
+      \int_\DCo^t 2(v-\DCo) \di v = (\DCo - t)^2.
   \end{equation*}
   Для второго слагаемого находим
   \begin{equation*}
-    \int_t^u 2(x - \DCo) (1 - t + x) \di x = \frac{1}{3} (t - u)(t^2 - t(3-u) - u(3 + 2u) + 3(2-t+u)\DCo).
+    \int_t^u 2(v - \DCo) (1 - t + v) \di v = \frac{1}{3} (t - u)(t^2 - t(3-u) - u(3 + 2u) + 3(2-t+u)\DCo).
   \end{equation*}
   Отсюда, получаем для $f(u)$ следующее выражение
   \begin{equation*}
@@ -1251,7 +1251,7 @@ $
   При $u > 1 - \sqrt{2p}$ находим
   \begin{align*}
     f(u) 
-    &= (u-\DCo)^{-2} \int_{1-\sqrt{2p}}^u 2 (x-\DCo) (1-\sqrt{2p}+x) \di x = \\
+    &= (u-\DCo)^{-2} \int_{1-\sqrt{2p}}^u 2 (v-\DCo) (1-\sqrt{2p}+v) \di v = \\
     &= \frac{(u - 1 + \sqrt{2p})(2(u^2 + u - 2) + 10p - \sqrt{2p}(1+5u+9\Co) + 3(3+u)\Co)}{3(u-\DCo)^2}.
   \end{align*}
   При $\DCo > 1 - \sqrt{2p}$ для $f$ имеет место следующая формула
