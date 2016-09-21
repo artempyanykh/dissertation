@@ -1,23 +1,4 @@
 #+STARTUP: content
-* Notation
-
-| Meaning                             | Ch.1.1       | Ch1.2+           | Ch.2                  | Ch.3   |
-|-------------------------------------+--------------+------------------+-----------------------+--------|
-| A priori distribution               | \overline{p} | p                | \overline{p}          |        |
-| A priori distribution component     | p(s)         | p(s)             |                       |        |
-| A posteriori distribution           | -            | -                | \p^i                  |        |
-| A posteriori distribution component | -            | p(s\i)           | p^{s\i}               |        |
-| Full probability of action i        | -            | q_i              | \q^i                  |        |
-| Lower bound                         | -            | L^m_n(p)         | L^\beta_n(\p, \sigma) |        |
-| Payoffs                             |              | A^{s,\beta)(i,j) | a^{s,\beta}(i,j)      |        |
-| First player strategy n-stages      | \sigma       | \sigma           | \sigmav               | \sigma |
-| First player strategy at i^th stage | \sigma_i     | \sigma_i         | \sigma_i              | ?      |
-| One-stage strategy                  | -            | \sigma_1         | \sigma                |        |
-| One stage strategy component        | -            | \sigma^s_{1,i}   | \sigma^s_i            |        |
-| Strategy tail                       | -            | \sigma(i)        | \sigmav^i             |        |
-|                                     |              |                  |                       |        |
-
-
 * Synopsis
 ** Chapter 1
 *** DONE Outline the structure of chapter 1
@@ -28,7 +9,6 @@ CLOSED: [2016-09-16 Fri 14:55]
 ** Misc
 *** DONE Fix numbering (theorem envs.)
 CLOSED: [2016-09-16 Fri 11:21]
-* 
 
 * Dissertation
 ** Activities
@@ -44,8 +24,10 @@ CLOCK: [2016-09-06 Tue 13:20]--[2016-09-06 Tue 13:44] =>  0:24
 CLOCK: [2016-09-06 Tue 12:58]--[2016-09-06 Tue 13:06] =>  0:08
 :END:
 *** Chapter 1
-**** TODO Address VV comments
-**** TODO Change notation L^m_n(p) (explicitly add a strategy)
+**** DONE Address VV comments
+CLOSED: [2016-09-20 Tue 13:36]
+**** DONE Change notation L^m_n(p) (explicitly add a strategy)
+CLOSED: [2016-09-20 Tue 13:36]
 L^\beta_n(\p, \sigma) во второй главе.
 *** Chapter 2
 **** DONE Finish moving chapter 2 from UBS
@@ -61,6 +43,7 @@ CLOCK: [2016-09-03 Sat 13:33]--[2016-09-03 Sat 13:34] =>  0:01
 :END:
 *** Chapter 3
 **** TODO Write about a structure of W' (photo from VV)
+**** TODO Address VV comments
 *** Other
 **** DONE Fix acronyms
 CLOSED: [2016-09-06 Tue 12:50]
@@ -68,7 +51,7 @@ CLOSED: [2016-09-06 Tue 12:50]
 CLOCK: [2016-09-05 Mon 22:54]--[2016-09-05 Mon 23:17] =>  0:23
 :END:
 **** TODO Change the title and main results
-
+**** TODO Adjust the conclusion with regard to VV comments
 * Refinements
 - [ ] Add "Э.Г. Давыдов. Исследование операций"
 - [X] Add Kohlberg, Heuer, Mertens/Zamir (1976)
@@ -76,7 +59,6 @@ CLOCK: [2016-09-05 Mon 22:54]--[2016-09-05 Mon 23:17] =>  0:23
 - [X] Write an intro to ch2
 - [X] Fix tables in ch2
 - [X] Fix 'Из леммы~\ref{ch3:lower-bound:eq:K1(q,pi)}'
-
 
 * Survey structure
 :PROPERTIES:
@@ -615,21 +597,6 @@ CLOSED: [2016-09-09 Fri 14:37]
 ***** Kreps (2009) Control theory and systems (m <= 3)
 ***** Sandomirskaya (2013) Dissertation (error term)
 
-
-* Part 1 structure
-** Основные понятия
-** Описание модели
-** Определение игры G_n^m(p)
-** Оценка сверху
-** Оценка снизу
-** Значение игры G_\infty^m(p)
-** Динамика апостериорных вероятностей
-
 * Defense
 ** Шестаков Олег Владимирович (секретарь совета)
 *** +7 (903) 535-67-65
-** Заключение
-** TODO Позвонить АА насчет подачи (напряженно с подачей документов)
-** TODO Послать письмо Наталье Михайловне по поводу названия и основных результатов
-
-

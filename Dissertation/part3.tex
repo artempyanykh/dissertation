@@ -1,10 +1,15 @@
 \chapter{Теоретико-игровая модель биржевых торгов с непрерывными ставками} \label{chapt3}%
 {
-\newcommand{\Port}[1]{\pi_{#1}}
-\newcommandx*\Ff[3][1={(f, Q)}, 2=n+1]{\ensuremath{F_{#2} \left(p, #1, #3 \right)}}
+\newcommand{\Port}[1]{\ensuremath{\pi_{#1}}}
+\newcommandx*\Ff[3][1={(f, Q)}, 2=n+1]{\ensuremath{F_{#2} \left(p, {#1}, {#3} \right)}}
 \newcommand*\dualFPS{\ensuremath{(p,\ \sigma)}}
-\newcommandx*\dualg[4][1=n, 2={\dualFPS}, 3=z, 4=\tau]{\ensuremath{g^*_{#1}(#3, #2, #4)}}
-\newcommandx*\Gf[2][1=x, 2=\tau_1]{\ensuremath{G_{n+1} \left(z, #1, #2 \right)}}
+\newcommandx*\dualg[4][1=n, 2={\dualFPS}, 3=z, 4=\tau]{\ensuremath{g^*_{#1}({#3}, {#2}, {#4})}}
+\newcommandx*\Gf[2][1=x, 2=\tau_1]{\ensuremath{G_{n+1} \left(z, {#1}, {#2} \right)}}
+
+\DeclareDocumentCommand{\LV}{O{} m}{\ensuremath{\underline{V}^{#1}_{#2}}}
+\DeclareDocumentCommand{\HV}{O{} m}{\ensuremath{\overbar{V}^{#1}_{#2}}}
+\DeclareDocumentCommand{\HW}{O{} m}{\ensuremath{\overbar{W}^{#1}_{#2}}}
+\DeclareDocumentCommand{\LW}{O{} m}{\ensuremath{\underline{W}^{#1}_{#2}}}
 
 В разделах~\ref{ch3:sec:model-descr} и~\ref{ch3:sec:formal-descr} приводится описание модели биржевых торгов с вещественными ставками и теоретико-игровая постановка основной задачи и двойственной к ней в смысле Де~Мейера.
 В разделе~\ref{ch3:sec:1st} получено решение одношаговой игры, на примере которой демонстрируются идеи, использованные при решении $n$-шаговой игры.
@@ -49,7 +54,7 @@
 Ниже мы рассмотрим теоретико-игровую постановку основной задачи и двойственной к ней в смысле Де~Мейера, которые мы будем называть прямой и двойственной играми соответственно.
 Как отмечено в \cite{demeyer02}, прямая (двойственная) игра больше подходит для построения оптимальной стратегии первого (второго) игрока.
 
-\subsection{Определение прямой игры $\mathbf{G_n(p)}$}
+\subsection{Определение прямой игры $\mathbf{ G_{n}(p) }$}
 Прямая игра описывает взаимодействие между агентами, соответствующее оригинальной модели биржевых торгов.
 Так же перед началом игры ходом случая определяется $s \in S$ таким образом, что $P(s = H) = p, \; P(s = L) = 1-p$.
 Выбранное $s$ сообщается первому игроку (инсайдеру), второй игрок при этом не осведомлен о настоящем значении $s$ и знает только вероятности выбора случаем того или иного состояния.
@@ -63,34 +68,36 @@
 Пара стратегий $(\sigma, \tau)$ вместе с ходом случая индуцирует на $S \times H_n$ вероятностное распределение $\Pi[p, \sigma, \tau]$.
 Тогда выигрыш первого игрока равен
 \[
-  g^\Co_n(p, \sigma, \tau) = \E_{\Pi[p, \sigma, \tau]} V(\Port{n}).
+  g^\Co_n(p, \sigma, \tau) = \E_{( p, \sigma, \tau )} V(\Port{n}).
 \]
 Выигрыш второго игрока при этом равен $-g^\Co_n(p, \sigma, \tau)$.
 
 Полученную игру обозначим через $G^\Co_n(p)$. 
 Ее нижнее и верхнее значения даются формулами
 \begin{align*}
-  V^\Co_{1,n}(p) = \sup_\sigma \inf_\tau g^\Co_n(p, \sigma, \tau), \quad
-  V^\Co_{2,n}(p) = \inf_\tau \sup_\sigma g^\Co_n(p, \sigma, \tau).
+  \LV[\Co]{n}(p) = \sup_\sigma \inf_\tau g^\Co_n(p, \sigma, \tau), \quad
+  \HV[\Co]{n}(p) = \inf_\tau \sup_\sigma g^\Co_n(p, \sigma, \tau).
 \end{align*}
-В том случае, когда $V^\Co_{1,n}(p) = V^\Co_{2,n}(p) = V^\Co_n(p)$, будем говорить, что игра имеет значение $V_n(p)$.
-При этом стратегии $\sigma^*$ и $\tau^*$ называются оптимальными, если
+В том случае, когда $\LV[\Co]{n}(p) = \HV[\Co]{n}(p) = V^\Co_n(p)$, будем говорить, что игра имеет значение $V_n(p)$.
+При этом стратегии $\sigma^0$ и $\tau^0$ называются оптимальными, если
 \[
-  \inf_\tau g^\Co_n(p, \sigma^*, \tau) = V^\Co_{1,n}(p), \enskip 
-  \sup_\sigma g^\Co_n(p, \sigma, \tau^*) = V_{2,n}(p).
+  \inf_\tau g^\Co_n(p, \sigma^0, \tau) = \LV[\Co]{n}(p), \enskip 
+  \sup_\sigma g^\Co_n(p, \sigma, \tau^0) = \HV[\Co]{n}(p).
 \]
 В дальнейшем верхний индекс $\Co$ мы будем часто опускать.
 
 В работе \cite{demeyer02} показано, что игра $G_n(p)$ имеет рекурсивную структуру аналогичную структуре повторяющейся игры из главы~\ref{chapt1}.
 Соответственно, рассмотрим стратегию $\sigma$ первого игрока как пару $(\sigma_1, \tilde{\sigma})$, где $\sigma_1$ -- ход игрока на первом шаге игры, а $\tilde{\sigma}$ -- стратегия в игре продолжительности $n$, зависящая от ставок $(x, y)$ на первом шаге.
 Аналогично стратегию $\tau$ второго игрока можно представить как пару $(\tau_1, \tilde{\tau})$.
+Случайные величины ставок, имеющих распределения $\sigma_1$ и $\tau_1$, обозначим через $X$ и $Y$ соответственно.
 
 Приведем несколько известных фактов, которые понадобятся нам в дальнейшем.
 
 Пара $(\sigma_1, \tau_1)$ вместе с ходом случая индуцирует вероятностное распределение $\Pi[p, \sigma_1, \tau_1]$ на $S \times I \times J$.
+Случайные величины ставок, имеющих распределения $\sigma_1$ и $\tau_1$, обозначим через $X$ и $Y$ соо
 Обозначим через
 \[
-  p(i) = \Pi[p, \sigma_1](s = H \; | \; x)
+  p(x) = \Pi[p, \sigma_1](s = H\ |\ X = x)
 \]
 апостериорную вероятность состояния $H$ при условии, что первый игрок сделал ставку $x$.
 Отметим, что апостериорная вероятность не зависит от ставки второго игрока $y$, так как она не зависит от $s$.
@@ -99,23 +106,23 @@
   g_{n+1}(p, \sigma, \tau) 
   &= 
     g_1(p, \sigma_1, \tau_1) +
-    \E_{\Pi[p, \sigma_1, \tau_1]}
+    \E_{( p, \sigma_1, \tau_1 )}
     g_n(p(X), \tilde{\sigma}(X, Y), \tilde{\tau}(X, Y)).
 \end{align*}
-Отсюда вытекает справедливость следующего утверждения для нижнего значения игры (\seename \cite{demeyer02}).
+Отсюда вытекает справедливость следующего утверждения для нижнего значения игры (\seename~\cite{demeyer02}).
 \begin{lemma}
   \label{ch3:lem:low-bound-primal}
   Для любого $p \in [0, 1]$ выполняется неравенство
   \begin{equation}
-    V_{1,n+1}(p) \geqslant \sup_{\sigma_1} \inf_{y} g_1(p, \sigma_1, y)
-    + \E_{\Pi[p, \sigma_1]} V_{1,n}\left( p(X) \right).
+    \LV{n+1}(p) \geqslant \sup_{\sigma_1} \inf_{y} g_1(p, \sigma_1, y)
+    + \E_{( p, \sigma_1 )} \LV{n}\left( p(X) \right).
   \end{equation}
 \end{lemma}
 Подчеркнем, что поскольку можно положить $V_0(p) = 0$, данная формула имеет смысл для любого $n \geqslant 1$.
 
 В силу того, что игра с $p \in \{0, 1\}$ имеет тривиальное решение, дальнейшие построения будут проведены для значений $p \in (0, 1)$.
 
-\subsection{Определение двойственной игры $\mathbf{G^*_n(z)}$}
+\subsection{Определение двойственной игры $\mathbf{ G^{*}_{n}(z) }$}
 Определим двойственную игру $G^*_n(z)$, следуя схеме из работы~\cite{demeyer02}.
 Перед началом игры первый игрок выбирает текущее состояние $s \in S$; второй игрок не осведомлен о выборе первого.
 Если $s = H$, то первый вынужден заплатить второму штраф размера $z$ в конце игры.
@@ -130,10 +137,10 @@
 \end{equation*}
 а верхнее и нижнее значения игры даются, соответственно, формулами
 \begin{equation*}
-  W_{1,n}(z) = \inf_{\dualFPS} \sup_\tau \dualg, \enskip
-  W_{2,n}(z) = \sup_\tau \inf_{\dualFPS} \dualg.
+  \HW{n}(z) = \inf_{\dualFPS} \sup_\tau \dualg, \enskip
+  \LW{n}(z) = \sup_\tau \inf_{\dualFPS} \dualg.
 \end{equation*}
-В том случае, когда $W_{1,n}(z) = W_{2,n}(z) = W_n(z)$, будем говорить, что игра имеет значение $W_n(z)$.
+В том случае, когда $\HW{n}(z) = \LW{n}(z) = W_n(z)$, будем говорить, что игра имеет значение $W_n(z)$.
 
 Обозначим выигрыши в состояниях $H$ и $L$ через
 \begin{equation*}
@@ -143,31 +150,31 @@
 \begin{lemma}\label{ch3:lem:low-bound-dual:general}
   Для любого $z \in \mathbb{R}$ выполняется неравенство
   \begin{equation}\label{ch3:eq:low-bound-dual:general}
-    W_{2,n+1}(z) \geqslant \sup_{\tau_1} \inf_x
-    W_{2,n}(z - g^H_1(x, \tau_1) + g_1^L(x, \tau_1)) - g^L_1(x, \tau_1).
+    \LW{n+1}(z) \geqslant \sup_{\tau_1} \inf_x
+    \LW{n}(z - g^H_1(x, \tau_1) + g_1^L(x, \tau_1)) - g^L_1(x, \tau_1).
   \end{equation}
 \end{lemma}
-Отметим, что так как $W^*_0(z) = \phi(z) = \min(z, 0)$, формула имеет смысл для любого $n \geqslant 1$.
+Отметим, что так как $W_0(z) = \phi(z) = \min(z, 0)$, формула имеет смысл для любого $n \geqslant 1$.
 
 \section{Решение одношаговой игры}
 \label{ch3:sec:1st}
 
 Получим решение одношаговой игры $G^\Co_1(p)$.
 Для игры, соответствующей значению параметра $\Co = 1$, решение было получено в~\cite{sandomirskaya12}.
-В силу того, что в состоянии $L$ использование ставки $0$, является доминирующей чистой стратегией, исходную игру удалось представить в виде игры с выбором момента времени, для которых известны эвристические методы решения (\seename \cite{karlin64}).
+В силу того, что в состоянии $L$ использование ставки $0$, является доминирующей чистой стратегией, исходную игру удалось представить в виде игры с выбором момента времени, для которых известны эвристические методы решения (\seename~\cite{karlin64}).
 При $\Co \neq 1$ подобная чистая стратегия уже не является доминирующей, однако, как будет показано далее, при $p < \Co$ все равно является оптимальной для первого игрока.
 
 Начнем рассмотрение со случая $p < \beta$.
 Будем искать оптимальные стратегии игроков, удовлетворяющие следующим условиям.
 Первый игрок в состоянии $L$ использует ставку $0$ с вероятностью 1.
 Обозначим такое распределение через $I_0$.
-В состоянии $H$ он рандомизирует действия в соответствии с вероятностным распределением $F$, имеющим плотность $f$, причем $F(d) = 1$ для некоторого $d \in [0, 1]$.
+В состоянии $H$ он рандомизирует действия, используя функцию распределения $F(x)$ со спектром $[0, d]$ и плотностью $f(x)$ на этом отрезке. При этом $F(0) = 0, F(d) = 1$ для некоторого $d \in [0, 1]$.
 
-Второй игрок рандомизирует действия в соответствии с вероятностным распределением $G$, имеющим скачок величины $\delta$ в точке $0$ и плотность $g$ на $(0, \delta]$.
+Второй игрок рандомизирует действия используя функцию распределения $G(y)$, имеющую скачок величины $\delta$ в точке $0$ и плотность $g(x)$ на $(0, d]$.
 Обозначим такое распределение через $(\delta I_o, g)$.
 Описанные стратегии имеют одинаковый спектр $[0, d]$.
 
-Для первого игрока при заданном действии $y \in (0, d)$ второго получаем
+Поскольку оптимальная стратегия первого игрока является выравнивающей при $y \in (0, d)$, имеем
 \begin{equation}
   \label{ch3:eq:1st:g1(F,0)}
   \begin{gathered}
@@ -179,7 +186,7 @@
     \right) + (1-p) \Co y.
   \end{gathered}
 \end{equation}
-Отсюда имеем
+Отсюда получаем
 \begin{align*}
   \frac{\partial g_1(p, (F, I_0), y)}{\partial y}
   &= p \left( 
@@ -188,7 +195,7 @@
   (1-p)\Co =\\
   &= p F(y) + 2p(y-1)F'(y) + \Co - p = 0.
 \end{align*}
-Решение данного уравнения представимо в виде
+Общее решение данного уравнения представимо в виде
 \begin{equation*}
   F(x) = \frac{C}{\sqrt{2(1-x)}} - \frac{\Co - p}{p},\ x \in [0, d].
 \end{equation*}
@@ -198,19 +205,19 @@
   \begin{gathered}
     F(x) =
     \begin{cases}
-      \frac{\Co - p}{p}(\frac{1}{\sqrt{1-x}} - 1),\ & x \leq 1 - \frac{(\Co - p)^2}{\Co^2},\\
+      \frac{\Co - p}{p}(\frac{1}{\sqrt{1-x}} - 1),\ & 0 \leq x \leq 1 - d,\\
       1,\ & \text{иначе},
     \end{cases}\\
     f(x) =
     \begin{cases}
-      \frac{\Co - p}{2 p} \frac{1}{(1-x)^{3/2}},\ & x \leq 1 - \frac{(\Co - p)^2}{\Co^2},\\
+      \frac{\Co - p}{2 p} \frac{1}{(1-x)^{3/2}},\ & 0 \leq x \leq 1 - d,\\
       0,\ & \text{иначе}.
     \end{cases}
   \end{gathered}
 \end{equation}
 \begin{lemma}
   \label{ch3:lem:1st:lower-bound}
-  При заданных $p$ и $\Co$ таких, что $p < \Co$, стратегия первого игрока $(\sigma^H, \sigma^L) = (F, I_0)$ гарантирует ему выигрыш не менее $p(1-p)$ в игре $G^\Co_1(p)$.
+  При заданных $p$ и $\Co$ таких, что $p < \Co$, стратегия первого игрока $(\sigma^H, \sigma^L) = (F, I_0)$, где $F$ определяется в \eqref{ch3:eq:1st:F}, гарантирует ему выигрыш не менее $p(1-p)$ в игре $G^\Co_1(p)$.
 \end{lemma}
 \begin{proof}
   При $y \in (0, d)$ получим выигрыш, подставив \eqref{ch3:eq:1st:F} в \eqref{ch3:eq:1st:g1(F,0)}. Для $g^H_1(p, (F, I_0), y)$ имеем
@@ -251,7 +258,7 @@
     -p + \Co y - \frac{\Co - p}{p} + (1-y) \left( 1 + \frac{\Co - p}{p} \right) = \\
     = \frac{(1-p)(p - \Co y)}{p}.
   \end{gather*}
-  Подставив данное выражение в \eqref{ch3:eq:1st:g1(F,0)} находим $g_1(p, (F, I_o), y) = p (1-p)$.
+  Подставив данное выражение в \eqref{ch3:eq:1st:g1(F,0)}, находим $g_1(p, (F, I_0), y) = p (1-p)$.
 
   При $y \in \{0, d\}$ выигрыш равен
   \begin{align*}
@@ -264,10 +271,9 @@
     &= p \frac{(1-p)(p-\Co)}{\Co} +
       (1-p) \Co \left( 1 - \frac{(\Co - p)^2}{\Co^2} \right) = p(1-p).
   \end{align*}
-  Также несложно показать, что при $y > d$ справедливо неравенство $g_1(p, (F, 0), y) > g_1(p, (F, 0), d)$.
-  Таким образом $V_{1,1}(p) \geq p(1-p)$.
+  Также несложно показать, что при $y > d$ справедливо неравенство $g_1(p, (F,I_0), y) > g_1(p, (F, I_0), d)$.
+  Таким образом, $\LV{1}(p) \geq p(1-p)$.
 \end{proof}
-
 
 Стратегию второго игрока будем искать из условия выравнивания выигрыша первого при применении им действия $(x^H, 0),\ x^H \in (0, d)$.
 Выигрыш дается формулой
@@ -285,7 +291,7 @@
   &= -G(x) + 2(1-x)G'(x) + \DCo =
   0.
 \end{align*}
-Решение данного дифференциального уравнения имеет вид 
+Общее решение данного дифференциального уравнения имеет вид 
 \begin{equation*}
   G(y) = \frac{C}{\sqrt{2}\sqrt{1-x}} + \DCo.
 \end{equation*}
@@ -295,12 +301,12 @@
   \begin{gathered}
     G(y) =
     \begin{cases}
-      \frac{\Co - p}{\sqrt{1-y}} + \DCo,\ & y \leq 1 - \frac{(\Co - p)^2}{\Co^2},\\
+      \frac{\Co - p}{\sqrt{1-y}} + \DCo,\ & 0 \leq y \leq 1 - \frac{(\Co - p)^2}{\Co^2},\\
       1,\ & \text{иначе},
     \end{cases}\\
     g(y) =
     \begin{cases}
-      \frac{\Co - p}{2(1-y)^{3/2}},\ & y \leq 1 - \frac{(\Co - p)^2}{\Co^2},\\
+      \frac{\Co - p}{2(1-y)^{3/2}},\ & 0 \leq y \leq 1 - \frac{(\Co - p)^2}{\Co^2},\\
       0,\ & \text{иначе},
     \end{cases}
   \end{gathered}
@@ -354,7 +360,7 @@
     g^H_1(p, d, G) = (1 - p)^2, \\
     g^H_1(p, x^H, G) < g^H_1(p, d, G),\ x \in (d, 1].
   \end{gather*}
-  Отсюда получаем, что $V_{2,1} \leq p(1-p)$.
+  Отсюда получаем, что $\HV{1}(p) \leq p(1-p)$.
 \end{proof}
 
 Из лемм \ref{ch3:lem:1st:lower-bound} и \ref{ch3:lem:1st:upper-bound} следует, что при $p < \Co$ оптимальные стратегии определяются формулами (\ref{ch3:eq:1st:F},~\ref{ch3:eq:1st:G}), а значение игры равно $V_1(p) = p(1-p)$.
@@ -369,13 +375,12 @@
 
 Таким образом, уже на примере одношаговой игры можно наблюдать тот эффект, что значение игры на зависит от параметра $\Co$.
 
-
-\section{Оценки выигрыша в $\mathbf{n}$-шаговой игре}
+\section{Оценки выигрыша в $\mathbf{ n }$-шаговой игре}
 \label{ch3:sec:value-bounds}
 
 В данном разделе будут построены выравнивающие стратегии первого и второго игроков в прямой и двойственной играх, соответственно.
-Будет показано, что несмотря на то, что по виду данные стратегии отличается от стратегий из \cite{demeyer02}, вид оценок на $V_{1,n}(p)$ и $W_{2,n}(z)$ остается неизменным.
-Отсюда будет следовать справедливость двойственных соотношений между $V_{1,n}(p)$ и $W_{2,n}(z)$, существование $V_n(p)$ и $W_n(x)$, формулы для их расчета, а также оптимальность построенных стратегий.
+Будет показано, что несмотря на то, что по виду данные стратегии отличается от стратегий из \cite{demeyer02}, вид оценок на $\LV{n}(p)$ и $\LW{n}(z)$ остается неизменным.
+Отсюда будет следовать справедливость двойственных соотношений между $\LV{n}(p)$ и $\LW{n}(z)$, существование $V_n(p)$ и $W_n(x)$, формулы для их расчета, а также оптимальность построенных стратегий.
 
 Нам потребуются некоторые определения и факты из выпуклого анализа.
 
@@ -397,7 +402,7 @@
   \partial f(v) =
   \{ a \in \mathbb{R} \;|\; \forall y \in \mathbb{R}: f(y) \leqslant f(v) + a(y-v) \}.
 \end{equation*}
-%
+
 Справедливо утверждение \cite[Теорема 23.5]{rockafellar73}:
 \begin{equation}\label{ch3:eq:subdiff-props}
   v^* \in \partial f(v) \iff v \in \partial f^*(v^*).
@@ -407,26 +412,26 @@
   \mathrm{int} \; (\dom f) \subset \range \partial f^* \subset \dom f.
 \end{equation}
 
-В \cite{demeyer02} показано, что $V_{1,n}(\cdot)$ и $W_{2,n}(\cdot)$ являются вогнутыми на своей области определения.
-Предположим дополнительно, что функции $V_{1,n}(\cdot)$, $V^*_{1,n}(\cdot)$ и $W_{2,n}(\cdot)$ непрерывно дифференцируемы.
+В \cite{demeyer02} показано, что $\LV{n}(\cdot)$ и $\LW{n}(\cdot)$ являются вогнутыми на своей области определения.
+Предположим дополнительно, что функции $\LV{n}(\cdot)$, $\LV[*]{n}(\cdot)$ и $\LW{n}(\cdot)$ непрерывно дифференцируемы.
 Справедливость данных предположений будет обоснована в разделе~\ref{ch3:sec:game-value}.
 
 
-\subsection{Оценка нижнего значения $\mathbf{V_{1,n}(p)}$ игры $\mathbf{G_n(p)}$}
+\subsection{Оценка нижнего значения $\mathbf{ \underline{V}_{n}(p) }$ игры $\mathbf{ G_{n}(p) }$}
 \label{ch3:sec:-primal-game}
 
 Обозначим через $\sigma^M_1(x) = p \sigma^H_1(x) + (1-p) \sigma^L_1(x)$ маргинальное распределение ставки $X$ при использовании одношаговой стратегии $\sigma_1 = (\sigma^H_1, \sigma^L_1)$, а соответствующую функцию распределения обозначим $F_{\sigma^M_1}(x)$.
 
-Возьмем случайную величину $u$, равномерно распределенную на $[0, 1]$, и положим
+Возьмем случайную величину $U$, равномерно распределенную на $[0, 1]$, и положим
 \begin{equation*}
-  f(u) = F^{-1}_{\sigma^M_1}(u) \eqdef \inf \{ v\ |\ F_{\sigma^M_1}(v) \geq u \}.
+  f(u) = F^{-1}_{\sigma^M_1}(u) \eqdef \inf \{ v\ |\ F_{\sigma^M_1}(v) \geq u \}, u \in [0, 1].
 \end{equation*}
 Известно, что тогда случайные величины $f(U)$ и $X$ одинаково распределены.
 
 Далее, обозначим $Q(u) = p(f(u))$.
 Легко видеть, что для условной апостериорной вероятности $p(x)$ состояния $H$ справедливо
 \begin{equation*}
-  \int_I p(x) \sigma^M_1(\di x) = \Pi[p, \sigma_1](s = H, x \in I) = p.
+  \int_I p(x) \sigma^M_1(\di x) = \Pi[p, \sigma_1](s = H, X \in I) = p.
 \end{equation*}
 Так как случайные величины $f(U)$ и $X$ одинаково распределены, то имеет место равенство
 \begin{equation*}
@@ -476,8 +481,8 @@
 \begin{proof}
   По определению
   \begin{equation}\label{ch3:eq:g1-def}
-    g_1(p, \sigma_1, y) = \E_{\Pi[p, \sigma_1]} \langle
-    (\Ind{s = H}, 1), t(x, y)
+    g_1(p, \sigma_1, y) = \E_{( p, \sigma_1 )} \langle
+    (\Ind{s = H}, 1), t(X, Y)
     \rangle,
   \end{equation}
   где $t(x, y)$ определена в~(\ref{ch3:eq:trans-mech}).
@@ -514,7 +519,7 @@
 
 Введем обозначение
 \[
-  \Ff{y} = g_1(p, (f, Q), y) + \E V_{1,n}(Q(u)).
+  \Ff{y} = g_1(p, (f, Q), y) + \E \LV{n}(Q(U)).
 \]
 Переходя к $f$ и $Q$ в формуле~\eqref{ch3:eq:g1-aposterior} получаем следующее равенство:
 \begin{equation}\label{ch3:eq:F(f,Q,p)}
@@ -522,7 +527,7 @@
   \Ff{y} =
   \int_0^1 \Ind{f(u) > y} (Q(u) - \Co f(u) - \DCo y) \di u \enskip + \\
   + \int_0^1 \Ind{f(u) < y} (\DCo f(u) + \Co y - Q(u)) \di u \; + \int_0^1
-  V_{1,n}(Q(u)) \di u.
+  \LV{n}(Q(u)) \di u.
 \end{multlined}
 \end{equation}
 
@@ -542,7 +547,7 @@
 \begin{lemma}
   Для любого $p \in [0, 1]$ выполняется неравенство
   \[
-    V_{1,n+1}(p) \geqslant \sup_{(f, \; Q)} \inf_{y} \Ff{y},
+    \LV{n+1}(p) \geqslant \sup_{(f, \; Q)} \inf_{y} \Ff{y},
   \]
   где $f$ и $Q$ удовлетворяют~\eqref{ch3:eq:parametr-prop:f-incr} "--- \eqref{ch3:eq:parametr-prop:f-Q-eq}.
 \end{lemma}
@@ -554,7 +559,7 @@
   \Ff{f(\alpha)} = \int_\alpha^1 \left( Q(u) - \Co f(u) - \DCo f(\alpha)
   \right) \di u \; + \\
   + \int_0^\alpha \left( \DCo f(u) + \Co f(\alpha) - Q(u) \right) \di u +
-  \int_0^1 V_{1,n}(Q(u)) \di u,
+  \int_0^1 \LV{n}(Q(u)) \di u,
 \end{multline}
 не зависит от $\alpha$. Следовательно,
 \begin{align*}
@@ -576,21 +581,21 @@
 \begin{equation}\label{ch3:eq:Phi(a=1)}
   \begin{gathered}
     \Phi(Q) \eqdef \int_0^1 (\DCo f(u) + \Co f(1) - Q(u)) \di u + \int_0^1
-    V_{1,n}(Q(u)) \di u.
+    \LV{n}(Q(u)) \di u.
   \end{gathered}
 \end{equation}
 Аналогично при $\alpha = 0$ для $\Phi(Q)$ имеет место формула
 \begin{equation}\label{ch3:eq:Phi(a=0)}
   \begin{gathered}
     \Phi(Q) = \int_0^1 (Q(u) - \Co f(u) - \DCo f(0)) \di u + \int_0^1
-    V_{1,n}(Q(u)) \di u.
+    \LV{n}(Q(u)) \di u.
   \end{gathered}
 \end{equation}
 
 \begin{lemma}\label{ch3:lem:Phi}
   Для $\Phi(Q)$ справедливо следующее выражение:
   \begin{equation}\label{ch3:eq:Phi(Q)}
-    \Phi(Q) = \int_0^1 (2u - 1) Q(u) \di u + \int_0^1 V_{1,n}(Q(u)) \di u.
+    \Phi(Q) = \int_0^1 (2u - 1) Q(u) \di u + \int_0^1 \LV{n}(Q(u)) \di u.
   \end{equation}
 \end{lemma}
 \begin{proof}
@@ -611,7 +616,7 @@
   \begin{multline*}
     \Phi(Q) = 2 \int_0^\DCo u Q(u) \di u + (2\DCo/\Co) \int_\DCo^1 (1-u) Q(u) \di u \; + \\
     + (2/\Co) \int_\DCo^1 (u - \DCo) Q(u) \di u - \int_0^1 Q(u) \di u + \int_0^1
-    V_{1,n}(Q(u)) \di u.
+    \LV{n}(Q(u)) \di u.
   \end{multline*}
   %
   Приведя подобные с учетом равенства $\DCo (1-u) + u - \DCo = \Co u$, получим
@@ -625,41 +630,41 @@
   \int_0^1 Q(u) \di u = p.
 \end{align}
 
-По предположению $V_{1,n}(\cdot)$ -- непрерывно дифференцируемая функция.
-Тогда функция $Q$, доставляющая экстремум в задаче \eqref{ch3:eq:Q-Problem}, удовлетворяет уравнению Эйлера для функции Лагранжа (\seename \cite{elsgolc69}):
+По предположению $\LV{n}(\cdot)$ -- непрерывно дифференцируемая функция.
+Тогда функция $Q$, доставляющая экстремум в задаче \eqref{ch3:eq:Q-Problem}, удовлетворяет уравнению Эйлера для функции Лагранжа (\seename~\cite{elsgolc69}):
 \begin{equation*}
   \Phi^*(Q) =
   \int_0^1 \left[
-     (2u - 1) Q(u) + V_{1,n}'(Q(u)) + \lambda Q(u)
+     (2u - 1) Q(u) + \LV[\prime]{n}(Q(u)) + \lambda Q(u)
    \right] \di u =
   \int_0^1 F^* \di u.
 \end{equation*}
 В силу того, что $\Phi^*$ не зависит от $Q'$, имеем
 \begin{gather*}
-  \frac{\di F^*}{\di Q} = 2u - 1 - \lambda + V_{1,n}'(Q(u)) = 0,\\
+  \frac{\di F^*}{\di Q} = 2u - 1 - \lambda + \LV[\prime]{n}(Q(u)) = 0,\\
   \int_0^1 Q(u) \di u = p.
 \end{gather*}
 Воспользовавшись свойством \eqref{ch3:eq:subdiff-props} о связи между субдифференциалами сопряженных функций, получим
 \begin{align}
   \label{ch3:eq:Q(u)}
-  &Q(u) = V^{*\prime}_{1,n}(1+\lambda-2u),\\
+  &Q(u) = \LV[*\prime]{n}(1+\lambda-2u),\\
   %
   \label{ch3:eq:lambda-cond}
-  &\int_0^1 V^{*\prime}_{1,n}(1+\lambda-2u) \di u = p.
+  &\int_0^1 \LV[ *\prime ]{n}(1+\lambda-2u) \di u = p.
 \end{align}
-Так как $V_{1,n}(\cdot)$ определена на $[0, 1]$, то из~\eqref{ch3:eq:dual-range} следует, что
+Так как $\LV{n}(\cdot)$ определена на $[0, 1]$, то из~\eqref{ch3:eq:dual-range} следует, что
 \begin{equation*}
-  \mathrm{int} \left( \dom V_{1,n}(\cdot) \right)
+  \mathrm{int} \left( \dom \LV{n}(\cdot) \right)
   = (0, 1)
-  \subset \range \partial V_{1,n}^*(\cdot),
+  \subset \range \partial \LV[*]{n}(\cdot),
 \end{equation*}
-и $V^{*\prime}_{1,n}(\cdot)$ не возрастает на $\mathbb{R}$ от $1$ до $0$.
+и $\LV[ *\prime ]{n}(\cdot)$ не возрастает на $\mathbb{R}$ от $1$ до $0$.
 Тогда при достаточно больших отрицательных $\lambda$ интеграл близок к $1$, а при достаточно больших положительных $\lambda$ интеграл близок к 0.
 Таким образом, $\lambda$, удовлетворяющее~\eqref{ch3:eq:lambda-cond}, существует.
 
 Введем обозначение
 \begin{equation*}
-  K(\lambda) = \int_0^1 V^*_{1,n}(1+\lambda-2u) \di u.
+  K(\lambda) = \int_0^1 \LV[*]{n}(1+\lambda-2u) \di u.
 \end{equation*}
 Тогда аналогично \cite{demeyer02} можно показать, что при подстановке~\eqref{ch3:eq:Q(u)} в~\eqref{ch3:eq:Phi(Q)} выполняется равенство
 \begin{equation}\label{ch3:eq:phi=k*}
@@ -675,7 +680,7 @@
   Функции $f$ и $Q$\textnormal{,} определенные в~\eqref{ch3:eq:f} и \eqref{ch3:eq:Q(u)}\textnormal{,} принимают значения в $[0, 1]$ и удовлетворяет~\eqref{ch3:eq:parametr-prop:f-incr} "--- \eqref{ch3:eq:parametr-prop:f-Q-eq}\textnormal{,} т.е. параметризуют некоторую стратегию $\sigma_1$ первого игрока.
 \end{lemma}
 \begin{proof}
-  Так как $V^{*\prime}_{1,n}(\cdot)$ не возрастает от $1$ до $0$, то $Q(\cdot)$ принимает значения в $[0, 1]$ и в силу \eqref{ch3:eq:Q(u)} не убывает на $[0, 1]$.
+  Так как $\LV[ *\prime ]{n}(\cdot)$ не возрастает от $1$ до $0$, то $Q(\cdot)$ принимает значения в $[0, 1]$ и в силу \eqref{ch3:eq:Q(u)} не убывает на $[0, 1]$.
 
   Далее, из \eqref{ch3:eq:f} вытекает, что $f(u)$ является математическим ожиданием $Q(X)$, где $X$ -- случайная величина, распределенная на отрезке $[\DCo, u]$ ($[u, \DCo]$) при $\DCo < u$ ($u < \DCo$) с плотностью $2|x-\DCo|/(u-\DCo)^2$.
   Следовательно, $f(\cdot)$ также принимает значения в $[0, 1]$.
@@ -744,7 +749,7 @@
 \end{proof}
 
 \begin{theorem}\label{ch3:thm:V-bound}
-  При любом $p \in [0, 1]$ для гарантированного выигрыша первого игрока в игре $G_n(p)$ справедлива оценка $V_{1,n+1}(p) \geqslant K^*(p)$.
+  При любом $p \in [0, 1]$ для гарантированного выигрыша первого игрока в игре $G_n(p)$ справедлива оценка $\LV{n+1}(p) \geqslant K^*(p)$.
 \end{theorem}
 \begin{proof}
   В силу леммы~\ref{ch3:lem:low-bound-primal} достаточно доказать, что при любом $y \in [0, 1]$ выполнено $\Ff{y} \geqslant K^*(p)$.
@@ -757,10 +762,10 @@
     &= \int_0^1 \left[ 
       Q(u) - \Co f(u) - \DCo y 
     \right] \di u +
-    \int_0^1 V_{1,n}(Q(u)) \di u \geq \\
+    \int_0^1 \LV{n}(Q(u)) \di u \geq \\
     &\geq \int_0^1 \left[ 
       Q(u) - \Co f(u) - \DCo f(0) 
-    \right] \di u + \int_0^1 V_{1,n}(Q(u)) \di u = \\
+    \right] \di u + \int_0^1 \LV{n}(Q(u)) \di u = \\
     &= \Phi(Q) = K^*(p).
   \end{align*}
   Аналогично можно показать, что при $y > f(1)$ из~(\ref{ch3:eq:Phi(a=1)}) следует
@@ -768,7 +773,7 @@
     \Ff{y} 
     &\geq \int_0^1 \left[ 
       \DCo f(u) + \Co f(1) - Q(u) 
-    \right] \di u + \int_0^1 V_{1,n}(Q(u)) \di u = \\
+    \right] \di u + \int_0^1 \LV{n}(Q(u)) \di u = \\
     &= \Phi(Q) = K^*(p).
   \end{align*}
   Пусть теперь $y = f(\alpha), \; \alpha \in [0, 1]$. Введем обозначения
@@ -781,21 +786,21 @@
     \Ff{y} =
     \int_{\alpha^+}^1  (Q(u) - \Co f(u) - \DCo f(\alpha)) \di u \; + \\
     + \int_0^{\alpha^-} (\DCo f(u) + \Co f(\alpha) - Q(u)) \di u \; + \int_0^1
-    V_{1,n}(Q(u)) \di u.
+    \LV{n}(Q(u)) \di u.
   \end{multline}
   Однако, из леммы~\ref{ch3:lem:f=Q} следует, что $Q(u) = f(\alpha)$ при $u \in [\alpha^-, \alpha^+]$.
   Поэтому~\eqref{ch3:eq:V-lower:alpha-0-1} совпадает с~\eqref{ch3:eq:F(f,Q,fa)} и $\Ff{y} = \Phi(Q) = K^*(p)$ по построению.
 \end{proof}
 
-\subsection{Оценка нижнего значения $\mathbf{W_{2,n}(z)}$ игры $\mathbf{G^*_n(z)}$}
+\subsection{Оценка нижнего значения $\mathbf{\underline{W}_{n}(z)}$ игры $\mathbf{G^*_n(z)}$}
 \label{ch3:sec:-dual-game}
 
 Аналогично тому, как это было сделано для первого игрока, параметризуем $\tau_1$ при помощи неубывающей функции $h: [0, 1] \rightarrow [0, 1]$.
-Если $F_{\tau_1}(y)$ "--- функция распределения ставки $y$ при применении вторым игроком стратегии $\tau_1$, то положим
+Если $F_{\tau_1}(y)$ "--- функция распределения ставки $Y$ при применении вторым игроком стратегии $\tau_1$, то положим
 \begin{equation*}
   h(u) = F^{-1}_{\tau_1}(u) \eqdef \inf \{ y\ |\ F_{\tau_1}(y) \geq u \}.
 \end{equation*}
-Тогда, если случайная величина $u$ равномерно распределена на $[0, 1]$, то $h(u)$ и $y$ имеют одинаковое распределение.
+Тогда, если случайная величина $U$ равномерно распределена на $[0, 1]$, то $h(U)$ и $Y$ имеют одинаковое распределение.
 
 Подобно предыдущему подразделу получим аналог леммы~\ref{ch3:lem:low-bound-dual:general} в терминах $h$.
 Заметим, что для $g_1^L(x, \tau_1)$ и $g_1^H(x, \tau_1)$ справедливы равенства
@@ -816,7 +821,7 @@
 \begin{equation}\label{eq:W-low-bound:parameterized}
 \begin{multlined}
   \Gf[x][h] =
-  W_{2,n}\left( 
+  \LW{n}\left( 
     z - \int_0^1 \left[ \Ind{h(u) < x} - \Ind{h(u) > x} \right] \di u
   \right) \; - \\
   - \int_0^1 \left[ 
@@ -829,7 +834,7 @@
 \begin{lemma}\label{ch3:lem:W-low-bound:parameterized}
   Для любого $z \in \mathbb{R}$ выполнено неравенство
   \begin{equation*}
-    W_{2,n+1}(z) \geqslant \sup_h \inf_{x} \Gf[x][h].
+    \LW{n+1}(z) \geqslant \sup_h \inf_{x} \Gf[x][h].
   \end{equation*}
 \end{lemma}
 
@@ -839,7 +844,7 @@
 \begin{equation}\label{ch3:eq:G(ha)}
 \begin{multlined}
   \Gf[h(\alpha)][h] =
-  W_{2,n}(z + 1 - 2\alpha) - \\
+  \LW{n}(z + 1 - 2\alpha) - \\
   - \int_\alpha^1 \biggl( \DCo h(\alpha) + \Co h(u) \biggr) \di u +
   \int_0^\alpha \biggl( \Co h(\alpha) + \DCo h(u) \biggr) \di u.
 \end{multlined}
@@ -847,12 +852,12 @@
 не зависит от $\alpha$. Следовательно
 \begin{equation*}
   \frac{\partial G_{n+1}}{\partial \alpha} =
-  2h(\alpha) + (\alpha - \DCo)h'(\alpha) - 2 W_{2,n}'(z - 2\alpha + 1) = 0.
+  2h(\alpha) + (\alpha - \DCo)h'(\alpha) - 2 \LW[\prime]{n}(z - 2\alpha + 1) = 0.
 \end{equation*}
 Отсюда
 \begin{equation}\label{ch3:eq:h(u)}
-  h(u) = 2(u - \DCo)^{-2} \int_\DCo^u (s - \DCo) W_{2,n}'(z - 2s + 1) \di s\footnotemark.
-  \footnotetext{При $u = \DCo$ доопределим $h(\DCo)$ по непрерывности как $W_{2,n}'(z - 2\DCo + 1)$.}
+  h(u) = 2(u - \DCo)^{-2} \int_\DCo^u (v - \DCo) \LW[\prime]{n}(z - 2v + 1) \di v.\footnotemark
+  \footnotetext{При $u = \DCo$ доопределим $h(\DCo)$ по непрерывности как $\LW[\prime]{n}(z - 2\DCo + 1)$.}
 \end{equation}
 Если подставить $h(u)$ в~\eqref{ch3:eq:G(ha)} то получившееся выражение, которое мы обозначим $\Psi(h)$, не зависит от $\alpha$.
 Доказательство следующей леммы аналогично доказательству леммы~\ref{ch3:lem:Phi}.
@@ -860,7 +865,7 @@
 \begin{lemma}
   Для значения $\Psi(h)$ справедливо равенство
   \begin{equation}
-    \Psi(h) = \int_0^1 W_{2,n}(z - 2s + 1) \di s.
+    \Psi(h) = \int_0^1 \LW{n}(z - 2s + 1) \di s.
   \end{equation}
 \end{lemma}
 
@@ -875,7 +880,7 @@
   \item[$\bullet$] 
   $\forall u_1, u_2 \in [0, 1]: u_1 < u_2 \implies h(u_1) \leq h(u_2);$
   \item[$\bullet$] 
-  $h(u_1) = h(u_2) \implies h(u_1) = W_{2,n}'(z - 2u_1 + 1) = W_{2,n}'(z - 2u_2 + 1)$.
+  $h(u_1) = h(u_2) \implies h(u_1) = \LW[\prime]{n}(z - 2u_1 + 1) = \LW[\prime]{n}(z - 2u_2 + 1)$.
   \end{itemize}
   В частности, функция $h(\cdot)$ может служить параметризацией некоторой стратегии $\tau_1$ второго игрока.
 \end{lemma}
@@ -883,7 +888,7 @@
 \begin{theorem}\label{ch3:thm:W-bound}
   Для гарантированного выигрыша второго игрока в игре $G_{n+1}^*(z)$ справедлива оценка
   \begin{equation*}
-    W_{2,n+1}(z) \geqslant \int_0^1 W_{2,n}(z - 2s + 1) \di s.
+    \LW{n+1}(z) \geqslant \int_0^1 \LW{n}(z - 2v + 1) \di v.
   \end{equation*}
 \end{theorem}
 \begin{proof}
@@ -893,8 +898,8 @@
   При $x < h(0)$ из~\eqref{eq:W-low-bound:parameterized} и~\eqref{ch3:eq:G(ha)} получаем
   \begin{multline*}
     \Gf[x][h] =
-    W_{2,n}(z + 1) - \int_0^1 \left( \DCo x + \Co h(u) \right) \di u \geqslant \\
-    \geqslant W_{2,n}(z + 1) - \int_0^1 \left( \DCo h(0) + \Co h(1) \right) \di
+    \LW{n}(z + 1) - \int_0^1 \left( \DCo x + \Co h(u) \right) \di u \geqslant \\
+    \geqslant \LW{n}(z + 1) - \int_0^1 \left( \DCo h(0) + \Co h(1) \right) \di
     u = \Gf[h(0)][h] = \Psi(h).
   \end{multline*}
 
@@ -908,30 +913,30 @@
   
   Из~\eqref{eq:W-low-bound:parameterized} находим
   \begin{multline}\label{ch3:eq:g+-}
-    \Gf[x][h] = W_{2,n}(z + 1 - \alpha^- - \alpha^+) \enskip - \\
+    \Gf[x][h] = \LW{n}(z + 1 - \alpha^- - \alpha^+) \enskip - \\
     - \int_0^{\alpha^-} \left(-\Co x - \DCo h(u)\right) \di u -
     \int_{\alpha^+}^1 \left(\DCo x + \Co h(u)\right) \di u.
   \end{multline}
-  Поскольку $W_{2,n}(\cdot)$ "--- дифференцируемая вогнутая функция, верно неравенство
+  Поскольку $\LW{n}(\cdot)$ "--- дифференцируемая вогнутая функция, верно неравенство
   \begin{multline*}
-    W_{2,n}(z + 1 - 2\alpha) \leqslant W_{2,n}(z + 1 - \alpha^- - \alpha^+) \enskip +\\
-    + W_{2,n}'(z + 1 - \alpha^- - \alpha^+) \left( [ \alpha^+ - \alpha ] + [
+    \LW{n}(z + 1 - 2\alpha) \leqslant \LW{n}(z + 1 - \alpha^- - \alpha^+) \enskip +\\
+    + \LW[\prime]{n}(z + 1 - \alpha^- - \alpha^+) \left( [ \alpha^+ - \alpha ] + [
       \alpha^- - \alpha ] \right).
   \end{multline*}
   Из леммы~\ref{ch3:lem:h(u)-props} при $u_1 = (\alpha^- + \alpha^+)/2,\: u_2 = \alpha$ следует, что
   \[
-    W_{2,n}'(z + 1 - \alpha^- - \alpha^+) = W_{2,n}'(z + 1 - 2\alpha) =
+    \LW[\prime]{n}(z + 1 - \alpha^- - \alpha^+) = \LW[\prime]{n}(z + 1 - 2\alpha) =
     h(\alpha).
   \]
   Так как $h(u)$ постоянна на $[\alpha^-, \alpha^+]$ и $h(\alpha) = x$ имеем
   \begin{multline*}
-    W_{2,n}(z + 1 - \alpha^- - \alpha^+) \geqslant W_{2,n}(z + 1 - 2\alpha) - \\
+    \LW{n}(z + 1 - \alpha^- - \alpha^+) \geqslant \LW{n}(z + 1 - 2\alpha) - \\
     - \int_\alpha^{\alpha^+} \left( \DCo x + \Co h(u) \right) \di u +
     \int_{\alpha^-}^\alpha \left( \Co x + \DCo h(u) \right) \di u.
   \end{multline*}
-  Используя оценку на $W_{2,n}(z + 1 - \alpha^- - \alpha^+)$ в \eqref{ch3:eq:g+-}, получаем
+  Используя оценку на $\LW{n}(z + 1 - \alpha^- - \alpha^+)$ в \eqref{ch3:eq:g+-}, получаем
   \begin{multline*}
-    \Gf[x][h] \geqslant W_{2,n}(z + 1 - 2\alpha)
+    \Gf[x][h] \geqslant \LW{n}(z + 1 - 2\alpha)
     - \int_\alpha^1 \biggl( \DCo h(\alpha) + \Co h(u) \biggr) \di u \; + \\
     + \int_0^\alpha \biggl( \Co h(\alpha) + \DCo h(u) \biggr) \di u =
     \Gf[h(\alpha)][h] = \Psi(h).
@@ -942,13 +947,13 @@
 \section{Значение игры $\mathbf{G_n\left(p\right)}$}
 \label{ch3:sec:game-value}
 
-Поскольку выражения для нижних оценок в теоремах~\ref{ch3:thm:V-bound} и~\ref{ch3:thm:W-bound} совпадают с аналогичными выражениями в \cite{demeyer02}, справедливы все двойственные соотношения между $V_{1,n}(p)$ и $W_{2,n}(z)$, а также утверждения относительно оптимальности стратегий.
+Поскольку выражения для нижних оценок в теоремах~\ref{ch3:thm:V-bound} и~\ref{ch3:thm:W-bound} совпадают с аналогичными выражениями в \cite{demeyer02}, справедливы все двойственные соотношения между $\LV{n}(p)$ и $\LW{n}(z)$, а также утверждения относительно оптимальности стратегий.
 Приведем соответствующие теоремы.
 
 \begin{theorem}
   Для всех $z \in \mathbb{R}$ выполнено
   \begin{equation}\label{ch3:eq:duality-relationships}
-    V_{1,n}^*(z) = W_{1,n}(z) = V_{2,n}^*(z) = W_{2,n}(z).
+    \LV[*]{n}(z) = \HW{n}(z) = \HV[*]{n}(z) = \LW{n}(z).
   \end{equation}
   Таким образом, игры $G_n(p)$ и $G_n^*(z)$ имеют значения $V_n(p)$ и $W_n(z)$ соответственно.
   Кроме того,
@@ -958,7 +963,7 @@
 \end{theorem}
 
 \begin{theorem}\label{ch3:thm:optimal-strategies}
-  Стратегии $\sigma$ и $\tau$ являются оптимальными в игре $G_n(p)$ тогда и только тогда, когда $(p, \sigma),$ $\tau$ являются оптимальными при $z = V_n'(p)$ в игре $G_n^*(z)$.
+  Стратегии $\sigma^0$ и $\tau^0$ являются оптимальными в игре $G_n(p)$ тогда и только тогда, когда $(p, \sigma^0),$ $\tau^0$ являются оптимальными при $z = V_n'(p)$ в игре $G_n^*(z)$.
 \end{theorem}
 
 \begin{corollary}
@@ -1018,7 +1023,7 @@ $
   где $x_m$ "--- ставка первого игрока на $m$-м шаге игры.
 \end{proposition}
 
-Обоснуем сделанные ранее предположения о непрерывной дифференцируемости функций $V_{1,n}(\cdot)$, $V_{1,n}^*(\cdot)$ и $W_{2,n}(\cdot)$.
+Обоснуем сделанные ранее предположения о непрерывной дифференцируемости функций $\LV{n}(\cdot)$, $\LV[*]{n}(\cdot)$ и $\LW{n}(\cdot)$.
 
 \begin{proposition}
   При любом $n \geqslant 1$ функция $W_n(\cdot)$ является непрерывно дифференцируемой на $\mathbb{R}$.
@@ -1181,7 +1186,7 @@ $
   \end{figure}
 
   Пусть $1/2 < p < 1$.
-  Тогда искомое $\lambda$ находится как решение следующего уравнения (\seename рис.~\ref{ch3:fig:W2}):
+  Тогда искомое $\lambda$ находится как решение следующего уравнения (\seename~рис.~\ref{ch3:fig:W2}):
   \[
   (4 - 4\lambda - \lambda^2)/8 = p.
   \]
@@ -1232,7 +1237,7 @@ $
   \end{equation*}
   
   Пусть $0 < p \leq 1/2$.
-  Тогда искомое $\lambda$ находится как решение следующего уравнения (\seename рис.~\ref{ch3:fig:W2}):
+  Тогда искомое $\lambda$ находится как решение следующего уравнения (\seename~рис.~\ref{ch3:fig:W2}):
   \begin{equation*}
     (\lambda - 2)^2/8 = p.
   \end{equation*}
@@ -1240,7 +1245,7 @@ $
   \begin{equation*}
     Q(u) = W'_1(\lambda + 1 - 2u) = \begin{cases}
       0,\ & u \geq 1 - \sqrt{2p},\\
-      1 - \sqrt{2p} + u,\ & u > 1 - \sqrt{2p}.
+
     \end{cases}
   \end{equation*}
   
