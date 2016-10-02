@@ -44,6 +44,7 @@
 \newcommand*\dom{\ensuremath{\mathrm{dom\;}} }
 \newcommand*\range{\ensuremath{\mathrm{range\;}}}
 \newcommand{\inter}{\mathrm{int}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 
 \newcommand{\eqdef}{\overset{\mathrm{def}}{=}}
 
@@ -65,96 +66,82 @@
 \newcommand{\floor}[1]{\ensuremath{\lfloor #1 \rfloor}}
 
 %% Distributions
-\newcommand{\pd}{\ensuremath{\todo{\overbar{p}}}} %%
-\newcommand{\pc}[1]{\ensuremath{\todo{p(#1)}}} %% component of a distribution
+\newcommand{\pd}{\ensuremath{\overbar{p}}} %%
+\newcommand{\pc}[1]{\ensuremath{p(#1)}} %% component of a distribution
 
 % Posterior distributions
-\newcommand{\pad}[1]{\ensuremath{\todo{\overbar{p}(#1)}}}
-\newcommand{\padn}[2]{\ensuremath{\todo{\overbar{p}^{#1}(#2)}}}
-\newcommand{\pac}[2]{\ensuremath{\todo{p(#1|#2)}}}
-\newcommand{\pacn}[3]{\ensuremath{\todo{p^{#1}(#2|#3)}}}
+\newcommand{\pad}[1]{\ensuremath{\overbar{p}(#1)}}
+\newcommand{\padn}[2]{\ensuremath{\overbar{p}^{#1}(#2)}}
+\newcommand{\pac}[2]{\ensuremath{p(#1|#2)}}
+\newcommand{\pacn}[3]{\ensuremath{p^{#1}(#2|#3)}}
 
 % Full probabilities
-\newcommand{\qd}{\ensuremath{\todo{q}}}
-\newcommand{\qdn}[1]{\ensuremath{\todo{q^{#1}}}}
-\newcommand{\qc}[1]{\ensuremath{\todo{q(#1)}}}
-\newcommand{\qcn}[2]{\ensuremath{\todo{q^{#1}(#2)}}}
+\newcommand{\qd}{\ensuremath{q}}
+\newcommand{\qdn}[1]{\ensuremath{q^{#1}}}
+\newcommand{\qc}[1]{\ensuremath{q(#1)}}
+\newcommand{\qcn}[2]{\ensuremath{q^{#1}(#2)}}
 
 % First player strategies
-\newcommand{\sigmar}{\ensuremath{\todo{\sigma}}} % in repeated game
-\DeclareDocumentCommand{\sigmas}{O{} m}{\ensuremath{\todo{\sigma^{#1}_{#2}}}}
-\DeclareDocumentCommand{\sigmasc}{O{} O{1} m}{\ensuremath{\todo{\sigma^{#1}_{#2,#3}}}}
-\newcommand{\sigmara}[1]{\ensuremath{\todo{\sigma(#1)}}}
-\newcommand{\sigmaran}[2]{\ensuremath{\todo{\sigma^{#1}(#2)}}}
-\newcommand{\sigmak}{\ensuremath{\todo{\hat{\sigma_k}}}}
+\newcommand{\sigmar}{\ensuremath{\sigma}} % in repeated game
+\DeclareDocumentCommand{\sigmas}{O{} m}{\ensuremath{\sigma^{#1}_{#2}}}
+\DeclareDocumentCommand{\sigmasc}{O{} O{1} m}{\ensuremath{\sigma^{#1}_{#2,#3}}}
+\newcommand{\sigmara}[1]{\ensuremath{\sigma(#1)}}
+\newcommand{\sigmaran}[2]{\ensuremath{\sigma^{#1}(#2)}}
+\newcommand{\sigmak}{\ensuremath{\hat{\sigma_k}}}
 
 % Second player strategies
-\newcommand{\taur}{\ensuremath{\todo{\tau}}}
-\newcommand{\taus}[1]{\ensuremath{\todo{\tau_{#1}}}}
-\newcommand{\tausc}[2][1]{\ensuremath{\todo{\tau_{#1,#2}}}}
-\newcommand{\taura}[1]{\ensuremath{\todo{\tau(#1)}}}
+\newcommand{\taur}{\ensuremath{\tau}}
+\newcommand{\taus}[1]{\ensuremath{\tau_{#1}}}
+\newcommand{\tausc}[2][1]{\ensuremath{\tau_{#1,#2}}}
+\newcommand{\taura}[1]{\ensuremath{\tau(#1)}}
 
 %% Payoffs
-\DeclareDocumentCommand{\as}{O{s} O{\Co}}{\ensuremath{\todo{a^{#1,#2}}}}
+\DeclareDocumentCommand{\as}{O{s} O{\Co}}{\ensuremath{a^{#1,#2}}}
 
 %% Game
 \DeclareDocumentCommand{\theG}{s O{\Co} m}{%
-\todo{%
 \IfBooleanTF {#1}
 {G^{m,#2}_{#3}}
 {G^{#2}_{#3}}%
-}%
 }
 
 %% Values
 \DeclareDocumentCommand{\K}{s O{\Co} m}{%
-\todo{%
 \IfBooleanTF {#1}
 {K^{m,#2}_{#3}}
 {K^{#2}_{#3}}%
-}%
 }
 
 \DeclareDocumentCommand{\V}{s O{\Co} m}{%
-\todo{%
 \IfBooleanTF {#1}
 {V^{m,#2}_{#3}}
 {V^{#2}_{#3}}%
-}%
 }
 
 \DeclareDocumentCommand{\LowV}{s O{\Co} m}{%
-\todo{%
 \IfBooleanTF {#1}
 {\underline{V}^{m,#2}_{#3}}
 {\underline{V}^{#2}_{#3}}%
-}%
 }
 
 \DeclareDocumentCommand{\HighV}{s O{\Co} m}{%
-\todo{%
 \IfBooleanTF {#1}
 {\overbar{V}^{m,#2}_{#3}}
 {\overbar{V}^{#2}_{#3}}%
-}%
 }
 
 %% Guaranteed values
 
 \DeclareDocumentCommand{\H}{s O{\Co} m}{%
-\todo{%
 \IfBooleanTF {#1}
 {H^{m,#2}_{#3}}
 {H^{#2}_{#3}}%
-}%
 }
 
 \DeclareDocumentCommand{\L}{s O{\Co} m}{%
-\todo{%
 \IfBooleanTF {#1}
 {L^{m,#2}_{#3}}
 {L^{#2}_{#3}}%
-}%
 }
 
 % $\sigmas{t}$

@@ -1,7 +1,6 @@
 \chapter{Теоретико-игровая модель биржевых торгов с дискретными ставками и счетным множеством состояний} \label{chapt2}
 {
 \newcommand{\s}{\ensuremath{s}}
-\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 \newcommand{\LL}{L^1(\{s^2\})}
 \newcommand{\PM}{\ensuremath{\overline{P}}}
 
@@ -158,8 +157,8 @@ $\taur = (\taus{1}, \ldots, \taus{n})$, где $\taus{t}: I^{t-1} \rightarrow \D
 
 \begin{theorem}
   \label{ch2:upper-bound:theorem}
-  При использовании вторым игроком стратегии $\taur^*$, выигрыш первого игрока в игре
-  $\theG{\infty}(\pd)$ ограничен сверху функцией
+  При использовании вторым игроком стратегии $\taur^*$ выигрыш первого игрока в игре
+  $\theG{\infty}(\pd)$ ограничен сверху величиной
   \begin{equation*}
     \H{\infty}(\pd) = \inf_{k \in J} \sum_{s \in S} \pc{s}  h^s_\infty(\taur^k).
   \end{equation*}
@@ -545,11 +544,16 @@ $
 Таким образом, при любом $\beta \in [0, 1]$ справедлива следующая
 \begin{theorem}
   \label{ch2:solution:theorem}
-  Игра $\theG{\infty}(\pd)$ имеет значение
-  \[
-    \V{\infty}(\pd) = \H{\infty}(\pd) = \L{\infty}(\pd, \sigmar^*),
-  \]
-  а $\sigmar^*$ и $\taur^*$ --- оптимальные стратегии игроков.
+  При любом распределении $\pd \in \PM$ игра $\theG{\infty}(\pd)$ имеет значение
+  $
+    \V{\infty}(\pd) = \H{\infty}(\pd) = \L{\infty}(\pd),
+  $
+  а $\sigmar^*$ и $\taur^*$ "--- оптимальные стратегии игроков.
+  % Игра $\theG{\infty}(\pd)$ имеет значение
+  % \[
+  %   \V{\infty}(\pd) = \H{\infty}(\pd) = \L{\infty}(\pd, \sigmar^*),
+  % \]
+  % а $\sigmar^*$ и $\taur^*$ --- оптимальные стратегии игроков.
 \end{theorem}
 
 \begin{figure}[tbh]

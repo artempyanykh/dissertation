@@ -3,6 +3,7 @@
 \PassOptionsToPackage{bookmarks=false}{hyperref}
 \documentclass[a5paper,10pt,twoside,openany,article]{memoir} %,draft
 
+
 \input{common/setup}          % общие настройки шаблона
 \input{common/packages}       % Пакеты общие для диссертации и автореферата
 \input{Synopsis/synpackages}  % Пакеты для автореферата
@@ -15,7 +16,11 @@
 \input{common/styles}         % Стили общие для диссертации и автореферата
 \input{Synopsis/synstyles}    % Стили для автореферата
 \input{Synopsis/userstyles}   % Стили для специфических пользовательских задач
-\input{biblio/bibliopreamble} % Настройки библиографии из внешнего файла (там же выбор: встроенная или на основе biblatex)
+% \input{biblio/bibliopreamble} % Настройки библиографии из внешнего файла (там же выбор: встроенная или на основе biblatex)
+\input{biblio/biblatex-synopsis}    % Реализация пакетом biblatex через движок biber
+
+% \newcommand{\regularcite}[1]{\cite{#1}}
+\renewcommand{\cite}[1]{\footcite{#1}}
 
 \begin{document}
 

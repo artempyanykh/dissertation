@@ -3,7 +3,8 @@
 ** Chapter 1
 *** DONE Outline the structure of chapter 1
 CLOSED: [2016-09-16 Fri 14:55]
-*** TODO Add a definition of \tau(p) in Sec.1.7 (random walk) near Theorem 4
+*** DONE Add a definition of \tau(p) in Sec.1.7 (random walk) near Theorem 4
+CLOSED: [2016-09-30 Fri 13:26]
 ** Chapter 2
 ** Chapter 3
 ** Misc
@@ -42,16 +43,20 @@ CLOCK: [2016-09-03 Sat 15:05]--[2016-09-03 Sat 15:34] =>  0:29
 CLOCK: [2016-09-03 Sat 13:33]--[2016-09-03 Sat 13:34] =>  0:01
 :END:
 *** Chapter 3
-**** TODO Write about a structure of W' (photo from VV)
-**** TODO Address VV comments
+**** DONE Write about a structure of W' (photo from VV)
+CLOSED: [2016-09-30 Fri 13:25]
+**** DONE Address VV comments
+CLOSED: [2016-09-30 Fri 13:25]
 *** Other
 **** DONE Fix acronyms
 CLOSED: [2016-09-06 Tue 12:50]
 :LOGBOOK:
 CLOCK: [2016-09-05 Mon 22:54]--[2016-09-05 Mon 23:17] =>  0:23
 :END:
-**** TODO Change the title and main results
-**** TODO Adjust the conclusion with regard to VV comments
+**** DONE Change the title and main results
+CLOSED: [2016-09-30 Fri 11:04]
+**** DONE Adjust the conclusion with regard to VV comments
+CLOSED: [2016-09-30 Fri 13:25]
 * Refinements
 - [ ] Add "Э.Г. Давыдов. Исследование операций"
 - [X] Add Kohlberg, Heuer, Mertens/Zamir (1976)
