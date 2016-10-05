@@ -864,11 +864,11 @@
 \begin{multlined}
   \Gf[x][h] =
   \LW{n}\left( 
-    z - \int_0^1 \left[ \Ind{\{h(u) < x\}} - \Ind{\{h(u) > x\}} \right] \di u
+    z - \int_0^1 \left[ \Ind{\{u | h(u) < x\}} - \Ind{\{u | h(u) > x\}} \right] \di u
   \right) \; - \\
   - \int_0^1 \left[ 
-    \Ind{\{h(u) < x\}} (-\Co x - \DCo h(u)) + 
-    \Ind{\{h(u) > x\}} (\DCo x + \Co h(u)) 
+    \Ind{\{u | h(u) < x\}} (-\Co x - \DCo h(u)) + 
+    \Ind{\{u | h(u) > x\}} (\DCo x + \Co h(u)) 
   \right] \di u.
 \end{multlined}
 \end{equation}
