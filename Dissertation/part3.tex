@@ -1174,18 +1174,17 @@ $
 
 В качестве иллюстрации использования \eqref{ch3:eq:Wn'} и \eqref{ch3:eq:F_Un} приведем формулы для $W_n'(z)$ при $n = \overline{2, 5}$:
 
-\begin{equation}\label{ch3:eq:W2'}
+\begin{align}
+  \label{ch3:eq:W2'}
   W_2'(z)
-  = 
+  &= 
     \begin{cases}
       1,\ & z\leq -2, \\
       \frac{1}{8} \left(-z^2-4 z+4\right),\ & -2<z\leq 0, \\
       \frac{1}{8} (z-2)^2,\ & 0<z\leq 2, \\
       0,\ & z > 2,
-    \end{cases}
-\end{equation}
-\begin{align*}
-W_3'(z)
+    \end{cases}\\
+  W_3'(z)
   &= 
     \begin{cases}
       1,\ & z\leq -3, \\
@@ -1193,7 +1192,9 @@ W_3'(z)
       \frac{1}{24} \left(z^3-9 z+12\right),\ & -1<z\leq 1, \\
       -\frac{1}{48} (z-3)^3,\ & 1<z\leq 3, \\
       0,\ & z > 3,
-    \end{cases}\\
+    \end{cases}\nonumber
+\end{align}
+\begin{align*}
   W_4'(z)
   &=
     \begin{cases}
@@ -1266,7 +1267,7 @@ W_3'(z)
   \[
   (4 - 4\lambda - \lambda^2)/8 = p.
   \]
-  \begin{figure}[hbt]
+  \begin{figure}[b]
     \centering \input{figures/ch3-w2}
     \caption{График функции $W_2'(z)$}
     \label{ch3:fig:W2}
